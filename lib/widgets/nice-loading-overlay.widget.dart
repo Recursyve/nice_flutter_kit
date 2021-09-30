@@ -9,6 +9,7 @@ class NiceLoadingOverlay extends StatelessWidget {
   final Widget? child;
   final bool loading;
   final Color? color;
+  final StackFit stackFit;
 
   const NiceLoadingOverlay({
     Key? key,
@@ -17,11 +18,13 @@ class NiceLoadingOverlay extends StatelessWidget {
     this.child,
     this.loading = true,
     this.color,
+    this.stackFit = StackFit.loose,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
+      fit: stackFit,
       children: [
         if (child != null) child!,
         if (loading)

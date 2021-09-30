@@ -56,7 +56,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_spinkit:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_spinkit
       url: "https://pub.dartlang.org"

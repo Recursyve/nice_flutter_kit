@@ -2,3 +2,17 @@ include: package:flutter_lints/flutter.yaml
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
+
+analyzer:
+    exclude: [build/**]
+
+linter:
+    rules:
+        - prefer_const_declarations
+        - prefer_const_literals_to_create_immutables
+        - prefer_const_constructors
+        - cancel_subscriptions
+        - close_sinks
+        - always_use_package_imports
+        - avoid_relative_lib_imports
+        - sort_pub_dependencies

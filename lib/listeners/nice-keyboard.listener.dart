@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 class NiceKeyboardListener extends StatelessWidget {
   final Widget child;
 
-  // Return true if the key event has been handled (stop propagation)
   final KeyEventResult? Function(LogicalKeyboardKey key)? onKeyDown;
   final KeyEventResult? Function(LogicalKeyboardKey key)? onKeyRepeat;
   final KeyEventResult? Function(LogicalKeyboardKey key)? onKeyUp;

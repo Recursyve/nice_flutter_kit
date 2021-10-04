@@ -13,7 +13,7 @@ class NiceFlutterKitOnboardingConfig {
   }
 
   bool get onboardingCompleted {
-    assert(_onboardingCompleted != null);
+    assert(_onboardingCompleted == null);
     return _onboardingCompleted!;
   }
 

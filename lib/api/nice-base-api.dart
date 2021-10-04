@@ -1,4 +1,4 @@
-import 'package:nice_flutter_kit/nice-flutter-kit-config.dart';
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 abstract class NiceBaseApi {
   final NiceFlutterKitApiConfig? overrideConfig;

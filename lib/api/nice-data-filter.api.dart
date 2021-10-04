@@ -1,7 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:nice_flutter_kit/api/api.dart';
-import 'package:nice_flutter_kit/data-filter/data-filter.dart';
-import 'package:nice_flutter_kit/nice-flutter-kit-config.dart';
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 abstract class NiceDataFilterApi<T> extends NiceBaseApi {
   final Dio dio;

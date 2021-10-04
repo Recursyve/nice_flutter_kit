@@ -81,7 +81,6 @@ class onboardingPage extends StatefulWidget {
   final List<IntroductionConfiguration>? introductionSequence;
   final List<NotificationConfiguration>? permissionSequence;
   final ButtonsText? buttonsText;
-  final Widget child;
 
   onboardingPage({
     required this.introPage,
@@ -89,7 +88,6 @@ class onboardingPage extends StatefulWidget {
     this.permissionSequence,
     this.onDone,
     this.buttonsText,
-    required this.child
   });
 
   @override
@@ -256,21 +254,20 @@ class NiceOnboarding extends StatefulWidget {
 class _NiceOnboardingState extends State<NiceOnboarding> {
   @override
   void initState() {
-      if(NiceFlutterKitOnboardingConfig().onboardingCompleted) {
-        Navigator.pop(context);
+      if(NiceFlutterKitOnboardingConfig()!.onboardingCompleted) {
+        Navigator.push(context, MaterialPageRoute( builder: (context)=> onboardingPage(
+          introPage: widget.introPage,
+          introductionSequence: widget.introductionSequence,
+          permissionSequence: widget.permissionSequence,
+          onDone: widget.onDone,
+          buttonsText: widget.buttonsText,
+        )));
     }
       super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-      return onboardingPage(
-        child: widget.child,
-        onDone: widget.onDone,
-        introPage: widget.introPage,
-        introductionSequence: widget.introductionSequence,
-        permissionSequence: widget.permissionSequence,
-        buttonsText: widget.buttonsText,
-      );
+      return widget.child;
   }
 }

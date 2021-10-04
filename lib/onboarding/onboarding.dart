@@ -1,13 +1,13 @@
 library onboarding;
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:nice_flutter_kit/onboarding/utils/permission-selector.utils.dart';
 import 'package:nice_flutter_kit/onboarding/widgets/onboarding-notification.widget.dart';
 import 'package:nice_flutter_kit/onboarding/widgets/text-accent-punctuation.widget.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'widgets/onboarding-explanation.widget.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+
 
 enum PermissionType {
   notification,

@@ -254,7 +254,8 @@ class NiceOnboarding extends StatefulWidget {
 class _NiceOnboardingState extends State<NiceOnboarding> {
   @override
   void initState() {
-      if(NiceFlutterKitOnboardingConfig()!.onboardingCompleted) {
+    super.initState();
+      if(!NiceFlutterKitConfig.onboardingConfig!.onboardingCompleted) {
         Navigator.push(context, MaterialPageRoute( builder: (context)=> onboardingPage(
           introPage: widget.introPage,
           introductionSequence: widget.introductionSequence,
@@ -263,7 +264,6 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
           buttonsText: widget.buttonsText,
         )));
     }
-      super.initState();
   }
 
   @override

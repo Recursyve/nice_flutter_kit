@@ -1,4 +1,5 @@
 library onboarding;
+import 'package:flutter/scheduler.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:nice_flutter_kit/onboarding/utils/permission-selector.utils.dart';
 import 'package:nice_flutter_kit/onboarding/widgets/onboarding-notification.widget.dart';
@@ -256,13 +257,16 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
   void initState() {
     super.initState();
       if(!NiceFlutterKitConfig.onboardingConfig!.onboardingCompleted) {
-        Navigator.push(context, MaterialPageRoute( builder: (context)=> onboardingPage(
-          introPage: widget.introPage,
-          introductionSequence: widget.introductionSequence,
-          permissionSequence: widget.permissionSequence,
-          onDone: widget.onDone,
-          buttonsText: widget.buttonsText,
-        )));
+        SchedulerBinding.instance!.addPostFrameCallback((_) {
+          Navigator.push(context, MaterialPageRoute( builder: (context)=> onboardingPage(
+            introPage: widget.introPage,
+            introductionSequence: widget.introductionSequence,
+            permissionSequence: widget.permissionSequence,
+            onDone: widget.onDone,
+            buttonsText: widget.buttonsText,
+          )));
+        });
+
     }
   }
 

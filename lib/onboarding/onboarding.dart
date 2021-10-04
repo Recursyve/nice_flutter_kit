@@ -231,7 +231,6 @@ class _onboardingPageState extends State<onboardingPage>{
   }
 }
 
-
 class NiceOnboarding extends StatefulWidget {
   final VoidCallback? onDone;
   final IntroPageConfiguration introPage;
@@ -274,5 +273,4 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
         buttonsText: widget.buttonsText,
       );
   }
-
 }

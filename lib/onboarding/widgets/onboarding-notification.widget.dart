@@ -69,9 +69,8 @@ class OnboardingNotification extends StatelessWidget {
         ],
       ),
     );
-
-
   }
+
   void _activate() {
     this.onActivate(this.permissionType);
   }

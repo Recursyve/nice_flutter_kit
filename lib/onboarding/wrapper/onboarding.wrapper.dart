@@ -25,7 +25,7 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
   @override
   void initState() {
     super.initState();
-    pageCount = widget.configuration.countPages;
+    pageCount = widget.configuration.pageCount;
   }
 
   @override

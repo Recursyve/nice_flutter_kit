@@ -10,10 +10,12 @@ class NiceOnboardingConfiguration {
   final VoidCallback? onDone;
 
   const NiceOnboardingConfiguration({this.welcome, this.introductionSequence, this.permissionSequence, this.onDone})
-      : assert(welcome != null || introductionSequence != null || permissionSequence != null,
-            "At least one of welcome, introduction or permission is required");
+      : assert(
+          welcome != null || introductionSequence != null || permissionSequence != null,
+          "At least one of welcome, introduction or permission is required",
+        );
 
-  int get countPages =>
+  int get pageCount =>
       (welcome != null ? 1 : 0) +
       (introductionSequence != null ? 1 : 0) +
       (permissionSequence?.configurations.length ?? 0);

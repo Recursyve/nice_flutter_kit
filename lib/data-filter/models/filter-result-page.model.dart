@@ -1,12 +1,12 @@
-import "dart:collection";
+import 'dart:collection';
 
-class FilterResultPageModel {
+class NiceFilterResultPageModel {
   int? number;
   int? size;
 
-  FilterResultPageModel({this.number, this.size});
+  NiceFilterResultPageModel({this.number, this.size});
 
-  FilterResultPageModel.fromJson(LinkedHashMap<String, dynamic>? json) {
+  NiceFilterResultPageModel.fromJson(LinkedHashMap<String, dynamic>? json) {
     if (json == null) {
       return;
     }

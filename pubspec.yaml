@@ -11,13 +11,13 @@ dependencies:
   flutter:
     sdk: flutter
 
-  dio: ^4.0.0
-  flutter_spinkit: ^5.1.0
-  shared_preferences: ^2.0.6
-  notification_permissions: ^0.6.1
-  geolocator: 7.0.3
-  firebase_messaging: ^10.0.0
-  introduction_screen: ^2.1.0
+  dio: 4.0.0
+  firebase_messaging: 10.0.8
+  flutter_spinkit: 5.1.0
+  geolocator: 7.6.2
+  introduction_screen: 2.1.0
+  notification_permissions: 0.6.1
+  shared_preferences: 2.0.8
 
 dev_dependencies:
   flutter_test:

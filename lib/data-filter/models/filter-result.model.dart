@@ -1,30 +1,28 @@
-import "dart:collection";
+import 'dart:collection';
 
+import 'package:nice_flutter_kit/configs/config.dart';
 import 'package:nice_flutter_kit/data-filter/models/filter-result-page.model.dart';
-import 'package:nice_flutter_kit/nice-flutter-kit-config.dart';
 
-class FilterResultModel<T> {
-  FilterResultPageModel? page;
+class NiceFilterResultModel<T> {
+  NiceFilterResultPageModel? page;
   int? total;
   List<T>? values;
 
-  FilterResultModel({this.page, this.total, this.values});
+  NiceFilterResultModel({this.page, this.total, this.values});
 
-  FilterResultModel.fromJson(LinkedHashMap<String, dynamic>? json) {
+  NiceFilterResultModel.fromJson(LinkedHashMap<String, dynamic>? json) {
     if (json == null) {
       return;
     }
 
-    page = FilterResultPageModel.fromJson(json["page"]);
+    page = NiceFilterResultPageModel.fromJson(json["page"]);
     total = json["total"];
 
-    if (NiceFlutterKitConfig.dataFilterConfig == null) {
-      throw Exception("Data filter config not defined.\nYou must define it in NiceFlutterKitConfig.");
-    }
+    assert(NiceConfig.dataFilterConfig != null, "NiceDataFilter wasn't initialized, please provide NiceDataFilterConfig in main");
 
     values = [
       for (final data in json["values"] ?? const [])
-        NiceFlutterKitConfig.dataFilterConfig!.deserialize(
+        NiceConfig.dataFilterConfig!.deserialize(
           data,
         ),
     ];

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:nice_flutter_kit/onboarding/introduction/onboarding-introduction-sequence.configuration.dart';
-import 'package:nice_flutter_kit/widgets/nice-text-accent-punctuation.widget.dart';
 
 class NiceOnboardingIntroductionSequence extends StatelessWidget {
   final NiceOnboardingIntroductionSequenceConfiguration sequenceConfiguration;
@@ -25,7 +24,8 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       pages: [
         for (final configuration in sequenceConfiguration.configurations)
           PageViewModel(
-            image: Image.asset(configuration.imageUrl,
+            image: Image.asset(
+              configuration.imageUrl,
             ),
             titleWidget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),

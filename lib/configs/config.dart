@@ -1,7 +1,6 @@
 import 'package:nice_flutter_kit/configs/api.config.dart';
 import 'package:nice_flutter_kit/configs/data-filter.config.dart';
 import 'package:nice_flutter_kit/configs/onboarding-global.config.dart';
-import 'package:nice_flutter_kit/utils/permissions.utils.dart';
 
 class NiceConfig {
   static NiceApiConfig? defaultApiConfig;

@@ -33,11 +33,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
             configuration.title,
             const SizedBox(height: 20),
             Text(configuration.paragraph,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Theme.of(context).textTheme.bodyText1?.color
-                )
-            ),
+                textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).textTheme.bodyText1?.color)),
             const SizedBox(height: 125),
             NiceButton(
               displayText: configuration.bottomButtonText,

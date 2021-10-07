@@ -1,6 +1,5 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:nice_flutter_kit/configs/config.dart';
-import 'package:nice_flutter_kit/configs/onboarding-global.config.dart';
 import 'package:nice_flutter_kit/onboarding/permission/onboarding-permission-sequence.configuration.dart';
 import 'package:nice_flutter_kit/services/fcm.service.dart';
 
@@ -15,6 +14,15 @@ class NicePermissionUtils {
       case NicePermissionTypes.notification:
         await requestNotificationPermission();
         break;
+    }
+  }
+
+  static Future<bool> isPermissionEnabled(NicePermissionTypes type) async {
+    switch (type) {
+      case NicePermissionTypes.gpsLocalization:
+        return await isGpsLocalizationEnabled();
+      case NicePermissionTypes.notification:
+        return await isNotificationEnabled();
     }
   }
 
@@ -36,12 +44,14 @@ class NicePermissionUtils {
   static Future<bool> isNotificationEnabled() {
     return NiceFcmService.isPermissionGranted();
   }
-// TODO, a voir si je le mets direct dans le projet ou dans la lib
+
+  // TODO, a voir si je le mets direct dans le projet ou dans la lib
   static OnboardingPermissionSequenceConfiguration removeAlreadyEnabledPermissionConfig(
-      OnboardingPermissionSequenceConfiguration sequence) {
-    sequence.configurations.removeWhere((permission) => (!NiceConfig
-        .onboardingConfig!.permissionsNeeded
-        .contains(permission.type)));
+    OnboardingPermissionSequenceConfiguration sequence,
+  ) {
+    sequence.configurations.removeWhere(
+      (permission) => (!NiceConfig.onboardingConfig!.permissions!.contains(permission.type)),
+    );
     return sequence;
   }
 }

@@ -5,7 +5,7 @@ import 'package:nice_flutter_kit/onboarding/welcome/onboarding-welcome.configura
 
 class NiceOnboardingConfiguration {
   final NiceOnboardingWelcomeConfiguration? welcome;
-  final OnboardingIntroductionSequenceConfiguration? introductionSequence;
+  final NiceOnboardingIntroductionSequenceConfiguration? introductionSequence;
   final OnboardingPermissionSequenceConfiguration? permissionSequence;
   final VoidCallback? onDone;
 

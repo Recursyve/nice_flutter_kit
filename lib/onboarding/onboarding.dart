@@ -9,10 +9,12 @@ import 'package:nice_flutter_kit/onboarding/wrapper/onboarding.wrapper.dart';
 class NiceOnboarding extends StatefulWidget {
   final NiceOnboardingConfiguration configuration;
   final Widget child;
+  final ThemeData? onboardingTheme;
 
   NiceOnboarding({
     required this.configuration,
     required this.child,
+    this.onboardingTheme,
   });
 
   @override
@@ -43,6 +45,7 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
           child: snapshot.data!
               ? widget.child
               : NiceOnboardingWrapper(
+                  theme: widget.onboardingTheme,
                   configuration: widget.configuration,
                   onCompleted: _complete,
                 ),

@@ -20,9 +20,9 @@ class NiceOnboardingPermissionConfiguration {
 }
 
 class OnboardingPermissionSequenceConfiguration {
-  final List<NiceOnboardingPermissionConfiguration> configurations;
+  List<NiceOnboardingPermissionConfiguration> configurations;
 
-  const OnboardingPermissionSequenceConfiguration({
+  OnboardingPermissionSequenceConfiguration({
     required this.configurations,
-  }) : assert(configurations.length > 0);
+  }) : assert(configurations.length >= 0);
 }

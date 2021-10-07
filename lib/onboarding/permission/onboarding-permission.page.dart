@@ -15,39 +15,45 @@ class NiceOnboardingPermissionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              child: Image.asset(
-                configuration.imageUrl,
-                width: 196,
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Container(
+                alignment: Alignment.center,
+                child: Image.asset(
+                  configuration.imageUrl,
+                  width: 196,
+                ),
               ),
             ),
-          ),
-          configuration.title,
-          const SizedBox(height: 54),
-          Text(configuration.paragraph, textAlign: TextAlign.center),
-          const SizedBox(height: 54),
-          NiceButton(
-            displayText: configuration.activate,
-            padding: EdgeInsets.zero,
-            onPressed: _activate,
-            themeColors: Theme.of(context).colorScheme.secondary,
-          ),
-          const SizedBox(height: 20),
-          NiceButton(
-            displayText: configuration.activateLater,
-            padding: EdgeInsets.zero,
-            onPressed: onNext,
-            themeColors: Theme.of(context).backgroundColor,
-          ),
-          const SizedBox(height: 40),
-        ],
+            configuration.title,
+            const SizedBox(height: 54),
+            Text(configuration.paragraph,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyText1?.color)),
+            const SizedBox(height: 54),
+            NiceButton(
+              displayText: configuration.activate,
+              padding: EdgeInsets.zero,
+              onPressed: _activate,
+              themeColors: Theme.of(context).buttonTheme.colorScheme?.primary,
+            ),
+            const SizedBox(height: 20),
+            NiceButton(
+              displayText: configuration.activateLater,
+              padding: EdgeInsets.zero,
+              onPressed: onNext,
+              themeColors: Theme.of(context).backgroundColor,
+            ),
+            const SizedBox(height: 40),
+          ],
+        ),
       ),
     );
   }

@@ -12,13 +12,13 @@ class NiceOnboardingIntroductionConfiguration {
   });
 }
 
-class OnboardingIntroductionSequenceConfiguration {
+class NiceOnboardingIntroductionSequenceConfiguration {
   final List<NiceOnboardingIntroductionConfiguration> configurations;
   final String skip;
   final String next;
   final String done;
 
-  const OnboardingIntroductionSequenceConfiguration({
+  const NiceOnboardingIntroductionSequenceConfiguration({
     required this.configurations,
     required this.skip,
     required this.next,

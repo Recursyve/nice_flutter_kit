@@ -1,4 +1,7 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:nice_flutter_kit/configs/config.dart';
+import 'package:nice_flutter_kit/configs/onboarding-global.config.dart';
+import 'package:nice_flutter_kit/onboarding/permission/onboarding-permission-sequence.configuration.dart';
 import 'package:nice_flutter_kit/services/fcm.service.dart';
 
 enum NicePermissionTypes { notification, gpsLocalization }
@@ -22,7 +25,23 @@ class NicePermissionUtils {
     }
   }
 
+  static Future<bool> isGpsLocalizationEnabled() {
+    return Geolocator.isLocationServiceEnabled();
+  }
+
   static Future<void> requestNotificationPermission() async {
     await NiceFcmService.requestPermission();
+  }
+
+  static Future<bool> isNotificationEnabled() {
+    return NiceFcmService.isPermissionGranted();
+  }
+// TODO, a voir si je le mets direct dans le projet ou dans la lib
+  static OnboardingPermissionSequenceConfiguration removeAlreadyEnabledPermissionConfig(
+      OnboardingPermissionSequenceConfiguration sequence) {
+    sequence.configurations.removeWhere((permission) => (!NiceConfig
+        .onboardingConfig!.permissionsNeeded
+        .contains(permission.type)));
+    return sequence;
   }
 }

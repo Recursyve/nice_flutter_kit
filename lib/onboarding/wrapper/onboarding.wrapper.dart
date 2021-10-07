@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:nice_flutter_kit/configs/config.dart';
 import 'package:nice_flutter_kit/onboarding/introduction/onboarding-introduction.wrapper.dart';
 import 'package:nice_flutter_kit/onboarding/onboarding.configuration.dart';
+import 'package:nice_flutter_kit/onboarding/permission/onboarding-permission-sequence.configuration.dart';
 import 'package:nice_flutter_kit/onboarding/permission/onboarding-permission.page.dart';
 import 'package:nice_flutter_kit/onboarding/welcome/onboarding-welcome.page.dart';
 
 class NiceOnboardingWrapper extends StatefulWidget {
   final NiceOnboardingConfiguration configuration;
   final VoidCallback onCompleted;
+  final ThemeData? theme;
 
   NiceOnboardingWrapper({
     required this.configuration,
     required this.onCompleted,
+    this.theme,
   });
 
   @override
@@ -30,29 +34,20 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: FutureBuilder<List<bool>>(
-        future: Future.wait([
-          // TODO: Need to skip permissions that are already granted.
-          // FcmService.isPermissionGranted(),
-          // GeolocationService.isPermissionGranted(),
-        ]),
-        builder: (context, snapshot) {
-          // final notificationAlreadyEnabled = snapshot.data?[0] ?? false;
-          // final geolocationAlreadyEnabled = snapshot.data?[1] ?? false;
-
-          return PageView(
-            controller: _controller,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              _buildWelcome(),
-              _buildIntroductionSequence(),
-              ..._buildPermissionSequence(),
-            ].whereType<Widget>().toList(),
-          );
-        },
-      ),
+    return Theme(
+        child: Scaffold(
+            backgroundColor: Theme.of(context).backgroundColor,
+            body: PageView(
+              controller: _controller,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                _buildWelcome(),
+                _buildIntroductionSequence(),
+                ..._buildPermissionSequence(),
+              ].whereType<Widget>().toList(),
+            )
+        ),
+        data: widget.theme ?? Theme.of(context),
     );
   }
 
@@ -79,21 +74,25 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
   }
 
   List<Widget> _buildPermissionSequence() {
-    return [
-      if (widget.configuration.permissionSequence != null)
-        for (final permission in widget.configuration.permissionSequence!.configurations)
-          NiceOnboardingPermissionPage(
-            configuration: permission,
-            onNext: _nextPage,
-          ),
-    ];
+
+    if (widget.configuration.permissionSequence != null)
+    return widget.configuration.permissionSequence!.configurations!
+        .map(
+          (permission) => NiceOnboardingPermissionPage(
+              configuration: permission, onNext: _nextPage),
+        )
+        .toList();
+    else{
+      return [];
+    }
   }
 
   void _nextPage() {
     if (_controller.page! + 1 >= pageCount) {
       widget.onCompleted();
     } else {
-      _controller.nextPage(duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+      _controller.nextPage(
+          duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
     }
   }
 }

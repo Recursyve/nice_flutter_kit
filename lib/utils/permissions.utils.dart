@@ -45,13 +45,12 @@ class NicePermissionUtils {
     return NiceFcmService.isPermissionGranted();
   }
 
-  // TODO, a voir si je le mets direct dans le projet ou dans la lib
-  static OnboardingPermissionSequenceConfiguration removeAlreadyEnabledPermissionConfig(
-    OnboardingPermissionSequenceConfiguration sequence,
+  static List<NiceOnboardingPermissionConfiguration> removeAlreadyEnabledPermissionConfig(
+      List<NiceOnboardingPermissionConfiguration> configurations,
   ) {
-    sequence.configurations.removeWhere(
-      (permission) => (!NiceConfig.onboardingConfig!.permissions!.contains(permission.type)),
+   configurations.removeWhere(
+      (permission) => (NiceConfig.onboardingConfig!.isPermissionEnabled[permission.type]!),
     );
-    return sequence;
+    return configurations;
   }
 }

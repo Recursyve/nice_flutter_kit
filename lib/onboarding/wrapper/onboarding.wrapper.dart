@@ -4,6 +4,7 @@ import 'package:nice_flutter_kit/onboarding/introduction/onboarding-introduction
 import 'package:nice_flutter_kit/onboarding/onboarding.configuration.dart';
 import 'package:nice_flutter_kit/onboarding/permission/onboarding-permission.page.dart';
 import 'package:nice_flutter_kit/onboarding/welcome/onboarding-welcome.page.dart';
+import 'package:nice_flutter_kit/utils/permissions.utils.dart';
 
 class NiceOnboardingWrapper extends StatefulWidget {
   final NiceOnboardingConfiguration configuration;
@@ -27,7 +28,7 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
   @override
   void initState() {
     super.initState();
-    pageCount = widget.configuration.pageCount;
+
   }
 
   @override
@@ -75,6 +76,7 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
     if (widget.configuration.permissionSequence == null) {
       return [];
     }
+    widget.configuration.permissionSequence!.configurations = NicePermissionUtils.removeAlreadyEnabledPermissionConfig(widget.configuration.permissionSequence!.configurations);
 
     return [
       for (final configuration in widget.configuration.permissionSequence!.configurations)
@@ -83,6 +85,7 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
   }
 
   void _nextPage() {
+    pageCount = widget.configuration.pageCount;
     if (_controller.page! + 1 >= pageCount) {
       widget.onCompleted();
     } else {

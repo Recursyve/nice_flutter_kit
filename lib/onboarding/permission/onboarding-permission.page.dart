@@ -32,10 +32,9 @@ class NiceOnboardingPermissionPage extends StatelessWidget {
               ),
             ),
             configuration.title,
-            const SizedBox(height: 54),
-            Text(configuration.paragraph,
-                textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).textTheme.bodyText1?.color)),
-            const SizedBox(height: 54),
+            const SizedBox(height: 20),
+            configuration.paragraph,
+            const SizedBox(height: 20),
             NiceButton(
               displayText: configuration.activate,
               padding: EdgeInsets.zero,

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/utils/permissions.utils.dart';
 import 'package:nice_flutter_kit/widgets/nice-text-accent-punctuation.widget.dart';
 
@@ -5,7 +6,7 @@ class NiceOnboardingPermissionConfiguration {
   final NicePermissionTypes type;
   final String imageUrl;
   final NiceTextAccentPunctuation title;
-  final String paragraph;
+  final Widget paragraph;
   final String activate;
   final String activateLater;
 

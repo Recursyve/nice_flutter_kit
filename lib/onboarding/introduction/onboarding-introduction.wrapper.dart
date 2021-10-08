@@ -18,7 +18,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       globalBackgroundColor: Theme.of(context).backgroundColor,
       isTopSafeArea: true,
       dotsDecorator: DotsDecorator(
-        activeColor: Theme.of(context).colorScheme.primary,
+        activeColor: Theme.of(context).colorScheme.secondary,
         color: Theme.of(context).primaryColor,
       ),
       pages: [
@@ -29,7 +29,12 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
             ),
             titleWidget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: configuration.title,
+              child: Column(
+                children: [
+                  const SizedBox(height: 40),
+                  configuration.title,
+                ],
+              ),
             ),
             decoration: PageDecoration(
               bodyAlignment: Alignment.topCenter,
@@ -48,7 +53,6 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 16,
                   height: 1.5,
-                  color: Theme.of(context).textTheme.bodyText1?.color,
                 ),
               ),
             ),
@@ -59,26 +63,27 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       skip: Text(
         sequenceConfiguration.skip,
         style: TextStyle(
-          color: Theme.of(context).buttonTheme.colorScheme?.secondary,
           fontSize: 16,
+          color: Theme.of(context).primaryColor,
         ),
       ),
       next: Text(
         sequenceConfiguration.next,
         style: TextStyle(
-          color: Theme.of(context).buttonTheme.colorScheme?.primary,
           fontSize: 16,
+          color: Theme.of(context).colorScheme.secondary,
         ),
       ),
       done: Text(
         sequenceConfiguration.done,
         style: TextStyle(
-          color: Theme.of(context).buttonTheme.colorScheme?.primary,
           fontSize: 16,
+          color: Theme.of(context).colorScheme.secondary,
         ),
       ),
       animationDuration: 250,
       onDone: onNext,
+      onSkip: onNext,
       scrollPhysics: const NeverScrollableScrollPhysics(),
     );
   }

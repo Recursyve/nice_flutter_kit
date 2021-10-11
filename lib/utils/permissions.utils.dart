@@ -29,7 +29,7 @@ class NicePermissionUtils {
   static Future<void> requestGpsLocalizationPermission() async {
     final permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
-      await Geolocator.openAppSettings();
+      await Geolocator.openLocationSettings();
     }
   }
 

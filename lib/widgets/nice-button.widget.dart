@@ -34,6 +34,7 @@ class NiceButton extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget button;
     if (outlined) {
+      // TODO: Use newest button.
       button = OutlineButton(
         padding: const EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(
@@ -63,6 +64,7 @@ class NiceButton extends StatelessWidget {
         onPressed: onPressed,
       );
     } else {
+      // TODO: Use newest button.
       button = FlatButton(
         padding: const EdgeInsets.all(12.0),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),

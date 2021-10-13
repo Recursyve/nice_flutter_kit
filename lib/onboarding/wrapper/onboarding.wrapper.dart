@@ -5,7 +5,6 @@ import 'package:nice_flutter_kit/onboarding/introduction/onboarding-introduction
 import 'package:nice_flutter_kit/onboarding/onboarding.configuration.dart';
 import 'package:nice_flutter_kit/onboarding/permission/onboarding-permission.page.dart';
 import 'package:nice_flutter_kit/onboarding/welcome/onboarding-welcome.page.dart';
-import 'package:nice_flutter_kit/utils/permissions.utils.dart';
 
 class NiceOnboardingWrapper extends StatefulWidget {
   final NiceOnboardingConfiguration configuration;
@@ -29,7 +28,6 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -79,7 +77,7 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
     }
 
     widget.configuration.permissionSequence!.configurations.removeWhere(
-          (permission) => (NiceConfig.onboardingConfig!.isPermissionEnabled[permission.type]!),
+      (permission) => (NiceConfig.onboardingConfig!.isPermissionEnabled[permission.type]!),
     );
 
     return [

@@ -1,6 +1,4 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:nice_flutter_kit/configs/config.dart';
-import 'package:nice_flutter_kit/onboarding/permission/onboarding-permission-sequence.configuration.dart';
 import 'package:nice_flutter_kit/services/fcm.service.dart';
 
 enum NicePermissionTypes { notification, gpsLocalization }

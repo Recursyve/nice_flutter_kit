@@ -55,6 +55,7 @@ class NiceOnboardingPermissionPage extends StatelessWidget {
     );
   }
 
+  // TODO: Add loading when requesting the permission.
   Future<void> _activate() async {
     await NicePermissionUtils.requestPermission(configuration.type);
     onNext();

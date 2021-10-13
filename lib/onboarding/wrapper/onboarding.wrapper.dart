@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:nice_flutter_kit/configs/config.dart';
 import 'package:nice_flutter_kit/onboarding/introduction/onboarding-introduction.wrapper.dart';
 import 'package:nice_flutter_kit/onboarding/onboarding.configuration.dart';
 import 'package:nice_flutter_kit/onboarding/permission/onboarding-permission.page.dart';
@@ -76,7 +77,10 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
     if (widget.configuration.permissionSequence == null) {
       return [];
     }
-    widget.configuration.permissionSequence!.configurations = NicePermissionUtils.removeAlreadyEnabledPermissionConfig(widget.configuration.permissionSequence!.configurations);
+
+    widget.configuration.permissionSequence!.configurations.removeWhere(
+          (permission) => (NiceConfig.onboardingConfig!.isPermissionEnabled[permission.type]!),
+    );
 
     return [
       for (final configuration in widget.configuration.permissionSequence!.configurations)

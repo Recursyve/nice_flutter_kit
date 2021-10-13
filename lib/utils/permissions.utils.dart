@@ -20,9 +20,9 @@ class NicePermissionUtils {
   static Future<bool> isPermissionEnabled(NicePermissionTypes type) async {
     switch (type) {
       case NicePermissionTypes.gpsLocalization:
-        return await isGpsLocalizationEnabled();
+        return await isGpsLocalizationPermissionEnabled();
       case NicePermissionTypes.notification:
-        return await isNotificationEnabled();
+        return await isNotificationPermissionEnabled();
     }
   }
 
@@ -33,24 +33,17 @@ class NicePermissionUtils {
     }
   }
 
-  static Future<bool> isGpsLocalizationEnabled() {
-    return Geolocator.isLocationServiceEnabled();
+  static Future<bool> isGpsLocalizationPermissionEnabled() async {
+    LocationPermission gpsPermission = await Geolocator.checkPermission();
+
+    return !(gpsPermission == LocationPermission.denied);
   }
 
   static Future<void> requestNotificationPermission() async {
     await NiceFcmService.requestPermission();
   }
 
-  static Future<bool> isNotificationEnabled() {
+  static Future<bool> isNotificationPermissionEnabled() {
     return NiceFcmService.isPermissionGranted();
-  }
-
-  static List<NiceOnboardingPermissionConfiguration> removeAlreadyEnabledPermissionConfig(
-      List<NiceOnboardingPermissionConfiguration> configurations,
-  ) {
-   configurations.removeWhere(
-      (permission) => (NiceConfig.onboardingConfig!.isPermissionEnabled[permission.type]!),
-    );
-    return configurations;
   }
 }

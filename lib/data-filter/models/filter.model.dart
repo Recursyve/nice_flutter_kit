@@ -3,13 +3,13 @@ import 'package:nice_flutter_kit/data-filter/models/filter-page.model.dart';
 import 'package:nice_flutter_kit/data-filter/models/filter-query.model.dart';
 import 'package:nice_flutter_kit/data-filter/models/filter-search.model.dart';
 
-class FilterModel {
-  FilterOrderModel? order;
-  FilterPageModel? page;
-  FilterQueryModel? query;
-  FilterSearchModel? search;
+class NiceFilterModel {
+  NiceFilterOrderModel? order;
+  NiceFilterPageModel? page;
+  NiceFilterQueryModel? query;
+  NiceFilterSearchModel? search;
 
-  FilterModel({this.order, this.page, this.query, this.search});
+  NiceFilterModel({this.order, this.page, this.query, this.search});
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         "order": order?.toJson(),

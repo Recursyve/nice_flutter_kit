@@ -1,10 +1,10 @@
-class FilterQueryConditionType {
+class NiceFilterQueryConditionType {
   final String _value;
 
-  const FilterQueryConditionType._internal(this._value);
+  const NiceFilterQueryConditionType._internal(this._value);
 
   String toString() => _value;
 
-  static const And = const FilterQueryConditionType._internal("and");
-  static const Or = const FilterQueryConditionType._internal("or");
+  static const And = const NiceFilterQueryConditionType._internal("and");
+  static const Or = const NiceFilterQueryConditionType._internal("or");
 }

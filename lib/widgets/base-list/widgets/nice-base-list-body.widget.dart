@@ -19,6 +19,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     return BlocBuilder<NiceBaseListCubit, NiceBaseListState>(
       buildWhen: (prev, curr) => prev.data != curr.data,
       builder: (context, state) => ListView.separated(
+        padding: EdgeInsets.zero,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: state.data.length,

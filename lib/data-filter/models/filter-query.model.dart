@@ -7,7 +7,7 @@ class NiceFilterQueryModel {
   // List<FilterQueryModel | FilterQueryRuleModel>
   final List<dynamic> rules;
 
-  NiceFilterQueryModel({required this.condition, required this.rules});
+  const NiceFilterQueryModel({required this.condition, required this.rules});
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         "condition": condition.toString(),

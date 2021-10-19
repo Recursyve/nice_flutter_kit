@@ -1,20 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
-enum NicePageMode {
-  View,
-  Edit,
-  Saving,
-}
-
-extension PageModeExt on NicePageMode {
-  bool get isView => this == NicePageMode.View;
-
-  bool get isEdit => this == NicePageMode.Edit;
-
-  bool get isSaving => this == NicePageMode.Saving;
-}
-
 @immutable
 abstract class NiceBaseState extends Equatable {
   final bool loading;

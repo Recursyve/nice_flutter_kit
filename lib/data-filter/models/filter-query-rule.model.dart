@@ -7,7 +7,7 @@ class NiceFilterQueryRuleModel {
   // ((int | String) | List<int | String>)
   final dynamic value;
 
-  NiceFilterQueryRuleModel({required this.id, required this.operation, required this.value});
+  const NiceFilterQueryRuleModel({required this.id, required this.operation, required this.value});
 
   Map<String, dynamic> toJson() => <String, dynamic>{"id": id, "operation": operation.toString(), "value": value};
 }

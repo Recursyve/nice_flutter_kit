@@ -10,39 +10,27 @@ abstract class BaseCubit<S extends NiceBaseState> extends Cubit<S> {
   BaseCubit(S initialState) : super(initialState);
 
   @protected
-  FutureOr<R?> wrap<R>(FutureOr<R> Function() callback) async {
+  FutureOr<R?> wrap<R>({
+    bool loading: true,
+    required FutureOr<R> Function() callback,
+  }) async {
     try {
-      emit(state.copyWithLoadingAndError(loading: true) as S);
+      if (loading) emit(state.copyWithLoadingAndError(loading: true) as S);
       final result = await callback();
-      emit(state.copyWithLoadingAndError(loading: false) as S);
+      if (loading) emit(state.copyWithLoadingAndError(loading: false) as S);
       return result;
     } catch (e, s) {
       if (!kIsWeb) {
         FirebaseCrashlytics.instance.recordError(e, s);
       } else {
         debugPrint(e.toString());
-        debugPrintStack(stackTrace: s);
       }
       emit(
         state.copyWithLoadingAndError(
-          loading: false,
+          loading: loading ? false : state.loading,
           error: true,
         ) as S,
       );
-    }
-  }
-
-  @protected
-  FutureOr<R?> wrapNoLoading<R>(FutureOr<R> Function() callback) async {
-    try {
-      return await callback();
-    } catch (e, s) {
-      if (!kIsWeb) {
-        FirebaseCrashlytics.instance.recordError(e, s);
-      } else {
-        debugPrint(e.toString());
-      }
-      emit(state.copyWithLoadingAndError(error: true) as S);
     }
   }
 }

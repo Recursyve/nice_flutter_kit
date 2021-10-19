@@ -1,20 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/api/data-filter.api.dart';
-import 'package:nice_flutter_kit/data-filter/models/filter-order-direction-type.dart';
-import 'package:nice_flutter_kit/data-filter/models/filter-order.model.dart';
 import 'package:nice_flutter_kit/data-filter/models/filter-page.model.dart';
 import 'package:nice_flutter_kit/data-filter/models/filter.model.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:nice_flutter_kit/widgets/base-list/cubit/nice-base-list.state.dart';
 
 class NiceBaseListCubit<D> extends BaseCubit<NiceBaseListState<D>> {
-  final NiceDataFilterApi<D> filterApi;
-  final int itemsPerPage;
+  final NiceBaseListConfig<D> config;
 
   NiceBaseListCubit({
-    required this.filterApi,
-    required this.itemsPerPage,
+    required this.config,
   }) : super(NiceBaseListState.initialState());
 
   factory NiceBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
@@ -23,16 +18,13 @@ class NiceBaseListCubit<D> extends BaseCubit<NiceBaseListState<D>> {
     emit(state.copyWith(error: false));
 
     await wrap(
-      () async {
-        final List<D> data = await filterApi
+      callback: () async {
+        final List<D> data = await config.filterApi
             .filter(
               NiceFilterModel(
-                page: NiceFilterPageModel(number: 0, size: itemsPerPage),
+                page: NiceFilterPageModel(number: 0, size: config.itemsPerPage),
                 search: NiceFilterSearchModel(value: searchQuery),
-                order: NiceFilterOrderModel(
-                  column: "createdAt",
-                  direction: NiceFilterOrderDirectionType.Asc,
-                ),
+                order: config.order,
               ),
             )
             .then((d) => d.values ?? const []);
@@ -40,7 +32,7 @@ class NiceBaseListCubit<D> extends BaseCubit<NiceBaseListState<D>> {
         emit(
           state.copyWith(
             data: data,
-            endReached: data.length < itemsPerPage,
+            endReached: data.length < config.itemsPerPage,
           ),
         );
       },
@@ -50,22 +42,20 @@ class NiceBaseListCubit<D> extends BaseCubit<NiceBaseListState<D>> {
   Future<void> loadMore([String searchQuery = ""]) async {
     if (state.loading || state.loadingMore || state.endReached) return;
 
-    await wrapNoLoading(
-      () async {
+    await wrap(
+      loading: false,
+      callback: () async {
         emit(state.copyWith(loadingMore: true));
 
-        final List<D> data = await filterApi
+        final List<D> data = await config.filterApi
             .filter(
               NiceFilterModel(
                 page: NiceFilterPageModel(
-                  number: state.data.length ~/ itemsPerPage,
-                  size: itemsPerPage,
+                  number: state.data.length ~/ config.itemsPerPage,
+                  size: config.itemsPerPage,
                 ),
                 search: NiceFilterSearchModel(value: searchQuery),
-                order: NiceFilterOrderModel(
-                  column: "createdAt",
-                  direction: NiceFilterOrderDirectionType.Asc,
-                ),
+                order: config.order,
               ),
             )
             .then((d) => d.values ?? const []);
@@ -74,7 +64,7 @@ class NiceBaseListCubit<D> extends BaseCubit<NiceBaseListState<D>> {
           state.copyWith(
             data: [...state.data, ...data],
             loadingMore: false,
-            endReached: data.length < itemsPerPage,
+            endReached: data.length < config.itemsPerPage,
           ),
         );
       },

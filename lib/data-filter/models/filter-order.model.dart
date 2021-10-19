@@ -4,7 +4,7 @@ class NiceFilterOrderModel {
   final String column;
   final NiceFilterOrderDirectionType direction;
 
-  NiceFilterOrderModel({required this.column, required this.direction});
+  const NiceFilterOrderModel({required this.column, required this.direction});
 
   Map<String, dynamic> toJson() => <String, dynamic>{"column": column, "direction": direction.toString()};
 }

@@ -1,3 +1,4 @@
+export 'base-list/nice-base-list.config.dart';
 export 'base-list/nice-base-list.widget.dart';
 export 'nice-button.widget.dart';
 export 'nice-loading-overlay.widget.dart';

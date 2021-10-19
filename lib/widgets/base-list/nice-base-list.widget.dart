@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/api/data-filter.api.dart';
 import 'package:nice_flutter_kit/localizations/nice.localizations.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:nice_flutter_kit/widgets/base-list/cubit/nice-base-list.cubit.dart';
@@ -14,8 +13,7 @@ import 'package:rxdart/rxdart.dart';
 typedef NiceBaseListItemBuilder<D> = Widget Function(BuildContext context, D data);
 
 class NiceBaseList<D> extends StatefulWidget {
-  final NiceDataFilterApi<D> filterApi;
-  final int itemsPerPage;
+  final NiceBaseListConfig config;
   final NiceBaseListItemBuilder<D> itemBuilder;
   final String title;
   final VoidCallback? onBack;
@@ -23,8 +21,7 @@ class NiceBaseList<D> extends StatefulWidget {
   final Widget? emptyState;
 
   const NiceBaseList({
-    required this.filterApi,
-    this.itemsPerPage: 20,
+    required this.config,
     required this.itemBuilder,
     required this.title,
     this.onBack,
@@ -49,10 +46,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   @override
   void initState() {
     super.initState();
-    _cubit = NiceBaseListCubit(
-      filterApi: widget.filterApi,
-      itemsPerPage: widget.itemsPerPage,
-    )..load();
+    _cubit = NiceBaseListCubit(config: widget.config)..load();
 
     _searchSubject.distinct().debounceTime(const Duration(milliseconds: 250)).listen((text) {
       _cubit.load(text);

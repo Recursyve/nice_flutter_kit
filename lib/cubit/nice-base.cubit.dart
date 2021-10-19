@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-abstract class BaseCubit<S extends NiceBaseState> extends Cubit<S> {
-  BaseCubit(S initialState) : super(initialState);
+abstract class NiceBaseCubit<S extends NiceBaseState> extends Cubit<S> {
+  NiceBaseCubit(S initialState) : super(initialState);
 
   @protected
   FutureOr<R?> wrap<R>({

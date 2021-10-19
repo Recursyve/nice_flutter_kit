@@ -5,7 +5,7 @@ import 'package:nice_flutter_kit/data-filter/models/filter.model.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:nice_flutter_kit/widgets/base-list/cubit/nice-base-list.state.dart';
 
-class NiceBaseListCubit<D> extends BaseCubit<NiceBaseListState<D>> {
+class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   final NiceBaseListConfig<D> config;
 
   NiceBaseListCubit({

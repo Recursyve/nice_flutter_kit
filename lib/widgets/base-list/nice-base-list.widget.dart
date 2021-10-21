@@ -19,6 +19,7 @@ class NiceBaseList<D> extends StatefulWidget {
   final VoidCallback? onBack;
   final Widget? separator;
   final Widget? emptyState;
+  final bool fadeInItems;
 
   const NiceBaseList({
     required this.config,
@@ -27,6 +28,7 @@ class NiceBaseList<D> extends StatefulWidget {
     this.onBack,
     this.separator,
     this.emptyState,
+    this.fadeInItems: false,
   });
 
   @override
@@ -123,6 +125,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
               return NiceBaseListBody(
                 itemBuilder: widget.itemBuilder,
                 separator: widget.separator,
+                fadeInItems: widget.fadeInItems,
               );
             },
           ),

@@ -92,4 +92,8 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     emit(NiceBaseListState.initialState());
     await load();
   }
+
+  void setData(List<D> data) {
+    emit(state.copyWith(data: data));
+  }
 }

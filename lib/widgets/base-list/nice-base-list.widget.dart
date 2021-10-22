@@ -22,6 +22,9 @@ class NiceBaseList<D> extends StatefulWidget {
   final bool fadeInItems;
   final Widget? action;
 
+  // These BlocProviders will be placed underneath the NiceBaseListCubit
+  final List<BlocProvider> blocProviders;
+
   const NiceBaseList({
     required this.config,
     required this.itemBuilder,
@@ -31,6 +34,7 @@ class NiceBaseList<D> extends StatefulWidget {
     this.emptyState,
     this.fadeInItems: false,
     this.action,
+    this.blocProviders: const [],
   });
 
   @override
@@ -78,8 +82,13 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NiceBaseListCubit<D>>.value(
-      value: _cubit,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<NiceBaseListCubit<D>>.value(
+          value: _cubit,
+        ),
+        ...widget.blocProviders,
+      ],
       child: BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
         buildWhen: (prev, curr) => prev.loading != curr.loading || prev.error != curr.error,
         builder: (context, state) {

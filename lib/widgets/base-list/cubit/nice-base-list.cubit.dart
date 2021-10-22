@@ -14,7 +14,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
 
   factory NiceBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
 
-  Future<void> load([String searchQuery = ""]) async {
+  Future<void> load() async {
     emit(state.copyWith(error: false));
 
     await wrap(
@@ -23,8 +23,9 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
             .filter(
               NiceFilterModel(
                 page: NiceFilterPageModel(number: 0, size: config.itemsPerPage),
-                search: NiceFilterSearchModel(value: searchQuery),
-                order: config.order,
+                order: state.order ?? config.defaultOrder,
+                query: state.query,
+                search: state.search,
               ),
             )
             .then((d) => d.values ?? const []);
@@ -39,7 +40,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     );
   }
 
-  Future<void> loadMore([String searchQuery = ""]) async {
+  Future<void> loadMore() async {
     if (state.loading || state.loadingMore || state.endReached) return;
 
     await wrap(
@@ -54,8 +55,9 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
                   number: state.data.length ~/ config.itemsPerPage,
                   size: config.itemsPerPage,
                 ),
-                search: NiceFilterSearchModel(value: searchQuery),
-                order: config.order,
+                order: state.order ?? config.defaultOrder,
+                query: state.query,
+                search: state.search,
               ),
             )
             .then((d) => d.values ?? const []);
@@ -69,5 +71,25 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
         );
       },
     );
+  }
+
+  Future<void> updateSearch(NiceFilterSearchModel? search) async {
+    emit(state.copyWithSearch(search));
+    await load();
+  }
+
+  Future<void> updateQuery(NiceFilterQueryModel? query) async {
+    emit(state.copyWithQuery(query));
+    await load();
+  }
+
+  Future<void> updateOrder(NiceFilterOrderModel? order) async {
+    emit(state.copyWithOrder(order));
+    await load();
+  }
+
+  Future<void> resetAndLoad() async {
+    emit(NiceBaseListState.initialState());
+    await load();
   }
 }

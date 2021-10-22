@@ -1,4 +1,6 @@
-class NiceFilterQueryRuleOperatorType {
+import 'package:equatable/equatable.dart';
+
+class NiceFilterQueryRuleOperatorType extends Equatable {
   final String _value;
 
   const NiceFilterQueryRuleOperatorType._internal(this._value);
@@ -25,4 +27,7 @@ class NiceFilterQueryRuleOperatorType {
   static const NotContains = const NiceFilterQueryRuleOperatorType._internal("not_contains");
   static const IsEmpty = const NiceFilterQueryRuleOperatorType._internal("is_empty");
   static const IsNotEmpty = const NiceFilterQueryRuleOperatorType._internal("is_not_empty");
+
+  @override
+  List<Object> get props => [_value];
 }

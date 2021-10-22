@@ -1,6 +1,8 @@
 import 'dart:collection';
 
-class NiceFilterResultPageModel {
+import 'package:equatable/equatable.dart';
+
+class NiceFilterResultPageModel extends Equatable {
   int? number;
   int? size;
 
@@ -14,4 +16,7 @@ class NiceFilterResultPageModel {
     number = json["number"];
     size = json["size"];
   }
+
+  @override
+  List<Object?> get props => [number, size];
 }

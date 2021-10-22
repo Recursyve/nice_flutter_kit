@@ -8,18 +8,61 @@ class NiceBaseListHeader extends StatelessWidget {
   final String title;
   final VoidCallback? onBack;
   final TextEditingController searchController;
+  final Widget? action;
 
   const NiceBaseListHeader({
     required this.title,
     required this.onBack,
     required this.searchController,
+    required this.action,
   });
 
   @override
   Widget build(BuildContext context) {
     if (NiceLayoutUtils.isPhone(context) || NiceLayoutUtils.isTabletPortrait(context)) {
-      return _buildSearch();
+      return _buildSmall();
     }
+
+    return _buildLarge();
+  }
+
+  Widget _buildSmall() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        _buildSearch(),
+        if (action != null) ...[
+          const SizedBox(height: 12),
+          action!,
+        ],
+      ],
+    );
+  }
+
+  Widget _buildLarge() {
+    if (action != null)
+      return Row(
+        children: [
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: _buildTitle(),
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.center,
+              child: _buildSearch(),
+            ),
+          ),
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: action!,
+            ),
+          ),
+        ],
+      );
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

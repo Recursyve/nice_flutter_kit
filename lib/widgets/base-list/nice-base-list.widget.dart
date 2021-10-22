@@ -13,13 +13,14 @@ import 'package:rxdart/rxdart.dart';
 typedef NiceBaseListItemBuilder<D> = Widget Function(BuildContext context, D data);
 
 class NiceBaseList<D> extends StatefulWidget {
-  final NiceBaseListConfig config;
+  final NiceBaseListConfig<D> config;
   final NiceBaseListItemBuilder<D> itemBuilder;
   final String title;
   final VoidCallback? onBack;
   final Widget? separator;
   final Widget? emptyState;
   final bool fadeInItems;
+  final Widget? action;
 
   const NiceBaseList({
     required this.config,
@@ -29,6 +30,7 @@ class NiceBaseList<D> extends StatefulWidget {
     this.separator,
     this.emptyState,
     this.fadeInItems: false,
+    this.action,
   });
 
   @override
@@ -38,7 +40,7 @@ class NiceBaseList<D> extends StatefulWidget {
 class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   final TextEditingController _searchController = TextEditingController();
   final _searchSubject = BehaviorSubject<String>();
-  late final NiceBaseListCubit _cubit;
+  late final NiceBaseListCubit<D> _cubit;
   final ScrollController _scrollController = ScrollController();
 
   bool get shouldLoadMore =>
@@ -48,10 +50,10 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   @override
   void initState() {
     super.initState();
-    _cubit = NiceBaseListCubit(config: widget.config)..load();
+    _cubit = NiceBaseListCubit<D>(config: widget.config)..load();
 
     _searchSubject.distinct().debounceTime(const Duration(milliseconds: 250)).listen((text) {
-      _cubit.load(text);
+      _cubit.updateSearch(NiceFilterSearchModel(value: text));
     });
 
     _searchController.addListener(() {
@@ -60,7 +62,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
 
     _scrollController.addListener(() {
       if (shouldLoadMore) {
-        _cubit.loadMore(_searchController.text);
+        _cubit.loadMore();
       }
     });
   }
@@ -76,15 +78,15 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NiceBaseListCubit>.value(
+    return BlocProvider<NiceBaseListCubit<D>>.value(
       value: _cubit,
-      child: BlocBuilder<NiceBaseListCubit, NiceBaseListState>(
+      child: BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
         buildWhen: (prev, curr) => prev.loading != curr.loading || prev.error != curr.error,
         builder: (context, state) {
           if (state.error) {
             return NiceErrorWidget(
               error: NiceLocalizations.of(context).translate("general.an_error_occurred"),
-              onRefresh: () => NiceBaseListCubit.of(context).load(),
+              onRefresh: () => NiceBaseListCubit<D>.of(context).resetAndLoad(),
             );
           }
 
@@ -110,9 +112,10 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
             title: widget.title,
             onBack: widget.onBack,
             searchController: _searchController,
+            action: widget.action,
           ),
           const SizedBox(height: 24),
-          BlocBuilder<NiceBaseListCubit, NiceBaseListState>(
+          BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
             buildWhen: (prev, curr) => prev.data.isEmpty != curr.data.isEmpty || prev.loading != curr.loading,
             builder: (context, state) {
               if (state.data.isEmpty && !state.loading) {
@@ -129,7 +132,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
               );
             },
           ),
-          BlocBuilder<NiceBaseListCubit, NiceBaseListState>(
+          BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
             buildWhen: (prev, curr) => prev.loadingMore != curr.loadingMore,
             builder: (context, state) {
               if (!state.loadingMore) return const SizedBox();

@@ -4,12 +4,12 @@ import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 @immutable
 class NiceBaseListConfig<D> {
   final NiceDataFilterApi<D> filterApi;
-  final NiceFilterOrderModel order;
+  final NiceFilterOrderModel defaultOrder;
   final int itemsPerPage;
 
   const NiceBaseListConfig({
     required this.filterApi,
-    this.order: const NiceFilterOrderModel(
+    this.defaultOrder: const NiceFilterOrderModel(
       column: "createdAt",
       direction: NiceFilterOrderDirectionType.Asc,
     ),

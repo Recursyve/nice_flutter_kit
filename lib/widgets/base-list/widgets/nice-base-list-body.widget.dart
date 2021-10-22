@@ -19,7 +19,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NiceBaseListCubit, NiceBaseListState>(
+    return BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
       buildWhen: (prev, curr) => prev.data != curr.data,
       builder: (context, state) => ListView.separated(
         padding: EdgeInsets.zero,

@@ -1,9 +1,10 @@
 import 'dart:collection';
 
+import 'package:equatable/equatable.dart';
 import 'package:nice_flutter_kit/configs/config.dart';
 import 'package:nice_flutter_kit/data-filter/models/filter-result-page.model.dart';
 
-class NiceFilterResultModel<T> {
+class NiceFilterResultModel<T> extends Equatable {
   NiceFilterResultPageModel? page;
   int? total;
   List<T>? values;
@@ -18,7 +19,10 @@ class NiceFilterResultModel<T> {
     page = NiceFilterResultPageModel.fromJson(json["page"]);
     total = json["total"];
 
-    assert(NiceConfig.dataFilterConfig != null, "NiceDataFilter wasn't initialized, please provide NiceDataFilterConfig in main");
+    assert(
+      NiceConfig.dataFilterConfig != null,
+      "NiceDataFilter wasn't initialized, please provide NiceDataFilterConfig in main",
+    );
 
     values = [
       for (final data in json["values"] ?? const [])
@@ -27,4 +31,7 @@ class NiceFilterResultModel<T> {
         ),
     ];
   }
+
+  @override
+  List<Object?> get props => [page, total, values];
 }

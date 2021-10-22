@@ -1,13 +1,26 @@
+import 'package:equatable/equatable.dart';
 import 'package:nice_flutter_kit/data-filter/models/filter-query-condition.type.dart';
 import 'package:nice_flutter_kit/data-filter/models/filter-query-rule.model.dart';
 
-class NiceFilterQueryModel {
+class NiceFilterQueryModel extends Equatable {
   final NiceFilterQueryConditionType condition;
 
   // List<FilterQueryModel | FilterQueryRuleModel>
   final List<dynamic> rules;
 
   const NiceFilterQueryModel({required this.condition, required this.rules});
+
+  // Recursively loop through the rules to maybe find a rule with id
+  D? getValueForId<D>(String id) {
+    for (final rule in rules) {
+      if (rule is NiceFilterQueryModel) {
+        final value = rule.getValueForId(id);
+        if (value != null) return value;
+      } else if (rule is NiceFilterQueryRuleModel) {
+        if (rule.id == id) return rule.value;
+      }
+    }
+  }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         "condition": condition.toString(),
@@ -16,4 +29,7 @@ class NiceFilterQueryModel {
             .map((rule) => rule?.toJson())
             .toList()
       };
+
+  @override
+  List<Object> get props => [condition, rules];
 }

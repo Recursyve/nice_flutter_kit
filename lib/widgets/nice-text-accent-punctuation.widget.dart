@@ -8,6 +8,7 @@ class NiceTextAccentPunctuation extends StatelessWidget {
   final FontWeight fontWeight;
   final bool align;
   final TextAlign textAlign;
+  final Color? punctuationColor;
   final double? lineHeight;
 
   NiceTextAccentPunctuation({
@@ -17,6 +18,7 @@ class NiceTextAccentPunctuation extends StatelessWidget {
     this.fontWeight: FontWeight.bold,
     this.align: true,
     this.textAlign: TextAlign.center,
+    this.punctuationColor,
     this.lineHeight,
   });
 
@@ -42,7 +44,7 @@ class NiceTextAccentPunctuation extends StatelessWidget {
             style: TextStyle(
               fontSize: size,
               fontWeight: fontWeight,
-              color: Theme.of(context).colorScheme.secondary,
+              color: punctuationColor != null ? punctuationColor : Theme.of(context).colorScheme.secondary,
             ),
           ),
         ],

@@ -1,9 +1,11 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/data-filter/models/filter-page.model.dart';
 import 'package:nice_flutter_kit/data-filter/models/filter.model.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:nice_flutter_kit/widgets/base-list/cubit/nice-base-list.state.dart';
+import 'package:nice_flutter_kit/widgets/base-list/utils/nice-filter-query.utils.dart';
 
 class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   final NiceBaseListConfig<D> config;
@@ -81,6 +83,46 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   Future<void> updateQuery(NiceFilterQueryModel? query) async {
     emit(state.copyWithQuery(query));
     await load();
+  }
+
+  Future<void> upsertQueryRules(List<NiceFilterQueryRuleModel> upsertedRules) async {
+    emit(
+      state.copyWithQuery(
+        NiceFilterQueryUtils.upsertQueryRules(
+          state.query,
+          upsertedRules,
+        ),
+      ),
+    );
+    await load();
+  }
+
+  Future<void> updateQueryRule(
+    String id,
+    NiceFilterQueryRuleModel Function(NiceFilterQueryRuleModel? oldRule) ruleUpdater, {
+    bool reloadData = true,
+  }) async {
+    final oldRule = state.query?.rules.firstWhereOrNull((r) => r is NiceFilterQueryRuleModel && r.id == id);
+    final newRule = ruleUpdater(oldRule);
+
+    emit(
+      state.copyWithQuery(
+        NiceFilterQueryUtils.upsertQueryRules(
+          state.query,
+          [newRule],
+        ),
+      ),
+    );
+    if (reloadData) await load();
+  }
+
+  Future<void> removeQueryRule(String id, {bool reloadData = true}) async {
+    emit(
+      state.copyWithQuery(
+        NiceFilterQueryUtils.removeRuleById(state.query, id),
+      ),
+    );
+    if (reloadData) await load();
   }
 
   Future<void> updateOrder(NiceFilterOrderModel? order) async {

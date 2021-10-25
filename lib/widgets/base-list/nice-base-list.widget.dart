@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +23,7 @@ class NiceBaseList<D> extends StatefulWidget {
   final Widget? emptyState;
   final bool fadeInItems;
   final Widget? action;
+  final FutureOr<void> Function()? onBeforeSearch;
 
   // These BlocProviders will be placed underneath the NiceBaseListCubit
   final List<BlocProvider> blocProviders;
@@ -35,6 +38,7 @@ class NiceBaseList<D> extends StatefulWidget {
     this.fadeInItems: false,
     this.action,
     this.blocProviders: const [],
+    this.onBeforeSearch,
   });
 
   @override
@@ -55,7 +59,8 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
     super.initState();
     _cubit = NiceBaseListCubit<D>(config: widget.config)..load();
 
-    _searchSubject.distinct().debounceTime(const Duration(milliseconds: 250)).listen((text) {
+    _searchSubject.distinct().debounceTime(const Duration(milliseconds: 250)).listen((text) async {
+      await widget.onBeforeSearch?.call();
       _cubit.updateSearch(NiceFilterSearchModel(value: text));
     });
 
@@ -108,7 +113,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
         controller: _scrollController,
         physics: const AlwaysScrollableScrollPhysics(),
         padding: NiceLayoutUtils.isPhone(context)
-            ? const EdgeInsets.all(12)
+            ? const EdgeInsets.fromLTRB(12, 12, 12, 24)
             : const EdgeInsets.symmetric(horizontal: 40, vertical: 32),
         children: [
           NiceBaseListHeader(
@@ -141,9 +146,13 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
               if (!state.loadingMore) return const SizedBox();
 
               return Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: LinearProgressIndicator(
-                  color: Theme.of(context).colorScheme.secondary,
+                padding: const EdgeInsets.only(top: 8),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: LinearProgressIndicator(
+                    color: Theme.of(context).colorScheme.secondary,
+
+                  ),
                 ),
               );
             },

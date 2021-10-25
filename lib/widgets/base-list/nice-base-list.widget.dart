@@ -42,7 +42,6 @@ class NiceBaseList<D> extends StatefulWidget {
 }
 
 class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
-  final TextEditingController _searchController = TextEditingController();
   final _searchSubject = BehaviorSubject<String>();
   late final NiceBaseListCubit<D> _cubit;
   final ScrollController _scrollController = ScrollController();
@@ -60,10 +59,6 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
       _cubit.updateSearch(NiceFilterSearchModel(value: text));
     });
 
-    _searchController.addListener(() {
-      _searchSubject.add(_searchController.text);
-    });
-
     _scrollController.addListener(() {
       if (shouldLoadMore) {
         _cubit.loadMore();
@@ -73,7 +68,6 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
 
   @override
   void dispose() {
-    _searchController.dispose();
     _searchSubject.close();
     _cubit.close();
     _scrollController.dispose();
@@ -120,7 +114,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
           NiceBaseListHeader(
             title: widget.title,
             onBack: widget.onBack,
-            searchController: _searchController,
+            onSearchChange: (searchQuery) => _searchSubject.add(searchQuery),
             action: widget.action,
           ),
           const SizedBox(height: 24),

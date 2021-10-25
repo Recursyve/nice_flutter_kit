@@ -7,13 +7,13 @@ import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 class NiceBaseListHeader extends StatelessWidget {
   final String title;
   final VoidCallback? onBack;
-  final TextEditingController searchController;
+  final ValueChanged<String> onSearchChange;
   final Widget? action;
 
   const NiceBaseListHeader({
     required this.title,
     required this.onBack,
-    required this.searchController,
+    required this.onSearchChange,
     required this.action,
   });
 
@@ -100,7 +100,7 @@ class NiceBaseListHeader extends StatelessWidget {
   Widget _buildSearch() {
     return Builder(
       builder: (context) => TextField(
-        controller: searchController,
+        onChanged: onSearchChange,
         decoration: InputDecoration(
           prefixIcon: const Icon(
             Icons.search,

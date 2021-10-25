@@ -151,7 +151,6 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
                   borderRadius: BorderRadius.circular(4),
                   child: LinearProgressIndicator(
                     color: Theme.of(context).colorScheme.secondary,
-
                   ),
                 ),
               );

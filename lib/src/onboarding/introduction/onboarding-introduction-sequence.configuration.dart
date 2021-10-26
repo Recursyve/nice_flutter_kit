@@ -1,0 +1,27 @@
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+
+class NiceOnboardingIntroductionConfiguration {
+  final NiceTextAccentPunctuation title;
+  final String imageUrl;
+  final String paragraph;
+
+  const NiceOnboardingIntroductionConfiguration({
+    required this.title,
+    required this.imageUrl,
+    required this.paragraph,
+  });
+}
+
+class NiceOnboardingIntroductionSequenceConfiguration {
+  final List<NiceOnboardingIntroductionConfiguration> configurations;
+  final String skip;
+  final String next;
+  final String done;
+
+  const NiceOnboardingIntroductionSequenceConfiguration({
+    required this.configurations,
+    required this.skip,
+    required this.next,
+    required this.done,
+  }) : assert(configurations.length > 0);
+}

@@ -1,3 +1,5 @@
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:path/path.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
@@ -23,10 +25,7 @@ class NiceOnboardingPermissionPage extends StatelessWidget {
             Expanded(
               child: Container(
                 alignment: Alignment.center,
-                child: Image.asset(
-                  configuration.imageUrl,
-                  width: 196,
-                ),
+                child: _buildImage(configuration.imageUrl),
               ),
             ),
             configuration.title,
@@ -51,6 +50,16 @@ class NiceOnboardingPermissionPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildImage(String imageUrl) {
+    final ext = extension(imageUrl);
+    switch (ext) {
+      case ".svg":
+        return SvgPicture.asset(imageUrl, width: 196);
+      default:
+        return Image.asset(configuration.imageUrl, width: 196);
+    }
   }
 
   // TODO: Add loading when requesting the permission.

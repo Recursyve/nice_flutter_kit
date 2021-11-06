@@ -1,3 +1,5 @@
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:path/path.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
@@ -23,10 +25,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
             Expanded(
               child: Container(
                 alignment: Alignment.center,
-                child: Image.asset(
-                  configuration.imageUrl,
-                  width: 300,
-                ),
+                child: _buildImage(configuration.imageUrl),
               ),
             ),
             configuration.title,
@@ -44,5 +43,15 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildImage(String imageUrl) {
+    final ext = extension(imageUrl);
+    switch (ext) {
+      case ".svg":
+        return SvgPicture.asset(imageUrl, width: 300);
+      default:
+        return Image.asset(configuration.imageUrl, width: 300);
+    }
   }
 }

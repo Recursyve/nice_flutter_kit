@@ -21,7 +21,7 @@ class NiceOnboardingGlobalConfig {
     _sharedPref = await SharedPreferences.getInstance();
     this._onboardingCompleted = _sharedPref.getBool(sharedPrefKey) ?? false;
 
-    if (!debug) {
+    if (debug) {
       this._onboardingCompleted = false;
     }
 

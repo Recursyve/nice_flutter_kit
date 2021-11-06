@@ -89,7 +89,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
   }
 
   Widget _buildImage(String imageUrl) {
-    final ext = extension("");
+    final ext = extension(imageUrl);
     switch (ext) {
       case ".svg":
         return SvgPicture.asset(imageUrl);

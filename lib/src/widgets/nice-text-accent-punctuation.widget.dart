@@ -8,8 +8,8 @@ class NiceTextAccentPunctuation extends StatelessWidget {
   final TextOverflow overflow;
   final double size;
   final FontWeight fontWeight;
-  final bool align;
   final TextAlign textAlign;
+  final Alignment? alignment;
   final Color? punctuationColor;
   final double? lineHeight;
 
@@ -20,8 +20,8 @@ class NiceTextAccentPunctuation extends StatelessWidget {
     this.overflow: TextOverflow.clip,
     this.size: 28,
     this.fontWeight: FontWeight.bold,
-    this.align: true,
     this.textAlign: TextAlign.center,
+    this.alignment,
     this.punctuationColor,
     this.lineHeight,
   });
@@ -57,9 +57,9 @@ class NiceTextAccentPunctuation extends StatelessWidget {
       ),
     );
 
-    if (align)
+    if (alignment != null)
       return Align(
-        alignment: Alignment.center,
+        alignment: alignment!,
         child: richText,
       );
     return richText;

@@ -9,15 +9,21 @@ class NiceOnboardingGlobalConfig {
   bool? _onboardingCompleted;
   late HashMap<NicePermissionTypes, bool> isPermissionEnabled = new HashMap<NicePermissionTypes, bool>();
   final Set<NicePermissionTypes>? permissions;
+  final bool debug;
 
   NiceOnboardingGlobalConfig({
     this.sharedPrefKey: "ONBOARDING_COMPLETED",
     this.permissions,
+    this.debug: false,
   });
 
   Future<void> init() async {
     _sharedPref = await SharedPreferences.getInstance();
     this._onboardingCompleted = _sharedPref.getBool(sharedPrefKey) ?? false;
+
+    if (!debug) {
+      this._onboardingCompleted = false;
+    }
 
     for (final permission in (permissions ?? {}).toList()) {
       isPermissionEnabled[permission] = await NicePermissionUtils.isPermissionEnabled(permission);

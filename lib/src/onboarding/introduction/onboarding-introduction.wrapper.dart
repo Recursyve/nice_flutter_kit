@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import 'package:path/path.dart';
 
 class NiceOnboardingIntroductionSequence extends StatelessWidget {
   final NiceOnboardingIntroductionSequenceConfiguration sequenceConfiguration;
@@ -24,9 +26,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       pages: [
         for (final configuration in sequenceConfiguration.configurations)
           PageViewModel(
-            image: Image.asset(
-              configuration.imageUrl,
-            ),
+            image: _buildImage(configuration.imageUrl),
             titleWidget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
@@ -43,14 +43,14 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
               bodyFlex: 2,
               imagePadding: const EdgeInsets.only(bottom: 0),
               pageColor: Theme.of(context).backgroundColor,
-              contentMargin: EdgeInsets.all(5),
+              contentMargin: const EdgeInsets.all(5),
             ),
             bodyWidget: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Text(
                 configuration.paragraph,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   height: 1.5,
                 ),
@@ -86,5 +86,15 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       onSkip: onNext,
       scrollPhysics: const NeverScrollableScrollPhysics(),
     );
+  }
+
+  Widget _buildImage(String imageUrl) {
+    final ext = extension("");
+    switch (ext) {
+      case ".svg":
+        return SvgPicture.asset(imageUrl);
+      default:
+        return Image.asset(imageUrl);
+    }
   }
 }

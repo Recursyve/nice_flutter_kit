@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 class NiceTextAccentPunctuation extends StatelessWidget {
   final String text;
   final String punctuation;
+  final int? maxLines;
+  final TextOverflow overflow;
   final double size;
   final FontWeight fontWeight;
   final bool align;
@@ -14,6 +16,8 @@ class NiceTextAccentPunctuation extends StatelessWidget {
   NiceTextAccentPunctuation({
     required this.text,
     required this.punctuation,
+    this.maxLines,
+    this.overflow: TextOverflow.clip,
     this.size: 28,
     this.fontWeight: FontWeight.bold,
     this.align: true,
@@ -26,6 +30,8 @@ class NiceTextAccentPunctuation extends StatelessWidget {
   Widget build(BuildContext context) {
     final richText = RichText(
       textAlign: textAlign,
+      maxLines: maxLines,
+      overflow: overflow,
       text: TextSpan(
         style: TextStyle(
           height: lineHeight,

@@ -101,10 +101,7 @@ class NiceBaseListHeader extends StatelessWidget {
       builder: (context) => TextField(
         onChanged: onSearchChange,
         decoration: InputDecoration(
-          prefixIcon: const Icon(
-            Icons.search,
-            color: Colors.white54,
-          ),
+          prefixIcon: const Icon(Icons.search),
           hintText: NiceLocalizations.of(context).translate("general.search"),
           constraints: const BoxConstraints(
             maxWidth: 300,

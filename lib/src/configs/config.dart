@@ -16,12 +16,18 @@ class NiceConfig {
     NiceBaseCubitConfig? baseCubitConfig,
   }) async {
     NiceConfig.defaultApiConfig = defaultApiConfig;
+
     NiceConfig.dataFilterConfig = dataFilterConfig;
+
     NiceConfig.onboardingConfig = onboardingConfig;
+
     if (NiceConfig.onboardingConfig != null) {
-      //hardcoded permissionsTypes for now
+      // Hardcoded permissionsTypes for now
       await NiceConfig.onboardingConfig!.init();
     }
+
     NiceConfig.baseCubitConfig = baseCubitConfig ?? NiceBaseCubitConfig();
+
+    NiceLocalizations.initializeTimeago();
   }
 }

@@ -33,6 +33,11 @@ class NiceLocalizations {
     timeago.setLocaleMessages('en', timeago.EnMessages());
   }
 
+  static void initializeTimeago() {
+    timeago.setLocaleMessages('fr', timeago.FrShortMessages());
+    timeago.setLocaleMessages('en', timeago.EnMessages());
+  }
+
   static Locale localResolutionCallback(Locale? locale, Iterable<Locale> supportedLocales) {
     if (locale == null) {
       return supportedLocales.first;

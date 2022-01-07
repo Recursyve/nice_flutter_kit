@@ -13,7 +13,7 @@ typedef NiceBaseListItemBuilder<D> = Widget Function(BuildContext context, D dat
 class NiceBaseList<D> extends StatefulWidget {
   final NiceBaseListConfig<D> config;
   final NiceBaseListItemBuilder<D> itemBuilder;
-  final String title;
+  final Widget title;
   final VoidCallback? onBack;
   final Widget? separator;
   final Widget? emptyState;

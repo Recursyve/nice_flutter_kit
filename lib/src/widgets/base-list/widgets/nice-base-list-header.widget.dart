@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceBaseListHeader extends StatelessWidget {
-  final String title;
+  final Widget title;
   final VoidCallback? onBack;
   final ValueChanged<String> onSearchChange;
   final Widget? action;
@@ -84,13 +84,7 @@ class NiceBaseListHeader extends StatelessWidget {
                 onPressed: onBack,
               ),
             ),
-          Text(
-            title,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          ),
+          title,
         ],
       ),
     );

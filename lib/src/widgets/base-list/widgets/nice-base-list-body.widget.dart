@@ -17,13 +17,13 @@ class NiceBaseListBody<D> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
-      buildWhen: (prev, curr) => prev.data != curr.data,
+      buildWhen: (prev, curr) => prev.result != curr.result,
       builder: (context, state) => ListView.separated(
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: state.data.length,
-        itemBuilder: (context, index) => _buildItem(context, state.data[index], index),
+        itemCount: state.values.length,
+        itemBuilder: (context, index) => _buildItem(context, state.values[index], index),
         separatorBuilder: (_, __) => separator ?? const SizedBox(),
       ),
     );

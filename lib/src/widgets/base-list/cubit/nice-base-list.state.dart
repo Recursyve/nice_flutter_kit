@@ -1,7 +1,7 @@
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceBaseListState<D> extends NiceBaseState {
-  final List<D> data;
+  final NiceFilterResultModel<D>? result;
   final bool loadingMore;
   final bool endReached;
 
@@ -9,10 +9,12 @@ class NiceBaseListState<D> extends NiceBaseState {
   final NiceFilterQueryModel? query;
   final NiceFilterSearchModel? search;
 
+  List<D> get values => result?.values ?? const [];
+
   const NiceBaseListState({
     required bool loading,
     required bool error,
-    required this.data,
+    required this.result,
     required this.loadingMore,
     required this.endReached,
     required this.order,
@@ -21,7 +23,7 @@ class NiceBaseListState<D> extends NiceBaseState {
   }) : super(loading, error);
 
   NiceBaseListState.initialState()
-      : data = <D>[],
+      : result = null,
         loadingMore = false,
         endReached = false,
         order = null,
@@ -37,14 +39,14 @@ class NiceBaseListState<D> extends NiceBaseState {
   NiceBaseListState<D> copyWith({
     bool? loading,
     bool? error,
-    List<D>? data,
+    NiceFilterResultModel<D>? result,
     bool? loadingMore,
     bool? endReached,
   }) {
     return NiceBaseListState<D>(
       loading: loading ?? this.loading,
       error: error ?? this.error,
-      data: data ?? this.data,
+      result: result ?? this.result,
       loadingMore: loadingMore ?? this.loadingMore,
       endReached: endReached ?? this.endReached,
       order: this.order,
@@ -57,7 +59,7 @@ class NiceBaseListState<D> extends NiceBaseState {
     return NiceBaseListState<D>(
       loading: loading,
       error: error,
-      data: data,
+      result: result,
       loadingMore: loadingMore,
       endReached: endReached,
       order: order,
@@ -70,7 +72,7 @@ class NiceBaseListState<D> extends NiceBaseState {
     return NiceBaseListState<D>(
       loading: loading,
       error: error,
-      data: data,
+      result: result,
       loadingMore: loadingMore,
       endReached: endReached,
       order: order,
@@ -83,7 +85,7 @@ class NiceBaseListState<D> extends NiceBaseState {
     return NiceBaseListState<D>(
       loading: loading,
       error: error,
-      data: data,
+      result: result,
       loadingMore: loadingMore,
       endReached: endReached,
       order: order,
@@ -93,5 +95,5 @@ class NiceBaseListState<D> extends NiceBaseState {
   }
 
   @override
-  List<Object?> get props => [loading, error, data, loadingMore, endReached, order, query, search];
+  List<Object?> get props => [loading, error, result, loadingMore, endReached, order, query, search];
 }

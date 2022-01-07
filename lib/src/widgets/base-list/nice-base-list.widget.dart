@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
@@ -120,9 +119,9 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
           ),
           const SizedBox(height: 24),
           BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
-            buildWhen: (prev, curr) => prev.data.isEmpty != curr.data.isEmpty || prev.loading != curr.loading,
+            buildWhen: (prev, curr) => prev.values.isEmpty != curr.values.isEmpty || prev.loading != curr.loading,
             builder: (context, state) {
-              if (state.data.isEmpty && !state.loading) {
+              if (state.values.isEmpty && !state.loading) {
                 return Padding(
                   padding: const EdgeInsets.only(top: 120),
                   child: widget.emptyState,

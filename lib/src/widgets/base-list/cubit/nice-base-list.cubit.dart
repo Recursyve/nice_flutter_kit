@@ -18,21 +18,19 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
 
     await wrap(
       callback: () async {
-        final List<D> data = await config.filterApi
-            .filter(
-              NiceFilterModel(
-                page: NiceFilterPageModel(number: 0, size: config.itemsPerPage),
-                order: state.order ?? config.defaultOrder,
-                query: state.query,
-                search: state.search,
-              ),
-            )
-            .then((d) => d.values ?? const []);
+        final result = await config.filterApi.filter(
+          NiceFilterModel(
+            page: NiceFilterPageModel(number: 0, size: config.itemsPerPage),
+            order: state.order ?? config.defaultOrder,
+            query: state.query,
+            search: state.search,
+          ),
+        );
 
         emit(
           state.copyWith(
-            data: data,
-            endReached: data.length < config.itemsPerPage,
+            result: result,
+            endReached: (result.values ?? const []).length < config.itemsPerPage,
           ),
         );
       },
@@ -47,25 +45,24 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
       callback: () async {
         emit(state.copyWith(loadingMore: true));
 
-        final List<D> data = await config.filterApi
-            .filter(
-              NiceFilterModel(
-                page: NiceFilterPageModel(
-                  number: state.data.length ~/ config.itemsPerPage,
-                  size: config.itemsPerPage,
-                ),
-                order: state.order ?? config.defaultOrder,
-                query: state.query,
-                search: state.search,
-              ),
-            )
-            .then((d) => d.values ?? const []);
+        final result = await config.filterApi.filter(
+          NiceFilterModel(
+            page: NiceFilterPageModel(
+              number: (state.values).length ~/ config.itemsPerPage,
+              size: config.itemsPerPage,
+            ),
+            order: state.order ?? config.defaultOrder,
+            query: state.query,
+            search: state.search,
+          ),
+        );
 
         emit(
           state.copyWith(
-            data: [...state.data, ...data],
+            result: NiceFilterResultModel(
+                page: result.page, total: result.total, values: [...state.values, ...(result.values ?? const [])]),
             loadingMore: false,
-            endReached: data.length < config.itemsPerPage,
+            endReached: (result.values ?? const []).length < config.itemsPerPage,
           ),
         );
       },
@@ -133,6 +130,12 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   }
 
   void setData(List<D> data) {
-    emit(state.copyWith(data: data));
+    emit(
+      state.copyWith(
+        result: state.result!.copyWith(
+          values: [...state.values, ...data],
+        ),
+      ),
+    );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/configs/base-cubit.config.dart';
 
 class NiceConfig {
   static NiceApiConfig? defaultApiConfig;

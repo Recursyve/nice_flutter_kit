@@ -31,6 +31,18 @@ class NiceFilterResultModel<T> extends Equatable {
     ];
   }
 
+  NiceFilterResultModel<T> copyWith({
+    NiceFilterResultPageModel? page,
+    int? total,
+    List<T>? values,
+  }) {
+    return NiceFilterResultModel(
+      page: page ?? this.page,
+      total: total ?? this.total,
+      values: values ?? this.values,
+    );
+  }
+
   @override
   List<Object?> get props => [page, total, values];
 }

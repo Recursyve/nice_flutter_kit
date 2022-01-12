@@ -138,4 +138,14 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
       ),
     );
   }
+
+  void updateData(D Function(D) mapFunc) {
+    emit(
+      state.copyWith(
+        result: state.result!.copyWith(
+          values: state.values.map((value) => mapFunc(value)).toList(),
+        ),
+      ),
+    );
+  }
 }

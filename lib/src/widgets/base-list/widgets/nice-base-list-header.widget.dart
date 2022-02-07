@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceBaseListHeader extends StatelessWidget {
   final Widget title;
   final VoidCallback? onBack;
+  final Widget? backIcon;
   final ValueChanged<String> onSearchChange;
   final Widget? action;
 
   const NiceBaseListHeader({
     required this.title,
-    required this.onBack,
+    this.backIcon,
+    this.onBack,
     required this.onSearchChange,
     required this.action,
   });
@@ -75,11 +76,11 @@ class NiceBaseListHeader extends StatelessWidget {
     return Builder(
       builder: (context) => Row(
         children: [
-          if (onBack != null)
+          if (onBack != null && backIcon != null)
             Padding(
               padding: const EdgeInsets.only(right: 12),
               child: IconButton(
-                icon: const FaIcon(FontAwesomeIcons.longArrowLeft),
+                icon: backIcon!,
                 onPressed: onBack,
               ),
             ),

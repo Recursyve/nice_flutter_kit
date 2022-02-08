@@ -67,10 +67,20 @@ class NiceBaseListHeader extends StatelessWidget {
       );
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildTitle(),
-        if (!hideSearch) _buildSearch(),
+        Expanded(
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: _buildTitle(),
+          ),
+        ),
+        if (!hideSearch)
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: _buildSearch(),
+            ),
+          ),
       ],
     );
   }

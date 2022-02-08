@@ -12,11 +12,14 @@ typedef NiceBaseListItemBuilder<D> = Widget Function(BuildContext context, D dat
 class NiceBaseList<D> extends StatefulWidget {
   final NiceBaseListConfig<D> config;
   final NiceBaseListItemBuilder<D> itemBuilder;
-  final Widget title;
+  final Widget? title;
   final VoidCallback? onBack;
   final Widget? separator;
   final Widget? emptyState;
   final bool fadeInItems;
+  final bool hideSearch;
+  final EdgeInsetsGeometry mobilePadding;
+  final EdgeInsetsGeometry largePadding;
   final Widget? action;
   final FutureOr<void> Function()? onBeforeSearch;
 
@@ -26,14 +29,17 @@ class NiceBaseList<D> extends StatefulWidget {
   const NiceBaseList({
     required this.config,
     required this.itemBuilder,
-    required this.title,
+    this.title,
     this.onBack,
     this.separator,
     this.emptyState,
     this.fadeInItems: false,
+    this.hideSearch: false,
     this.action,
     this.blocProviders: const [],
     this.onBeforeSearch,
+    this.mobilePadding: const EdgeInsets.fromLTRB(12, 12, 12, 24),
+    this.largePadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 32),
   });
 
   @override
@@ -107,14 +113,13 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
       builder: (context) => ListView(
         controller: _scrollController,
         physics: const AlwaysScrollableScrollPhysics(),
-        padding: NiceLayoutUtils.isPhone(context)
-            ? const EdgeInsets.fromLTRB(12, 12, 12, 24)
-            : const EdgeInsets.symmetric(horizontal: 40, vertical: 32),
+        padding: NiceLayoutUtils.isPhone(context) ? widget.mobilePadding : widget.largePadding,
         children: [
           NiceBaseListHeader(
             title: widget.title,
             onBack: widget.onBack,
             onSearchChange: (searchQuery) => _searchSubject.add(searchQuery),
+            hideSearch: widget.hideSearch,
             action: widget.action,
           ),
           const SizedBox(height: 24),

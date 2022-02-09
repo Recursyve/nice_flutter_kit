@@ -97,7 +97,7 @@ class NiceBaseListHeader extends StatelessWidget {
                 onPressed: onBack,
               ),
             ),
-          title ?? const SizedBox.shrink(),
+          if (title != null) title,
         ],
       ),
     );

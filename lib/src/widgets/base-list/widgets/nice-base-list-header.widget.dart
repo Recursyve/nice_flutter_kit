@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceBaseListHeader extends StatelessWidget {
-  final Widget title;
+  final Widget? title;
   final VoidCallback? onBack;
   final Widget? backIcon;
   final ValueChanged<String> onSearchChange;
   final Widget? action;
+  final bool hideSearch;
 
   const NiceBaseListHeader({
-    required this.title,
+    this.title,
     this.backIcon,
     this.onBack,
+    this.hideSearch: false,
     required this.onSearchChange,
     required this.action,
   });
@@ -29,7 +31,7 @@ class NiceBaseListHeader extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildSearch(),
+        if (!hideSearch) _buildSearch(),
         if (action != null) ...[
           const SizedBox(height: 12),
           action!,
@@ -48,12 +50,13 @@ class NiceBaseListHeader extends StatelessWidget {
               child: _buildTitle(),
             ),
           ),
-          Expanded(
-            child: Align(
-              alignment: Alignment.center,
-              child: _buildSearch(),
+          if (!hideSearch)
+            Expanded(
+              child: Align(
+                alignment: Alignment.center,
+                child: _buildSearch(),
+              ),
             ),
-          ),
           Expanded(
             child: Align(
               alignment: Alignment.centerRight,
@@ -64,10 +67,20 @@ class NiceBaseListHeader extends StatelessWidget {
       );
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _buildTitle(),
-        _buildSearch(),
+        Expanded(
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: _buildTitle(),
+          ),
+        ),
+        if (!hideSearch)
+          Expanded(
+            child: Align(
+              alignment: Alignment.centerRight,
+              child: _buildSearch(),
+            ),
+          ),
       ],
     );
   }
@@ -84,7 +97,7 @@ class NiceBaseListHeader extends StatelessWidget {
                 onPressed: onBack,
               ),
             ),
-          title,
+          if (title != null) title,
         ],
       ),
     );

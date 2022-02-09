@@ -97,7 +97,7 @@ class NiceBaseListHeader extends StatelessWidget {
                 onPressed: onBack,
               ),
             ),
-          if (title != null) title,
+          if (title != null) title!,
         ],
       ),
     );

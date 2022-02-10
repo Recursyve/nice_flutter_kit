@@ -1,9 +1,9 @@
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:path/path.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import 'package:path/path.dart';
 
-class NiceOnboardingPermissionPage extends StatelessWidget {
+class NiceOnboardingPermissionPage extends StatefulWidget {
   final NiceOnboardingPermissionConfiguration configuration;
   final VoidCallback onNext;
 
@@ -11,6 +11,13 @@ class NiceOnboardingPermissionPage extends StatelessWidget {
     required this.configuration,
     required this.onNext,
   });
+
+  @override
+  State<NiceOnboardingPermissionPage> createState() => _NiceOnboardingPermissionPageState();
+}
+
+class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionPage> {
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,24 +31,31 @@ class NiceOnboardingPermissionPage extends StatelessWidget {
             Expanded(
               child: Container(
                 alignment: Alignment.center,
-                child: _buildImage(configuration.imageUrl),
+                child: _buildImage(widget.configuration.imageUrl),
               ),
             ),
-            configuration.title,
+            widget.configuration.title,
             const SizedBox(height: 20),
-            configuration.paragraph,
+            widget.configuration.paragraph,
             const SizedBox(height: 20),
             NiceButton(
-              displayText: configuration.activate,
+              displayText: widget.configuration.activate,
               padding: EdgeInsets.zero,
-              onPressed: _activate,
+              onPressed: !loading ? _activate : null,
               themeColors: Theme.of(context).buttonTheme.colorScheme?.primary,
+              child: loading
+                  ? const SizedBox(
+                      height: 24,
+                      width: 24,
+                      child: CircularProgressIndicator(),
+                    )
+                  : null,
             ),
             const SizedBox(height: 20),
             NiceButton(
-              displayText: configuration.activateLater,
+              displayText: widget.configuration.activateLater,
               padding: EdgeInsets.zero,
-              onPressed: onNext,
+              onPressed: widget.onNext,
               themeColors: Theme.of(context).backgroundColor,
             ),
             const SizedBox(height: 40),
@@ -57,13 +71,15 @@ class NiceOnboardingPermissionPage extends StatelessWidget {
       case ".svg":
         return SvgPicture.asset(imageUrl, width: 196);
       default:
-        return Image.asset(configuration.imageUrl, width: 196);
+        return Image.asset(widget.configuration.imageUrl, width: 196);
     }
   }
 
-  // TODO: Add loading when requesting the permission.
   Future<void> _activate() async {
-    await NicePermissionUtils.requestPermission(configuration.type);
-    onNext();
+    setState(() => loading = true);
+    await NicePermissionUtils.requestPermission(widget.configuration.type);
+    if (widget.configuration.onActivated != null) await widget.configuration.onActivated!();
+    setState(() => loading = false);
+    widget.onNext();
   }
 }

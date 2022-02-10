@@ -77,7 +77,10 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
 
     return [
       for (final configuration in widget.configuration.permissionSequence!.configurations)
-        NiceOnboardingPermissionPage(configuration: configuration, onNext: _nextPage),
+        NiceOnboardingPermissionPage(
+          configuration: configuration,
+          onNext: _nextPage,
+        ),
     ];
   }
 

@@ -7,7 +7,7 @@ import 'package:nice_flutter_kit/src/widgets/base-list/widgets/nice-base-list-bo
 import 'package:nice_flutter_kit/src/widgets/base-list/widgets/nice-base-list-header.widget.dart';
 import 'package:rxdart/rxdart.dart';
 
-typedef NiceBaseListItemBuilder<D> = Widget Function(BuildContext context, D data);
+typedef NiceBaseListItemBuilder<D> = Widget Function(BuildContext context, D data, int? index);
 
 class NiceBaseList<D> extends StatefulWidget {
   final NiceBaseListConfig<D> config;

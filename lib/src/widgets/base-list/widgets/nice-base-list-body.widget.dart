@@ -30,7 +30,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
   }
 
   Widget _buildItem(BuildContext context, D data, int index) {
-    final child = itemBuilder(context, data);
+    final child = itemBuilder(context, data, index);
 
     if (!fadeInItems) return child;
 

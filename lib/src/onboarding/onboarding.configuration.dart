@@ -5,10 +5,18 @@ class NiceOnboardingConfiguration {
   final NiceOnboardingWelcomeConfiguration? welcome;
   final NiceOnboardingIntroductionSequenceConfiguration? introductionSequence;
   final OnboardingPermissionSequenceConfiguration? permissionSequence;
+  final VoidCallback? onShown;
+  final VoidCallback? onNotShown;
   final VoidCallback? onDone;
 
-  const NiceOnboardingConfiguration({this.welcome, this.introductionSequence, this.permissionSequence, this.onDone})
-      : assert(
+  const NiceOnboardingConfiguration({
+    this.welcome,
+    this.introductionSequence,
+    this.permissionSequence,
+    this.onShown,
+    this.onNotShown,
+    this.onDone,
+  }) : assert(
           welcome != null || introductionSequence != null || permissionSequence != null,
           "At least one of welcome, introduction or permission is required",
         );

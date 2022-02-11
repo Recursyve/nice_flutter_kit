@@ -22,6 +22,17 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
   final StreamController<bool> _controller = StreamController<bool>();
 
   @override
+  void initState() {
+    super.initState();
+
+    if (NiceConfig.onboardingConfig!.onboardingCompleted) {
+      if (widget.configuration.onNotShown != null) widget.configuration.onNotShown!();
+    } else {
+      if (widget.configuration.onShown != null) widget.configuration.onShown!();
+    }
+  }
+
+  @override
   void dispose() {
     _controller.close();
     super.dispose();
@@ -54,5 +65,6 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
   void _complete() {
     _controller.add(true);
     NiceConfig.onboardingConfig!.onboardingCompleted = true;
+    if (widget.configuration.onDone != null) widget.configuration.onDone!();
   }
 }

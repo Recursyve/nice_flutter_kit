@@ -22,6 +22,9 @@ class NiceBaseList<D> extends StatefulWidget {
   final EdgeInsetsGeometry largePadding;
   final Widget? action;
   final FutureOr<void> Function()? onBeforeSearch;
+  final ScrollPhysics scrollPhysics;
+  final ScrollController? scrollController;
+  final bool shrinkWrap;
 
   // These BlocProviders will be placed underneath the NiceBaseListCubit
   final List<BlocProvider> blocProviders;
@@ -40,6 +43,9 @@ class NiceBaseList<D> extends StatefulWidget {
     this.onBeforeSearch,
     this.mobilePadding: const EdgeInsets.fromLTRB(12, 12, 12, 24),
     this.largePadding: const EdgeInsets.symmetric(horizontal: 40, vertical: 32),
+    this.scrollPhysics: const AlwaysScrollableScrollPhysics(),
+    this.scrollController,
+    this.shrinkWrap: false,
   });
 
   @override
@@ -49,7 +55,7 @@ class NiceBaseList<D> extends StatefulWidget {
 class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   final _searchSubject = BehaviorSubject<String>();
   late final NiceBaseListCubit<D> _cubit;
-  final ScrollController _scrollController = ScrollController();
+  late final ScrollController _scrollController;
 
   bool get shouldLoadMore =>
       _scrollController.position.pixels == _scrollController.position.maxScrollExtent &&
@@ -58,6 +64,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   @override
   void initState() {
     super.initState();
+    _scrollController = widget.scrollController ?? ScrollController();
     _cubit = NiceBaseListCubit<D>(config: widget.config)..load();
 
     _searchSubject.distinct().debounceTime(const Duration(milliseconds: 250)).listen((text) async {
@@ -66,7 +73,9 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
     });
 
     _scrollController.addListener(() {
+      print("load");
       if (shouldLoadMore) {
+        print("load more");
         _cubit.loadMore();
       }
     });
@@ -76,7 +85,9 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   void dispose() {
     _searchSubject.close();
     _cubit.close();
-    _scrollController.dispose();
+    if (widget.scrollController == null) {
+      _scrollController.dispose();
+    }
     super.dispose();
   }
 
@@ -111,8 +122,9 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   Widget _buildList() {
     return Builder(
       builder: (context) => ListView(
-        controller: _scrollController,
-        physics: const AlwaysScrollableScrollPhysics(),
+        shrinkWrap: widget.shrinkWrap,
+        controller: widget.scrollController == null ? _scrollController : null,
+        physics: widget.scrollPhysics,
         padding: NiceLayoutUtils.isPhone(context) ? widget.mobilePadding : widget.largePadding,
         children: [
           NiceBaseListHeader(

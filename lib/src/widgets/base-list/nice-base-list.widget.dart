@@ -73,9 +73,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
     });
 
     _scrollController.addListener(() {
-      print("load");
       if (shouldLoadMore) {
-        print("load more");
         _cubit.loadMore();
       }
     });

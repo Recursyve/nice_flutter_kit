@@ -35,63 +35,67 @@ class PasswordValidator extends StatelessWidget {
         for (final entry in validationsAndTranslationsMap.entries)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Row(
-              children: _buildValidations(entry),
-            ),
+            child: _buildValidations(entry),
           ),
       ],
     );
   }
 
-  List<Widget> _buildValidations(MapEntry<RegExp, String> entry) {
+  Widget _buildValidations(MapEntry<RegExp, String> entry) {
     if (password.isEmpty) {
-      return [
-        if (defaultIcon != null)
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: defaultIcon!,
+      return Row(
+        children: [
+          if (defaultIcon != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: defaultIcon!,
+            ),
+          Text(
+            entry.value,
+            maxLines: 2,
+            style: textStyle.copyWith(
+              color: defaultColor,
+            ),
           ),
-        Text(
-          entry.value,
-          maxLines: 2,
-          style: textStyle.copyWith(
-            color: defaultColor,
-          ),
-        ),
-      ];
+        ],
+      );
     }
 
     final hasMatch = entry.key.hasMatch(password);
     if (hasMatch) {
-      return [
-        if (validIcon != null)
+      return Row(
+        children: [
+          if (validIcon != null)
+            Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: validIcon!,
+            ),
+          Text(
+            entry.value,
+            maxLines: 2,
+            style: textStyle.copyWith(
+              color: validColor,
+            ),
+          ),
+        ],
+      );
+    }
+
+    return Row(
+      children: [
+        if (invalidIcon != null)
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
-            child: validIcon!,
+            child: invalidIcon!,
           ),
         Text(
           entry.value,
           maxLines: 2,
           style: textStyle.copyWith(
-            color: validColor,
+            color: invalidColor,
           ),
         ),
-      ];
-    }
-
-    return [
-      if (invalidIcon != null)
-        Padding(
-          padding: const EdgeInsets.only(right: 16.0),
-          child: invalidIcon!,
-        ),
-      Text(
-        entry.value,
-        maxLines: 2,
-        style: textStyle.copyWith(
-          color: invalidColor,
-        ),
-      ),
-    ];
+      ],
+    );
   }
 }

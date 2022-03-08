@@ -1,6 +1,6 @@
 name: nice_flutter_kit
-description: A new Flutter package project.
-version: 0.0.1
+description: A collection of nice widgets
+version: 1.0.0
 homepage: https://github.com/Recursyve/nice_flutter_kit
 
 environment:
@@ -15,6 +15,7 @@ dependencies:
     sdk: flutter
 
   bloc: ^8.0.0
+  collection: ^1.15.0
   dio: ^4.0.0
   equatable: ^2.0.0
   firebase_messaging: ^11.0.0
@@ -25,14 +26,10 @@ dependencies:
   intl: ^0.17.0
   introduction_screen: ^2.1.0
   notification_permissions: ^0.6.1
+  path: ^1.8.0
   rxdart: ^0.27.0
   shared_preferences: ^2.0.0
   timeago: ^3.1.0
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

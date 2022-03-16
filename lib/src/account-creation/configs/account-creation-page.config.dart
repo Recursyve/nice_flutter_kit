@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nice_flutter_kit/src/account-creation/pages/account-creation-layout.page.dart';
-import 'package:provider/provider.dart';
 
 class NiceAccountCreationPageConfig {
   /// Alignment of the title, used in [NiceAccountCreationLayoutPage]

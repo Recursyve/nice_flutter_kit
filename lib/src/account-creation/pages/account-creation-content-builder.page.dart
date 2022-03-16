@@ -5,12 +5,14 @@ class NiceAccountCreationContentBuilderPage extends NiceAccountCreationLayoutPag
   final WidgetBuilder contentBuilder;
 
   const NiceAccountCreationContentBuilderPage({
-    bool enabled: true,
+    NiceAccountCreationBaseEnabledStrategy enabledStrategy: const NiceAccountCreationAlwaysEnabledEnabledStrategy(),
+    required NiceAccountCreationBaseValidationStrategy validationStrategy,
     NiceAccountCreationLayoutHeaderData headerData: const NiceAccountCreationLayoutHeaderData(),
     NiceAccountCreationPageConfig? pageConfig,
     required this.contentBuilder,
   }) : super(
-          enabled: enabled,
+          enabledStrategy: enabledStrategy,
+          validationStrategy: validationStrategy,
           headerData: headerData,
           pageConfig: pageConfig,
         );

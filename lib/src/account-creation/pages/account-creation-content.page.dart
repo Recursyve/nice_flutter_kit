@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/src/account-creation/configs/account-creation-page.config.dart';
-import 'package:nice_flutter_kit/src/account-creation/pages/account-creation-layout.page.dart';
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceAccountCreationContentPage extends NiceAccountCreationLayoutPage {
   final Widget content;
 
   const NiceAccountCreationContentPage({
-    bool enabled: true,
+    NiceAccountCreationBaseEnabledStrategy enabledStrategy:
+        const NiceAccountCreationAlwaysEnabledEnabledStrategy(),
+    required NiceAccountCreationBaseValidationStrategy validationStrategy,
     NiceAccountCreationLayoutHeaderData headerData: const NiceAccountCreationLayoutHeaderData(),
     NiceAccountCreationPageConfig? pageConfig,
     required this.content,
   }) : super(
-          enabled: enabled,
+          enabledStrategy: enabledStrategy,
+          validationStrategy: validationStrategy,
           headerData: headerData,
           pageConfig: pageConfig,
         );

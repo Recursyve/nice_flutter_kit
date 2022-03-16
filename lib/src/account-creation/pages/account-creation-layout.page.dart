@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:nice_flutter_kit/src/account-creation/configs/account-creation-page.config.dart';
-import 'package:nice_flutter_kit/src/account-creation/pages/account-creation.page.dart';
+import 'package:nice_flutter_kit/src/account-creation/pages/account-creation-base.page.dart';
 
 class NiceAccountCreationLayoutHeaderData {
   /// Title of the page, displayed according to [defaultPageConfig]
@@ -34,15 +34,19 @@ class NiceAccountCreationLayoutHeaderData {
 
 /// Base page for a step that has a title / subtitle and content
 /// Title, subTitle and content style / alignment will depend on the [NiceAccountCreationPageConfig] passed
-abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationPage {
+abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationBasePage {
   final NiceAccountCreationLayoutHeaderData headerData;
   final NiceAccountCreationPageConfig? pageConfig;
 
   const NiceAccountCreationLayoutPage({
-    required bool enabled,
+    required NiceAccountCreationBaseEnabledStrategy enabledStrategy,
+    required NiceAccountCreationBaseValidationStrategy validationStrategy,
     required this.headerData,
     this.pageConfig,
-  }) : super(enabled: enabled);
+  }) : super(
+          enabledStrategy: enabledStrategy,
+          validationStrategy: validationStrategy,
+        );
 
   /// Build the page layout around [child] according to [pageConfig] or [defaultPageConfig]
   @mustCallSuper
@@ -52,7 +56,9 @@ abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationPage {
     return Column(
       children: [
         if (headerData.isNotEmpty) _buildHeader(),
-        child,
+        Expanded(
+          child: child,
+        ),
       ],
     );
   }

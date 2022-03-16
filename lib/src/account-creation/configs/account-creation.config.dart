@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:nice_flutter_kit/src/account-creation/configs/account-creation-page.config.dart';
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:provider/provider.dart';
 
 class NiceAccountCreationConfig {
@@ -20,6 +20,12 @@ class NiceAccountCreationConfig {
   /// The physics applied to the page view. By default, we use [NeverScrollableScrollPhysics]
   final ScrollPhysics pageViewPhysics;
 
+  /// Config for the next button
+  final NiceAccountCreationNextButtonConfig nextButtonConfig;
+
+  /// Config for the previous button
+  final NiceAccountCreationPreviousButtonConfig previousButtonConfig;
+
   const NiceAccountCreationConfig({
     this.pageChangeDuration: const Duration(milliseconds: 200),
     this.pageChangeCurve: Curves.easeOut,
@@ -27,6 +33,8 @@ class NiceAccountCreationConfig {
     required this.nextButtonText,
     required this.previousButtonText,
     this.pageViewPhysics: const NeverScrollableScrollPhysics(),
+    required this.nextButtonConfig,
+    required this.previousButtonConfig,
   });
 
   factory NiceAccountCreationConfig.of(BuildContext context) => Provider.of<NiceAccountCreationConfig>(context);

@@ -1,77 +1,96 @@
 import 'package:flutter/cupertino.dart';
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:nice_flutter_kit/src/account-creation/configs/account-creation-page.config.dart';
 import 'package:nice_flutter_kit/src/account-creation/pages/account-creation.page.dart';
 
-/// Base page for a step that has a title / subtitle and content
-/// Title, subTitle and content style / alignment will depend on the [NiceAccountCreationPageConfig] passed
-abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationPage {
-  /// Title of the page, displayed according to [pageConfig]
+class NiceAccountCreationLayoutHeaderData {
+  /// Title of the page, displayed according to [defaultPageConfig]
   /// If [titleBuilder] is passed, [title] will be ignored
   final String? title;
 
   /// Title builder of the page. Takes over [title]
   final WidgetBuilder? titleBuilder;
 
-  /// Sub title of teh page, displayed under [title]/[titleBuilder] according to [pageConfig]
+  /// Sub title of teh page, displayed under [title]/[titleBuilder] according to [defaultPageConfig]
   /// If [subTitleBuilder] is passed, [subTitle] will be ignored
   final String? subTitle;
 
   // Sub title builder of the page. Takes over [subTitle]
   final WidgetBuilder? subTitleBuilder;
 
-  bool get _hasTitle => title != null || titleBuilder != null;
+  bool get hasTitle => title != null || titleBuilder != null;
 
-  bool get _hasSubTitle => subTitle != null || subTitleBuilder != null;
+  bool get hasSubTitle => subTitle != null || subTitleBuilder != null;
 
-  const NiceAccountCreationLayoutPage({
+  bool get isNotEmpty => hasTitle || hasSubTitle;
+
+  const NiceAccountCreationLayoutHeaderData({
     this.title,
     this.titleBuilder,
     this.subTitle,
     this.subTitleBuilder,
   });
+}
 
-  /// Build the page layout around [child] according to [pageConfig]
+/// Base page for a step that has a title / subtitle and content
+/// Title, subTitle and content style / alignment will depend on the [NiceAccountCreationPageConfig] passed
+abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationPage {
+  final NiceAccountCreationLayoutHeaderData headerData;
+  final NiceAccountCreationPageConfig? pageConfig;
+
+  const NiceAccountCreationLayoutPage({
+    required bool enabled,
+    required this.headerData,
+    this.pageConfig,
+  }) : super(enabled: enabled);
+
+  /// Build the page layout around [child] according to [pageConfig] or [defaultPageConfig]
   @mustCallSuper
   Widget buildLayout({
-    required NiceAccountCreationPageConfig pageConfig,
     required Widget child,
   }) {
     return Column(
       children: [
-        if (_hasTitle || _hasSubTitle) _buildHeader(pageConfig),
+        if (headerData.isNotEmpty) _buildHeader(),
         child,
       ],
     );
   }
 
-  Widget _buildHeader(NiceAccountCreationPageConfig pageConfig) {
+  Widget _buildHeader() {
     return Builder(
-      builder: (context) => Column(
-        children: [
-          if (_hasTitle)
-            Padding(
-              padding: pageConfig.titlePadding,
-              child: Align(
-                alignment: pageConfig.titleAlignment,
-                child: DefaultTextStyle(
-                  style: pageConfig.titleStyle,
-                  child: titleBuilder?.call(context) ?? Text(title!),
+      builder: (context) {
+        final defaultPageConfig = NiceAccountCreationConfig.of(context).defaultPageConfig;
+
+        return Column(
+          children: [
+            if (headerData.hasTitle)
+              Padding(
+                padding: pageConfig?.titlePadding ?? defaultPageConfig.titlePadding,
+                child: Align(
+                  alignment: pageConfig?.titleAlignment ?? defaultPageConfig.titleAlignment,
+                  child: DefaultTextStyle(
+                    style: pageConfig?.titleStyle ?? defaultPageConfig.titleStyle ?? DefaultTextStyle.of(context).style,
+                    child: headerData.titleBuilder?.call(context) ?? Text(headerData.title!),
+                  ),
                 ),
               ),
-            ),
-          if (_hasSubTitle)
-            Padding(
-              padding: pageConfig.subTitlePadding,
-              child: Align(
-                alignment: pageConfig.subTitleAlignment,
-                child: DefaultTextStyle(
-                  style: pageConfig.subTitleStyle,
-                  child: subTitleBuilder?.call(context) ?? Text(subTitle!),
+            if (headerData.hasSubTitle)
+              Padding(
+                padding: pageConfig?.subTitlePadding ?? defaultPageConfig.subTitlePadding,
+                child: Align(
+                  alignment: pageConfig?.subTitleAlignment ?? defaultPageConfig.subTitleAlignment,
+                  child: DefaultTextStyle(
+                    style: pageConfig?.subTitleStyle ??
+                        defaultPageConfig.subTitleStyle ??
+                        DefaultTextStyle.of(context).style,
+                    child: headerData.subTitleBuilder?.call(context) ?? Text(headerData.subTitle!),
+                  ),
                 ),
               ),
-            ),
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
 }

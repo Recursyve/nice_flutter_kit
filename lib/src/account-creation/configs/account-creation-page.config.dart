@@ -3,33 +3,37 @@ import 'package:nice_flutter_kit/src/account-creation/pages/account-creation-lay
 
 class NiceAccountCreationPageConfig {
   /// Alignment of the title, used in [NiceAccountCreationLayoutPage]
-  final Alignment titleAlignment;
+  final Alignment? titleAlignment;
 
   /// Style of the title, used in [NiceAccountCreationLayoutPage]
   final TextStyle? titleStyle;
 
   /// Padding around the title, used in [NiceAccountCreationLayoutPage]
-  final EdgeInsets titlePadding;
+  final EdgeInsets? titlePadding;
 
   /// Alignment of the sub title, used in [NiceAccountCreationLayoutPage]
-  final Alignment subTitleAlignment;
+  final Alignment? subTitleAlignment;
 
   /// Style of the sub title, used in [NiceAccountCreationLayoutPage]
   final TextStyle? subTitleStyle;
 
   /// Padding around the sub title, used in [NiceAccountCreationLayoutPage]
-  final EdgeInsets subTitlePadding;
+  final EdgeInsets? subTitlePadding;
 
   /// Alignment of the content, used in [NiceAccountCreationLayoutPage]
-  final Alignment contentAlignment;
+  final Alignment? contentAlignment;
+
+  /// Padding around the content, used in [NiceAccountCreationLayoutPage]
+  final EdgeInsets? contentPadding;
 
   const NiceAccountCreationPageConfig({
-    this.titleAlignment: Alignment.center,
+    this.titleAlignment,
     this.titleStyle,
-    this.subTitleAlignment: Alignment.center,
-    this.titlePadding: const EdgeInsets.only(bottom: 4),
+    this.subTitleAlignment,
+    this.titlePadding,
     this.subTitleStyle,
-    this.contentAlignment: Alignment.topCenter,
-    this.subTitlePadding: EdgeInsets.zero,
+    this.contentAlignment,
+    this.subTitlePadding,
+    this.contentPadding,
   });
 }

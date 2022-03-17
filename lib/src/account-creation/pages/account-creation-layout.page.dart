@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/account-creation/configs/account-creation-page.config.dart';
-import 'package:nice_flutter_kit/src/account-creation/pages/account-creation-base.page.dart';
 
 class NiceAccountCreationLayoutHeaderData {
   /// Title of the page, displayed according to [defaultPageConfig]
@@ -22,7 +21,7 @@ class NiceAccountCreationLayoutHeaderData {
 
   bool get hasSubTitle => subTitle != null || subTitleBuilder != null;
 
-  bool get isNotEmpty => hasTitle || hasSubTitle;
+  bool get hasHeader => hasTitle || hasSubTitle;
 
   const NiceAccountCreationLayoutHeaderData({
     this.title,
@@ -53,11 +52,36 @@ abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationBasePage
   Widget buildLayout({
     required Widget child,
   }) {
+    // For now, only the content (child) will be scrollable, and not the header. It doesn't seem possible to align the
+    // content if the header is in the same scrollable
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        if (headerData.isNotEmpty) _buildHeader(),
+        if (headerData.hasHeader) _buildHeader(),
         Expanded(
-          child: child,
+          child: Builder(
+            builder: (context) {
+              final defaultPageConfig = NiceAccountCreationConfig.of(context).defaultPageConfig;
+
+              final contentAlignment =
+                  pageConfig?.contentAlignment ?? defaultPageConfig.contentAlignment ?? Alignment.topCenter;
+              final contentPadding = pageConfig?.contentPadding ?? defaultPageConfig.contentPadding ?? EdgeInsets.zero;
+
+              return Align(
+                alignment: contentAlignment,
+                child: SingleChildScrollView(
+                  child: Align(
+                    alignment: contentAlignment,
+                    child: Padding(
+                      padding: contentPadding,
+                      child: child,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
         ),
       ],
     );
@@ -72,9 +96,9 @@ abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationBasePage
           children: [
             if (headerData.hasTitle)
               Padding(
-                padding: pageConfig?.titlePadding ?? defaultPageConfig.titlePadding,
+                padding: pageConfig?.titlePadding ?? defaultPageConfig.titlePadding ?? EdgeInsets.zero,
                 child: Align(
-                  alignment: pageConfig?.titleAlignment ?? defaultPageConfig.titleAlignment,
+                  alignment: pageConfig?.titleAlignment ?? defaultPageConfig.titleAlignment ?? Alignment.center,
                   child: DefaultTextStyle(
                     style: pageConfig?.titleStyle ?? defaultPageConfig.titleStyle ?? DefaultTextStyle.of(context).style,
                     child: headerData.titleBuilder?.call(context) ?? Text(headerData.title!),
@@ -83,9 +107,9 @@ abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationBasePage
               ),
             if (headerData.hasSubTitle)
               Padding(
-                padding: pageConfig?.subTitlePadding ?? defaultPageConfig.subTitlePadding,
+                padding: pageConfig?.subTitlePadding ?? defaultPageConfig.subTitlePadding ?? EdgeInsets.zero,
                 child: Align(
-                  alignment: pageConfig?.subTitleAlignment ?? defaultPageConfig.subTitleAlignment,
+                  alignment: pageConfig?.subTitleAlignment ?? defaultPageConfig.subTitleAlignment ?? Alignment.center,
                   child: DefaultTextStyle(
                     style: pageConfig?.subTitleStyle ??
                         defaultPageConfig.subTitleStyle ??

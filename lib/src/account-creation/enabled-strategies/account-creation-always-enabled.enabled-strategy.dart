@@ -1,7 +1,7 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class NiceAccountCreationAlwaysEnabledEnabledStrategy extends NiceAccountCreationBaseEnabledStrategy {
+class NiceAccountCreationAlwaysEnabledEnabledStrategy implements NiceAccountCreationBaseEnabledStrategy {
   const NiceAccountCreationAlwaysEnabledEnabledStrategy();
 
   @override

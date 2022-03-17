@@ -20,6 +20,7 @@ dependencies:
   equatable: ^2.0.0
   firebase_messaging: ^11.0.0
   flutter_bloc: ^8.0.0
+  flutter_keyboard_visibility: ^5.2.0
   flutter_spinkit: ^5.0.0
   flutter_svg: ^1.0.0
   geolocator: ^8.0.0

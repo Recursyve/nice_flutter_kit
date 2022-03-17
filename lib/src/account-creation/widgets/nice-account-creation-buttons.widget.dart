@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceAccountCreationButtons extends StatelessWidget {
@@ -14,22 +15,38 @@ class NiceAccountCreationButtons extends StatelessWidget {
   /// Called whenever the previous button is pressed and [currentPageIndex]
   final VoidCallback onPrevious;
 
+  /// Called whenever onNext or onPrevious is called
+  final VoidCallback? onChange;
+
   const NiceAccountCreationButtons({
     required this.currentPageIndex,
     required this.pageCount,
     required this.onNext,
     required this.onPrevious,
+    this.onChange,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    final buttons = Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _buildNextButton(),
         _buildPreviousButton(),
       ],
     );
+
+    if (NiceAccountCreationConfig.of(context).hideButtonsIfKeyboardVisible) {
+      return KeyboardVisibilityBuilder(
+        builder: (context, keyboardVisible) => AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          reverseDuration: Duration.zero,
+          child: keyboardVisible ? const SizedBox.shrink() : buttons,
+        ),
+      );
+    }
+
+    return buttons;
   }
 
   Widget _buildNextButton() {

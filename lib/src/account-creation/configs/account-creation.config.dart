@@ -26,6 +26,12 @@ class NiceAccountCreationConfig {
   /// Config for the previous button
   final NiceAccountCreationPreviousButtonConfig previousButtonConfig;
 
+  /// Hide the buttons if the keyboard is visible
+  final bool hideButtonsIfKeyboardVisible;
+
+  /// Automatically unfocus on tap and on page change
+  final bool unfocusOnInteraction;
+
   const NiceAccountCreationConfig({
     this.pageChangeDuration: const Duration(milliseconds: 200),
     this.pageChangeCurve: Curves.easeOut,
@@ -35,6 +41,8 @@ class NiceAccountCreationConfig {
     this.pageViewPhysics: const NeverScrollableScrollPhysics(),
     required this.nextButtonConfig,
     required this.previousButtonConfig,
+    this.hideButtonsIfKeyboardVisible: true,
+    this.unfocusOnInteraction: true,
   });
 
   factory NiceAccountCreationConfig.of(BuildContext context) => Provider.of<NiceAccountCreationConfig>(context);

@@ -15,6 +15,24 @@ class AccountCreationPage extends StatelessWidget {
           {
             "page3Enabled": fb.control(true),
             "someField": fb.control("", [Validators.required]),
+            "password": fb.group(
+              {
+                "password": fb.control("", [Validators.required, Validators.minLength(8)]),
+                "passwordConfirmation": fb.control("", [Validators.required]),
+              },
+              [
+                Validators.mustMatch("password", "passwordConfirmation"),
+              ],
+            ),
+            "email": fb.group(
+              {
+                "email": fb.control("", [Validators.required, Validators.email]),
+                "emailConfirmation": fb.control("", [Validators.required]),
+              },
+              [
+                Validators.mustMatch("email", "emailConfirmation"),
+              ],
+            ),
           },
         ),
         builder: (context, formGroup, _) => NiceAccountCreation(
@@ -32,6 +50,7 @@ class AccountCreationPage extends StatelessWidget {
                 color: Colors.blue,
               ),
               subTitlePadding: EdgeInsets.only(bottom: 32),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             ),
             nextButtonConfig: NiceAccountCreationNextButtonConfig(
               text: "Next",
@@ -83,27 +102,31 @@ class AccountCreationPage extends StatelessWidget {
               headerData: const NiceAccountCreationLayoutHeaderData(
                 title: "Page 3",
               ),
-              content: Text("ALLO!"),
+              content: const Text("This is page 3"),
             ),
-            const NiceAccountCreationContentPage(
-              validationStrategy: AccountCreationAlwaysValidValidationStrategy(),
-              headerData: NiceAccountCreationLayoutHeaderData(
-                title: "Page 4",
-              ),
-              content: Text("ALLO!"),
-            ),
-            NiceAccountCreationContentPage(
-              validationStrategy: const NiceAccountCreationFormGroupValidationStrategy(
-                abstractControlName: "someField",
-              ),
+            NiceAccountCreationEmailPage(
               headerData: const NiceAccountCreationLayoutHeaderData(
-                title: "Page 5",
+                title: "Email",
+                subTitle: "Please enter your email",
               ),
-              content: ReactiveTextField(
-                formControlName: "someField",
-                decoration: const InputDecoration(
-                  label: Text("Not empty field"),
-                ),
+              pageConfig: const NiceAccountCreationPageConfig(contentAlignment: Alignment.center),
+              emailDecoration: const InputDecoration(
+                hintText: "Email",
+              ),
+              emailConfirmationDecoration: const InputDecoration(
+                hintText: "Email confirmation",
+              ),
+            ),
+            NiceAccountCreationPasswordPage(
+              headerData: const NiceAccountCreationLayoutHeaderData(
+                title: "Password",
+                subTitle: "Please enter your password",
+              ),
+              passwordDecoration: const InputDecoration(
+                hintText: "Password",
+              ),
+              passwordConfirmationDecoration: const InputDecoration(
+                hintText: "Password confirmation",
               ),
             ),
             const NiceAccountCreationContentPage(
@@ -111,14 +134,17 @@ class AccountCreationPage extends StatelessWidget {
               headerData: NiceAccountCreationLayoutHeaderData(
                 title: "Page 6",
               ),
-              content: Text("ALLO!"),
+              pageConfig: NiceAccountCreationPageConfig(
+                contentAlignment: Alignment.bottomRight,
+              ),
+              content: Text("Page with content at bottom right!"),
             ),
             const NiceAccountCreationContentPage(
               validationStrategy: AccountCreationAlwaysValidValidationStrategy(),
               headerData: NiceAccountCreationLayoutHeaderData(
                 title: "Page 7",
               ),
-              content: Text("ALLO!"),
+              content: Text("Final page!"),
             ),
           ],
           onSubmit: () {

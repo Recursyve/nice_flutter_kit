@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:nice_flutter_kit/src/account-creation/configs/account-creation.config.dart';
 import 'package:nice_flutter_kit/src/account-creation/pages/account-creation-base.page.dart';
 import 'package:nice_flutter_kit/src/account-creation/widgets/nice-account-creation-buttons.widget.dart';
@@ -53,6 +54,7 @@ class _NiceAccountCreationState extends State<NiceAccountCreation> {
   int get _enabledPageCount => _enabledPages.length;
 
   Future<void> _onNext() async {
+    _unfocusIfEnabled();
     final currentPage = _enabledPages.elementAt(_pageViewPageIndex);
     if (!await currentPage.validationStrategy.isValid(context)) {
       return;
@@ -70,10 +72,19 @@ class _NiceAccountCreationState extends State<NiceAccountCreation> {
   }
 
   Future<void> _onPrevious() async {
+    _unfocusIfEnabled();
     await _pageController.previousPage(
       duration: widget.config.pageChangeDuration,
       curve: widget.config.pageChangeCurve,
     );
+  }
+
+  void _unfocusIfEnabled() {
+    if (!widget.config.unfocusOnInteraction) return;
+    final focusScope = FocusScope.of(context);
+    if (!focusScope.hasPrimaryFocus) {
+      focusScope.unfocus();
+    }
   }
 
   @override
@@ -108,13 +119,20 @@ class _NiceAccountCreationState extends State<NiceAccountCreation> {
 
   Widget _buildPageView() {
     return Builder(
-      builder: (context) => PageView(
-        controller: _pageController,
-        physics: widget.config.pageViewPhysics,
-        children: [
-          for (final page in _enabledPages) page.buildPage(context),
-        ],
-      ),
+      builder: (context) {
+        Widget child = PageView(
+          controller: _pageController,
+          physics: widget.config.pageViewPhysics,
+          children: [
+            for (final page in _enabledPages) page.buildPage(context),
+          ],
+        );
+
+        if (widget.config.unfocusOnInteraction) {
+          child = NiceAutomaticUnfocus(child: child);
+        }
+        return child;
+      },
     );
   }
 }

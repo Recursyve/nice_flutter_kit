@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:nice_flutter_kit/src/account-creation/validation-strategies/account-creation-base.validation-strategy.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class NiceAccountCreationFormGroupValidationStrategy extends NiceAccountCreationBaseValidationStrategy {
+class NiceAccountCreationFormGroupValidationStrategy implements NiceAccountCreationBaseValidationStrategy {
   final String? abstractControlName;
   final AbstractControl? abstractControl;
   final bool markAllAsTouchedIfInvalid;

@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/account-creation/configs/account-creation.config.dart';
-import 'package:nice_flutter_kit/src/account-creation/pages/account-creation-base.page.dart';
 import 'package:nice_flutter_kit/src/account-creation/widgets/nice-account-creation-buttons.widget.dart';
 import 'package:provider/provider.dart';
 
 class NiceAccountCreation extends StatefulWidget {
   /// Config used for teh account creation
   final NiceAccountCreationConfig config;
+
+  /// Controller used for the page view
+  /// This can be used to change pages from outside of the [NiceAccountCreation] widget, for example go to the previous
+  /// page when the back button of an app bar is pressed
+  /// If not null, this widget won't dispose it
+  final PageController? pageController;
 
   /// Pages that will be displayed in the account creation page view
   final List<NiceAccountCreationBasePage> pages;
@@ -23,6 +27,7 @@ class NiceAccountCreation extends StatefulWidget {
 
   NiceAccountCreation({
     required this.config,
+    this.pageController,
     required this.pages,
     this.onPageChange,
     required this.onSubmit,
@@ -33,11 +38,25 @@ class NiceAccountCreation extends StatefulWidget {
 }
 
 class _NiceAccountCreationState extends State<NiceAccountCreation> {
-  final _pageController = PageController();
+  late final _localPageController;
+
+  PageController get _pageController => widget.pageController ?? _localPageController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.pageController == null) {
+      _localPageController = PageController();
+    }
+  }
 
   @override
   void dispose() {
-    _pageController.dispose();
+    if (widget.pageController == null) {
+      // Only dispose of the PageController if it was created by this widget
+      _localPageController.dispose();
+    }
     super.dispose();
   }
 

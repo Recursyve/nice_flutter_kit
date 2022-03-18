@@ -1,0 +1,38 @@
+{
+  "name": "firebase_messaging",
+  "version": "11.2.11",
+  "summary": "Flutter plugin for Firebase Cloud Messaging, a cross-platform messaging solution that lets you reliably deliver messages on Android and iOS.",
+  "description": "Flutter plugin for Firebase Cloud Messaging, a cross-platform messaging solution that lets you reliably deliver messages on Android and iOS.",
+  "homepage": "https://firebase.flutter.dev/docs/messaging/overview",
+  "license": {
+    "file": "../LICENSE"
+  },
+  "authors": "The Chromium Authors",
+  "source": {
+    "path": "."
+  },
+  "source_files": "Classes/**/*.{h,m}",
+  "public_header_files": "Classes/**/*.h",
+  "platforms": {
+    "osx": "10.12"
+  },
+  "dependencies": {
+    "FlutterMacOS": [
+
+    ],
+    "firebase_core": [
+
+    ],
+    "Firebase/CoreOnly": [
+      "~> 8.11.0"
+    ],
+    "Firebase/Messaging": [
+      "~> 8.11.0"
+    ]
+  },
+  "static_framework": true,
+  "pod_target_xcconfig": {
+    "GCC_PREPROCESSOR_DEFINITIONS": "LIBRARY_VERSION=\\@\\\"11.2.11\\\" LIBRARY_NAME=\\@\\\"flutter-fire-fcm\\\"",
+    "DEFINES_MODULE": "YES"
+  }
+}

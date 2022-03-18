@@ -121,13 +121,16 @@ class _NiceAccountCreationState extends State<NiceAccountCreation> {
             Expanded(
               child: _buildPageView(),
             ),
-            AnimatedBuilder(
-              animation: _pageController,
-              builder: (context, _) => NiceAccountCreationButtons(
-                currentPageIndex: _pageViewPageIndex,
-                pageCount: _enabledPageCount,
-                onNext: _onNext,
-                onPrevious: _onPrevious,
+            ConstrainedBox(
+              constraints: widget.config.buttonConstraints,
+              child: AnimatedBuilder(
+                animation: _pageController,
+                builder: (context, _) => NiceAccountCreationButtons(
+                  currentPageIndex: _pageViewPageIndex,
+                  pageCount: _enabledPageCount,
+                  onNext: _onNext,
+                  onPrevious: _onPrevious,
+                ),
               ),
             ),
           ],

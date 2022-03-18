@@ -55,35 +55,43 @@ abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationBasePage
     // For now, only the content (child) will be scrollable, and not the header. It doesn't seem possible to align the
     // content if the header is in the same scrollable
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (headerData.hasHeader) _buildHeader(),
-        Expanded(
-          child: Builder(
-            builder: (context) {
-              final defaultPageConfig = NiceAccountCreationConfig.of(context).defaultPageConfig;
+    return Builder(
+      builder: (context) {
+        final defaultPageConfig = NiceAccountCreationConfig.of(context).defaultPageConfig;
+        final constraints = pageConfig?.pageConstraints ?? defaultPageConfig.pageConstraints ?? const BoxConstraints();
 
-              final contentAlignment =
-                  pageConfig?.contentAlignment ?? defaultPageConfig.contentAlignment ?? Alignment.topCenter;
-              final contentPadding = pageConfig?.contentPadding ?? defaultPageConfig.contentPadding ?? EdgeInsets.zero;
+        final contentAlignment =
+            pageConfig?.contentAlignment ?? defaultPageConfig.contentAlignment ?? Alignment.topCenter;
+        final contentPadding = pageConfig?.contentPadding ?? defaultPageConfig.contentPadding ?? EdgeInsets.zero;
 
-              return Align(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (headerData.hasHeader)
+              ConstrainedBox(
+                constraints: constraints,
+                child: _buildHeader(),
+              ),
+            Expanded(
+              child: Align(
                 alignment: contentAlignment,
-                child: SingleChildScrollView(
-                  child: Align(
-                    alignment: contentAlignment,
-                    child: Padding(
-                      padding: contentPadding,
-                      child: child,
+                child: ConstrainedBox(
+                  constraints: constraints,
+                  child: SingleChildScrollView(
+                    child: Align(
+                      alignment: contentAlignment,
+                      child: Padding(
+                        padding: contentPadding,
+                        child: child,
+                      ),
                     ),
                   ),
                 ),
-              );
-            },
-          ),
-        ),
-      ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -101,6 +109,7 @@ abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationBasePage
                   alignment: pageConfig?.titleAlignment ?? defaultPageConfig.titleAlignment ?? Alignment.center,
                   child: DefaultTextStyle(
                     style: pageConfig?.titleStyle ?? defaultPageConfig.titleStyle ?? DefaultTextStyle.of(context).style,
+                    textAlign: pageConfig?.titleTextAlign ?? defaultPageConfig.titleTextAlign,
                     child: headerData.titleBuilder?.call(context) ?? Text(headerData.title!),
                   ),
                 ),
@@ -114,6 +123,7 @@ abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationBasePage
                     style: pageConfig?.subTitleStyle ??
                         defaultPageConfig.subTitleStyle ??
                         DefaultTextStyle.of(context).style,
+                    textAlign: pageConfig?.subTitleTextAlign ?? defaultPageConfig.subTitleTextAlign,
                     child: headerData.subTitleBuilder?.call(context) ?? Text(headerData.subTitle!),
                   ),
                 ),

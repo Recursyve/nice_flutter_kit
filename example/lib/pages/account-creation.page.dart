@@ -49,8 +49,15 @@ class AccountCreationPage extends StatelessWidget {
                 fontSize: 20,
                 color: Colors.blue,
               ),
+              subTitleTextAlign: TextAlign.center,
               subTitlePadding: EdgeInsets.only(bottom: 32),
               contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              pageConstraints: BoxConstraints(
+                maxWidth: 350,
+              ),
+            ),
+            buttonConstraints: const BoxConstraints(
+              maxWidth: 350,
             ),
             nextButtonConfig: NiceAccountCreationNextButtonConfig(
               text: "Next",

@@ -32,6 +32,9 @@ class NiceAccountCreationConfig {
   /// Automatically unfocus on tap and on page change
   final bool unfocusOnInteraction;
 
+  /// Constrained used for the next / previous buttons
+  final BoxConstraints buttonConstraints;
+
   const NiceAccountCreationConfig({
     this.pageChangeDuration: const Duration(milliseconds: 200),
     this.pageChangeCurve: Curves.easeOut,
@@ -43,6 +46,7 @@ class NiceAccountCreationConfig {
     required this.previousButtonConfig,
     this.hideButtonsIfKeyboardVisible: true,
     this.unfocusOnInteraction: true,
+    this.buttonConstraints: const BoxConstraints(),
   });
 
   factory NiceAccountCreationConfig.of(BuildContext context) => Provider.of<NiceAccountCreationConfig>(context);

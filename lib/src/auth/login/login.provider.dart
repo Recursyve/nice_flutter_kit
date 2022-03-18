@@ -1,5 +1,5 @@
-abstract class NiceLoginProvider {
+abstract class NiceLoginProvider<SocialProviders> {
   Future<bool> loginWithPassword(String email, String password);
 
-// TODO: socials
+  Future<void> loginWithProvider(SocialProviders socialProviders);
 }

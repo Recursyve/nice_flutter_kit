@@ -28,7 +28,7 @@ class NiceAccountCreationEmailPage extends NiceAccountCreationLayoutPage {
   final Widget? suffix;
 
   NiceAccountCreationEmailPage({
-    NiceAccountCreationBaseEnabledStrategy enabledStrategy: const NiceAccountCreationAlwaysEnabledEnabledStrategy(),
+    NiceAccountCreationBaseEnabledStrategy enabledStrategy: const NiceAccountCreationAlwaysEnabledStrategy(),
     NiceAccountCreationLayoutHeaderData headerData: const NiceAccountCreationLayoutHeaderData(),
     NiceAccountCreationPageConfig? pageConfig,
     this.formGroupName: "email",

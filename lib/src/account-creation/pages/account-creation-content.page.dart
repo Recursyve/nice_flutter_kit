@@ -6,7 +6,7 @@ class NiceAccountCreationContentPage extends NiceAccountCreationLayoutPage {
 
   const NiceAccountCreationContentPage({
     NiceAccountCreationBaseEnabledStrategy enabledStrategy:
-        const NiceAccountCreationAlwaysEnabledEnabledStrategy(),
+        const NiceAccountCreationAlwaysEnabledStrategy(),
     required NiceAccountCreationBaseValidationStrategy validationStrategy,
     NiceAccountCreationLayoutHeaderData headerData: const NiceAccountCreationLayoutHeaderData(),
     NiceAccountCreationPageConfig? pageConfig,

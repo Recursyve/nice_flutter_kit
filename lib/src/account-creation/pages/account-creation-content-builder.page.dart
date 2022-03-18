@@ -5,7 +5,7 @@ class NiceAccountCreationContentBuilderPage extends NiceAccountCreationLayoutPag
   final WidgetBuilder contentBuilder;
 
   const NiceAccountCreationContentBuilderPage({
-    NiceAccountCreationBaseEnabledStrategy enabledStrategy: const NiceAccountCreationAlwaysEnabledEnabledStrategy(),
+    NiceAccountCreationBaseEnabledStrategy enabledStrategy: const NiceAccountCreationAlwaysEnabledStrategy(),
     required NiceAccountCreationBaseValidationStrategy validationStrategy,
     NiceAccountCreationLayoutHeaderData headerData: const NiceAccountCreationLayoutHeaderData(),
     NiceAccountCreationPageConfig? pageConfig,

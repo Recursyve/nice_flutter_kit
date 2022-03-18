@@ -28,7 +28,7 @@ class NiceAccountCreationPasswordPage extends NiceAccountCreationLayoutPage {
   final Widget? suffix;
 
   NiceAccountCreationPasswordPage({
-    NiceAccountCreationBaseEnabledStrategy enabledStrategy: const NiceAccountCreationAlwaysEnabledEnabledStrategy(),
+    NiceAccountCreationBaseEnabledStrategy enabledStrategy: const NiceAccountCreationAlwaysEnabledStrategy(),
     NiceAccountCreationLayoutHeaderData headerData: const NiceAccountCreationLayoutHeaderData(),
     NiceAccountCreationPageConfig? pageConfig,
     this.formGroupName: "password",

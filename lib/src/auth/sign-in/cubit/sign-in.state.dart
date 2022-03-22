@@ -1,6 +1,7 @@
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceSignInState extends NiceBaseState {
+  /// Whether the user entered invalid credentials
   final bool invalidCredentials;
 
   const NiceSignInState({

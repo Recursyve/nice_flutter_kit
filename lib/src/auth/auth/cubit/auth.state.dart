@@ -4,8 +4,13 @@ class NiceAuthState<User extends Object, Account extends Object> extends NiceBas
   final User? user;
   final Account? account;
 
+  /// Whether a user is signed in
   bool get isSignedIn => user != null;
 
+  /// Whether the user is registered
+  /// [user] should never be null if [account] is not null
+  ///
+  /// A user is registered if he's signed in ([isSignedIn]) and has an account
   bool get isRegistered => account != null;
 
   const NiceAuthState({

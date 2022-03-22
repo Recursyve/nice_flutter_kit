@@ -2,11 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
+/// Used to provide [NiceAuthCubit], which holds the auth state
+///
+/// The [User] and [Account] should never be left empty
 class NiceAuth<User extends Object, Account extends Object> extends StatelessWidget {
+  /// [NiceAuthProvider] that will be used to handle the current user
+  /// Passed to [NiceAuthCubit.authProvider]
   final NiceAuthProvider<User, Account> authProvider;
+
+  /// Child [Widget], that will be able to access the [NiceAuthCubit] via [InheritedWidget]
   final Widget child;
+
+  /// Called whenever the [NiceAuthState] changes
   final void Function(BuildContext context, NiceAuthState state)? onStateChange;
+
+  /// Called whenever the [NiceAuthState.user] changes
   final void Function(BuildContext context, User? user)? onUserChange;
+
+  /// Called whenever the [NiceAuthState.account] changes
   final void Function(BuildContext context, Account? account)? onAccountChange;
 
   const NiceAuth({

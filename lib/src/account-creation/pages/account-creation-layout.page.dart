@@ -10,7 +10,7 @@ class NiceAccountCreationLayoutHeaderData {
   /// Title builder of the page. Takes over [title]
   final WidgetBuilder? titleBuilder;
 
-  /// Sub title of teh page, displayed under [title]/[titleBuilder] according to [defaultPageConfig]
+  /// Sub title of the page, displayed under [title]/[titleBuilder] according to [defaultPageConfig]
   /// If [subTitleBuilder] is passed, [subTitle] will be ignored
   final String? subTitle;
 

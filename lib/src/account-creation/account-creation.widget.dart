@@ -4,7 +4,7 @@ import 'package:nice_flutter_kit/src/account-creation/widgets/nice-account-creat
 import 'package:provider/provider.dart';
 
 class NiceAccountCreation extends StatefulWidget {
-  /// Config used for teh account creation
+  /// Config used for the account creation
   final NiceAccountCreationConfig config;
 
   /// Controller used for the page view

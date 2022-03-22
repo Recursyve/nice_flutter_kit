@@ -14,6 +14,6 @@ abstract class NiceAccountCreationBasePage {
     required this.validationStrategy,
   });
 
-  /// Page builder, ie. the content of the [PageView]
+  /// Page builder, e.g. the content of the [PageView]
   Widget buildPage(BuildContext context);
 }

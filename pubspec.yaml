@@ -14,7 +14,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  bloc: ^8.0.0
   collection: ^1.15.0
   dio: ^4.0.0
   equatable: ^2.0.0

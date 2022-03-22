@@ -1,4 +1,5 @@
 import 'package:example/pages/account-creation.page.dart';
+import 'package:example/pages/auth/auth.page.dart';
 import 'package:example/pages/home.page.dart';
 import 'package:example/pages/onboarding.page.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,12 @@ void main() async {
 
   await NiceConfig.setup(
     onboardingConfig: NiceOnboardingGlobalConfig(),
+    baseCubitConfig: NiceBaseCubitConfig(
+      wrapErrorHandler: (e, s) {
+        print(e);
+        print(s);
+      }
+    ),
   );
 
   runApp(MyApp());
@@ -26,6 +33,11 @@ class MyApp extends StatelessWidget {
       path: "/account-creation",
       title: "Account Creation",
       child: AccountCreationPage(),
+    ),
+    RouteData(
+      path: "/auth",
+      title: "Auth",
+      child: AuthPage(),
     ),
   ];
 

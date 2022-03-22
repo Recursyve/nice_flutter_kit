@@ -12,8 +12,8 @@ class NiceSignInCubit<SocialProviders> extends NiceBaseCubit<NiceSignInState> {
   final unsubscribeAll$ = new BehaviorSubject<void>();
 
   final signInWithPasswordFormGroup = FormGroup({
-    "email": FormControl<String>(validators: [Validators.required, Validators.email], value: "foo@bar.dev"),
-    "password": FormControl<String>(validators: [Validators.required], value: "123456Ab"),
+    "email": FormControl<String>(validators: [Validators.required, Validators.email]),
+    "password": FormControl<String>(validators: [Validators.required]),
   });
 
   NiceSignInCubit({

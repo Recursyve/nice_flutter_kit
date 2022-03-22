@@ -102,7 +102,7 @@ class AccountCreationPage extends StatelessWidget {
               ),
             ),
             NiceAccountCreationContentPage(
-              enabledStrategy: NiceAccountCallbackEnabledStrategy(
+              enabledStrategy: NiceAccountCreationCustomEnabledStrategy(
                 callback: (context) => (ReactiveForm.of(context) as FormGroup).control("page3Enabled").value,
               ),
               validationStrategy: const AccountCreationAlwaysValidValidationStrategy(),

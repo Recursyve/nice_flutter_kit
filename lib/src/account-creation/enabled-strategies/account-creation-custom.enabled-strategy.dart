@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class NiceAccountCallbackEnabledStrategy implements NiceAccountCreationBaseEnabledStrategy {
+class NiceAccountCreationCustomEnabledStrategy implements NiceAccountCreationBaseEnabledStrategy {
   final bool Function(BuildContext context) callback;
 
-  const NiceAccountCallbackEnabledStrategy({
+  const NiceAccountCreationCustomEnabledStrategy({
     required this.callback,
   });
 

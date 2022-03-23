@@ -22,12 +22,21 @@ class NiceAuth<User extends Object, Account extends Object> extends StatelessWid
   /// Called whenever the [NiceAuthState.account] changes
   final void Function(BuildContext context, Account? account)? onAccountChange;
 
+  /// Display [placeholder] instead of [child] until [NiceAuthState.initialized] is true
+  final bool waitForInitialization;
+
+  /// Widget to display if [waitForInitialization] is true, until [NiceAuthState.initialized] is true
+  /// Falls back to [SizedBox.shrink]
+  final Widget? placeholder;
+
   const NiceAuth({
     required this.authProvider,
     required this.child,
     this.onStateChange,
     this.onUserChange,
     this.onAccountChange,
+    this.waitForInitialization: true,
+    this.placeholder,
   });
 
   @override
@@ -35,12 +44,28 @@ class NiceAuth<User extends Object, Account extends Object> extends StatelessWid
     return BlocProvider<NiceAuthCubit<User, Account>>(
       create: (context) => NiceAuthCubit<User, Account>(
         authProvider: authProvider,
+      )..init(),
+      child: _buildBlocListener(
+        child: _buildBlocBuilder(
+          child: child,
+        ),
       ),
-      child: _buildListeners(),
     );
   }
 
-  Widget _buildListeners() {
+  Widget _buildBlocBuilder({required Widget child}) {
+    if (!waitForInitialization) return child;
+
+    return BlocBuilder<NiceAuthCubit<User, Account>, NiceAuthState<User, Account>>(
+      buildWhen: (prev, curr) => prev.initialized != curr.initialized,
+      builder: (context, state) {
+        if (state.initialized) return child;
+        return placeholder ?? const SizedBox.shrink();
+      },
+    );
+  }
+
+  Widget _buildBlocListener({required Widget child}) {
     if (onStateChange == null && onUserChange == null && onAccountChange == null) return child;
 
     return BlocListener<NiceAuthCubit<User, Account>, NiceAuthState<User, Account>>(

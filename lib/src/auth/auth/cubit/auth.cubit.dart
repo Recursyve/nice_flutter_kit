@@ -13,6 +13,11 @@ class NiceAuthCubit<User extends Object, Account extends Object> extends NiceBas
   static NiceAuthCubit<User, Account> of<User extends Object, Account extends Object>(BuildContext context) =>
       BlocProvider.of<NiceAuthCubit<User, Account>>(context);
 
+  Future<void> init() async {
+    await loadCurrentUser();
+    emit(state.copyWith(initialized: true));
+  }
+
   /// Uses [authProvider] to load the current user, and maybe the account if there is a user
   Future<void> loadCurrentUser() async {
     await wrap(

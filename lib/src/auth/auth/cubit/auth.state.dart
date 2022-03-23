@@ -1,6 +1,8 @@
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceAuthState<User extends Object, Account extends Object> extends NiceBaseState {
+  final bool initialized;
+
   final User? user;
   final Account? account;
 
@@ -16,6 +18,7 @@ class NiceAuthState<User extends Object, Account extends Object> extends NiceBas
   const NiceAuthState({
     required bool loading,
     required bool error,
+    required this.initialized,
     required this.user,
     required this.account,
   }) : super(loading, error);
@@ -25,6 +28,7 @@ class NiceAuthState<User extends Object, Account extends Object> extends NiceBas
     return NiceAuthState<User, Account>(
       loading: false,
       error: false,
+      initialized: false,
       user: null,
       account: null,
     );
@@ -36,6 +40,7 @@ class NiceAuthState<User extends Object, Account extends Object> extends NiceBas
   NiceAuthState<User, Account> copyWithUserAndAccount(User? user, Account? account) => NiceAuthState(
         loading: this.loading,
         error: this.error,
+        initialized: this.initialized,
         user: user,
         account: account,
       );
@@ -43,15 +48,17 @@ class NiceAuthState<User extends Object, Account extends Object> extends NiceBas
   NiceAuthState<User, Account> copyWith({
     bool? loading,
     bool? error,
+    bool? initialized,
   }) {
     return NiceAuthState(
       loading: loading ?? this.loading,
       error: error ?? this.error,
+      initialized: initialized ?? this.initialized,
       user: this.user,
       account: this.account,
     );
   }
 
   @override
-  List<Object?> get props => [loading, error, user, account];
+  List<Object?> get props => [loading, error, initialized, user, account];
 }

@@ -33,7 +33,7 @@ class NiceAccountCreationLayoutHeaderData {
 
 /// Base page for a step that has a title / subtitle and content
 /// Title, subTitle and content style / alignment will depend on the [NiceAccountCreationPageConfig] passed
-abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationBasePage {
+abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationPage {
   final NiceAccountCreationLayoutHeaderData headerData;
   final NiceAccountCreationPageConfig? pageConfig;
 

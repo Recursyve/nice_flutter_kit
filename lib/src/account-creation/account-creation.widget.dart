@@ -14,7 +14,7 @@ class NiceAccountCreation extends StatefulWidget {
   final PageController? pageController;
 
   /// Pages that will be displayed in the account creation page view
-  final List<NiceAccountCreationBasePage> pages;
+  final List<NiceAccountCreationPage> pages;
 
   /// Called whenever the current [PageView] page changes
   /// [index] represents the index of the page in the [PageView]
@@ -38,25 +38,21 @@ class NiceAccountCreation extends StatefulWidget {
 }
 
 class _NiceAccountCreationState extends State<NiceAccountCreation> {
-  late final _localPageController;
+  late final PageController? _localPageController;
 
-  PageController get _pageController => widget.pageController ?? _localPageController;
+  PageController get _pageController => widget.pageController ?? _localPageController!;
 
   @override
   void initState() {
     super.initState();
 
-    if (widget.pageController == null) {
-      _localPageController = PageController();
-    }
+    _localPageController = widget.pageController == null ? PageController() : null;
   }
 
   @override
   void dispose() {
-    if (widget.pageController == null) {
-      // Only dispose of the PageController if it was created by this widget
-      _localPageController.dispose();
-    }
+    // Only dispose of the PageController if it was created by this widget
+    _localPageController?.dispose();
     super.dispose();
   }
 
@@ -65,7 +61,7 @@ class _NiceAccountCreationState extends State<NiceAccountCreation> {
     return _pageController.page?.round() ?? _pageController.initialPage;
   }
 
-  List<NiceAccountCreationBasePage> get _enabledPages => [
+  List<NiceAccountCreationPage> get _enabledPages => [
         for (final page in widget.pages)
           if (page.enabledStrategy.isEnabled(context)) page,
       ];

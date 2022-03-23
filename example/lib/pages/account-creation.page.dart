@@ -78,15 +78,15 @@ class AccountCreationPage extends StatelessWidget {
             ),
           ),
           pages: [
-            const NiceAccountCreationContentPage(
-              validationStrategy: AccountCreationAlwaysValidValidationStrategy(),
-              headerData: NiceAccountCreationLayoutHeaderData(
+            NiceAccountCreationPage.content(
+              validationStrategy: const AccountCreationAlwaysValidValidationStrategy(),
+              headerData: const NiceAccountCreationLayoutHeaderData(
                 title: "Page 1",
                 subTitle: "Subtitle test",
               ),
-              content: Text("This is the account creation first page"),
+              content: const Text("This is the account creation first page"),
             ),
-            NiceAccountCreationContentPage(
+            NiceAccountCreationPage.content(
               validationStrategy: const AccountCreationAlwaysValidValidationStrategy(),
               headerData: const NiceAccountCreationLayoutHeaderData(
                 title: "Page 2",
@@ -101,7 +101,7 @@ class AccountCreationPage extends StatelessWidget {
                 ],
               ),
             ),
-            NiceAccountCreationContentPage(
+            NiceAccountCreationPage.content(
               enabledStrategy: NiceAccountCreationCustomEnabledStrategy(
                 callback: (context) => (ReactiveForm.of(context) as FormGroup).control("page3Enabled").value,
               ),
@@ -111,7 +111,7 @@ class AccountCreationPage extends StatelessWidget {
               ),
               content: const Text("This is page 3"),
             ),
-            NiceAccountCreationEmailPage(
+            NiceAccountCreationPage.email(
               headerData: const NiceAccountCreationLayoutHeaderData(
                 title: "Email",
                 subTitle: "Please enter your email",
@@ -124,7 +124,7 @@ class AccountCreationPage extends StatelessWidget {
                 hintText: "Email confirmation",
               ),
             ),
-            NiceAccountCreationPasswordPage(
+            NiceAccountCreationPage.password(
               headerData: const NiceAccountCreationLayoutHeaderData(
                 title: "Password",
                 subTitle: "Please enter your password",
@@ -136,22 +136,22 @@ class AccountCreationPage extends StatelessWidget {
                 hintText: "Password confirmation",
               ),
             ),
-            const NiceAccountCreationContentPage(
-              validationStrategy: AccountCreationAlwaysValidValidationStrategy(),
-              headerData: NiceAccountCreationLayoutHeaderData(
+            NiceAccountCreationPage.content(
+              validationStrategy: const AccountCreationAlwaysValidValidationStrategy(),
+              headerData: const NiceAccountCreationLayoutHeaderData(
                 title: "Page 6",
               ),
-              pageConfig: NiceAccountCreationPageConfig(
+              pageConfig: const NiceAccountCreationPageConfig(
                 contentAlignment: Alignment.bottomRight,
               ),
-              content: Text("Page with content at bottom right!"),
+              content: const Text("Page with content at bottom right!"),
             ),
-            const NiceAccountCreationContentPage(
-              validationStrategy: AccountCreationAlwaysValidValidationStrategy(),
-              headerData: NiceAccountCreationLayoutHeaderData(
+            NiceAccountCreationPage.content(
+              validationStrategy: const AccountCreationAlwaysValidValidationStrategy(),
+              headerData: const NiceAccountCreationLayoutHeaderData(
                 title: "Page 7",
               ),
-              content: Text("Final page!"),
+              content: const Text("Final page!"),
             ),
           ],
           onSubmit: () {

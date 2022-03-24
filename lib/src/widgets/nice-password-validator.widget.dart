@@ -1,48 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
-class PasswordValidator extends StatelessWidget {
+class ReactiveCheckListValidator extends StatelessWidget {
   final Widget? validIcon;
   final Widget? invalidIcon;
   final Widget? defaultIcon;
   final Color validColor;
   final Color invalidColor;
   final Color defaultColor;
-  final Map<RegExp, String> validationsAndTranslationsMap;
-  final String password;
+  final Map<RegExp, String> validationsAndTranslations;
+  final String? value;
+  final String? formControlName;
   final TextStyle textStyle;
-  final bool hideWhenPasswordIsEmpty;
+  final bool hideWhenEmpty;
 
-  PasswordValidator({
+  ReactiveCheckListValidator({
     required this.invalidColor,
     required this.validColor,
     required this.defaultColor,
-    required this.validationsAndTranslationsMap,
-    required this.password,
+    required this.validationsAndTranslations,
+    this.value,
+    this.formControlName,
     this.validIcon,
     this.invalidIcon,
     this.defaultIcon,
     this.textStyle = const TextStyle(),
-    this.hideWhenPasswordIsEmpty = false,
-  }) : assert(validationsAndTranslationsMap.entries.length > 0,
-            "validationsAndTranslationsMap must contains at least 1 entry");
+    this.hideWhenEmpty = false,
+  })  : assert(
+            validationsAndTranslations.entries.length > 0, "validationsAndTranslations must contains at least 1 entry"),
+        assert(value != null || formControlName != null, "Value and formControlName can't both be empty");
 
   @override
   Widget build(BuildContext context) {
-    if (password.isEmpty && hideWhenPasswordIsEmpty) return const SizedBox.shrink();
+    final needsEarlyReturn = _checkIfEarlyReturnNeeded(context);
+    if (needsEarlyReturn) return const SizedBox.shrink();
 
+    if (formControlName != null) {
+      return ReactiveValueListenableBuilder(
+        formControlName: formControlName,
+        builder: (context, control, _) {
+          return _buildDefault((control as AbstractControl<String>).value ?? "");
+        }
+      );
+    }
+    return _buildDefault(value!);
+  }
+
+  Widget _buildDefault(String value) {
     return Column(
       children: [
-        for (final entry in validationsAndTranslationsMap.entries)
+        for (final entry in validationsAndTranslations.entries)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: _buildValidations(entry),
+            child: _buildValidations(entry, value),
           ),
       ],
     );
   }
 
-  Widget _buildValidations(MapEntry<RegExp, String> entry) {
-    if (password.isEmpty) {
+  Widget _buildValidations(MapEntry<RegExp, String> entry, String value) {
+    if (value.isEmpty) {
       return Row(
         children: [
           if (defaultIcon != null)
@@ -61,7 +78,7 @@ class PasswordValidator extends StatelessWidget {
       );
     }
 
-    final hasMatch = entry.key.hasMatch(password);
+    final hasMatch = entry.key.hasMatch(value);
     if (hasMatch) {
       return Row(
         children: [
@@ -97,5 +114,17 @@ class PasswordValidator extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  bool _checkIfEarlyReturnNeeded(BuildContext context) {
+    if (formControlName != null) {
+      final control = (ReactiveForm.of(context) as FormGroup).control(formControlName!);
+      if (control.value != null && hideWhenEmpty) return true;
+
+      return false;
+    }
+
+    if ((value == null || value!.isEmpty) && hideWhenEmpty) return true;
+    return false;
   }
 }

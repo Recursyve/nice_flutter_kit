@@ -25,6 +25,7 @@ abstract class NiceBaseCubit<S extends NiceBaseState> extends Cubit<S> {
           error: true,
         ) as S,
       );
+      return null;
     }
   }
 }

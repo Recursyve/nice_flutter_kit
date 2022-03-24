@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class NiceAccountCreationPasswordPage extends NiceAccountCreationLayoutPage {
+class NicePageViewFormPasswordPage extends NicePageViewFormLayoutPage {
   /// Name of the parent [FormGroup]
   final String formGroupName;
 
@@ -27,10 +27,10 @@ class NiceAccountCreationPasswordPage extends NiceAccountCreationLayoutPage {
   /// [Widget] to display after both inputs
   final Widget? suffix;
 
-  NiceAccountCreationPasswordPage({
-    NiceAccountCreationBaseEnabledStrategy enabledStrategy: const NiceAccountCreationAlwaysEnabledStrategy(),
-    NiceAccountCreationLayoutHeaderData headerData: const NiceAccountCreationLayoutHeaderData(),
-    NiceAccountCreationPageConfig? pageConfig,
+  NicePageViewFormPasswordPage({
+    NicePageViewFormBaseEnabledStrategy enabledStrategy: const NicePageViewFormAlwaysEnabledStrategy(),
+    NicePageViewFormLayoutHeaderData headerData: const NicePageViewFormLayoutHeaderData(),
+    NicePageViewFormPageConfig? pageConfig,
     this.formGroupName: "password",
     this.passwordFormControlName: "password",
     this.passwordConfirmationControlName: "passwordConfirmation",
@@ -41,7 +41,7 @@ class NiceAccountCreationPasswordPage extends NiceAccountCreationLayoutPage {
     this.suffix,
   }) : super(
           enabledStrategy: enabledStrategy,
-          validationStrategy: NiceAccountCreationFormGroupValidationStrategy(
+          validationStrategy: NicePageViewFormFormGroupValidationStrategy(
             abstractControlName: formGroupName,
           ),
           headerData: headerData,

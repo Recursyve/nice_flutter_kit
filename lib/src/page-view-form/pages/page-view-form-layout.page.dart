@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class NiceAccountCreationLayoutHeaderData {
+class NicePageViewFormLayoutHeaderData {
   /// Title of the page, displayed according to [defaultPageConfig]
   /// If [titleBuilder] is passed, [title] will be ignored
   final String? title;
@@ -23,7 +23,7 @@ class NiceAccountCreationLayoutHeaderData {
 
   bool get hasHeader => hasTitle || hasSubTitle;
 
-  const NiceAccountCreationLayoutHeaderData({
+  const NicePageViewFormLayoutHeaderData({
     this.title,
     this.titleBuilder,
     this.subTitle,
@@ -32,14 +32,14 @@ class NiceAccountCreationLayoutHeaderData {
 }
 
 /// Base page for a step that has a title / subtitle and content
-/// Title, subTitle and content style / alignment will depend on the [NiceAccountCreationPageConfig] passed
-abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationPage {
-  final NiceAccountCreationLayoutHeaderData headerData;
-  final NiceAccountCreationPageConfig? pageConfig;
+/// Title, subTitle and content style / alignment will depend on the [NicePageViewFormPageConfig] passed
+abstract class NicePageViewFormLayoutPage extends NicePageViewFormPage {
+  final NicePageViewFormLayoutHeaderData headerData;
+  final NicePageViewFormPageConfig? pageConfig;
 
-  const NiceAccountCreationLayoutPage({
-    required NiceAccountCreationBaseEnabledStrategy enabledStrategy,
-    required NiceAccountCreationBaseValidationStrategy validationStrategy,
+  const NicePageViewFormLayoutPage({
+    required NicePageViewFormBaseEnabledStrategy enabledStrategy,
+    required NicePageViewFormBaseValidationStrategy validationStrategy,
     required this.headerData,
     this.pageConfig,
   }) : super(
@@ -57,7 +57,7 @@ abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationPage {
 
     return Builder(
       builder: (context) {
-        final defaultPageConfig = NiceAccountCreationConfig.of(context).defaultPageConfig;
+        final defaultPageConfig = NicePageViewFormConfig.of(context).defaultPageConfig;
         final constraints = pageConfig?.pageConstraints ?? defaultPageConfig.pageConstraints ?? const BoxConstraints();
 
         final contentAlignment =
@@ -98,7 +98,7 @@ abstract class NiceAccountCreationLayoutPage extends NiceAccountCreationPage {
   Widget _buildHeader() {
     return Builder(
       builder: (context) {
-        final defaultPageConfig = NiceAccountCreationConfig.of(context).defaultPageConfig;
+        final defaultPageConfig = NicePageViewFormConfig.of(context).defaultPageConfig;
 
         return Column(
           children: [

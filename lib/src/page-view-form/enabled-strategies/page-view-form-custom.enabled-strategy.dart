@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class NiceAccountCreationCustomEnabledStrategy implements NiceAccountCreationBaseEnabledStrategy {
+class NicePageViewFormCustomEnabledStrategy implements NicePageViewFormBaseEnabledStrategy {
   final bool Function(BuildContext context) callback;
 
-  const NiceAccountCreationCustomEnabledStrategy({
+  const NicePageViewFormCustomEnabledStrategy({
     required this.callback,
   });
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum NiceAccountCreationButtonBoundReachedState {
+enum NicePageViewFormButtonBoundReachedState {
   /// Leave the button as it is
   None,
 
@@ -11,15 +11,15 @@ enum NiceAccountCreationButtonBoundReachedState {
   Hidden,
 }
 
-extension NiceAccountCreationButtonBoundReachedStateExt on NiceAccountCreationButtonBoundReachedState {
-  bool get isNone => this == NiceAccountCreationButtonBoundReachedState.None;
+extension NicePageViewFormButtonBoundReachedStateExt on NicePageViewFormButtonBoundReachedState {
+  bool get isNone => this == NicePageViewFormButtonBoundReachedState.None;
 
-  bool get isDisabled => this == NiceAccountCreationButtonBoundReachedState.Disabled;
+  bool get isDisabled => this == NicePageViewFormButtonBoundReachedState.Disabled;
 
-  bool get isHidden => this == NiceAccountCreationButtonBoundReachedState.Hidden;
+  bool get isHidden => this == NicePageViewFormButtonBoundReachedState.Hidden;
 }
 
-abstract class NiceAccountCreationBaseButtonConfig {
+abstract class NicePageViewFormBaseButtonConfig {
   /// The text that will be displayed on the button
   final String text;
 
@@ -31,7 +31,7 @@ abstract class NiceAccountCreationBaseButtonConfig {
 
   final EdgeInsets padding;
 
-  const NiceAccountCreationBaseButtonConfig({
+  const NicePageViewFormBaseButtonConfig({
     required this.text,
     required this.elevated,
     this.style,
@@ -39,11 +39,11 @@ abstract class NiceAccountCreationBaseButtonConfig {
   });
 }
 
-class NiceAccountCreationNextButtonConfig extends NiceAccountCreationBaseButtonConfig {
+class NicePageViewFormNextButtonConfig extends NicePageViewFormBaseButtonConfig {
   /// Text that will be displayed on the button on the last page
   final String submitText;
 
-  const NiceAccountCreationNextButtonConfig({
+  const NicePageViewFormNextButtonConfig({
     required String text,
     required this.submitText,
     bool elevated: false,
@@ -57,17 +57,17 @@ class NiceAccountCreationNextButtonConfig extends NiceAccountCreationBaseButtonC
         );
 }
 
-class NiceAccountCreationPreviousButtonConfig extends NiceAccountCreationBaseButtonConfig {
+class NicePageViewFormPreviousButtonConfig extends NicePageViewFormBaseButtonConfig {
   /// Controls if the button will be normal, disabled or hidden when this button bound is reached
   /// This is only really useful for the previous button when the first page is displayed
-  final NiceAccountCreationButtonBoundReachedState boundReachedState;
+  final NicePageViewFormButtonBoundReachedState boundReachedState;
 
-  const NiceAccountCreationPreviousButtonConfig({
+  const NicePageViewFormPreviousButtonConfig({
     required String text,
     bool elevated: false,
     ButtonStyle? style,
     EdgeInsets padding: EdgeInsets.zero,
-    this.boundReachedState: NiceAccountCreationButtonBoundReachedState.Hidden,
+    this.boundReachedState: NicePageViewFormButtonBoundReachedState.Hidden,
   }) : super(
           text: text,
           elevated: elevated,

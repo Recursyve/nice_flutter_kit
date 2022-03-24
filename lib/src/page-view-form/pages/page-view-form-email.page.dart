@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class NiceAccountCreationEmailPage extends NiceAccountCreationLayoutPage {
+class NicePageViewFormEmailPage extends NicePageViewFormLayoutPage {
   /// Name of the parent [FormGroup]
   final String formGroupName;
 
@@ -27,10 +27,10 @@ class NiceAccountCreationEmailPage extends NiceAccountCreationLayoutPage {
   /// [Widget] to display after both inputs
   final Widget? suffix;
 
-  NiceAccountCreationEmailPage({
-    NiceAccountCreationBaseEnabledStrategy enabledStrategy: const NiceAccountCreationAlwaysEnabledStrategy(),
-    NiceAccountCreationLayoutHeaderData headerData: const NiceAccountCreationLayoutHeaderData(),
-    NiceAccountCreationPageConfig? pageConfig,
+  NicePageViewFormEmailPage({
+    NicePageViewFormBaseEnabledStrategy enabledStrategy: const NicePageViewFormAlwaysEnabledStrategy(),
+    NicePageViewFormLayoutHeaderData headerData: const NicePageViewFormLayoutHeaderData(),
+    NicePageViewFormPageConfig? pageConfig,
     this.formGroupName: "email",
     this.emailFormControlName: "email",
     this.emailConfirmationControlName: "emailConfirmation",
@@ -41,7 +41,7 @@ class NiceAccountCreationEmailPage extends NiceAccountCreationLayoutPage {
     this.suffix,
   }) : super(
           enabledStrategy: enabledStrategy,
-          validationStrategy: NiceAccountCreationFormGroupValidationStrategy(
+          validationStrategy: NicePageViewFormFormGroupValidationStrategy(
             abstractControlName: formGroupName,
           ),
           headerData: headerData,

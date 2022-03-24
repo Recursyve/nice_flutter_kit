@@ -1,15 +1,17 @@
+import 'dart:io';
+
 import 'package:example/pages/common/base.page.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class AccountCreationPage extends StatelessWidget {
-  const AccountCreationPage();
+class PageViewFormPage extends StatelessWidget {
+  const PageViewFormPage();
 
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: "Account creation",
+      title: "Page view form",
       child: ReactiveFormBuilder(
         form: () => fb.group(
           {
@@ -35,11 +37,11 @@ class AccountCreationPage extends StatelessWidget {
             ),
           },
         ),
-        builder: (context, formGroup, _) => NiceAccountCreation(
-          config: NiceAccountCreationConfig(
+        builder: (context, formGroup, _) => NicePageViewForm(
+          config: NicePageViewFormConfig(
             nextButtonText: "Next",
             previousButtonText: "Previous",
-            defaultPageConfig: const NiceAccountCreationPageConfig(
+            defaultPageConfig: const NicePageViewFormPageConfig(
               titleStyle: TextStyle(
                 fontSize: 24,
                 color: Colors.blue,
@@ -59,7 +61,8 @@ class AccountCreationPage extends StatelessWidget {
             buttonConstraints: const BoxConstraints(
               maxWidth: 350,
             ),
-            nextButtonConfig: NiceAccountCreationNextButtonConfig(
+            hideButtonsIfKeyboardVisible: Platform.isAndroid || Platform.isIOS,
+            nextButtonConfig: NicePageViewFormNextButtonConfig(
               text: "Next",
               submitText: "Create account",
               elevated: true,
@@ -68,27 +71,27 @@ class AccountCreationPage extends StatelessWidget {
               ),
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
             ),
-            previousButtonConfig: NiceAccountCreationPreviousButtonConfig(
+            previousButtonConfig: NicePageViewFormPreviousButtonConfig(
               text: "Previous",
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
               ),
               padding: const EdgeInsets.fromLTRB(12, 8, 12, 12),
-              boundReachedState: NiceAccountCreationButtonBoundReachedState.Disabled,
+              boundReachedState: NicePageViewFormButtonBoundReachedState.Disabled,
             ),
           ),
           pages: [
-            NiceAccountCreationPage.content(
-              validationStrategy: const AccountCreationAlwaysValidValidationStrategy(),
-              headerData: const NiceAccountCreationLayoutHeaderData(
+            NicePageViewFormPage.content(
+              validationStrategy: const PageViewFormAlwaysValidValidationStrategy(),
+              headerData: const NicePageViewFormLayoutHeaderData(
                 title: "Page 1",
                 subTitle: "Subtitle test",
               ),
-              content: const Text("This is the account creation first page"),
+              content: const Text("This is the first page"),
             ),
-            NiceAccountCreationPage.content(
-              validationStrategy: const AccountCreationAlwaysValidValidationStrategy(),
-              headerData: const NiceAccountCreationLayoutHeaderData(
+            NicePageViewFormPage.content(
+              validationStrategy: const PageViewFormAlwaysValidValidationStrategy(),
+              headerData: const NicePageViewFormLayoutHeaderData(
                 title: "Page 2",
               ),
               content: Row(
@@ -101,22 +104,22 @@ class AccountCreationPage extends StatelessWidget {
                 ],
               ),
             ),
-            NiceAccountCreationPage.content(
-              enabledStrategy: NiceAccountCreationCustomEnabledStrategy(
+            NicePageViewFormPage.content(
+              enabledStrategy: NicePageViewFormCustomEnabledStrategy(
                 callback: (context) => (ReactiveForm.of(context) as FormGroup).control("page3Enabled").value,
               ),
-              validationStrategy: const AccountCreationAlwaysValidValidationStrategy(),
-              headerData: const NiceAccountCreationLayoutHeaderData(
+              validationStrategy: const PageViewFormAlwaysValidValidationStrategy(),
+              headerData: const NicePageViewFormLayoutHeaderData(
                 title: "Page 3",
               ),
               content: const Text("This is page 3"),
             ),
-            NiceAccountCreationPage.email(
-              headerData: const NiceAccountCreationLayoutHeaderData(
+            NicePageViewFormPage.email(
+              headerData: const NicePageViewFormLayoutHeaderData(
                 title: "Email",
                 subTitle: "Please enter your email",
               ),
-              pageConfig: const NiceAccountCreationPageConfig(contentAlignment: Alignment.center),
+              pageConfig: const NicePageViewFormPageConfig(contentAlignment: Alignment.center),
               emailDecoration: const InputDecoration(
                 hintText: "Email",
               ),
@@ -124,8 +127,8 @@ class AccountCreationPage extends StatelessWidget {
                 hintText: "Email confirmation",
               ),
             ),
-            NiceAccountCreationPage.password(
-              headerData: const NiceAccountCreationLayoutHeaderData(
+            NicePageViewFormPage.password(
+              headerData: const NicePageViewFormLayoutHeaderData(
                 title: "Password",
                 subTitle: "Please enter your password",
               ),
@@ -136,19 +139,19 @@ class AccountCreationPage extends StatelessWidget {
                 hintText: "Password confirmation",
               ),
             ),
-            NiceAccountCreationPage.content(
-              validationStrategy: const AccountCreationAlwaysValidValidationStrategy(),
-              headerData: const NiceAccountCreationLayoutHeaderData(
+            NicePageViewFormPage.content(
+              validationStrategy: const PageViewFormAlwaysValidValidationStrategy(),
+              headerData: const NicePageViewFormLayoutHeaderData(
                 title: "Page 6",
               ),
-              pageConfig: const NiceAccountCreationPageConfig(
+              pageConfig: const NicePageViewFormPageConfig(
                 contentAlignment: Alignment.bottomRight,
               ),
               content: const Text("Page with content at bottom right!"),
             ),
-            NiceAccountCreationPage.content(
-              validationStrategy: const AccountCreationAlwaysValidValidationStrategy(),
-              headerData: const NiceAccountCreationLayoutHeaderData(
+            NicePageViewFormPage.content(
+              validationStrategy: const PageViewFormAlwaysValidValidationStrategy(),
+              headerData: const NicePageViewFormLayoutHeaderData(
                 title: "Page 7",
               ),
               content: const Text("Final page!"),

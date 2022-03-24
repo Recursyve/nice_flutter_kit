@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:nice_flutter_kit/src/account-creation/validation-strategies/account-creation-base.validation-strategy.dart';
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class NiceAccountCreationFormGroupValidationStrategy implements NiceAccountCreationBaseValidationStrategy {
+class NicePageViewFormFormGroupValidationStrategy implements NicePageViewFormBaseValidationStrategy {
   final String? abstractControlName;
   final AbstractControl? abstractControl;
   final bool markAllAsTouchedIfInvalid;
 
-  const NiceAccountCreationFormGroupValidationStrategy({
+  const NicePageViewFormFormGroupValidationStrategy({
     this.abstractControlName,
     this.abstractControl,
     this.markAllAsTouchedIfInvalid: true,

@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/account-creation/widgets/nice-account-creation-buttons.widget.dart';
+import 'package:nice_flutter_kit/src/page-view-form/widgets/page-view-form-buttons.widget.dart';
 import 'package:provider/provider.dart';
 
-class NiceAccountCreation extends StatefulWidget {
-  /// Config used for the account creation
-  final NiceAccountCreationConfig config;
+class NicePageViewForm extends StatefulWidget {
+  /// Config used for the page view form
+  final NicePageViewFormConfig config;
 
   /// Controller used for the page view
-  /// This can be used to change pages from outside of the [NiceAccountCreation] widget, for example go to the previous
+  /// This can be used to change pages from outside of the [NicePageViewForm] widget, for example go to the previous
   /// page when the back button of an app bar is pressed
   /// If not null, this widget won't dispose it
   final PageController? pageController;
 
-  /// Pages that will be displayed in the account creation page view
-  final List<NiceAccountCreationPage> pages;
+  /// Pages that will be displayed in the [NicePageViewForm] page view
+  final List<NicePageViewFormPage> pages;
 
   /// Called whenever the current [PageView] page changes
   /// [index] represents the index of the page in the [PageView]
@@ -25,7 +25,7 @@ class NiceAccountCreation extends StatefulWidget {
   /// Called when the user is at the last page and presses the "next" button
   final VoidCallback onSubmit;
 
-  NiceAccountCreation({
+  NicePageViewForm({
     required this.config,
     this.pageController,
     required this.pages,
@@ -34,10 +34,10 @@ class NiceAccountCreation extends StatefulWidget {
   }) : assert(pages.isNotEmpty);
 
   @override
-  State<NiceAccountCreation> createState() => _NiceAccountCreationState();
+  State<NicePageViewForm> createState() => _NicePageViewFormState();
 }
 
-class _NiceAccountCreationState extends State<NiceAccountCreation> {
+class _NicePageViewFormState extends State<NicePageViewForm> {
   late final PageController? _localPageController;
 
   PageController get _pageController => widget.pageController ?? _localPageController!;
@@ -61,7 +61,7 @@ class _NiceAccountCreationState extends State<NiceAccountCreation> {
     return _pageController.page?.round() ?? _pageController.initialPage;
   }
 
-  List<NiceAccountCreationPage> get _enabledPages => [
+  List<NicePageViewFormPage> get _enabledPages => [
         for (final page in widget.pages)
           if (page.enabledStrategy.isEnabled(context)) page,
       ];
@@ -104,7 +104,7 @@ class _NiceAccountCreationState extends State<NiceAccountCreation> {
 
   @override
   Widget build(BuildContext context) {
-    return Provider<NiceAccountCreationConfig>.value(
+    return Provider<NicePageViewFormConfig>.value(
       value: widget.config,
       child: WillPopScope(
         onWillPop: () async {
@@ -121,7 +121,7 @@ class _NiceAccountCreationState extends State<NiceAccountCreation> {
               constraints: widget.config.buttonConstraints,
               child: AnimatedBuilder(
                 animation: _pageController,
-                builder: (context, _) => NiceAccountCreationButtons(
+                builder: (context, _) => NicePageViewFormButtons(
                   currentPageIndex: _pageViewPageIndex,
                   pageCount: _enabledPageCount,
                   onNext: _onNext,

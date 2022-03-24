@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class NiceAccountCreationContentPage extends NiceAccountCreationLayoutPage {
+class NicePageViewFormContentPage extends NicePageViewFormLayoutPage {
   final Widget content;
 
-  const NiceAccountCreationContentPage({
-    NiceAccountCreationBaseEnabledStrategy enabledStrategy:
-        const NiceAccountCreationAlwaysEnabledStrategy(),
-    required NiceAccountCreationBaseValidationStrategy validationStrategy,
-    NiceAccountCreationLayoutHeaderData headerData: const NiceAccountCreationLayoutHeaderData(),
-    NiceAccountCreationPageConfig? pageConfig,
+  const NicePageViewFormContentPage({
+    NicePageViewFormBaseEnabledStrategy enabledStrategy:
+        const NicePageViewFormAlwaysEnabledStrategy(),
+    required NicePageViewFormBaseValidationStrategy validationStrategy,
+    NicePageViewFormLayoutHeaderData headerData: const NicePageViewFormLayoutHeaderData(),
+    NicePageViewFormPageConfig? pageConfig,
     required this.content,
   }) : super(
           enabledStrategy: enabledStrategy,

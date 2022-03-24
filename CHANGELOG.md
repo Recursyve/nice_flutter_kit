@@ -4,4 +4,4 @@
 
 ## 1.1.0
 
-* Added NiceAccountCreation
+* Added NicePageViewForm

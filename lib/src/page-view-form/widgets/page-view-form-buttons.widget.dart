@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class NiceAccountCreationButtons extends StatelessWidget {
+class NicePageViewFormButtons extends StatelessWidget {
   /// Index of the current page in the [PageView]
   final int currentPageIndex;
 
@@ -18,7 +18,7 @@ class NiceAccountCreationButtons extends StatelessWidget {
   /// Called whenever onNext or onPrevious is called
   final VoidCallback? onChange;
 
-  const NiceAccountCreationButtons({
+  const NicePageViewFormButtons({
     required this.currentPageIndex,
     required this.pageCount,
     required this.onNext,
@@ -36,7 +36,7 @@ class NiceAccountCreationButtons extends StatelessWidget {
       ],
     );
 
-    if (NiceAccountCreationConfig.of(context).hideButtonsIfKeyboardVisible) {
+    if (NicePageViewFormConfig.of(context).hideButtonsIfKeyboardVisible) {
       return KeyboardVisibilityBuilder(
         builder: (context, keyboardVisible) => AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
@@ -52,7 +52,7 @@ class NiceAccountCreationButtons extends StatelessWidget {
   Widget _buildNextButton() {
     return Builder(
       builder: (context) {
-        final config = NiceAccountCreationConfig.of(context).nextButtonConfig;
+        final config = NicePageViewFormConfig.of(context).nextButtonConfig;
 
         return _buildButton(
           config: config,
@@ -66,7 +66,7 @@ class NiceAccountCreationButtons extends StatelessWidget {
   Widget _buildPreviousButton() {
     return Builder(
       builder: (context) {
-        final config = NiceAccountCreationConfig.of(context).previousButtonConfig;
+        final config = NicePageViewFormConfig.of(context).previousButtonConfig;
 
         final isAtFirstPage = currentPageIndex == 0;
         if (isAtFirstPage && config.boundReachedState.isHidden) {
@@ -87,7 +87,7 @@ class NiceAccountCreationButtons extends StatelessWidget {
   }
 
   Widget _buildButton({
-    required NiceAccountCreationBaseButtonConfig config,
+    required NicePageViewFormBaseButtonConfig config,
     required Widget child,
     required VoidCallback? onPressed,
   }) {

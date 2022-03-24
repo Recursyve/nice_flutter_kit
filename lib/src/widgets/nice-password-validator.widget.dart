@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ReactiveCheckListValidator extends StatelessWidget {
+  final String? value;
+  final String? formControlName;
   final Widget? validIcon;
   final Widget? invalidIcon;
   final Widget? defaultIcon;
@@ -9,8 +11,6 @@ class ReactiveCheckListValidator extends StatelessWidget {
   final Color invalidColor;
   final Color defaultColor;
   final Map<RegExp, String> validationsAndTranslations;
-  final String? value;
-  final String? formControlName;
   final TextStyle textStyle;
   final bool hideWhenEmpty;
 
@@ -28,7 +28,7 @@ class ReactiveCheckListValidator extends StatelessWidget {
     this.hideWhenEmpty = false,
   })  : assert(
             validationsAndTranslations.entries.length > 0, "validationsAndTranslations must contains at least 1 entry"),
-        assert(value != null || formControlName != null, "Value and formControlName can't both be empty");
+        assert(value != null || formControlName != null, "value and formControlName can't both be null");
 
   @override
   Widget build(BuildContext context) {
@@ -39,26 +39,26 @@ class ReactiveCheckListValidator extends StatelessWidget {
       return ReactiveValueListenableBuilder(
         formControlName: formControlName,
         builder: (context, control, _) {
-          return _buildDefault((control as AbstractControl<String>).value ?? "");
+          return _buildCheckList((control as AbstractControl<String>).value ?? "");
         }
       );
     }
-    return _buildDefault(value!);
+    return _buildCheckList(value!);
   }
 
-  Widget _buildDefault(String value) {
+  Widget _buildCheckList(String value) {
     return Column(
       children: [
         for (final entry in validationsAndTranslations.entries)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: _buildValidations(entry, value),
+            child: _buildValidation(entry, value),
           ),
       ],
     );
   }
 
-  Widget _buildValidations(MapEntry<RegExp, String> entry, String value) {
+  Widget _buildValidation(MapEntry<RegExp, String> entry, String value) {
     if (value.isEmpty) {
       return Row(
         children: [
@@ -119,12 +119,9 @@ class ReactiveCheckListValidator extends StatelessWidget {
   bool _checkIfEarlyReturnNeeded(BuildContext context) {
     if (formControlName != null) {
       final control = (ReactiveForm.of(context) as FormGroup).control(formControlName!);
-      if (control.value != null && hideWhenEmpty) return true;
-
-      return false;
+      return control.value != null && hideWhenEmpty;
     }
 
-    if ((value == null || value!.isEmpty) && hideWhenEmpty) return true;
-    return false;
+    return (value == null || value!.isEmpty) && hideWhenEmpty;
   }
 }

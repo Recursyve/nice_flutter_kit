@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class ReactiveCheckListValidator extends StatelessWidget {
+class ReactiveChecklistValidator extends StatelessWidget {
   final String? value;
   final String? formControlName;
   final Widget? validIcon;
@@ -14,7 +14,7 @@ class ReactiveCheckListValidator extends StatelessWidget {
   final TextStyle textStyle;
   final bool hideWhenEmpty;
 
-  ReactiveCheckListValidator({
+  ReactiveChecklistValidator({
     required this.invalidColor,
     required this.validColor,
     required this.defaultColor,
@@ -27,7 +27,7 @@ class ReactiveCheckListValidator extends StatelessWidget {
     this.textStyle = const TextStyle(),
     this.hideWhenEmpty = false,
   })  : assert(
-            validationsAndTranslations.entries.length > 0, "validationsAndTranslations must contains at least 1 entry"),
+            validationsAndTranslations.entries.isNotEmpty, "validationsAndTranslations must contains at least 1 entry"),
         assert(value != null || formControlName != null, "value and formControlName can't both be null");
 
   @override

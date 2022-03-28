@@ -33,3 +33,10 @@ Runner/GeneratedPluginRegistrant.*
 !default.perspectivev3
 
 build
+# Flutter-related
+**/Flutter/ephemeral/
+**/Pods/
+
+# Xcode-related
+**/dgph
+**/xcuserdata/

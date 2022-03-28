@@ -1,6 +1,5 @@
 library nice_flutter_kit;
 
-export 'src/account-creation/public.dart';
 export 'src/api/public.dart';
 export 'src/auth/public.dart';
 export 'src/configs/public.dart';

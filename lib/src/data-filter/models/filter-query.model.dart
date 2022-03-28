@@ -19,6 +19,8 @@ class NiceFilterQueryModel extends Equatable {
         if (rule.id == id) return rule.value;
       }
     }
+
+    return null;
   }
 
   Map<String, dynamic> toJson() => <String, dynamic>{

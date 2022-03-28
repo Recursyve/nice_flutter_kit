@@ -5,3 +5,5 @@
 ## 1.1.0
 
 * Added NicePageViewForm
+* Added NiceCaseUtils
+* Added NiceJwtUtils

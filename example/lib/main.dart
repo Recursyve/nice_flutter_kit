@@ -1,7 +1,7 @@
-import 'package:example/pages/account-creation.page.dart';
 import 'package:example/pages/auth/auth.page.dart';
 import 'package:example/pages/home.page.dart';
 import 'package:example/pages/onboarding.page.dart';
+import 'package:example/pages/page-view-form.page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
       child: OnboardingPage(),
     ),
     RouteData(
-      path: "/account-creation",
-      title: "Account Creation",
-      child: AccountCreationPage(),
+      path: "/page-view-form",
+      title: "Page view form",
+      child: PageViewFormPage(),
     ),
     RouteData(
       path: "/auth",

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 abstract class NiceBaseCubit<S extends NiceBaseState> extends Cubit<S> {

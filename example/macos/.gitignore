@@ -1,3 +1,11 @@
+# Flutter-related
+**/Flutter/ephemeral/
+**/Pods/
+
+# Xcode-related
+**/dgph
+**/xcuserdata/
+
 *.mode1v3
 *.mode2v3
 *.moved-aside

@@ -1,6 +1,7 @@
 library nice_flutter_kit;
 
 export 'src/api/public.dart';
+export 'src/auth/public.dart';
 export 'src/configs/public.dart';
 export 'src/cubit/public.dart';
 export 'src/data-filter/public.dart';

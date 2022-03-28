@@ -7,3 +7,5 @@
 * Added NicePageViewForm
 * Added NiceCaseUtils
 * Added NiceJwtUtils
+* Added NiceAuth
+* Added NiceSignIn

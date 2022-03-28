@@ -11,6 +11,7 @@ abstract class NiceBaseCubit<S extends NiceBaseState> extends Cubit<S> {
   FutureOr<R?> wrap<R>({
     bool loading: true,
     required FutureOr<R> Function() callback,
+    FutureOr<R?> Function(Object e)? onError,
   }) async {
     try {
       if (loading) emit(state.copyWithLoadingAndError(loading: true) as S);
@@ -25,7 +26,7 @@ abstract class NiceBaseCubit<S extends NiceBaseState> extends Cubit<S> {
           error: true,
         ) as S,
       );
-      return null;
+      return await onError?.call(e);
     }
   }
 }

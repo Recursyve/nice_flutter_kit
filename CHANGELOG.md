@@ -13,3 +13,5 @@
 ## 1.2.0
 
 * Added NiceFutureUtils
+
+## 1.3.0

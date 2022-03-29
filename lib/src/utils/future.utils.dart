@@ -42,7 +42,7 @@ class NiceFutureUtils {
     );
   }
 
-  static Future<Tuple5<T1, T2, T3, T4, T5>> wt1it5<T1, T2, T3, T4, T5>(
+  static Future<Tuple5<T1, T2, T3, T4, T5>> wait5<T1, T2, T3, T4, T5>(
     Future<T1> t1,
     Future<T2> t2,
     Future<T3> t3,

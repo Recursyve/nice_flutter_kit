@@ -9,3 +9,7 @@
 * Added NiceJwtUtils
 * Added NiceAuth
 * Added NiceSignIn
+
+## 1.2.0
+
+* Added NiceFutureUtils

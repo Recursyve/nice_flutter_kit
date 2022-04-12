@@ -2,7 +2,10 @@ import 'package:flutter/widgets.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class RadioExpandableProvider extends StatefulWidget {
+  /// Key that will be initially expanded
   final Key? initialExpandedKey;
+
+  /// Child which will be able to listen to the expandedKey
   final Widget child;
 
   const RadioExpandableProvider({

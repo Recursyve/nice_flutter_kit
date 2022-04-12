@@ -15,3 +15,7 @@
 * Added NiceFutureUtils
 
 ## 1.3.0
+
+* Added RadioExpandableProvider
+* Added RadioExpandable
+* Added RadioExpandableCard

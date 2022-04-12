@@ -12,10 +12,12 @@ void main() async {
 
   await NiceConfig.setup(
     onboardingConfig: NiceOnboardingGlobalConfig(),
-    baseCubitConfig: NiceBaseCubitConfig(wrapErrorHandler: (e, s) {
-      print(e);
-      print(s);
-    }),
+    baseCubitConfig: NiceBaseCubitConfig(
+      wrapErrorHandler: (e, s) {
+        print(e);
+        print(s);
+      },
+    ),
   );
 
   runApp(MyApp());

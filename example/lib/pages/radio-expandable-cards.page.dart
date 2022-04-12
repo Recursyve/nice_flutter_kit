@@ -10,6 +10,7 @@ class RadioExpandableCardsPage extends StatelessWidget {
     return BasePage(
       title: "Radio expandable cards",
       child: RadioExpandableProvider(
+        initialExpandedKey: const ValueKey(42),
         child: ListView.separated(
           itemCount: 50,
           itemBuilder: (_, index) {

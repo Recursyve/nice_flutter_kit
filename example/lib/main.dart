@@ -2,6 +2,7 @@ import 'package:example/pages/auth/auth.page.dart';
 import 'package:example/pages/home.page.dart';
 import 'package:example/pages/onboarding.page.dart';
 import 'package:example/pages/page-view-form.page.dart';
+import 'package:example/pages/radio-expandable-cards.page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
@@ -15,7 +16,7 @@ void main() async {
       wrapErrorHandler: (e, s) {
         print(e);
         print(s);
-      }
+      },
     ),
   );
 
@@ -38,6 +39,11 @@ class MyApp extends StatelessWidget {
       path: "/auth",
       title: "Auth",
       child: AuthPage(),
+    ),
+    RouteData(
+      path: "/radio-expandable-cards",
+      title: "Radio expandable cards",
+      child: RadioExpandableCardsPage(),
     ),
   ];
 

@@ -15,6 +15,7 @@ dependencies:
   nice_flutter_kit:
     path: ../
   reactive_forms: 11.0.1
+  expandable: ^5.0.1
 
 flutter:
   uses-material-design: true

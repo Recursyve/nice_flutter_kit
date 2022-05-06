@@ -56,7 +56,7 @@ class NiceBaseList<D> extends StatefulWidget {
 
 class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   final _searchSubject = BehaviorSubject<String>();
-  late final NiceBaseListCubit<D> cubit;
+  late final NiceBaseListCubit<D> _cubit;
   late final ScrollController _scrollController;
 
   bool get shouldLoadMore =>
@@ -67,21 +67,19 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   void initState() {
     super.initState();
     _scrollController = widget.scrollController ?? ScrollController();
-    cubit = NiceBaseListCubit<D>(config: widget.config)..load();
+    _cubit = NiceBaseListCubit<D>(config: widget.config)..load();
 
     // @Marc-Andre Callback utilisé pour exposer le cubit de la niceBaseList dans le but de pouvoir modifier le UI de la base list.
-    if (widget.onCubitCreated != null) {
-      widget.onCubitCreated!.call(cubit);
-    }
+    widget.onCubitCreated?.call(_cubit);
 
     _searchSubject.distinct().debounceTime(const Duration(milliseconds: 250)).listen((text) async {
       await widget.onBeforeSearch?.call();
-      cubit.updateSearch(NiceFilterSearchModel(value: text));
+      _cubit.updateSearch(NiceFilterSearchModel(value: text));
     });
 
     _scrollController.addListener(() {
       if (shouldLoadMore) {
-        cubit.loadMore();
+        _cubit.loadMore();
       }
     });
   }
@@ -89,7 +87,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   @override
   void dispose() {
     _searchSubject.close();
-    cubit.close();
+    _cubit.close();
     if (widget.scrollController == null) {
       _scrollController.dispose();
     }
@@ -101,7 +99,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<NiceBaseListCubit<D>>.value(
-          value: cubit,
+          value: _cubit,
         ),
         ...widget.blocProviders,
       ],

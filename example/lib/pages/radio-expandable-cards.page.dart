@@ -32,6 +32,7 @@ class RadioExpandableCardsPage extends StatelessWidget {
     return RadioExpandableCard(
       key: ValueKey(index),
       cardMargin: const EdgeInsets.symmetric(horizontal: 32),
+      onChanged: (expanded) => print("Card $index changed: $expanded"),
       cardDecoration: const BoxDecoration(
         color: Colors.white,
         boxShadow: [

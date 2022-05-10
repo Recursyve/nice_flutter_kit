@@ -54,6 +54,9 @@ class RadioExpandableCard extends StatefulWidget {
   /// The UI properties of the theme will be ignored
   final ExpandableThemeData? theme;
 
+  /// Called whenever the expandable expands (true) or collapses (false).
+  final ValueChanged<bool>? onChanged;
+
   const RadioExpandableCard({
     // Key is required since this is what is used to keep track of which RadioExpandable is expanded
     required Key key,
@@ -72,6 +75,7 @@ class RadioExpandableCard extends StatefulWidget {
     this.bodyMargin,
     this.separator,
     this.theme,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -119,6 +123,7 @@ class _RadioExpandableCardState extends State<RadioExpandableCard> {
     return RadioExpandable(
       key: widget.key!,
       controller: _controller,
+      onChanged: widget.onChanged,
       header: _buildHeader(),
       body: _buildBody(),
       expandedBuilder: (_, header, body) => Column(

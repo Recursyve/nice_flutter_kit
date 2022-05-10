@@ -21,6 +21,9 @@ class RadioExpandable extends StatefulWidget {
   /// Controller that will be provided to the [Expandable]
   final ExpandableController? controller;
 
+  /// Called whenever the expandable expands (true) or collapses (false).
+  final ValueChanged<bool>? onChanged;
+
   const RadioExpandable({
     // Key is required since this is what is used to keep track of which RadioExpandable is expanded
     required Key key,
@@ -29,6 +32,7 @@ class RadioExpandable extends StatefulWidget {
     this.expandedBuilder,
     this.theme,
     this.controller,
+    this.onChanged,
   }) : super(key: key);
 
   @override
@@ -49,6 +53,12 @@ class _RadioExpandableState extends State<RadioExpandable> {
     } else {
       _localController = null;
       widget.controller?.addListener(_controllerListener);
+    }
+
+    if (widget.onChanged != null) {
+      _controller.addListener(() {
+        widget.onChanged!(_controller.expanded);
+      });
     }
   }
 

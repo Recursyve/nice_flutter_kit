@@ -20,7 +20,7 @@ class NiceTypedButton extends StatelessWidget {
   final Widget child;
 
   const NiceTypedButton({
-    Key? key,
+    super.key,
     required this.type,
     required this.onPressed,
     this.onLongPress,
@@ -31,7 +31,7 @@ class NiceTypedButton extends StatelessWidget {
     this.autofocus: false,
     this.clipBehavior: Clip.none,
     required this.child,
-  }) : super(key: key);
+  });
 
   factory NiceTypedButton.icon({
     Key? key,

@@ -10,13 +10,12 @@ class NiceKeyboardListener extends StatelessWidget {
   final KeyEventResult? Function(LogicalKeyboardKey key)? onKeyUp;
 
   const NiceKeyboardListener({
-    Key? key,
+    super.key,
     required this.child,
     this.onKeyDown,
     this.onKeyRepeat,
     this.onKeyUp,
-  })  : assert(onKeyDown != null || onKeyRepeat != null || onKeyUp != null),
-        super(key: key);
+  }) : assert(onKeyDown != null || onKeyRepeat != null || onKeyUp != null);
 
   @override
   Widget build(BuildContext context) {

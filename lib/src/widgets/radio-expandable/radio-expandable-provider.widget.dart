@@ -9,10 +9,10 @@ class RadioExpandableProvider extends StatefulWidget {
   final Widget child;
 
   const RadioExpandableProvider({
-    Key? key,
+    super.key,
     this.initialExpandedKey,
     required this.child,
-  }) : super(key: key);
+  });
 
   static RadioExpandableProviderData of(BuildContext context) {
     final data = context.dependOnInheritedWidgetOfExactType<RadioExpandableProviderData>();

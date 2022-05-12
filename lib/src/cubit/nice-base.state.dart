@@ -6,7 +6,10 @@ abstract class NiceBaseState extends Equatable {
   final bool loading;
   final bool error;
 
-  const NiceBaseState(this.loading, this.error);
+  const NiceBaseState({
+    required this.loading,
+    required this.error,
+  });
 
   const NiceBaseState.initialState()
       : loading = false,

@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+// Deprecated: Use TextButton, OutlinedButton or ElevatedButton instead
+@deprecated
 class NiceButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String? displayText;
@@ -13,7 +15,7 @@ class NiceButton extends StatelessWidget {
   final bool expanded;
 
   NiceButton({
-    Key? key,
+    super.key,
     this.outlined = false,
     this.onPressed,
     this.displayText,
@@ -28,22 +30,24 @@ class NiceButton extends StatelessWidget {
       bottom: 12.0,
     ),
     this.expanded: true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     Widget button;
     if (outlined) {
       // TODO: Use newest button.
-      button = OutlineButton(
-        padding: const EdgeInsets.all(12.0),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        borderSide: BorderSide(
-          color: themeColors ?? Theme.of(context).primaryColor,
-          width: 1,
-          style: BorderStyle.solid,
+      button = OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          padding: const EdgeInsets.all(12.0),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          side: BorderSide(
+            color: themeColors ?? Theme.of(context).primaryColor,
+            width: 1,
+            style: BorderStyle.solid,
+          ),
         ),
         child: Container(
           width: expanded ? double.infinity : null,

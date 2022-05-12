@@ -12,15 +12,15 @@ class NiceBaseListState<D> extends NiceBaseState {
   List<D> get values => result?.values ?? const [];
 
   const NiceBaseListState({
-    required bool loading,
-    required bool error,
+    required super.loading,
+    required super.error,
     required this.result,
     required this.loadingMore,
     required this.endReached,
     required this.order,
     required this.query,
     required this.search,
-  }) : super(loading, error);
+  });
 
   NiceBaseListState.initialState()
       : result = null,

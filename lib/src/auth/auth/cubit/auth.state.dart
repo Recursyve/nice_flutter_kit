@@ -16,12 +16,12 @@ class NiceAuthState<User extends Object, Account extends Object> extends NiceBas
   bool get isRegistered => account != null;
 
   const NiceAuthState({
-    required bool loading,
-    required bool error,
+    required super.loading,
+    required super.error,
     required this.initialized,
     required this.user,
     required this.account,
-  }) : super(loading, error);
+  });
 
   // We have to use a static method for initialState, or we get type errors
   static NiceAuthState<User, Account> initialState<User extends Object, Account extends Object>() {

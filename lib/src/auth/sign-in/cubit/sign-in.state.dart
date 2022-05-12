@@ -5,10 +5,10 @@ class NiceSignInState extends NiceBaseState {
   final bool invalidCredentials;
 
   const NiceSignInState({
-    required bool loading,
-    required bool error,
+    required super.loading,
+    required super.error,
     required this.invalidCredentials,
-  }) : super(loading, error);
+  });
 
   const NiceSignInState.initialState()
       : invalidCredentials = false,

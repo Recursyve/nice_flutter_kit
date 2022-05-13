@@ -1,10 +1,10 @@
 name: nice_flutter_kit
 description: A collection of nice widgets
-version: 1.3.0
+version: 1.4.1
 homepage: https://github.com/Recursyve/nice_flutter_kit
 
 environment:
-  sdk: ">=2.14.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
   flutter: ">=2.5.0"
 
 dependencies:

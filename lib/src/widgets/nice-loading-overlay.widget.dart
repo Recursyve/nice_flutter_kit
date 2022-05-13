@@ -11,14 +11,14 @@ class NiceLoadingOverlay extends StatelessWidget {
   final StackFit stackFit;
 
   const NiceLoadingOverlay({
-    Key? key,
+    super.key,
     this.size = 72,
     this.lineWidth = 7,
     this.child,
     this.loading = true,
     this.color,
     this.stackFit = StackFit.loose,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -6,11 +6,11 @@ class NiceAnimatedFadeIn extends StatefulWidget {
   final Duration delay;
 
   const NiceAnimatedFadeIn({
-    Key? key,
+    super.key,
     required this.child,
     required this.duration,
     this.delay: Duration.zero,
-  }) : super(key: key);
+  });
 
   @override
   State<NiceAnimatedFadeIn> createState() => _NiceAnimatedFadeInState();

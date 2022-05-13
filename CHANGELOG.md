@@ -19,3 +19,12 @@
 * Added RadioExpandableProvider
 * Added RadioExpandable
 * Added RadioExpandableCard
+
+### 1.4.0
+
+* Added onCubitCreated callback to NiceBaseList
+* Added onChanged callback to RadioExpandable & RadioExpandableCard
+
+### 1.4.1
+
+* Fixes for Flutter 3.0

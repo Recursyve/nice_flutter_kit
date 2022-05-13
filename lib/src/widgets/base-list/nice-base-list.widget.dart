@@ -26,6 +26,7 @@ class NiceBaseList<D> extends StatefulWidget {
   final ScrollController? scrollController;
   final bool shrinkWrap;
   final Function(NiceBaseListCubit)? onCubitCreated;
+  final bool loadOnInit;
 
   // These BlocProviders will be placed underneath the NiceBaseListCubit
   final List<BlocProvider> blocProviders;
@@ -48,6 +49,7 @@ class NiceBaseList<D> extends StatefulWidget {
     this.scrollController,
     this.shrinkWrap: false,
     this.onCubitCreated,
+    this.loadOnInit = true,
   });
 
   @override
@@ -67,8 +69,10 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   void initState() {
     super.initState();
     _scrollController = widget.scrollController ?? ScrollController();
-    _cubit = NiceBaseListCubit<D>(config: widget.config)..load();
-
+    _cubit = NiceBaseListCubit<D>(config: widget.config);
+    if (widget.loadOnInit) {
+      _cubit.load();
+    }
     // @Marc-Andre Callback utilisé pour exposer le cubit de la niceBaseList dans le but de pouvoir modifier le UI de la base list.
     widget.onCubitCreated?.call(_cubit);
 

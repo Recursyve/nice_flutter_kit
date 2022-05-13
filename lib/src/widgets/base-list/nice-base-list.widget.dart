@@ -28,7 +28,6 @@ class NiceBaseList<D> extends StatefulWidget {
   final Function(NiceBaseListCubit)? onCubitCreated;
   final bool loadOnInit;
 
-
   // These BlocProviders will be placed underneath the NiceBaseListCubit
   final List<BlocProvider> blocProviders;
 

@@ -28,3 +28,7 @@
 ### 1.4.1
 
 * Fixes for Flutter 3.0
+
+### 1.4.2
+
+* Added loadOnInit callback to the NiceBaseList

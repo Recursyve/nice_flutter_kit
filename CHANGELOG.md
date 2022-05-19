@@ -32,3 +32,7 @@
 ### 1.4.2
 
 * Added loadOnInit callback to the NiceBaseList
+
+### 1.4.3
+
+* Update dependencies

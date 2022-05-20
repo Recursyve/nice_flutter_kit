@@ -36,3 +36,7 @@
 ### 1.4.3
 
 * Update dependencies
+
+### 1.4.4
+
+* Added batch method to NiceFutureUtils

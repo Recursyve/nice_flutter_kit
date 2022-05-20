@@ -3,6 +3,25 @@ import 'package:tuple/tuple.dart';
 class NiceFutureUtils {
   const NiceFutureUtils._();
 
+  // We need to take a callback for each future, since dart`s futures aren't lazy, meaning that they will all launch
+  // even if we don't await them
+  static Future<List<T>> batch<T>(List<Future<T> Function()> futureCallbacks, {required int batchSize}) async {
+    final results = <T>[];
+
+    List<Future<T>> futureBatch = [];
+    for (int i = 0; i < futureCallbacks.length; i++) {
+      futureBatch.add(futureCallbacks[i].call());
+
+      if (futureBatch.length == batchSize || i == futureCallbacks.length - 1) {
+        final batchResult = await Future.wait(futureBatch);
+        results.addAll(batchResult);
+        futureBatch = [];
+      }
+    }
+
+    return results;
+  }
+
   static Future<Tuple2<T1, T2>> wait2<T1, T2>(
     Future<T1> t1,
     Future<T2> t2,

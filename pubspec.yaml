@@ -1,6 +1,6 @@
 name: nice_flutter_kit
 description: A collection of nice widgets
-version: 1.4.4
+version: 1.4.5
 homepage: https://github.com/Recursyve/nice_flutter_kit
 
 environment:
@@ -29,7 +29,7 @@ dependencies:
   notification_permissions: ^0.6.1
   path: ^1.8.0
   provider: ^6.0.0
-  reactive_forms: ^12.0.0
+  reactive_forms: ^13.0.0
   rxdart: ^0.27.0
   shared_preferences: ^2.0.0
   timeago: ^3.1.0

@@ -44,3 +44,7 @@
 ### 1.4.5
 
 * Update dependencies
+
+### 1.4.6
+
+* Added "raw" argument to NiceLocalizations' translate method to return translation as a json object if a node is reached instead of a leaf.

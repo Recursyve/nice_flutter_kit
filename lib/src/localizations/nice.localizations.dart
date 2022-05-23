@@ -63,20 +63,18 @@ class NiceLocalizations {
     }
   }
 
-  String translate(
-    String key, {
-    Map<String, String>? variables,
-    String? overrideLocale,
-    bool raw: false,
-  }) {
+  String translate(String key, {Map<String, String>? variables, String? overrideLocale}) {
     var nestedMap = _getNestedValue(key, overrideLocale: overrideLocale);
-    if (raw) return nestedMap;
 
     if (nestedMap is String) {
       nestedMap = this.replaceValues(nestedMap, variables);
     }
 
     return nestedMap.toString();
+  }
+
+  dynamic translateRaw(String key, {String? overrideLocale}) {
+    return _getNestedValue(key, overrideLocale: overrideLocale);
   }
 
   String replaceValues(String translation, Map<String, String>? variables) {

@@ -2,16 +2,16 @@ import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/widgets/base-list/utils/nice-filter-query.utils.dart';
+import 'package:nice_flutter_kit/src/widgets/worst-base-list/utils/worst-filter-query.utils.dart';
 
-class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
-  final NiceBaseListConfig<D> config;
+class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
+  final WorstBaseListConfig<D> config;
 
-  NiceBaseListCubit({
+  WorstBaseListCubit({
     required this.config,
-  }) : super(NiceBaseListState.initialState());
+  }) : super(WorstBaseListState.initialState());
 
-  factory NiceBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
+  factory WorstBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
 
   Future<void> load() async {
     emit(state.copyWith(error: false));
@@ -82,7 +82,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   Future<void> upsertQueryRules(List<NiceFilterQueryRuleModel> upsertedRules) async {
     emit(
       state.copyWithQuery(
-        NiceFilterQueryUtils.upsertQueryRules(
+        WorstFilterQueryUtils.upsertQueryRules(
           state.query,
           upsertedRules,
         ),
@@ -101,7 +101,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
 
     emit(
       state.copyWithQuery(
-        NiceFilterQueryUtils.upsertQueryRules(
+        WorstFilterQueryUtils.upsertQueryRules(
           state.query,
           [newRule],
         ),
@@ -113,7 +113,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   Future<void> removeQueryRule(String id, {bool reloadData = true}) async {
     emit(
       state.copyWithQuery(
-        NiceFilterQueryUtils.removeRuleById(state.query, id),
+        WorstFilterQueryUtils.removeRuleById(state.query, id),
       ),
     );
     if (reloadData) await load();
@@ -125,7 +125,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   }
 
   Future<void> resetAndLoad() async {
-    emit(NiceBaseListState.initialState());
+    emit(WorstBaseListState.initialState());
     await load();
   }
 

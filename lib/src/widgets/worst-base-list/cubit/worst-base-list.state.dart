@@ -1,6 +1,6 @@
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class NiceBaseListState<D> extends NiceBaseState {
+class WorstBaseListState<D> extends NiceBaseState {
   final NiceFilterResultModel<D>? result;
   final bool loadingMore;
   final bool endReached;
@@ -11,7 +11,7 @@ class NiceBaseListState<D> extends NiceBaseState {
 
   List<D> get values => result?.values ?? const [];
 
-  const NiceBaseListState({
+  const WorstBaseListState({
     required super.loading,
     required super.error,
     required this.result,
@@ -22,7 +22,7 @@ class NiceBaseListState<D> extends NiceBaseState {
     required this.search,
   });
 
-  NiceBaseListState.initialState()
+  WorstBaseListState.initialState()
       : result = null,
         loadingMore = false,
         endReached = false,
@@ -36,14 +36,14 @@ class NiceBaseListState<D> extends NiceBaseState {
     return copyWith(loading: loading, error: error);
   }
 
-  NiceBaseListState<D> copyWith({
+  WorstBaseListState<D> copyWith({
     bool? loading,
     bool? error,
     NiceFilterResultModel<D>? result,
     bool? loadingMore,
     bool? endReached,
   }) {
-    return NiceBaseListState<D>(
+    return WorstBaseListState<D>(
       loading: loading ?? this.loading,
       error: error ?? this.error,
       result: result ?? this.result,
@@ -55,8 +55,8 @@ class NiceBaseListState<D> extends NiceBaseState {
     );
   }
 
-  NiceBaseListState<D> copyWithOrder(NiceFilterOrderModel? order) {
-    return NiceBaseListState<D>(
+  WorstBaseListState<D> copyWithOrder(NiceFilterOrderModel? order) {
+    return WorstBaseListState<D>(
       loading: loading,
       error: error,
       result: result,
@@ -68,8 +68,8 @@ class NiceBaseListState<D> extends NiceBaseState {
     );
   }
 
-  NiceBaseListState<D> copyWithQuery(NiceFilterQueryModel? query) {
-    return NiceBaseListState<D>(
+  WorstBaseListState<D> copyWithQuery(NiceFilterQueryModel? query) {
+    return WorstBaseListState<D>(
       loading: loading,
       error: error,
       result: result,
@@ -81,8 +81,8 @@ class NiceBaseListState<D> extends NiceBaseState {
     );
   }
 
-  NiceBaseListState<D> copyWithSearch(NiceFilterSearchModel? search) {
-    return NiceBaseListState<D>(
+  WorstBaseListState<D> copyWithSearch(NiceFilterSearchModel? search) {
+    return WorstBaseListState<D>(
       loading: loading,
       error: error,
       result: result,

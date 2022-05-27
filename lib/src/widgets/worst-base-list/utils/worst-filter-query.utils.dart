@@ -1,6 +1,6 @@
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class NiceFilterQueryUtils {
+class WorstFilterQueryUtils {
   // Replace or add the new rule only in the first rules list
   static NiceFilterQueryModel upsertQueryRules(
       NiceFilterQueryModel? query, List<NiceFilterQueryRuleModel> upsertedRules) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class NiceBaseListHeader extends StatelessWidget {
+class WorstBaseListHeader extends StatelessWidget {
   final Widget? title;
   final VoidCallback? onBack;
   final Widget? backIcon;
@@ -9,7 +9,7 @@ class NiceBaseListHeader extends StatelessWidget {
   final Widget? action;
   final bool hideSearch;
 
-  const NiceBaseListHeader({
+  const WorstBaseListHeader({
     this.title,
     this.backIcon,
     this.onBack,

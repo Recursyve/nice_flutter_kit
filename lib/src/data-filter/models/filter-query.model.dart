@@ -10,10 +10,10 @@ class NiceFilterQueryModel extends Equatable {
   const NiceFilterQueryModel({required this.condition, required this.rules});
 
   // Recursively loop through the rules to maybe find a rule with id
-  D? getValueForId<D>(String id) {
+  D? findValueForId<D>(String id) {
     for (final rule in rules) {
       if (rule is NiceFilterQueryModel) {
-        final value = rule.getValueForId(id);
+        final value = rule.findValueForId(id);
         if (value != null) return value;
       } else if (rule is NiceFilterQueryRuleModel) {
         if (rule.id == id) return rule.value;
@@ -23,7 +23,7 @@ class NiceFilterQueryModel extends Equatable {
     return null;
   }
 
-  Map<String, dynamic> toJson() => <String, dynamic>{
+  Map<String, dynamic> toJson() => {
         "condition": condition.toString(),
         "rules": rules
             .where((rule) => rule is NiceFilterQueryModel || rule is NiceFilterQueryRuleModel)

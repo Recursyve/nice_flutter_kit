@@ -1,11 +1,12 @@
 import 'package:flutter/widgets.dart';
-import 'package:nice_flutter_kit/src/base-list/config/base-list.config.data.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:provider/provider.dart';
 
-class NiceBaseListConfig extends StatelessWidget {
-  static NiceBaseListConfigData of(BuildContext context) => Provider.of(context, listen: false);
+class NiceBaseListConfig<D> extends StatelessWidget {
+  static NiceBaseListConfigData of(BuildContext context, {bool listen = false}) => Provider.of(context, listen: listen);
 
-  final NiceBaseListConfigData config;
+  final NiceBaseListConfigData<D> config;
   final Widget child;
 
   const NiceBaseListConfig({
@@ -17,7 +18,12 @@ class NiceBaseListConfig extends StatelessWidget {
   Widget build(BuildContext context) {
     return Provider<NiceBaseListConfigData>.value(
       value: config,
-      child: child,
+      child: BlocProvider<NiceBaseListCubit<D>>(
+        create: (context) => NiceBaseListCubit(
+          config: config,
+        ),
+        child: child,
+      ),
     );
   }
 }

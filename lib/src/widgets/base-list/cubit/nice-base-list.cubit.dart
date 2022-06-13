@@ -13,10 +13,11 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
 
   factory NiceBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
 
-  Future<void> load() async {
+  Future<void> load({bool loading = true}) async {
     emit(state.copyWith(error: false));
 
     await wrap(
+      loading: loading,
       callback: () async {
         final result = await config.filterApi.filter(
           NiceFilterModel(

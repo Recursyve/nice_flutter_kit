@@ -1,77 +1,136 @@
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceBaseListState<D> extends NiceBaseState {
+  final bool initialLoadCompleted;
+
   final int? nextPage;
-  final int pageLength;
+  final int pageSize;
   final int total;
 
-  final String? search;
-  final List<NiceFilterQueryModel>? query;
+  final String? searchQuery;
+  final NiceFilterQueryModel? query;
   final NiceFilterOrderModel? order;
 
   final List<D> values;
 
+  NiceFilterModel get filter => NiceFilterModel(
+        page: NiceFilterPageModel(
+          number: nextPage ?? 0,
+          size: pageSize,
+        ),
+        order: order,
+        search: _filterSearch,
+        query: query,
+      );
+
+  NiceFilterSearchModel? get _filterSearch {
+    if (searchQuery == null || searchQuery!.isEmpty) return null;
+    return NiceFilterSearchModel(value: searchQuery!);
+  }
+
   const NiceBaseListState({
     required super.loading,
     required super.error,
+    required this.initialLoadCompleted,
     required this.nextPage,
-    required this.pageLength,
+    required this.pageSize,
     required this.total,
-    required this.search,
+    required this.searchQuery,
     required this.query,
     required this.order,
     required this.values,
   });
 
-  NiceBaseListState.initialState(NiceFilterModel? defaultFilter)
-      : nextPage = defaultFilter?.page?.number ?? 0,
-        pageLength = defaultFilter?.page?.size ?? 20,
+  const NiceBaseListState.initialState()
+      : initialLoadCompleted = false,
+        nextPage = 0,
+        pageSize = 20,
         total = 0,
-        search = defaultFilter?.search?.value,
-        query = defaultFilter?.query != null ? [defaultFilter!.query!] : null,
-        order = defaultFilter?.order,
+        searchQuery = null,
+        query = null,
+        order = null,
         values = const [],
         super.initialState();
 
   @override
-  NiceBaseListState copyWithLoadingAndError({bool? loading, bool? error}) {
+  NiceBaseListState<D> copyWithLoadingAndError({bool? loading, bool? error}) {
     return copyWith(loading: loading, error: error);
   }
 
-  NiceBaseListState copyWithNextPage(int? nextPage) => NiceBaseListState(
+  NiceBaseListState<D> copyWithNextPage(int? nextPage) => NiceBaseListState<D>(
         loading: this.loading,
         error: this.error,
+        initialLoadCompleted: this.initialLoadCompleted,
         nextPage: nextPage,
-        pageLength: this.pageLength,
+        pageSize: this.pageSize,
         total: this.total,
-        search: this.search,
+        searchQuery: this.searchQuery,
         query: this.query,
         order: this.order,
         values: this.values,
       );
 
-  NiceBaseListState copyWith({
+  NiceBaseListState<D> copyWithSearchQuery(String? searchQuery) => NiceBaseListState<D>(
+        loading: this.loading,
+        error: this.error,
+        initialLoadCompleted: this.initialLoadCompleted,
+        nextPage: this.nextPage,
+        pageSize: this.pageSize,
+        total: this.total,
+        searchQuery: searchQuery,
+        query: this.query,
+        order: this.order,
+        values: this.values,
+      );
+
+  NiceBaseListState<D> copyWithQuery(NiceFilterQueryModel? query) => NiceBaseListState<D>(
+        loading: this.loading,
+        error: this.error,
+        initialLoadCompleted: this.initialLoadCompleted,
+        nextPage: this.nextPage,
+        pageSize: this.pageSize,
+        total: this.total,
+        searchQuery: this.searchQuery,
+        query: query,
+        order: this.order,
+        values: this.values,
+      );
+
+  NiceBaseListState<D> copyWithOrder(NiceFilterOrderModel? order) => NiceBaseListState<D>(
+        loading: this.loading,
+        error: this.error,
+        initialLoadCompleted: this.initialLoadCompleted,
+        nextPage: this.nextPage,
+        pageSize: this.pageSize,
+        total: this.total,
+        searchQuery: this.searchQuery,
+        query: this.query,
+        order: order,
+        values: this.values,
+      );
+
+  NiceBaseListState<D> copyWith({
     bool? loading,
     bool? error,
-    int? pageLength,
+    bool? initialLoadCompleted,
+    int? pageSize,
     int? total,
-    NiceFilterOrderModel? order,
     List<D>? values,
-    NiceFilterResultModel? result,
   }) {
-    return NiceBaseListState(
+    return NiceBaseListState<D>(
       loading: loading ?? this.loading,
-      error: error ?? this.error,
+      error: error ?? false,
+      initialLoadCompleted: initialLoadCompleted ?? this.initialLoadCompleted,
       nextPage: this.nextPage,
-      pageLength: pageLength ?? this.pageLength,
+      pageSize: pageSize ?? this.pageSize,
       total: total ?? this.total,
-      order: order ?? this.order,
+      order: this.order,
       values: values ?? this.values,
       query: this.query,
-      search: this.search,
+      searchQuery: this.searchQuery,
     );
   }
 
   @override
-  List<Object?> get props => [loading, error, nextPage, pageLength, total, order, values, query, search];
+  List<Object?> get props => [loading, error, nextPage, pageSize, total, order, values, query, searchQuery];
 }

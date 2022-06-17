@@ -30,7 +30,7 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
         emit(
           state.copyWith(
             result: result,
-            endReached: (result.values ?? const []).length < config.itemsPerPage,
+            endReached: result.values.length < config.itemsPerPage,
           ),
         );
       },
@@ -60,9 +60,12 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
         emit(
           state.copyWith(
             result: NiceFilterResultModel(
-                page: result.page, total: result.total, values: [...state.values, ...(result.values ?? const [])]),
+              page: result.page,
+              total: result.total,
+              values: [...state.values, ...result.values],
+            ),
             loadingMore: false,
-            endReached: (result.values ?? const []).length < config.itemsPerPage,
+            endReached: result.values.length < config.itemsPerPage,
           ),
         );
       },
@@ -97,7 +100,7 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
     bool reloadData = true,
   }) async {
     final oldRule = state.query?.rules.firstWhereOrNull((r) => r is NiceFilterQueryRuleModel && r.id == id);
-    final newRule = ruleUpdater(oldRule);
+    final newRule = ruleUpdater(oldRule as NiceFilterQueryRuleModel?);
 
     emit(
       state.copyWithQuery(

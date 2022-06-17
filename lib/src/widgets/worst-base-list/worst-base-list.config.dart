@@ -11,7 +11,7 @@ class WorstBaseListConfig<D> {
     required this.filterApi,
     this.defaultOrder: const NiceFilterOrderModel(
       column: "createdAt",
-      direction: NiceFilterOrderDirectionType.Asc,
+      direction: NiceFilterOrderDirections.Asc,
     ),
     this.itemsPerPage: 20,
   });

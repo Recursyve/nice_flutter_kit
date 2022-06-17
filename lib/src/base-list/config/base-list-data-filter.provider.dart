@@ -1,13 +1,15 @@
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-abstract class NiceBaseListDataFilterService<D> {
-  Future<NiceFilterResultModel<D>> filter(NiceFilterModel params);
+abstract class NiceBaseListDataFilterProvider<D> {
+  const NiceBaseListDataFilterProvider();
+
+  Future<NiceFilterResultModel<D>> filter(NiceFilterModel filter);
 }
 
-class NiceBaseListDataFilterApiService<D> implements NiceBaseListDataFilterService<D> {
+class NiceBaseListDataFilterApiProvider<D> implements NiceBaseListDataFilterProvider<D> {
   final NiceDataFilterApi<D> api;
 
-  const NiceBaseListDataFilterApiService({
+  const NiceBaseListDataFilterApiProvider({
     required this.api,
   });
 

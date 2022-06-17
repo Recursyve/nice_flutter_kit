@@ -52,3 +52,7 @@
 ### 1.4.7
 
 * Remove "raw" argument and move it to a new function.
+
+### 1.4.8
+
+* Added the `loading` option to the `NiceBaseListCubit.load` method.

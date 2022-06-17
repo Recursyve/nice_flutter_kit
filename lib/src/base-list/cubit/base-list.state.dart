@@ -13,6 +13,16 @@ class NiceBaseListState<D> extends NiceBaseState {
 
   final List<D> values;
 
+  int get currentPage {
+    // If we are not at the last page, the nextPage will not be null
+    if (nextPage != null) return nextPage! - 1;
+
+    // If we are a the last page, return the total number of pages
+    return pageCount;
+  }
+
+  int get pageCount => (total / pageSize).ceil();
+
   NiceFilterModel get filter => NiceFilterModel(
         page: NiceFilterPageModel(
           number: nextPage ?? 0,

@@ -10,7 +10,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     required this.config,
   }) : super(const NiceBaseListState.initialState());
 
-  factory NiceBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
+  static NiceBaseListCubit<D> of<D>(BuildContext context) => BlocProvider.of<NiceBaseListCubit<D>>(context);
 
   Future<void> applyDefaultConfigAndMaybeLoad() async {
     emit(
@@ -57,18 +57,23 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     );
   }
 
-  Future<void> updateSearchQuery(String? searchQuery, {bool reload = true}) async {
+  Future<void> setSearchQuery(String? searchQuery, {bool reload = true}) async {
     emit(state.copyWithSearchQuery(searchQuery));
     if (reload) await load(resetPaging: true);
   }
 
-  Future<void> updateQuery(NiceFilterQueryModel? query, {bool reload = true}) async {
+  Future<void> setQuery(NiceFilterQueryModel? query, {bool reload = true}) async {
     emit(state.copyWithQuery(query));
     if (reload) await load(resetPaging: true);
   }
 
-  Future<void> updateOrder(NiceFilterOrderModel? order, {bool reload = true}) async {
+  Future<void> setOrder(NiceFilterOrderModel? order, {bool reload = true}) async {
     emit(state.copyWithOrder(order));
+    if (reload) await load(resetPaging: true);
+  }
+
+  Future<void> setPageSize(int pageSize, {bool reload = true}) async {
+    emit(state.copyWith(pageSize: pageSize));
     if (reload) await load(resetPaging: true);
   }
 

@@ -27,6 +27,7 @@ class NiceBaseList<D> extends StatefulWidget {
   final bool shrinkWrap;
   final Function(NiceBaseListCubit)? onCubitCreated;
   final bool loadOnInit;
+  final Color? progressIndicatorBackgroundColor;
 
   // These BlocProviders will be placed underneath the NiceBaseListCubit
   final List<BlocProvider> blocProviders;
@@ -50,6 +51,7 @@ class NiceBaseList<D> extends StatefulWidget {
     this.shrinkWrap: false,
     this.onCubitCreated,
     this.loadOnInit = true,
+    this.progressIndicatorBackgroundColor,
   });
 
   @override
@@ -170,6 +172,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
                   borderRadius: BorderRadius.circular(4),
                   child: LinearProgressIndicator(
                     color: Theme.of(context).colorScheme.secondary,
+                    backgroundColor: widget.progressIndicatorBackgroundColor,
                   ),
                 ),
               );

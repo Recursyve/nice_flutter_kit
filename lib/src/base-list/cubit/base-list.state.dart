@@ -13,6 +13,8 @@ class NiceBaseListState<D> extends NiceBaseState {
 
   final List<D> values;
 
+  final bool loadingNextPage;
+
   int get currentPage {
     // If we are not at the last page, the nextPage will not be null
     if (nextPage != null) return nextPage! - 1;
@@ -49,6 +51,7 @@ class NiceBaseListState<D> extends NiceBaseState {
     required this.query,
     required this.order,
     required this.values,
+    required this.loadingNextPage,
   });
 
   const NiceBaseListState.initialState()
@@ -60,6 +63,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         query = null,
         order = null,
         values = const [],
+        loadingNextPage = false,
         super.initialState();
 
   @override
@@ -78,6 +82,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         query: this.query,
         order: this.order,
         values: this.values,
+        loadingNextPage: this.loadingNextPage,
       );
 
   NiceBaseListState<D> copyWithSearchQuery(String? searchQuery) => NiceBaseListState<D>(
@@ -91,6 +96,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         query: this.query,
         order: this.order,
         values: this.values,
+        loadingNextPage: this.loadingNextPage,
       );
 
   NiceBaseListState<D> copyWithQuery(NiceFilterQueryModel? query) => NiceBaseListState<D>(
@@ -104,6 +110,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         query: query,
         order: this.order,
         values: this.values,
+        loadingNextPage: this.loadingNextPage,
       );
 
   NiceBaseListState<D> copyWithOrder(NiceFilterOrderModel? order) => NiceBaseListState<D>(
@@ -117,6 +124,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         query: this.query,
         order: order,
         values: this.values,
+        loadingNextPage: this.loadingNextPage,
       );
 
   NiceBaseListState<D> copyWith({
@@ -126,6 +134,7 @@ class NiceBaseListState<D> extends NiceBaseState {
     int? pageSize,
     int? total,
     List<D>? values,
+    bool? loadingNextPage,
   }) {
     return NiceBaseListState<D>(
       loading: loading ?? this.loading,
@@ -138,9 +147,21 @@ class NiceBaseListState<D> extends NiceBaseState {
       values: values ?? this.values,
       query: this.query,
       searchQuery: this.searchQuery,
+      loadingNextPage: loadingNextPage ?? this.loadingNextPage,
     );
   }
 
   @override
-  List<Object?> get props => [loading, error, nextPage, pageSize, total, order, values, query, searchQuery];
+  List<Object?> get props => [
+        loading,
+        error,
+        nextPage,
+        pageSize,
+        total,
+        order,
+        values,
+        query,
+        searchQuery,
+        loadingNextPage,
+      ];
 }

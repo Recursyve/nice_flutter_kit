@@ -35,6 +35,8 @@ class _NiceLazyLoaderState extends State<NiceLazyLoader> {
     }
 
     _scrollController.addListener(_scrollListener);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollListener());
   }
 
   @override

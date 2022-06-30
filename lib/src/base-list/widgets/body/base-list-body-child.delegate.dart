@@ -17,10 +17,10 @@ abstract class NiceBaseListBodyChildDelegate<D> {
 }
 
 /// A delegate that builds with a simple callback of the context and the data.
-class NiceBaseListBodyChildBuilderDelegate<D> implements NiceBaseListBodyChildDelegate<D> {
+class NiceBaseListBodyBuilderDelegate<D> implements NiceBaseListBodyChildDelegate<D> {
   final Widget Function(BuildContext context, D data) builder;
 
-  const NiceBaseListBodyChildBuilderDelegate(this.builder);
+  const NiceBaseListBodyBuilderDelegate(this.builder);
 
   @override
   Widget build(BuildContext context, D data, _, __, ___) {
@@ -42,17 +42,17 @@ class NiceBaseListBodyChildIndexedBuilderDelegate<D> implements NiceBaseListBody
 
 /// A delegate that builds with a separator between elements.
 class NiceBaseListBodyChildSeparatedBuilderDelegate<D> implements NiceBaseListBodyChildDelegate<D> {
-  final Widget Function(BuildContext context, D data) childBuilder;
+  final Widget Function(BuildContext context, D data) builder;
   final WidgetBuilder separatorBuilder;
 
   const NiceBaseListBodyChildSeparatedBuilderDelegate({
-    required this.childBuilder,
+    required this.builder,
     required this.separatorBuilder,
   });
 
   @override
   Widget build(BuildContext context, D data, int absoluteIndex, int relativeIndex, NiceBaseListConfigData config) {
-    final child = childBuilder(context, data);
+    final child = builder(context, data);
 
     final index = config.mode.keepPreviousPageValues ? absoluteIndex : relativeIndex;
     if (index == 0) return child;
@@ -67,17 +67,17 @@ class NiceBaseListBodyChildSeparatedBuilderDelegate<D> implements NiceBaseListBo
 
 /// A mix between [NiceBaseListBodyChildSeparatedBuilderDelegate] and [NiceBaseListBodyChildIndexedBuilderDelegate].
 class NiceBaseListBodyChildSeparatedIndexedBuilderDelegate<D> implements NiceBaseListBodyChildDelegate<D> {
-  final Widget Function(BuildContext context, D data, int absoluteIndex, int relativeIndex) childBuilder;
+  final Widget Function(BuildContext context, D data, int absoluteIndex, int relativeIndex) builder;
   final WidgetBuilder separatorBuilder;
 
   const NiceBaseListBodyChildSeparatedIndexedBuilderDelegate({
-    required this.childBuilder,
+    required this.builder,
     required this.separatorBuilder,
   });
 
   @override
   Widget build(BuildContext context, D data, int absoluteIndex, int relativeIndex, NiceBaseListConfigData config) {
-    final child = childBuilder(context, data, absoluteIndex, relativeIndex);
+    final child = builder(context, data, absoluteIndex, relativeIndex);
 
     final index = config.mode.keepPreviousPageValues ? absoluteIndex : relativeIndex;
     if (index == 0) return child;

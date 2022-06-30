@@ -44,7 +44,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 350,
-  })  : delegate = NiceBaseListBodyChildBuilderDelegate(builder),
+  })  : delegate = NiceBaseListBodyBuilderDelegate(builder),
         super(key: key);
 
   NiceBaseListBody.indexed({
@@ -80,7 +80,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
     this.cacheExtent,
-    required Widget Function(BuildContext context, D data) childBuilder,
+    required Widget Function(BuildContext context, D data) builder,
     required WidgetBuilder separatorBuilder,
     this.dragStartBehavior = DragStartBehavior.start,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
@@ -88,7 +88,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 350,
   })  : delegate = NiceBaseListBodyChildSeparatedBuilderDelegate(
-          childBuilder: childBuilder,
+          builder: builder,
           separatorBuilder: separatorBuilder,
         ),
         super(key: key);
@@ -105,7 +105,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
     this.cacheExtent,
-    required Widget Function(BuildContext context, D data, int absoluteIndex, int relativeIndex) childBuilder,
+    required Widget Function(BuildContext context, D data, int absoluteIndex, int relativeIndex) builder,
     required WidgetBuilder separatorBuilder,
     this.dragStartBehavior = DragStartBehavior.start,
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
@@ -113,7 +113,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 350,
   })  : delegate = NiceBaseListBodyChildSeparatedIndexedBuilderDelegate(
-          childBuilder: childBuilder,
+          builder: builder,
           separatorBuilder: separatorBuilder,
         ),
         super(key: key);

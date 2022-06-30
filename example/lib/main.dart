@@ -1,4 +1,5 @@
 import 'package:example/pages/auth/auth.page.dart';
+import 'package:example/pages/base-list/base-list.page.dart';
 import 'package:example/pages/home.page.dart';
 import 'package:example/pages/onboarding.page.dart';
 import 'package:example/pages/page-view-form.page.dart';
@@ -44,6 +45,11 @@ class MyApp extends StatelessWidget {
       path: "/radio-expandable-cards",
       title: "Radio expandable cards",
       child: RadioExpandableCardsPage(),
+    ),
+    RouteData(
+      path: "/base-list",
+      title: "Base list",
+      child: BaseListPage(),
     ),
   ];
 

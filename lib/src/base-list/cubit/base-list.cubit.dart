@@ -8,7 +8,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
 
   NiceBaseListCubit({
     required this.config,
-  }) : super(const NiceBaseListState.initialState());
+  }) : super(NiceBaseListState<D>.initialState());
 
   static NiceBaseListCubit<D> of<D>(BuildContext context) => BlocProvider.of<NiceBaseListCubit<D>>(context);
 
@@ -31,13 +31,17 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
 
     await wrap(
       callback: () async {
-        await loadNextPage();
+        await loadNextPage(
+          forceReplaceValues: resetPaging,
+        );
       },
     );
   }
 
-  Future<void> loadNextPage({bool loading = true}) async {
-    if (state.nextPage == null) return;
+  Future<void> loadNextPage({bool loading = true, bool forceReplaceValues = false}) async {
+    if (state.nextPage == null || state.loadingNextPage) return;
+
+    emit(state.copyWith(loadingNextPage: true));
 
     await wrap(
       loading: loading,
@@ -48,13 +52,15 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
           state.copyWith(
             total: result.total,
             values: [
-              if (config.mode.keepPreviousPageValues) ...state.values,
+              if (config.mode.keepPreviousPageValues && !forceReplaceValues) ...state.values,
               ...result.values,
             ],
           ).copyWithNextPage(result.nextPage),
         );
       },
     );
+
+    emit(state.copyWith(loadingNextPage: false));
   }
 
   Future<void> setSearchQuery(String? searchQuery, {bool reload = true}) async {

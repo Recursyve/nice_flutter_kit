@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import 'package:nice_flutter_kit/src/base-list/cubit/base-list-cubit-builder.widget.dart';
 
 typedef NiceBaseListBodyBuilder<D> = Widget Function(D data);
 typedef NiceBaseListBodyBuilderIndexed<D> = Widget Function(D data, int index);
@@ -12,7 +12,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
   final bool? primary;
   final ScrollPhysics? physics;
   final bool shrinkWrap;
-  final EdgeInsetsGeometry? padding;
+  final EdgeInsets padding;
   final bool addAutomaticKeepAlives;
   final bool addRepaintBoundaries;
   final bool addSemanticIndexes;
@@ -21,6 +21,9 @@ class NiceBaseListBody<D> extends StatelessWidget {
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final String? restorationId;
   final Clip clipBehavior;
+
+  final Widget? nextPageLoadingIndicator;
+  final bool nextPageLoadingIndicatorMaintainSize;
 
   final NiceBaseListBodyChildDelegate<D> delegate;
 
@@ -33,7 +36,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.primary,
     this.physics,
     this.shrinkWrap = false,
-    this.padding,
+    this.padding: EdgeInsets.zero,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -43,7 +46,9 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-    this.loadingThreshold = 350,
+    this.loadingThreshold = 400,
+    this.nextPageLoadingIndicator,
+    this.nextPageLoadingIndicatorMaintainSize: true,
   })  : delegate = NiceBaseListBodyBuilderDelegate(builder),
         super(key: key);
 
@@ -54,7 +59,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.primary,
     this.physics,
     this.shrinkWrap = false,
-    this.padding,
+    this.padding: EdgeInsets.zero,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -64,7 +69,9 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-    this.loadingThreshold = 350,
+    this.loadingThreshold = 400,
+    this.nextPageLoadingIndicator,
+    this.nextPageLoadingIndicatorMaintainSize: true,
   })  : delegate = NiceBaseListBodyChildIndexedBuilderDelegate(builder),
         super(key: key);
 
@@ -75,7 +82,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.primary,
     this.physics,
     this.shrinkWrap = false,
-    this.padding,
+    this.padding: EdgeInsets.zero,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -86,7 +93,9 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-    this.loadingThreshold = 350,
+    this.loadingThreshold = 400,
+    this.nextPageLoadingIndicator,
+    this.nextPageLoadingIndicatorMaintainSize: true,
   })  : delegate = NiceBaseListBodyChildSeparatedBuilderDelegate(
           builder: builder,
           separatorBuilder: separatorBuilder,
@@ -100,7 +109,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.primary,
     this.physics,
     this.shrinkWrap = false,
-    this.padding,
+    this.padding: EdgeInsets.zero,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -111,7 +120,9 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-    this.loadingThreshold = 350,
+    this.loadingThreshold = 400,
+    this.nextPageLoadingIndicator,
+    this.nextPageLoadingIndicatorMaintainSize: true,
   })  : delegate = NiceBaseListBodyChildSeparatedIndexedBuilderDelegate(
           builder: builder,
           separatorBuilder: separatorBuilder,
@@ -125,7 +136,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.primary,
     this.physics,
     this.shrinkWrap = false,
-    this.padding,
+    this.padding: EdgeInsets.zero,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -135,77 +146,109 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-    this.loadingThreshold = 350,
+    this.loadingThreshold = 400,
+    this.nextPageLoadingIndicator,
+    this.nextPageLoadingIndicatorMaintainSize: true,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final config = NiceBaseListCubit.of<D>(context).config;
 
-    if (!config.mode.lazyLoaded) return _buildListView(controller);
+    if (!config.mode.lazyLoaded) return _buildList(controller);
 
     return NiceLazyLoader(
       onLoad: NiceBaseListCubit.of<D>(context).loadNextPage,
       loadingThreshold: loadingThreshold,
       scrollController: controller,
-      builder: (context, controller) => _buildListView(controller),
+      builder: (context, controller) => _buildList(controller),
     );
   }
 
-  Widget _buildListView(ScrollController? controller) {
+  Widget _buildList(ScrollController? controller) {
     return Builder(
       builder: (context) {
         final config = NiceBaseListCubit.of<D>(context).config;
 
-        return BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
+        return NiceBaseListCubitBuilder<D>(
           buildWhen: (prev, curr) =>
               prev.pageSize != curr.pageSize || prev.currentPage != curr.currentPage || prev.values != curr.values,
           builder: (context, state) {
             final pageIndexStart = state.currentPage * state.pageSize;
 
-            return ListView.builder(
+            return CustomScrollView(
               scrollDirection: scrollDirection,
               controller: controller,
               primary: primary,
               physics: physics,
               shrinkWrap: shrinkWrap,
-              padding: padding,
-              addAutomaticKeepAlives: addAutomaticKeepAlives,
-              addRepaintBoundaries: addRepaintBoundaries,
-              addSemanticIndexes: addSemanticIndexes,
               cacheExtent: cacheExtent,
               dragStartBehavior: dragStartBehavior,
               keyboardDismissBehavior: keyboardDismissBehavior,
               restorationId: restorationId,
               clipBehavior: clipBehavior,
-              itemCount: state.values.length,
-              itemBuilder: (context, index) {
-                final int relativeIndex;
-                if (config.mode.keepPreviousPageValues) {
-                  relativeIndex = index - pageIndexStart;
-                } else {
-                  relativeIndex = index;
-                }
+              slivers: [
+                SliverPadding(
+                  padding: padding.copyWith(bottom: 0),
+                  sliver: SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      addAutomaticKeepAlives: addAutomaticKeepAlives,
+                      addRepaintBoundaries: addRepaintBoundaries,
+                      addSemanticIndexes: addSemanticIndexes,
+                      childCount: state.values.length,
+                      (context, index) {
+                        final int relativeIndex;
+                        if (config.mode.keepPreviousPageValues) {
+                          relativeIndex = index - pageIndexStart;
+                        } else {
+                          relativeIndex = index;
+                        }
 
-                final int absoluteIndex;
-                if (config.mode.keepPreviousPageValues) {
-                  absoluteIndex = index;
-                } else {
-                  absoluteIndex = pageIndexStart + index;
-                }
+                        final int absoluteIndex;
+                        if (config.mode.keepPreviousPageValues) {
+                          absoluteIndex = index;
+                        } else {
+                          absoluteIndex = pageIndexStart + index;
+                        }
 
-                return delegate.build(
-                  context,
-                  state.values[index],
-                  absoluteIndex,
-                  relativeIndex,
-                  config,
-                );
-              },
+                        return delegate.build(
+                          context,
+                          state.values[index],
+                          absoluteIndex,
+                          relativeIndex,
+                          config,
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                SliverPadding(
+                  padding: padding.copyWith(top: 0),
+                  sliver: nextPageLoadingIndicator != null
+                      ? SliverToBoxAdapter(
+                          child: _buildNextPageLoadingIndicator(),
+                        )
+                      : null,
+                ),
+              ],
             );
           },
         );
       },
+    );
+  }
+
+  Widget _buildNextPageLoadingIndicator() {
+    return NiceBaseListCubitBuilder<D>(
+      buildWhen: (prev, curr) =>
+          prev.loadingNextPage != curr.loadingNextPage || prev.values.isNotEmpty != curr.values.isNotEmpty,
+      builder: (context, state) => Visibility(
+        maintainSize: nextPageLoadingIndicatorMaintainSize,
+        maintainAnimation: nextPageLoadingIndicatorMaintainSize,
+        maintainState: nextPageLoadingIndicatorMaintainSize,
+        visible: state.loadingNextPage && state.values.isNotEmpty,
+        child: nextPageLoadingIndicator!,
+      ),
     );
   }
 }

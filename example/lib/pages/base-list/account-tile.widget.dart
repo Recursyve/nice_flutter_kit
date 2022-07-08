@@ -27,9 +27,12 @@ class AccountTile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              "${account.id}",
-              style: const TextStyle(fontWeight: FontWeight.bold),
+            SizedBox(
+              width: 32,
+              child: Text(
+                "${account.id}",
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
             const SizedBox(width: 16),
             Expanded(

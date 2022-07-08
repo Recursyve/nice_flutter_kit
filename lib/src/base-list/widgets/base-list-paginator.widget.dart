@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import 'package:nice_flutter_kit/src/base-list/cubit/base-list-cubit-builder.widget.dart';
 
 class BaseListPaginator<D> extends StatefulWidget {
   final List<int> pageSizes;
@@ -43,14 +43,14 @@ class _BaseListPaginatorState<D> extends State<BaseListPaginator<D>> {
   }
 
   Widget _buildCurrentPage() {
-    return BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
+    return NiceBaseListCubitBuilder<D>(
       buildWhen: (prev, curr) => prev.currentPage != curr.currentPage || prev.pageCount != curr.pageCount,
       builder: (context, state) => Text("${state.currentPage}/${state.pageCount}"),
     );
   }
 
   Widget _buildPageSize() {
-    return BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
+    return NiceBaseListCubitBuilder<D>(
       buildWhen: (prev, curr) => prev.pageSize != curr.pageSize,
       builder: (context, state) => DropdownButton<int>(
         onChanged: (pageSize) {

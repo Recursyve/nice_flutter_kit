@@ -24,30 +24,44 @@ class BaseListPage extends StatelessWidget {
         mode: NiceBaseListMode.InfiniteScroll,
         autoLoad: true,
       ),
-      child: Column(
-        children: [
-          const NiceBaseListSearchBar<Accounts>(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(0, 4),
-                  blurRadius: 12,
-                  color: Color(0x1F000000),
+      child: NiceBaseListLoadingIndicator<Accounts>(
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.fromLTRB(16, 20, 16, 8),
+              child: NiceBaseListSearchBar<Accounts>(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(0, 4),
+                      blurRadius: 12,
+                      color: Color(0x1F000000),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
-              ],
-              borderRadius: BorderRadius.all(Radius.circular(8)),
+                inputDecoration: InputDecoration(
+                  hintText: "Search...",
+                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                  border: InputBorder.none,
+                ),
+                debounceDuration: Duration.zero,
+              ),
             ),
-            debounceDuration: Duration(milliseconds: 0),
-          ),
-          Expanded(
-            child: NiceBaseListBody<Accounts>.separated(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              builder: (_, account) => AccountTile(account: account),
-              separatorBuilder: (_) => const SizedBox(height: 16),
+            Expanded(
+              child: NiceBaseListBody<Accounts>.separated(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                builder: (_, account) => AccountTile(account: account),
+                separatorBuilder: (_) => const SizedBox(height: 16),
+                nextPageLoadingIndicator: const Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: LinearProgressIndicator(),
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

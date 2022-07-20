@@ -18,10 +18,16 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
     return IntroductionScreen(
       globalBackgroundColor: Theme.of(context).backgroundColor,
       isTopSafeArea: true,
-      dotsDecorator: DotsDecorator(
-        activeColor: Theme.of(context).colorScheme.secondary,
-        color: Theme.of(context).primaryColor,
-      ),
+      dotsFlex: sequenceConfiguration.footerConfig.dotsFlex ?? 1,
+      nextFlex: sequenceConfiguration.footerConfig.nextFlex ?? 1,
+      skipOrBackFlex: sequenceConfiguration.footerConfig.skipOrBackFlex ?? 1,
+      baseBtnStyle: sequenceConfiguration.footerConfig.buttonStyle ?? TextButton.styleFrom(),
+      dotsDecorator: sequenceConfiguration.footerConfig.dotsDecorator != null
+          ? sequenceConfiguration.footerConfig.dotsDecorator!
+          : DotsDecorator(
+              activeColor: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).primaryColor,
+            ),
       pages: [
         for (final configuration in sequenceConfiguration.configurations)
           PageViewModel(

@@ -78,7 +78,7 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
                       ),
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 48),
                 ],
               ),
             )

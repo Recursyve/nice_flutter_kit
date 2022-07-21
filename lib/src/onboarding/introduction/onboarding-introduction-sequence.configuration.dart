@@ -32,18 +32,18 @@ class NiceOnboardingIntroductionSequenceConfiguration {
 
 class NiceOnboardingIntroductionSequenceFooterConfig {
   final DotsDecorator? dotsDecorator;
-  final int? dotsFlex;
-  final int? nextFlex;
-  final int? skipOrBackFlex;
-  final ButtonStyle? buttonStyle;
+  final int dotsFlex;
+  final int nextFlex;
+  final int skipOrBackFlex;
+  final ButtonStyle buttonStyle;
 
   const NiceOnboardingIntroductionSequenceFooterConfig({
     this.dotsDecorator,
-    this.dotsFlex,
-    this.nextFlex,
-    this.skipOrBackFlex,
-    this.buttonStyle,
-  })  : assert(dotsFlex == null || dotsFlex > 0),
-        assert(nextFlex == null || nextFlex > 0),
-        assert(skipOrBackFlex == null || skipOrBackFlex > 0);
+    this.dotsFlex = 1,
+    this.nextFlex = 1,
+    this.skipOrBackFlex = 1,
+    this.buttonStyle = const ButtonStyle(),
+  })  : assert(dotsFlex > 0),
+        assert(nextFlex > 0),
+        assert(skipOrBackFlex > 0);
 }

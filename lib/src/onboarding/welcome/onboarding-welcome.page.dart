@@ -39,7 +39,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
                   configuration.paragraph,
                   textAlign: TextAlign.center,
                 ),
-                Spacer(),
+                const Spacer(),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -65,9 +65,9 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
     final ext = extension(imageUrl);
     switch (ext) {
       case ".svg":
-        return SvgPicture.asset(imageUrl, width: 239);
+        return SvgPicture.asset(imageUrl, width: 260);
       default:
-        return Image.asset(configuration.imageUrl, width: 239);
+        return Image.asset(configuration.imageUrl, width: 260);
     }
   }
 }

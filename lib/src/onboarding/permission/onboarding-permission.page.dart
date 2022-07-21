@@ -22,9 +22,9 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: BoxDecoration(color: Theme
-          .of(context)
-          .backgroundColor),
+      decoration: BoxDecoration(
+        color: Theme.of(context).backgroundColor,
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
@@ -50,23 +50,22 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
-                          Theme
-                              .of(context)
-                              .buttonTheme
-                              .colorScheme
-                              ?.primary ?? Theme.of(context).colorScheme.primary,),
+                          Theme.of(context).buttonTheme.colorScheme?.primary ?? Theme.of(context).colorScheme.primary,
+                        ),
                       ),
                       onPressed: loading ? _activate : null,
                       child: loading
                           ? const SizedBox(
-                        height: 24,
-                        width: 24,
-                        child: CircularProgressIndicator(),
-                      )
-                          : Text(widget.configuration.activate,
-                        style: TextStyle(color: Colors.white,
-                        ),
-                      ),
+                              height: 24,
+                              width: 24,
+                              child: CircularProgressIndicator(),
+                            )
+                          : Text(
+                              widget.configuration.activate,
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                     ),
                   ),
                   const SizedBox(height: 20),

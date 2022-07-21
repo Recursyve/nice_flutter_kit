@@ -44,7 +44,7 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
                   widget.configuration.title,
                   const SizedBox(height: 20),
                   widget.configuration.paragraph,
-                  Spacer(),
+                  const Spacer(),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -62,7 +62,7 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
                             )
                           : Text(
                               widget.configuration.activate,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                               ),
                             ),

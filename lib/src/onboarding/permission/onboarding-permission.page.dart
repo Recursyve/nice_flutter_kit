@@ -21,44 +21,68 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Theme.of(context).backgroundColor,
+    return DecoratedBox(
+      decoration: BoxDecoration(color: Theme
+          .of(context)
+          .backgroundColor),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: Container(
+              flex: 3,
+              child: Align(
                 alignment: Alignment.center,
                 child: _buildImage(widget.configuration.imageUrl),
               ),
             ),
-            widget.configuration.title,
-            const SizedBox(height: 20),
-            widget.configuration.paragraph,
-            const SizedBox(height: 20),
-            NiceButton(
-              displayText: widget.configuration.activate,
-              padding: EdgeInsets.zero,
-              onPressed: !loading ? _activate : null,
-              themeColors: Theme.of(context).buttonTheme.colorScheme?.primary,
-              child: loading
-                  ? const SizedBox(
-                      height: 24,
-                      width: 24,
-                      child: CircularProgressIndicator(),
-                    )
-                  : null,
-            ),
-            const SizedBox(height: 20),
-            NiceButton(
-              displayText: widget.configuration.activateLater,
-              padding: EdgeInsets.zero,
-              onPressed: widget.onNext,
-              themeColors: Theme.of(context).backgroundColor,
-            ),
-            const SizedBox(height: 40),
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  widget.configuration.title,
+                  const SizedBox(height: 20),
+                  widget.configuration.paragraph,
+                  Spacer(),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all(
+                          Theme
+                              .of(context)
+                              .buttonTheme
+                              .colorScheme
+                              ?.primary ?? Theme.of(context).colorScheme.primary,),
+                      ),
+                      onPressed: loading ? _activate : null,
+                      child: loading
+                          ? const SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(),
+                      )
+                          : Text(widget.configuration.activate,
+                        style: TextStyle(color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: TextButton(
+                      onPressed: widget.onNext,
+                      child: Text(
+                        widget.configuration.activateLater,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 40),
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -69,9 +93,9 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
     final ext = extension(imageUrl);
     switch (ext) {
       case ".svg":
-        return SvgPicture.asset(imageUrl, width: 196);
+        return SvgPicture.asset(imageUrl, width: 260);
       default:
-        return Image.asset(widget.configuration.imageUrl, width: 196);
+        return Image.asset(widget.configuration.imageUrl, width: 260);
     }
   }
 

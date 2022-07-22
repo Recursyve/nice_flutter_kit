@@ -54,7 +54,7 @@ class NiceBaseListBodyChildSeparatedBuilderDelegate<D> implements NiceBaseListBo
   Widget build(BuildContext context, D data, int absoluteIndex, int relativeIndex, NiceBaseListConfigData config) {
     final child = builder(context, data);
 
-    final index = config.mode.keepPreviousPageValues ? absoluteIndex : relativeIndex;
+    final index = config.mode.keepPreviousValuesOnNextPage ? absoluteIndex : relativeIndex;
     if (index == 0) return child;
     return Column(
       children: [
@@ -79,7 +79,7 @@ class NiceBaseListBodyChildSeparatedIndexedBuilderDelegate<D> implements NiceBas
   Widget build(BuildContext context, D data, int absoluteIndex, int relativeIndex, NiceBaseListConfigData config) {
     final child = builder(context, data, absoluteIndex, relativeIndex);
 
-    final index = config.mode.keepPreviousPageValues ? absoluteIndex : relativeIndex;
+    final index = config.mode.keepPreviousValuesOnNextPage ? absoluteIndex : relativeIndex;
     if (index == 0) return child;
     return Column(
       children: [

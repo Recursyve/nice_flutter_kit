@@ -33,15 +33,22 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
       callback: () async {
         await loadNextPage(
           forceReplaceValues: resetPaging,
+          skipLoadingCheck: true,
         );
       },
     );
   }
 
-  Future<void> loadNextPage({bool loading = true, bool forceReplaceValues = false}) async {
-    if (state.nextPage == null || state.loadingNextPage) return;
+  Future<void> loadNextPage({
+    bool? forceLoading = null,
+    bool forceReplaceValues = false,
+    bool skipLoadingCheck = false,
+  }) async {
+    if (!skipLoadingCheck && (state.nextPage == null || state.loadingNextPage)) return;
 
     emit(state.copyWith(loadingNextPage: true));
+
+    final loading = forceLoading ?? (forceReplaceValues || !config.mode.keepPreviousValuesOnNextPage);
 
     await wrap(
       loading: loading,
@@ -52,7 +59,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
           state.copyWith(
             total: result.total,
             values: [
-              if (config.mode.keepPreviousPageValues && !forceReplaceValues) ...state.values,
+              if (config.mode.keepPreviousValuesOnNextPage && !forceReplaceValues) ...state.values,
               ...result.values,
             ],
           ).copyWithNextPage(result.nextPage),

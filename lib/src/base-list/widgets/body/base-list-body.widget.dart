@@ -198,14 +198,14 @@ class NiceBaseListBody<D> extends StatelessWidget {
                       childCount: state.values.length,
                       (context, index) {
                         final int relativeIndex;
-                        if (config.mode.keepPreviousPageValues) {
+                        if (config.mode.keepPreviousValuesOnNextPage) {
                           relativeIndex = index - pageIndexStart;
                         } else {
                           relativeIndex = index;
                         }
 
                         final int absoluteIndex;
-                        if (config.mode.keepPreviousPageValues) {
+                        if (config.mode.keepPreviousValuesOnNextPage) {
                           absoluteIndex = index;
                         } else {
                           absoluteIndex = pageIndexStart + index;
@@ -241,12 +241,14 @@ class NiceBaseListBody<D> extends StatelessWidget {
   Widget _buildNextPageLoadingIndicator() {
     return NiceBaseListCubitBuilder<D>(
       buildWhen: (prev, curr) =>
-          prev.loadingNextPage != curr.loadingNextPage || prev.values.isNotEmpty != curr.values.isNotEmpty,
+          prev.loadingNextPage != curr.loadingNextPage ||
+          prev.values.isNotEmpty != curr.values.isNotEmpty ||
+          curr.loading != curr.loading,
       builder: (context, state) => Visibility(
+        visible: state.loadingNextPage && state.values.isNotEmpty && !state.loading,
         maintainSize: nextPageLoadingIndicatorMaintainSize,
         maintainAnimation: nextPageLoadingIndicatorMaintainSize,
         maintainState: nextPageLoadingIndicatorMaintainSize,
-        visible: state.loadingNextPage && state.values.isNotEmpty,
         child: nextPageLoadingIndicator!,
       ),
     );

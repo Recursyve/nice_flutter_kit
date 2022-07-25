@@ -33,6 +33,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Column(children: [
+                const SizedBox(height: 40),
                 configuration.title,
                 const SizedBox(height: 20),
                 Text(

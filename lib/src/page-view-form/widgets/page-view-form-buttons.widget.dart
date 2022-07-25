@@ -36,16 +36,13 @@ class NicePageViewFormButtons extends StatelessWidget {
       ],
     );
 
-    if (NicePageViewFormConfig
-        .of(context)
-        .hideButtonsIfKeyboardVisible) {
+    if (NicePageViewFormConfig.of(context).hideButtonsIfKeyboardVisible) {
       return KeyboardVisibilityBuilder(
-        builder: (context, keyboardVisible) =>
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              reverseDuration: Duration.zero,
-              child: keyboardVisible ? const SizedBox.shrink() : buttons,
-            ),
+        builder: (context, keyboardVisible) => AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          reverseDuration: Duration.zero,
+          child: keyboardVisible ? const SizedBox.shrink() : buttons,
+        ),
       );
     }
 
@@ -55,9 +52,7 @@ class NicePageViewFormButtons extends StatelessWidget {
   Widget _buildNextButton() {
     return Builder(
       builder: (context) {
-        final config = NicePageViewFormConfig
-            .of(context)
-            .nextButtonConfig;
+        final config = NicePageViewFormConfig.of(context).nextButtonConfig;
 
         return _buildButton(
           config: config,
@@ -71,9 +66,7 @@ class NicePageViewFormButtons extends StatelessWidget {
   Widget _buildPreviousButton() {
     return Builder(
       builder: (context) {
-        final config = NicePageViewFormConfig
-            .of(context)
-            .previousButtonConfig;
+        final config = NicePageViewFormConfig.of(context).previousButtonConfig;
 
         final isAtFirstPage = currentPageIndex == 0;
         if (isAtFirstPage && config.boundReachedState.isHidden) {
@@ -86,8 +79,8 @@ class NicePageViewFormButtons extends StatelessWidget {
           onPressed: isAtFirstPage && config.boundReachedState.isDisabled
               ? null
               : () {
-            if (!isAtFirstPage) onPrevious();
-          },
+                  if (!isAtFirstPage) onPrevious();
+                },
         );
       },
     );
@@ -121,16 +114,11 @@ class NicePageViewFormButtons extends StatelessWidget {
 
   Widget _buildSubmitButton() {
     return Builder(
-        builder: (context) {
-          final config = NicePageViewFormConfig
-              .of(context)
-              .nextButtonConfig;
-          if (config.submitButtonContentWidget != null) {
-            return config.submitButtonContentWidget!;
-          } else {
-            return Text(config.submitText);
-          }
-        }
+      builder: (context) {
+        final config = NicePageViewFormConfig.of(context).nextButtonConfig;
+
+        return config.submitButtonContentWidget ?? Text(config.submitText);
+      },
     );
   }
 }

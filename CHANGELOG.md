@@ -56,3 +56,7 @@
 ### 1.4.8
 
 * Added the `loading` option to the `NiceBaseListCubit.load` method.
+
+### 1.4.9
+
+* Minor UI improvements

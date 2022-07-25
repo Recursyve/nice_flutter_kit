@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class NiceTextAccentPunctuation extends StatelessWidget {
   final String text;
-  final String punctuation;
+  final String? punctuation;
   final TextStyle? textSpanStyle;
   final TextStyle? textStyle;
   final TextStyle? punctuationStyle;
@@ -26,6 +26,10 @@ class NiceTextAccentPunctuation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (punctuation == null || punctuation!.isEmpty) {
+      return Text(text);
+    }
+
     final richText = Text.rich(
       TextSpan(
         style: textSpanStyle,

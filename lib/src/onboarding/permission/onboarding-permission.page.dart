@@ -49,9 +49,7 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).buttonTheme.colorScheme?.primary ?? Theme.of(context).colorScheme.primary,
-                        ),
+                        backgroundColor: ElevatedButton.styleFrom().backgroundColor,
                       ),
                       onPressed: loading ? _activate : null,
                       child: loading

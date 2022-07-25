@@ -46,9 +46,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
                     child: Text(configuration.bottomButtonText),
                     onPressed: onNext,
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                        Theme.of(context).buttonTheme.colorScheme?.primary ?? Theme.of(context).colorScheme.primary,
-                      ),
+                      backgroundColor: ElevatedButton.styleFrom().backgroundColor,
                     ),
                   ),
                 ),

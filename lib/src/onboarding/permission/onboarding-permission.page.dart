@@ -48,9 +48,6 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: ElevatedButton.styleFrom().backgroundColor,
-                      ),
                       onPressed: loading ? _activate : null,
                       child: loading
                           ? const SizedBox(

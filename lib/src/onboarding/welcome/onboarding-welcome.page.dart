@@ -45,9 +45,6 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
                   child: ElevatedButton(
                     child: Text(configuration.bottomButtonText),
                     onPressed: onNext,
-                    style: ButtonStyle(
-                      backgroundColor: ElevatedButton.styleFrom().backgroundColor,
-                    ),
                   ),
                 ),
                 const SizedBox(height: 48),

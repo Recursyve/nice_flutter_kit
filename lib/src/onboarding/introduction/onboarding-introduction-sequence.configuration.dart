@@ -3,7 +3,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceOnboardingIntroductionConfiguration {
-  final NiceTextAccentPunctuation title;
+  final Widget title;
   final String imageUrl;
   final String paragraph;
 

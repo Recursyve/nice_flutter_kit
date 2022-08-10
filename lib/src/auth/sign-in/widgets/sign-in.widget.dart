@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/auth/sign-in/config/sign-in.config.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 /// Widget used to provide the [NiceSignInCubit]
@@ -26,7 +25,7 @@ class NiceSignIn<SocialProviders, User extends Object, Account extends Object> e
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NiceSignInCubit>(
+    return BlocProvider<NiceSignInCubit<SocialProviders>>(
       create: (context) => NiceSignInCubit<SocialProviders>(
         signInProvider: signInProvider,
         authCubit: NiceAuthCubit.of<User, Account>(context),

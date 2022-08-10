@@ -4,7 +4,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 /// [ReactiveTextField] that will automatically bind to the [FormGroup] of [NiceSignInCubit] provided in [NiceSignIn]
 /// Must be used in combination with [NiceSignIn], [NiceSignInPasswordField] and [NiceSignInEmailPasswordButton]
-class NiceSignInEmailField extends StatelessWidget {
+class NiceSignInEmailField<SocialProviders> extends StatelessWidget {
   /// Validation messages that is passed to the [ReactiveTextField]
   final ValidationMessagesFunction? validationMessages;
 
@@ -35,7 +35,7 @@ class NiceSignInEmailField extends StatelessWidget {
       style: style,
       textAlign: textAlign,
       autofillHints: [
-        if (NiceSignInCubit.of(context).config.autofillEmailAndPassword) AutofillHints.email,
+        if (NiceSignInCubit.of<SocialProviders>(context).config.autofillEmailAndPassword) AutofillHints.email,
       ],
     );
   }

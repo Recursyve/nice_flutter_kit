@@ -39,7 +39,7 @@ class NiceSignInPasswordField<SocialProviders> extends StatelessWidget {
       textAlign: textAlign,
       onSubmitted: NiceSignInCubit.of<SocialProviders>(context).signInWithPassword,
       autofillHints: [
-        if (NiceSignInCubit.of(context).config.autofillEmailAndPassword) AutofillHints.password,
+        if (NiceSignInCubit.of<SocialProviders>(context).config.autofillEmailAndPassword) AutofillHints.password,
       ],
     );
   }

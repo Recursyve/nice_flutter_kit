@@ -26,7 +26,7 @@ class NiceSignIn<SocialProviders, User extends Object, Account extends Object> e
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NiceSignInCubit<SocialProviders>>(
+    return BlocProvider<NiceSignInCubit>(
       create: (context) => NiceSignInCubit<SocialProviders>(
         signInProvider: signInProvider,
         authCubit: NiceAuthCubit.of<User, Account>(context),

@@ -2,7 +2,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/auth/sign-in/config/sign-in.config.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:rxdart/rxdart.dart';
 

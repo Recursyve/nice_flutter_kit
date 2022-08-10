@@ -34,6 +34,9 @@ class NiceSignInEmailField extends StatelessWidget {
       textInputAction: TextInputAction.next,
       style: style,
       textAlign: textAlign,
+      autofillHints: [
+        if (NiceSignInCubit.of(context).config.autofillEmailAndPassword) AutofillHints.email,
+      ],
     );
   }
 }

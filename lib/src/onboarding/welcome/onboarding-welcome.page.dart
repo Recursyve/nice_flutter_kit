@@ -32,23 +32,26 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Column(children: [
-                configuration.title,
-                const SizedBox(height: 20),
-                Text(
-                  configuration.paragraph,
-                  textAlign: TextAlign.center,
-                ),
-                const Spacer(),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    child: Text(configuration.bottomButtonText),
-                    onPressed: onNext,
+              child: Column(
+                children: [
+                  const SizedBox(height: 40),
+                  configuration.title,
+                  const SizedBox(height: 20),
+                  Text(
+                    configuration.paragraph,
+                    textAlign: TextAlign.center,
                   ),
-                ),
-                const SizedBox(height: 48),
-              ]),
+                  const Spacer(),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      child: Text(configuration.bottomButtonText),
+                      onPressed: onNext,
+                    ),
+                  ),
+                  const SizedBox(height: 48),
+                ],
+              ),
             ),
           ],
         ),

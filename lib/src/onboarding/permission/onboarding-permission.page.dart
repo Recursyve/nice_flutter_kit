@@ -41,6 +41,7 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
               flex: 2,
               child: Column(
                 children: [
+                  const SizedBox(height: 40),
                   widget.configuration.title,
                   const SizedBox(height: 20),
                   widget.configuration.paragraph,
@@ -48,7 +49,7 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: loading ? _activate : null,
+                      onPressed: loading ? null : _activate,
                       child: loading
                           ? const SizedBox(
                               height: 24,

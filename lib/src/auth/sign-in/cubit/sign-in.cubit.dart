@@ -40,8 +40,6 @@ class NiceSignInCubit<SocialProviders> extends NiceBaseCubit<NiceSignInState> {
   void resetInvalidCredentials() => emit(state.copyWith(invalidCredentials: false));
 
   Future<void> signInWithPassword() async {
-    if (config.autofillEmailAndPassword) TextInput.finishAutofillContext(shouldSave: true);
-
     resetInvalidCredentials();
 
     await wrap(
@@ -61,6 +59,8 @@ class NiceSignInCubit<SocialProviders> extends NiceBaseCubit<NiceSignInState> {
           emit(state.copyWith(invalidCredentials: true));
           return;
         }
+
+        if (config.autofillEmailAndPassword) TextInput.finishAutofillContext(shouldSave: true);
 
         await authCubit.loadCurrentUser();
       },

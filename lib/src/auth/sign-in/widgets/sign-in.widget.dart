@@ -11,7 +11,7 @@ class NiceSignIn<SocialProviders, User extends Object, Account extends Object> e
   /// [NiceSignInProvider] to be used when the user signs in with password / social provider.
   final NiceSignInProvider<SocialProviders> signInProvider;
 
-  /// [NiceSignInConfig] to be used for functionalities of the sign page.
+  /// [NiceSignInConfig] to be used for functionalities of the sign in page.
   final NiceSignInConfig config;
 
   /// Child [Widget] that will be under the [BlocProvider].

@@ -60,3 +60,7 @@
 ### 1.4.9
 
 * Minor UI improvements
+
+### 1.4.10
+
+* Added a NiceSignInConfig with the autofillEmailAndPassword argument to NiceSignIn 

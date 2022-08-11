@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceOnboardingIntroductionConfiguration {
   final Widget title;

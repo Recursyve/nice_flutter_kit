@@ -1,3 +1,4 @@
+export 'config/sign-in.config.dart';
 export 'cubit/sign-in.cubit.dart';
 export 'cubit/sign-in.state.dart';
 export 'sign-in.provider.dart';

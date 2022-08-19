@@ -1,4 +1,7 @@
+import 'dart:math' as math;
+
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
@@ -39,27 +42,24 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     );
   }
 
-  Future<void> loadNextPage({
-    bool? forceLoading = null,
-    bool forceReplaceValues = false,
-    bool skipLoadingCheck = false,
+  Future<void> _loadPage(
+    int page, {
+    required bool forceReplaceValues,
   }) async {
-    if (!skipLoadingCheck && (state.nextPage == null || state.loadingNextPage)) return;
+    final loading = forceReplaceValues || !config.mode.keepPreviousValuesOnPageChange;
 
-    emit(state.copyWith(loadingNextPage: true));
-
-    final loading = forceLoading ?? (forceReplaceValues || !config.mode.keepPreviousValuesOnNextPage);
+    emit(state.copyWith(loadingPage: true));
 
     await wrap(
       loading: loading,
       callback: () async {
-        final result = await config.dataFilterProvider.filter(state.filter);
+        final result = await config.dataFilterProvider.filter(state.getFilterForPage(page));
 
         emit(
           state.copyWith(
             total: result.total,
             values: [
-              if (config.mode.keepPreviousValuesOnNextPage && !forceReplaceValues) ...state.values,
+              if (config.mode.keepPreviousValuesOnPageChange && !forceReplaceValues) ...state.values,
               ...result.values,
             ],
           ).copyWithNextPage(result.nextPage),
@@ -67,7 +67,33 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
       },
     );
 
-    emit(state.copyWith(loadingNextPage: false));
+    emit(state.copyWith(loadingPage: false));
+  }
+
+  Future<void> loadPreviousPage({
+    bool forceReplaceValues = false,
+    bool skipLoadingCheck = false,
+  }) {
+    if (state.currentPage <= 0) return SynchronousFuture(null);
+    if (!skipLoadingCheck && state.loadingPage) return SynchronousFuture(null);
+
+    return _loadPage(
+      math.max(state.currentPage - 1, 0),
+      forceReplaceValues: forceReplaceValues,
+    );
+  }
+
+  Future<void> loadNextPage({
+    bool forceReplaceValues = false,
+    bool skipLoadingCheck = false,
+  }) {
+    if (state.nextPage == null) return SynchronousFuture(null);
+    if (!skipLoadingCheck && state.loadingPage) return SynchronousFuture(null);
+
+    return _loadPage(
+      state.nextPage ?? 0,
+      forceReplaceValues: forceReplaceValues,
+    );
   }
 
   Future<void> setSearchQuery(String? searchQuery, {bool reload = true}) async {
@@ -86,6 +112,8 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   }
 
   Future<void> setPageSize(int pageSize, {bool reload = true}) async {
+    if (pageSize == state.pageSize) return;
+
     emit(state.copyWith(pageSize: pageSize));
     if (reload) await load(resetPaging: true);
   }

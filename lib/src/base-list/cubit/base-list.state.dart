@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceBaseListState<D> extends NiceBaseState {
@@ -13,27 +15,17 @@ class NiceBaseListState<D> extends NiceBaseState {
 
   final List<D> values;
 
-  final bool loadingNextPage;
+  final bool loadingPage;
 
   int get currentPage {
     // If we are not at the last page, the nextPage will not be null
-    if (nextPage != null) return nextPage! - 1;
+    if (nextPage != null) return math.max(nextPage! - 1, 0);
 
     // If we are a the last page, return the total number of pages
-    return pageCount;
+    return pageCount - 1;
   }
 
   int get pageCount => (total / pageSize).ceil();
-
-  NiceFilterModel get filter => NiceFilterModel(
-        page: NiceFilterPageModel(
-          number: nextPage ?? 0,
-          size: pageSize,
-        ),
-        order: order,
-        search: _filterSearch,
-        query: query,
-      );
 
   NiceFilterSearchModel? get _filterSearch {
     if (searchQuery == null || searchQuery!.isEmpty) return null;
@@ -51,7 +43,7 @@ class NiceBaseListState<D> extends NiceBaseState {
     required this.query,
     required this.order,
     required this.values,
-    required this.loadingNextPage,
+    required this.loadingPage,
   });
 
   const NiceBaseListState.initialState()
@@ -63,8 +55,18 @@ class NiceBaseListState<D> extends NiceBaseState {
         query = null,
         order = null,
         values = const [],
-        loadingNextPage = false,
+        loadingPage = false,
         super.initialState();
+
+  NiceFilterModel getFilterForPage(int page) => NiceFilterModel(
+    page: NiceFilterPageModel(
+      number: page,
+      size: pageSize,
+    ),
+    order: order,
+    search: _filterSearch,
+    query: query,
+  );
 
   @override
   NiceBaseListState<D> copyWithLoadingAndError({bool? loading, bool? error}) {
@@ -82,7 +84,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         query: this.query,
         order: this.order,
         values: this.values,
-        loadingNextPage: this.loadingNextPage,
+        loadingPage: this.loadingPage,
       );
 
   NiceBaseListState<D> copyWithSearchQuery(String? searchQuery) => NiceBaseListState<D>(
@@ -96,7 +98,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         query: this.query,
         order: this.order,
         values: this.values,
-        loadingNextPage: this.loadingNextPage,
+        loadingPage: this.loadingPage,
       );
 
   NiceBaseListState<D> copyWithQuery(NiceFilterQueryModel? query) => NiceBaseListState<D>(
@@ -110,7 +112,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         query: query,
         order: this.order,
         values: this.values,
-        loadingNextPage: this.loadingNextPage,
+        loadingPage: this.loadingPage,
       );
 
   NiceBaseListState<D> copyWithOrder(NiceFilterOrderModel? order) => NiceBaseListState<D>(
@@ -124,7 +126,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         query: this.query,
         order: order,
         values: this.values,
-        loadingNextPage: this.loadingNextPage,
+        loadingPage: this.loadingPage,
       );
 
   NiceBaseListState<D> copyWith({
@@ -134,7 +136,7 @@ class NiceBaseListState<D> extends NiceBaseState {
     int? pageSize,
     int? total,
     List<D>? values,
-    bool? loadingNextPage,
+    bool? loadingPage,
   }) {
     return NiceBaseListState<D>(
       loading: loading ?? this.loading,
@@ -147,7 +149,7 @@ class NiceBaseListState<D> extends NiceBaseState {
       values: values ?? this.values,
       query: this.query,
       searchQuery: this.searchQuery,
-      loadingNextPage: loadingNextPage ?? this.loadingNextPage,
+      loadingPage: loadingPage ?? this.loadingPage,
     );
   }
 
@@ -162,6 +164,6 @@ class NiceBaseListState<D> extends NiceBaseState {
         values,
         query,
         searchQuery,
-        loadingNextPage,
+        loadingPage,
       ];
 }

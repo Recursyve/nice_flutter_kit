@@ -4,8 +4,6 @@ import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 class AccountsFilterProvider implements NiceBaseListDataFilterProvider<Accounts> {
   @override
   Future<NiceFilterResultModel<Accounts>> filter(NiceFilterModel filter) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-
     final startIndex = filter.page.number * filter.page.size;
 
     final filteredAccounts = Accounts.generatedAccounts
@@ -14,7 +12,7 @@ class AccountsFilterProvider implements NiceBaseListDataFilterProvider<Accounts>
         )
         .toList(growable: false);
 
-    final values;
+    final List<Accounts> values;
     if (filteredAccounts.length < startIndex) {
       values = [];
     } else if (filteredAccounts.length < startIndex + filter.page.size) {
@@ -22,6 +20,8 @@ class AccountsFilterProvider implements NiceBaseListDataFilterProvider<Accounts>
     } else {
       values = filteredAccounts.sublist(startIndex, startIndex + filter.page.size);
     }
+
+    await Future.delayed(Duration(milliseconds: 50 + values.length * 10));
 
     return NiceFilterResultModel(
       page: NiceFilterResultPageModel(

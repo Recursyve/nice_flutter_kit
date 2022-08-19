@@ -22,8 +22,8 @@ class NiceBaseListBody<D> extends StatelessWidget {
   final String? restorationId;
   final Clip clipBehavior;
 
-  final Widget? nextPageLoadingIndicator;
-  final bool nextPageLoadingIndicatorMaintainSize;
+  final Widget? pageLoadingIndicator;
+  final bool pageLoadingIndicatorMaintainSize;
 
   final NiceBaseListBodyChildDelegate<D> delegate;
 
@@ -47,8 +47,8 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 400,
-    this.nextPageLoadingIndicator,
-    this.nextPageLoadingIndicatorMaintainSize: true,
+    this.pageLoadingIndicator,
+    this.pageLoadingIndicatorMaintainSize: true,
   })  : delegate = NiceBaseListBodyBuilderDelegate(builder),
         super(key: key);
 
@@ -70,8 +70,8 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 400,
-    this.nextPageLoadingIndicator,
-    this.nextPageLoadingIndicatorMaintainSize: true,
+    this.pageLoadingIndicator,
+    this.pageLoadingIndicatorMaintainSize: true,
   })  : delegate = NiceBaseListBodyChildIndexedBuilderDelegate(builder),
         super(key: key);
 
@@ -94,8 +94,8 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 400,
-    this.nextPageLoadingIndicator,
-    this.nextPageLoadingIndicatorMaintainSize: true,
+    this.pageLoadingIndicator,
+    this.pageLoadingIndicatorMaintainSize: true,
   })  : delegate = NiceBaseListBodyChildSeparatedBuilderDelegate(
           builder: builder,
           separatorBuilder: separatorBuilder,
@@ -121,8 +121,8 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 400,
-    this.nextPageLoadingIndicator,
-    this.nextPageLoadingIndicatorMaintainSize: true,
+    this.pageLoadingIndicator,
+    this.pageLoadingIndicatorMaintainSize: true,
   })  : delegate = NiceBaseListBodyChildSeparatedIndexedBuilderDelegate(
           builder: builder,
           separatorBuilder: separatorBuilder,
@@ -147,8 +147,8 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 400,
-    this.nextPageLoadingIndicator,
-    this.nextPageLoadingIndicatorMaintainSize: true,
+    this.pageLoadingIndicator,
+    this.pageLoadingIndicatorMaintainSize: true,
   }) : super(key: key);
 
   @override
@@ -198,14 +198,14 @@ class NiceBaseListBody<D> extends StatelessWidget {
                       childCount: state.values.length,
                       (context, index) {
                         final int relativeIndex;
-                        if (config.mode.keepPreviousValuesOnNextPage) {
+                        if (config.mode.keepPreviousValuesOnPageChange) {
                           relativeIndex = index - pageIndexStart;
                         } else {
                           relativeIndex = index;
                         }
 
                         final int absoluteIndex;
-                        if (config.mode.keepPreviousValuesOnNextPage) {
+                        if (config.mode.keepPreviousValuesOnPageChange) {
                           absoluteIndex = index;
                         } else {
                           absoluteIndex = pageIndexStart + index;
@@ -224,9 +224,9 @@ class NiceBaseListBody<D> extends StatelessWidget {
                 ),
                 SliverPadding(
                   padding: padding.copyWith(top: 0),
-                  sliver: nextPageLoadingIndicator != null
+                  sliver: pageLoadingIndicator != null
                       ? SliverToBoxAdapter(
-                          child: _buildNextPageLoadingIndicator(),
+                          child: _buildPageLoadingIndicator(),
                         )
                       : null,
                 ),
@@ -238,18 +238,18 @@ class NiceBaseListBody<D> extends StatelessWidget {
     );
   }
 
-  Widget _buildNextPageLoadingIndicator() {
+  Widget _buildPageLoadingIndicator() {
     return NiceBaseListCubitBuilder<D>(
       buildWhen: (prev, curr) =>
-          prev.loadingNextPage != curr.loadingNextPage ||
+          prev.loadingPage != curr.loadingPage ||
           prev.values.isNotEmpty != curr.values.isNotEmpty ||
           curr.loading != curr.loading,
       builder: (context, state) => Visibility(
-        visible: state.loadingNextPage && state.values.isNotEmpty && !state.loading,
-        maintainSize: nextPageLoadingIndicatorMaintainSize,
-        maintainAnimation: nextPageLoadingIndicatorMaintainSize,
-        maintainState: nextPageLoadingIndicatorMaintainSize,
-        child: nextPageLoadingIndicator!,
+        visible: state.loadingPage && state.values.isNotEmpty && !state.loading,
+        maintainSize: pageLoadingIndicatorMaintainSize,
+        maintainAnimation: pageLoadingIndicatorMaintainSize,
+        maintainState: pageLoadingIndicatorMaintainSize,
+        child: pageLoadingIndicator!,
       ),
     );
   }

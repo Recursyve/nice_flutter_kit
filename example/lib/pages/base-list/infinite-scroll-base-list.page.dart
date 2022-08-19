@@ -5,13 +5,13 @@ import 'package:example/pages/common/base.page.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class BaseListPage extends StatelessWidget {
-  const BaseListPage();
+class InfiniteScrollLoadedBaseListPage extends StatelessWidget {
+  const InfiniteScrollLoadedBaseListPage();
 
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: "Base list",
+      title: "Infinite scroll base list",
       child: _buildList(),
     );
   }
@@ -22,7 +22,6 @@ class BaseListPage extends StatelessWidget {
         dataFilterProvider: AccountsFilterProvider(),
         pageSize: 20,
         mode: NiceBaseListMode.InfiniteScroll,
-        autoLoad: true,
       ),
       child: NiceBaseListLoadingIndicator<Accounts>(
         child: Column(
@@ -54,7 +53,7 @@ class BaseListPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 builder: (_, account) => AccountTile(account: account),
                 separatorBuilder: (_) => const SizedBox(height: 16),
-                nextPageLoadingIndicator: const Padding(
+                pageLoadingIndicator: const Padding(
                   padding: EdgeInsets.only(top: 20),
                   child: LinearProgressIndicator(),
                 ),

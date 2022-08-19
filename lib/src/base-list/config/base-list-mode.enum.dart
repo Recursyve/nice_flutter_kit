@@ -1,21 +1,21 @@
 enum NiceBaseListMode {
   InfiniteScroll(
-    keepPreviousValuesOnNextPage: true,
+    keepPreviousValuesOnPageChange: true,
     supportsPaginator: false,
     lazyLoaded: true,
   ),
   Paginated(
-    keepPreviousValuesOnNextPage: false,
-    supportsPaginator: false,
+    keepPreviousValuesOnPageChange: false,
+    supportsPaginator: true,
     lazyLoaded: false,
   );
 
-  final bool keepPreviousValuesOnNextPage;
+  final bool keepPreviousValuesOnPageChange;
   final bool supportsPaginator;
   final bool lazyLoaded;
 
   const NiceBaseListMode({
-    required this.keepPreviousValuesOnNextPage,
+    required this.keepPreviousValuesOnPageChange,
     required this.supportsPaginator,
     required this.lazyLoaded,
   });

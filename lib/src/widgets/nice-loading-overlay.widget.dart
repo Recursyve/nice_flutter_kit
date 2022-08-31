@@ -9,6 +9,8 @@ class NiceLoadingOverlay extends StatelessWidget {
   final bool loading;
   final Color? color;
   final StackFit stackFit;
+  final bool absorb;
+  final double opacity;
 
   const NiceLoadingOverlay({
     super.key,
@@ -18,6 +20,8 @@ class NiceLoadingOverlay extends StatelessWidget {
     this.loading = true,
     this.color,
     this.stackFit = StackFit.loose,
+    this.absorb = false,
+    this.opacity = 1.0,
   });
 
   @override
@@ -25,7 +29,14 @@ class NiceLoadingOverlay extends StatelessWidget {
     return Stack(
       fit: stackFit,
       children: [
-        if (child != null) child!,
+        if (child != null)
+          AbsorbPointer(
+            absorbing: absorb,
+            child: Opacity(
+              opacity: loading ? opacity : 1.0,
+              child: child!,
+            ),
+          ),
         if (loading)
           Positioned.fill(
             child: _buildSpinner(),

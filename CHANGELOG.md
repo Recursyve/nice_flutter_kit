@@ -63,4 +63,8 @@
 
 ### 1.4.10
 
-* Added a NiceSignInConfig with the autofillEmailAndPassword argument to NiceSignIn 
+* Added a NiceSignInConfig with the autofillEmailAndPassword argument to NiceSignIn
+
+### 1.4.11
+
+* Added absorb pointer and opacity overlay to NiceLoadingOverlay.

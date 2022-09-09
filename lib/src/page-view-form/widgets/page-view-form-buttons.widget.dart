@@ -56,7 +56,7 @@ class NicePageViewFormButtons extends StatelessWidget {
 
         return _buildButton(
           config: config,
-          child: Text(currentPageIndex == pageCount - 1 ? config.submitText : config.text),
+          child: currentPageIndex == pageCount - 1 ? _buildSubmitButton() : Text(config.text),
           onPressed: onNext,
         );
       },
@@ -109,6 +109,16 @@ class NicePageViewFormButtons extends StatelessWidget {
         onPressed: onPressed,
         child: child,
       ),
+    );
+  }
+
+  Widget _buildSubmitButton() {
+    return Builder(
+      builder: (context) {
+        final config = NicePageViewFormConfig.of(context).nextButtonConfig;
+
+        return config.submitButtonContentWidget ?? Text(config.submitText);
+      },
     );
   }
 }

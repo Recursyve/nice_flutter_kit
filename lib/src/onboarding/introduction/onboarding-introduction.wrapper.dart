@@ -18,10 +18,16 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
     return IntroductionScreen(
       globalBackgroundColor: Theme.of(context).backgroundColor,
       isTopSafeArea: true,
-      dotsDecorator: DotsDecorator(
-        activeColor: Theme.of(context).colorScheme.secondary,
-        color: Theme.of(context).primaryColor,
-      ),
+      dotsFlex: sequenceConfiguration.footerConfig.dotsFlex,
+      nextFlex: sequenceConfiguration.footerConfig.nextFlex,
+      skipOrBackFlex: sequenceConfiguration.footerConfig.skipOrBackFlex,
+      baseBtnStyle: sequenceConfiguration.footerConfig.buttonStyle,
+      dotsDecorator: sequenceConfiguration.footerConfig.dotsDecorator != null
+          ? sequenceConfiguration.footerConfig.dotsDecorator!
+          : DotsDecorator(
+              activeColor: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).primaryColor,
+            ),
       pages: [
         for (final configuration in sequenceConfiguration.configurations)
           PageViewModel(
@@ -37,8 +43,8 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
             ),
             decoration: PageDecoration(
               bodyAlignment: Alignment.topCenter,
-              imageAlignment: Alignment.bottomCenter,
-              imageFlex: 2,
+              imageAlignment: Alignment.center,
+              imageFlex: 3,
               bodyFlex: 2,
               imagePadding: const EdgeInsets.only(bottom: 0),
               pageColor: Theme.of(context).backgroundColor,

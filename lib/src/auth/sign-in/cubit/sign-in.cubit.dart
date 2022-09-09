@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
@@ -8,6 +9,7 @@ class NiceSignInCubit<SocialProviders> extends NiceBaseCubit<NiceSignInState> {
   /// Provider that will be used for email/password & social provider sign ins
   final NiceSignInProvider<SocialProviders> signInProvider;
   final NiceAuthCubit authCubit;
+  final NiceSignInConfig config;
 
   final unsubscribeAll$ = new BehaviorSubject<void>();
 
@@ -19,6 +21,7 @@ class NiceSignInCubit<SocialProviders> extends NiceBaseCubit<NiceSignInState> {
   NiceSignInCubit({
     required this.signInProvider,
     required this.authCubit,
+    required this.config,
   }) : super(const NiceSignInState.initialState()) {
     signInWithPasswordFormGroup.valueChanges.takeUntil(unsubscribeAll$).listen((_) => resetInvalidCredentials());
   }
@@ -56,6 +59,8 @@ class NiceSignInCubit<SocialProviders> extends NiceBaseCubit<NiceSignInState> {
           emit(state.copyWith(invalidCredentials: true));
           return;
         }
+
+        if (config.autofillEmailAndPassword) TextInput.finishAutofillContext(shouldSave: true);
 
         await authCubit.loadCurrentUser();
       },

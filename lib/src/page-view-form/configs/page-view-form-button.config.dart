@@ -42,19 +42,22 @@ abstract class NicePageViewFormBaseButtonConfig {
 class NicePageViewFormNextButtonConfig extends NicePageViewFormBaseButtonConfig {
   /// Text that will be displayed on the button on the last page
   final String submitText;
+  // If not null, will override submitText as content of submit button
+  final Widget? submitButtonContentWidget;
 
   const NicePageViewFormNextButtonConfig({
     required String text,
     required this.submitText,
+    this.submitButtonContentWidget,
     bool elevated: false,
     ButtonStyle? style,
     EdgeInsets padding: EdgeInsets.zero,
   }) : super(
-          text: text,
-          elevated: elevated,
-          style: style,
-          padding: padding,
-        );
+    text: text,
+    elevated: elevated,
+    style: style,
+    padding: padding,
+  );
 }
 
 class NicePageViewFormPreviousButtonConfig extends NicePageViewFormBaseButtonConfig {
@@ -69,9 +72,10 @@ class NicePageViewFormPreviousButtonConfig extends NicePageViewFormBaseButtonCon
     EdgeInsets padding: EdgeInsets.zero,
     this.boundReachedState: NicePageViewFormButtonBoundReachedState.Hidden,
   }) : super(
-          text: text,
-          elevated: elevated,
-          style: style,
-          padding: padding,
-        );
+    text: text,
+    elevated: elevated,
+    style: style,
+    padding: padding,
+  );
 }
+

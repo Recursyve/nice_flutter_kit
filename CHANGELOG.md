@@ -52,3 +52,19 @@
 ### 1.4.7
 
 * Remove "raw" argument and move it to a new function.
+
+### 1.4.8
+
+* Added the `loading` option to the `NiceBaseListCubit.load` method.
+
+### 1.4.9
+
+* Minor UI improvements
+
+### 1.4.10
+
+* Added a NiceSignInConfig with the autofillEmailAndPassword argument to NiceSignIn
+
+### 1.4.11
+
+* Added absorb pointer and opacity overlay to NiceLoadingOverlay.

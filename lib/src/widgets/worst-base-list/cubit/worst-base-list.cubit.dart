@@ -13,10 +13,11 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
 
   factory WorstBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
 
-  Future<void> load() async {
+  Future<void> load({bool loading = true}) async {
     emit(state.copyWith(error: false));
 
     await wrap(
+      loading: loading,
       callback: () async {
         final result = await config.filterApi.filter(
           NiceFilterModel(

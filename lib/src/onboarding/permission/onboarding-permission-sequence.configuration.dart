@@ -4,7 +4,7 @@ import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 class NiceOnboardingPermissionConfiguration {
   final NicePermissionTypes type;
   final String imageUrl;
-  final NiceTextAccentPunctuation title;
+  final Widget title;
   final Widget paragraph;
   final String activate;
   final String activateLater;

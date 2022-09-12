@@ -2,9 +2,9 @@ import 'package:equatable/equatable.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:nice_flutter_kit/src/data-filter/models/query/base-filter-query.model.dart';
 
-class NiceFilterQueryModel extends BaseFilterQueryModel with EquatableMixin {
+class NiceFilterQueryModel extends NiceBaseFilterQueryModel with EquatableMixin {
   final NiceFilterQueryConditionType condition;
-  final List<BaseFilterQueryModel> rules;
+  final List<NiceBaseFilterQueryModel> rules;
 
   const NiceFilterQueryModel({
     required this.condition,
@@ -27,7 +27,7 @@ class NiceFilterQueryModel extends BaseFilterQueryModel with EquatableMixin {
 
   @override
   Json toJson() => {
-        "condition": condition,
+        "condition": condition.value,
         "rules": [
           for (final rule in rules) rule.toJson(),
         ],

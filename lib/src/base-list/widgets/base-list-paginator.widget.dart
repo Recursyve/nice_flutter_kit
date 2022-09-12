@@ -37,15 +37,20 @@ class _BaseListPaginatorState<D> extends State<BaseListPaginator<D>> {
       child: Padding(
         padding: widget.innerPadding,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildPreviousPageButton(),
-            const SizedBox(width: 8),
-            _buildCurrentPage(),
-            const SizedBox(width: 8),
-            _buildNextPageButton(),
-            const SizedBox(width: 24),
             _buildPageSize(),
+            const SizedBox(width: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                _buildPreviousPageButton(),
+                const SizedBox(width: 8),
+                _buildCurrentPage(),
+                const SizedBox(width: 8),
+                _buildNextPageButton(),
+              ],
+            ),
           ],
         ),
       ),
@@ -61,6 +66,7 @@ class _BaseListPaginatorState<D> extends State<BaseListPaginator<D>> {
         return IconButton(
           onPressed: hasPreviousPage ? NiceBaseListCubit.of<D>(context).loadPreviousPage : null,
           icon: const Icon(Icons.chevron_left),
+          splashRadius: 24,
         );
       },
     );
@@ -75,6 +81,7 @@ class _BaseListPaginatorState<D> extends State<BaseListPaginator<D>> {
         return IconButton(
           onPressed: hasNextPage ? NiceBaseListCubit.of<D>(context).loadNextPage : null,
           icon: const Icon(Icons.chevron_right),
+          splashRadius: 24,
         );
       },
     );
@@ -88,31 +95,39 @@ class _BaseListPaginatorState<D> extends State<BaseListPaginator<D>> {
   }
 
   Widget _buildPageSize() {
-    return NiceBaseListCubitBuilder<D>(
-      buildWhen: (prev, curr) => prev.pageSize != curr.pageSize,
-      builder: (context, state) {
-        final pageSizes = [...widget.pageSizes];
+    return Row(
+      children: [
+        NiceBaseListCubitBuilder<D>(
+          buildWhen: (prev, curr) => prev.pageSize != curr.pageSize,
+          builder: (context, state) {
+            final pageSizes = [...widget.pageSizes];
 
-        // If the pageSize from the state in not in the available page sizes,
-        // temporary  add it as an option until the user changes it
-        if (!pageSizes.contains(state.pageSize)) {
-          pageSizes.add(state.pageSize);
-        }
+            // If the pageSize from the state in not in the available page sizes,
+            // temporary  add it as an option until the user changes it
+            if (!pageSizes.contains(state.pageSize)) {
+              pageSizes.add(state.pageSize);
+            }
 
-        return DropdownButton<int>(
-          value: state.pageSize,
-          onChanged: (pageSize) {
-            if (pageSize != null) NiceBaseListCubit.of<D>(context).setPageSize(pageSize);
+            return DropdownButton<int>(
+              value: state.pageSize,
+              onChanged: (pageSize) {
+                if (pageSize != null) NiceBaseListCubit.of<D>(context).setPageSize(pageSize);
+              },
+              items: [
+                for (final pageSize in pageSizes.sorted((a, b) => a - b))
+                  DropdownMenuItem(
+                    value: pageSize,
+                    child: Text("$pageSize"),
+                  ),
+              ],
+            );
           },
-          items: [
-            for (final pageSize in pageSizes.sorted((a, b) => a - b))
-              DropdownMenuItem(
-                value: pageSize,
-                child: Text("$pageSize"),
-              ),
-          ],
-        );
-      },
+        ),
+        const SizedBox(width: 12),
+        Text(
+          NiceLocalizations.of(context).translate("widgets.nice_base_list.paginator.per_page"),
+        ),
+      ],
     );
   }
 }

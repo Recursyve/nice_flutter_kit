@@ -10,7 +10,7 @@ class NiceBaseListSearchBar<D> extends StatefulWidget {
   const NiceBaseListSearchBar({
     required this.decoration,
     this.inputDecoration: const InputDecoration(),
-    this.debounceDuration: const Duration(milliseconds: 200),
+    this.debounceDuration: const Duration(milliseconds: 300),
   });
 
   @override

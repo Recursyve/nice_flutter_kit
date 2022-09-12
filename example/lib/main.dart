@@ -98,6 +98,9 @@ class _MyAppState extends State<MyApp> {
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
+      supportedLocales: NiceLocalizations.supportedLocales,
+      localizationsDelegates: NiceLocalizations.delegates,
+      localeResolutionCallback: NiceLocalizations.localResolutionCallback,
     );
   }
 }

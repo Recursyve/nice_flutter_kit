@@ -1,7 +1,7 @@
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-abstract class BaseFilterQueryModel {
-  const BaseFilterQueryModel();
+abstract class NiceBaseFilterQueryModel {
+  const NiceBaseFilterQueryModel();
 
   Json toJson();
 }

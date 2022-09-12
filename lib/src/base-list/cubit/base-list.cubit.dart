@@ -161,4 +161,9 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
       ],
     );
   }
+
+  void mapValues(D Function(D value) mapper) {
+    final mappedValues = state.values.map(mapper).toList(growable: false);
+    emit(state.copyWith(values: mappedValues));
+  }
 }

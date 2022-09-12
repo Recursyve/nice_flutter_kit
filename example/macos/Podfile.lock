@@ -7,7 +7,7 @@ PODS:
   - firebase_core (1.13.1):
     - Firebase/CoreOnly (~> 8.11.0)
     - FlutterMacOS
-  - firebase_messaging (11.2.11):
+  - firebase_messaging (12.0.1):
     - Firebase/CoreOnly (~> 8.11.0)
     - Firebase/Messaging (~> 8.11.0)
     - firebase_core
@@ -102,12 +102,12 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Firebase: 44dd9724c84df18b486639e874f31436eaa9a20c
   firebase_core: 11d0b4e9fa6120706c015fbfe5f4b409758dae5d
-  firebase_messaging: ebfaa890ba507562f9cb8ad867bc94ac9752dda5
+  firebase_messaging: 3a8c2e2983058c71891324e34a6dfbb5a3451cb4
   FirebaseCore: 2f4f85b453cc8fea4bb2b37e370007d2bcafe3f0
   FirebaseCoreDiagnostics: c2836d254a8f0bbb4121ff18f2c2ea39d118fd08
   FirebaseInstallations: 60edbf7e11d91ae4c751d26c200dfd037099abe0
   FirebaseMessaging: 02e248e8997f71fa8cc9d78e9d49ec1a701ba14a
-  FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+  FlutterMacOS: ae6af50a8ea7d6103d888583d46bd8328a7e9811
   geolocator_apple: 72a78ae3f3e4ec0db62117bd93e34523f5011d58
   GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
   GoogleUtilities: e0913149f6b0625b553d70dae12b49fc62914fd1

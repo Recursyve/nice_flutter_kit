@@ -25,9 +25,9 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       dotsDecorator: sequenceConfiguration.footerConfig.dotsDecorator != null
           ? sequenceConfiguration.footerConfig.dotsDecorator!
           : DotsDecorator(
-        activeColor: Theme.of(context).colorScheme.secondary,
-        color: Theme.of(context).primaryColor,
-      ),
+              activeColor: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).primaryColor,
+            ),
       pages: [
         for (final configuration in sequenceConfiguration.configurations)
           PageViewModel(

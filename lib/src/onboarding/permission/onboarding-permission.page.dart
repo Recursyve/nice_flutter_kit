@@ -75,16 +75,16 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
           onPressed: loading ? null : _activate,
           child: loading
               ? const SizedBox(
-            height: 24,
-            width: 24,
-            child: CircularProgressIndicator(),
-          )
+                  height: 24,
+                  width: 24,
+                  child: CircularProgressIndicator(),
+                )
               : Text(
-            widget.configuration.activate,
-            style: const TextStyle(
-              color: Colors.white,
-            ),
-          ),
+                  widget.configuration.activate,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
         ),
         const SizedBox(height: 20),
         TextButton(

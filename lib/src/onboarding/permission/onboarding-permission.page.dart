@@ -26,19 +26,19 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
         color: Theme.of(context).backgroundColor,
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
+        padding: const EdgeInsets.only(top: 64.0, left: 24.0, right: 24.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              flex: 3,
+              flex: 2,
               child: Align(
                 alignment: Alignment.center,
                 child: _buildImage(widget.configuration.imageUrl),
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Column(
                 children: [
                   const SizedBox(height: 40),
@@ -46,38 +46,11 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
                   const SizedBox(height: 20),
                   widget.configuration.paragraph,
                   const Spacer(),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: loading ? null : _activate,
-                      child: loading
-                          ? const SizedBox(
-                              height: 24,
-                              width: 24,
-                              child: CircularProgressIndicator(),
-                            )
-                          : Text(
-                              widget.configuration.activate,
-                              style: const TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: TextButton(
-                      onPressed: widget.onNext,
-                      child: Text(
-                        widget.configuration.activateLater,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 48),
                 ],
               ),
-            )
+            ),
+            _buildButtons(),
+            const SizedBox(height: 16),
           ],
         ),
       ),
@@ -92,6 +65,36 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
       default:
         return Image.asset(widget.configuration.imageUrl, width: 260);
     }
+  }
+
+  Widget _buildButtons() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ElevatedButton(
+          onPressed: loading ? null : _activate,
+          child: loading
+              ? const SizedBox(
+            height: 24,
+            width: 24,
+            child: CircularProgressIndicator(),
+          )
+              : Text(
+            widget.configuration.activate,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+        TextButton(
+          onPressed: widget.onNext,
+          child: Text(
+            widget.configuration.activateLater,
+          ),
+        ),
+      ],
+    );
   }
 
   Future<void> _activate() async {

@@ -21,7 +21,7 @@ class AccountsFilterProvider implements NiceBaseListDataFilterProvider<Accounts>
       values = filteredAccounts.sublist(startIndex, startIndex + filter.page.size);
     }
 
-    await Future.delayed(Duration(milliseconds: 50 + values.length * 10));
+    await Future.delayed(Duration(milliseconds: 200 + values.length * 10));
 
     return NiceFilterResultModel(
       page: NiceFilterResultPageModel(

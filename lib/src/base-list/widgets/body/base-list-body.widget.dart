@@ -29,6 +29,8 @@ class NiceBaseListBody<D> extends StatelessWidget {
 
   final double loadingThreshold;
 
+  final WidgetBuilder? emptyStateBuilder;
+
   NiceBaseListBody({
     Key? key,
     this.scrollDirection = Axis.vertical,
@@ -49,6 +51,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize: true,
+    this.emptyStateBuilder,
   })  : delegate = NiceBaseListBodyBuilderDelegate(builder),
         super(key: key);
 
@@ -72,6 +75,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize: true,
+    this.emptyStateBuilder,
   })  : delegate = NiceBaseListBodyChildIndexedBuilderDelegate(builder),
         super(key: key);
 
@@ -96,6 +100,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize: true,
+    this.emptyStateBuilder,
   })  : delegate = NiceBaseListBodyChildSeparatedBuilderDelegate(
           builder: builder,
           separatorBuilder: separatorBuilder,
@@ -123,6 +128,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize: true,
+    this.emptyStateBuilder,
   })  : delegate = NiceBaseListBodyChildSeparatedIndexedBuilderDelegate(
           builder: builder,
           separatorBuilder: separatorBuilder,
@@ -149,6 +155,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize: true,
+    this.emptyStateBuilder,
   }) : super(key: key);
 
   @override
@@ -172,7 +179,10 @@ class NiceBaseListBody<D> extends StatelessWidget {
 
         return NiceBaseListCubitBuilder<D>(
           buildWhen: (prev, curr) =>
-              prev.pageSize != curr.pageSize || prev.currentPage != curr.currentPage || prev.values != curr.values,
+              prev.pageSize != curr.pageSize ||
+              prev.currentPage != curr.currentPage ||
+              prev.values != curr.values ||
+              prev.loading != curr.loading,
           builder: (context, state) {
             final pageIndexStart = state.currentPage * state.pageSize;
 
@@ -188,40 +198,46 @@ class NiceBaseListBody<D> extends StatelessWidget {
               restorationId: restorationId,
               clipBehavior: clipBehavior,
               slivers: [
-                SliverPadding(
-                  padding: padding.copyWith(bottom: 0),
-                  sliver: SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      addAutomaticKeepAlives: addAutomaticKeepAlives,
-                      addRepaintBoundaries: addRepaintBoundaries,
-                      addSemanticIndexes: addSemanticIndexes,
-                      childCount: state.values.length,
-                      (context, index) {
-                        final int relativeIndex;
-                        if (config.mode.keepPreviousValuesOnPageChange) {
-                          relativeIndex = index - pageIndexStart;
-                        } else {
-                          relativeIndex = index;
-                        }
+                if (state.values.isNotEmpty)
+                  SliverPadding(
+                    padding: padding.copyWith(bottom: 0),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        addAutomaticKeepAlives: addAutomaticKeepAlives,
+                        addRepaintBoundaries: addRepaintBoundaries,
+                        addSemanticIndexes: addSemanticIndexes,
+                        childCount: state.values.length,
+                        (context, index) {
+                          final int relativeIndex;
+                          if (config.mode.keepPreviousValuesOnPageChange) {
+                            relativeIndex = index - pageIndexStart;
+                          } else {
+                            relativeIndex = index;
+                          }
 
-                        final int absoluteIndex;
-                        if (config.mode.keepPreviousValuesOnPageChange) {
-                          absoluteIndex = index;
-                        } else {
-                          absoluteIndex = pageIndexStart + index;
-                        }
+                          final int absoluteIndex;
+                          if (config.mode.keepPreviousValuesOnPageChange) {
+                            absoluteIndex = index;
+                          } else {
+                            absoluteIndex = pageIndexStart + index;
+                          }
 
-                        return delegate.build(
-                          context,
-                          state.values[index],
-                          absoluteIndex,
-                          relativeIndex,
-                          config,
-                        );
-                      },
+                          return delegate.build(
+                            context,
+                            state.values[index],
+                            absoluteIndex,
+                            relativeIndex,
+                            config,
+                          );
+                        },
+                      ),
                     ),
+                  )
+                else
+                  SliverPadding(
+                    padding: padding.copyWith(bottom: 0),
+                    sliver: _buildEmptyStateSliver(),
                   ),
-                ),
                 SliverPadding(
                   padding: padding.copyWith(top: 0),
                   sliver: pageLoadingIndicator != null
@@ -251,6 +267,22 @@ class NiceBaseListBody<D> extends StatelessWidget {
         maintainState: pageLoadingIndicatorMaintainSize,
         child: pageLoadingIndicator!,
       ),
+    );
+  }
+
+  Widget _buildEmptyStateSliver() {
+    Widget? child;
+    if (emptyStateBuilder != null) {
+      child = Center(
+        child: Builder(
+          builder: emptyStateBuilder!,
+        ),
+      );
+    }
+
+    return SliverFillRemaining(
+      hasScrollBody: false,
+      child: child,
     );
   }
 }

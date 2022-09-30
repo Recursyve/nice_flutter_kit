@@ -57,6 +57,7 @@ class InfiniteScrollLoadedBaseListPage extends StatelessWidget {
                   padding: EdgeInsets.only(top: 20),
                   child: LinearProgressIndicator(),
                 ),
+                emptyStateBuilder: (context) => const Text("Empty state"),
               ),
             ),
           ],

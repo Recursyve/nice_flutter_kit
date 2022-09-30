@@ -15,5 +15,5 @@ class NiceFilterResultPageModel extends Equatable {
         size = json["size"];
 
   @override
-  List<Object?> get props => [number, size];
+  List<Object> get props => [number, size];
 }

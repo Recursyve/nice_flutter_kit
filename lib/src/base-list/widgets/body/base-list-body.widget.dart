@@ -6,29 +6,70 @@ import 'package:nice_flutter_kit/src/base-list/cubit/base-list-cubit-builder.wid
 typedef NiceBaseListBodyBuilder<D> = Widget Function(D data);
 typedef NiceBaseListBodyBuilderIndexed<D> = Widget Function(D data, int index);
 
+/// This widget is part of the base list, and MUST be a child of [NiceBaseListConfig]
+///
+/// The [D] generic type refers to the filtered type (e.g. `Accounts`). It must be provided and it must be the same type
+/// as the [NiceBaseListConfig].
+///
+/// This widget is used to display the base list values.
 class NiceBaseListBody<D> extends StatelessWidget {
+  /// [Axis] on which this widget will scroll.
   final Axis scrollDirection;
+
+  /// [ScrollController] that will be passed to the [CustomScrollView].
   final ScrollController? controller;
+
+  /// Whether the [CustomScrollView] is primary.
   final bool? primary;
+
+  /// [ScrollPhysics] that is going to be passed to [CustomScrollView].
   final ScrollPhysics? physics;
+
+  /// Whether to shrink the [CustomScrollView].
   final bool shrinkWrap;
+
+  /// Padding that will be applied around the entire body.
   final EdgeInsets padding;
+
+  /// Passed to [SliverChildBuilderDelegate.addAutomaticKeepAlives].
   final bool addAutomaticKeepAlives;
+
+  /// Passed to [SliverChildBuilderDelegate.addRepaintBoundaries].
   final bool addRepaintBoundaries;
+
+  /// Passed to [SliverChildBuilderDelegate.addSemanticIndexes].
   final bool addSemanticIndexes;
+
+  /// Passed to [CustomScrollView.cacheExtent].
   final double? cacheExtent;
+
+  /// Passed to [CustomScrollView.dragStartBehavior].
   final DragStartBehavior dragStartBehavior;
+
+  /// Passed to [CustomScrollView.keyboardDismissBehavior].
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
+
+  /// Passed to [CustomScrollView.restorationId].
   final String? restorationId;
+
+  /// Passed to [CustomScrollView.clipBehavior].
   final Clip clipBehavior;
 
+  /// [Widget] this is going to be displayed bellow the items whenever the next page loads.
   final Widget? pageLoadingIndicator;
+
+  /// Whether to maintain the size of the [pageLoadingIndicator], even when it's not loading.
+  /// This can be helpful to prevent UI elements shifting on loading.
   final bool pageLoadingIndicatorMaintainSize;
 
+  /// Delegate that will be used to display the items.
   final NiceBaseListBodyChildDelegate<D> delegate;
 
+  /// Distance at which the base list should load next page.
+  /// Only used if the [NiceBaseListConfigData.mode] is [NiceBaseListMode.lazyLoaded].
   final double loadingThreshold;
 
+  /// [WidgetBuilder] that will display the resulting [Widget] when there are no items in the list.
   final WidgetBuilder? emptyStateBuilder;
 
   NiceBaseListBody({

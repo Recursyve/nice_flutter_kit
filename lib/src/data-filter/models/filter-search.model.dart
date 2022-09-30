@@ -13,5 +13,5 @@ class NiceFilterSearchModel extends Equatable {
       };
 
   @override
-  List<Object?> get props => [value];
+  List<Object> get props => [value];
 }

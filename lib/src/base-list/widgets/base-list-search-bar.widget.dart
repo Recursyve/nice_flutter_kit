@@ -2,9 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:rxdart/rxdart.dart';
 
+/// This widget is part of the base list, and MUST be a child of [NiceBaseListConfig]
+///
+/// The [D] generic type refers to the filtered type (e.g. `Accounts`). It must be provided and it must be the same type
+/// as the [NiceBaseListConfig].
+///
+/// This widget is used to filter items based on a text input.
 class NiceBaseListSearchBar<D> extends StatefulWidget {
+  /// [BoxDecoration] of the search bar.
   final BoxDecoration decoration;
+
+  /// [InputDecoration] that will be passed to the search bar's [TextField].
   final InputDecoration inputDecoration;
+
+  /// [Duration] that will be used to debounce the [TextField]'s values.
   final Duration debounceDuration;
 
   const NiceBaseListSearchBar({

@@ -3,20 +3,39 @@ import 'dart:math' as math;
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceBaseListState<D> extends NiceBaseState {
+  /// Whether the initial load has been completed.
   final bool initialLoadCompleted;
 
+  /// Index of the next page.
+  /// If this value is null, it means that there are no next page.
   final int? nextPage;
+
+  /// Current size of the pages.
   final int pageSize;
+
+  /// Total item count.
   final int total;
 
+  /// Search query that will be used to filter items, via the [NiceBaseListDataFilterProvider].
   final String? searchQuery;
+
+  /// Query that will be used to filter items, via the [NiceBaseListDataFilterProvider].
   final NiceFilterQueryModel? query;
+
+  /// Order that will be used to sort items, via the [NiceBaseListDataFilterProvider].
   final NiceFilterOrderModel? order;
 
+  /// Items that have been filtered by the data filter, and are being displayed.
   final List<D> values;
 
+  /// Whether the base list is currently loading the next page.
+  /// This is used to show [NiceBaseListBody.pageLoadingIndicator]
   final bool loadingPage;
 
+  /// Current page index (the last page that was loaded) of the base list.
+  ///
+  /// If [nextPage] is not null, the current page is [nextPage] - 1, with a minimum of 0.
+  /// Otherwise, since we are at the list page, the current page is [pageCount] - 1.
   int get currentPage {
     // If we are not at the last page, the nextPage will not be null
     if (nextPage != null) return math.max(nextPage! - 1, 0);
@@ -25,6 +44,9 @@ class NiceBaseListState<D> extends NiceBaseState {
     return pageCount - 1;
   }
 
+  /// Total page count.
+  /// This value may become inaccurate in a lazy loaded base list if the [pageSize] changes after the first page has
+  /// loaded.
   int get pageCount => (total / pageSize).ceil();
 
   NiceFilterSearchModel? get _filterSearch {
@@ -59,14 +81,14 @@ class NiceBaseListState<D> extends NiceBaseState {
         super.initialState();
 
   NiceFilterModel getFilterForPage(int page) => NiceFilterModel(
-    page: NiceFilterPageModel(
-      number: page,
-      size: pageSize,
-    ),
-    order: order,
-    search: _filterSearch,
-    query: query,
-  );
+        page: NiceFilterPageModel(
+          number: page,
+          size: pageSize,
+        ),
+        order: order,
+        search: _filterSearch,
+        query: query,
+      );
 
   @override
   NiceBaseListState<D> copyWithLoadingAndError({bool? loading, bool? error}) {

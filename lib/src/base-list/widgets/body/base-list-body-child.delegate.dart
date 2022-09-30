@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
+/// List child delegate that is used by the [NiceBaseListBody].
 abstract class NiceBaseListBodyChildDelegate<D> {
   const NiceBaseListBodyChildDelegate();
 

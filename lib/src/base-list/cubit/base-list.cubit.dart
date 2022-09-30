@@ -13,8 +13,16 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     required this.config,
   }) : super(NiceBaseListState<D>.initialState());
 
-  static NiceBaseListCubit<D> of<D>(BuildContext context) => BlocProvider.of<NiceBaseListCubit<D>>(context);
+  static NiceBaseListCubit<D> of<D>(BuildContext context, {listen = false}) =>
+      BlocProvider.of<NiceBaseListCubit<D>>(context, listen: listen);
 
+  /// Applies
+  /// - [NiceBaseListConfigData.pageSize]
+  /// - [NiceBaseListConfigData.initialPage]
+  /// - [NiceBaseListConfigData.initialSearch]
+  /// - [NiceBaseListConfigData.initialQuery]
+  /// - [NiceBaseListConfigData.initialQuery]
+  /// and loads if [NiceBaseListConfigData.autoLoad] is true.
   Future<void> applyDefaultConfigAndMaybeLoad() async {
     emit(
       state
@@ -29,6 +37,9 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     emit(state.copyWith(initialLoadCompleted: true));
   }
 
+  /// Loads values for the [NiceBaseListState.nextPage].
+  /// If [resetPaging] is true, [NiceBaseListState.nextPage] will be reset to 0 and [NiceBaseListState.values] will be
+  /// replaced by the values to be loaded.
   Future<void> load({required bool resetPaging}) async {
     if (resetPaging) emit(state.copyWithNextPage(0));
 
@@ -42,6 +53,46 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     );
   }
 
+  /// Loads the previous page, relative to [NiceBaseListState.currentPage].
+  /// If [forceReplaceValues] is true, the values returned will replaced the entirety of [NiceBaseListState.values].
+  /// If [skipLoadingCheck] is true, the previous page will be loaded, whether this cubit is currently loading a page or
+  /// not.
+  Future<void> loadPreviousPage({
+    bool forceReplaceValues = false,
+    bool skipLoadingCheck = false,
+  }) {
+    final currentPage = state.currentPage;
+
+    if (currentPage <= 0) return SynchronousFuture(null);
+    if (!skipLoadingCheck && state.loadingPage) return SynchronousFuture(null);
+
+    return _loadPage(
+      math.max(currentPage - 1, 0),
+      forceReplaceValues: forceReplaceValues,
+    );
+  }
+
+  /// Loads the next page, relative to [NiceBaseListState.currentPage].
+  /// If [forceReplaceValues] is true, the values returned will replaced the entirety of [NiceBaseListState.values].
+  /// If [skipLoadingCheck] is true, the next page will be loaded, whether this cubit is currently loading a page or
+  /// not.
+  Future<void> loadNextPage({
+    bool forceReplaceValues = false,
+    bool skipLoadingCheck = false,
+  }) {
+    if (state.nextPage == null) return SynchronousFuture(null);
+    if (!skipLoadingCheck && state.loadingPage) return SynchronousFuture(null);
+
+    return _loadPage(
+      state.nextPage ?? 0,
+      forceReplaceValues: forceReplaceValues,
+    );
+  }
+
+  /// Inner method of both [loadPreviousPage] and [loadNextPage].
+  ///
+  /// If [forceReplaceValues], [NiceBaseListState.value] will be replaced by the values that are going to be returned by
+  /// the config's [NiceBaseListDataFilterProvider].
   Future<void> _loadPage(
     int page, {
     required bool forceReplaceValues,
@@ -70,47 +121,25 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     emit(state.copyWith(loadingPage: false));
   }
 
-  Future<void> loadPreviousPage({
-    bool forceReplaceValues = false,
-    bool skipLoadingCheck = false,
-  }) {
-    if (state.currentPage <= 0) return SynchronousFuture(null);
-    if (!skipLoadingCheck && state.loadingPage) return SynchronousFuture(null);
-
-    return _loadPage(
-      math.max(state.currentPage - 1, 0),
-      forceReplaceValues: forceReplaceValues,
-    );
-  }
-
-  Future<void> loadNextPage({
-    bool forceReplaceValues = false,
-    bool skipLoadingCheck = false,
-  }) {
-    if (state.nextPage == null) return SynchronousFuture(null);
-    if (!skipLoadingCheck && state.loadingPage) return SynchronousFuture(null);
-
-    return _loadPage(
-      state.nextPage ?? 0,
-      forceReplaceValues: forceReplaceValues,
-    );
-  }
-
+  /// Sets the [NiceBaseListState.searchQuery].
   Future<void> setSearchQuery(String? searchQuery, {bool reload = true}) async {
     emit(state.copyWithSearchQuery(searchQuery));
     if (reload) await load(resetPaging: true);
   }
 
+  /// Sets the [NiceBaseListState.query].
   Future<void> setQuery(NiceFilterQueryModel? query, {bool reload = true}) async {
     emit(state.copyWithQuery(query));
     if (reload) await load(resetPaging: true);
   }
 
+  /// Sets the [NiceBaseListState.order].
   Future<void> setOrder(NiceFilterOrderModel? order, {bool reload = true}) async {
     emit(state.copyWithOrder(order));
     if (reload) await load(resetPaging: true);
   }
 
+  /// Sets the [NiceBaseListState.pageSize].
   Future<void> setPageSize(int pageSize, {bool reload = true}) async {
     if (pageSize == state.pageSize) return;
 
@@ -118,28 +147,38 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     if (reload) await load(resetPaging: true);
   }
 
+  /// Sets the [NiceBaseListState.values].
   void setValues(List<D> values) => emit(state.copyWith(values: values));
 
+  /// Sets the [NiceBaseListState.values], via a callback containing the current values.
   void setValuesCallback(List<D> Function(List<D> values) callback) =>
       emit(state.copyWith(values: callback(state.values)));
 
+  /// Prepends [value] to the [NiceBaseListState.values].
   void prependValue(D value) => setValues([value, ...state.values]);
 
+  /// Appends [value] to the [NiceBaseListState.values].
   void appendValue(D value) => setValues([...state.values, value]);
 
+  /// Removes the [NiceBaseListState.values] where the [filter] callback return true.
   void removeValuesWhere(bool Function(D value) filter) {
     final filteredValues = state.values.where(filter).toList(growable: false);
     setValues(filteredValues);
   }
 
+  /// Update all [NiceBaseListState.values] where [test] returns true, or prepend the [upsertedValue] if [test] returns
+  /// false for all [NiceBaseListState.values].
   void updateAllOrPrependValueWhere(bool Function(D value) test, D upsertedValue) {
     _updateAllOrAppendPrependValueWhere(test, upsertedValue, prepend: true);
   }
 
+  /// Update all [NiceBaseListState.values] where [test] returns true, or append the [upsertedValue] if [test] returns
+  /// false for all [NiceBaseListState.values].
   void updateAllOrAppendValueWhere(bool Function(D value) test, D upsertedValue) {
     _updateAllOrAppendPrependValueWhere(test, upsertedValue, prepend: false);
   }
 
+  /// Inner function of both [updateAllOrPrependValueWhere] and [updateAllOrAppendValueWhere].
   void _updateAllOrAppendPrependValueWhere(
     bool Function(D value) test,
     D upsertedValue, {
@@ -162,6 +201,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     );
   }
 
+  /// Maps all [NiceBaseListState.values] and replaces them with the result.
   void mapValues(D Function(D value) mapper) {
     final mappedValues = state.values.map(mapper).toList(growable: false);
     emit(state.copyWith(values: mappedValues));

@@ -1,11 +1,23 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/base-list/cubit/base-list-cubit-builder.widget.dart';
 
+/// This widget is part of the base list, and MUST be a child of [NiceBaseListConfig]
+///
+/// The [D] generic type refers to the filtered type (e.g. `Accounts`). It must be provided and it must be the same type
+/// as the [NiceBaseListConfig].
+///
+/// This widget may only be used under a [NiceBaseListConfig] whose [NiceBaseListConfigData]'s mode support a paginator
+/// (i.e. [NiceBaseListMode.Paginated])
 class BaseListPaginator<D> extends StatefulWidget {
+  /// List of page sizes that the user will be able to select.
+  /// Items of the list will be reordered in ascending order.
   final List<int> pageSizes;
+
+  /// [BoxDecoration] of the [DecoratedBox] wrapping the paginator.
   final BoxDecoration boxDecoration;
+
+  /// Padding that will be added inside the [DecoratedBox].
   final EdgeInsets innerPadding;
 
   BaseListPaginator({

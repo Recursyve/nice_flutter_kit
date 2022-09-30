@@ -45,7 +45,6 @@ class InfiniteScrollLoadedBaseListPage extends StatelessWidget {
                   contentPadding: EdgeInsets.symmetric(horizontal: 20),
                   border: InputBorder.none,
                 ),
-                debounceDuration: Duration.zero,
               ),
             ),
             Expanded(

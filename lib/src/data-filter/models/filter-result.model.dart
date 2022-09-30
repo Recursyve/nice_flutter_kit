@@ -36,5 +36,5 @@ class NiceFilterResultModel<T> extends Equatable {
   }
 
   @override
-  List<Object?> get props => [page, total, values];
+  List<Object> get props => [page, total, values];
 }

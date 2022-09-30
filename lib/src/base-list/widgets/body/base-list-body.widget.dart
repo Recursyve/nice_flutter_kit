@@ -223,7 +223,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
               prev.pageSize != curr.pageSize ||
               prev.currentPage != curr.currentPage ||
               prev.values != curr.values ||
-              prev.loading != curr.loading,
+              prev.initialLoadCompleted != curr.initialLoadCompleted,
           builder: (context, state) {
             final pageIndexStart = state.currentPage * state.pageSize;
 
@@ -239,7 +239,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
               restorationId: restorationId,
               clipBehavior: clipBehavior,
               slivers: [
-                if (state.values.isNotEmpty)
+                if (state.values.isNotEmpty || !state.initialLoadCompleted)
                   SliverPadding(
                     padding: padding.copyWith(bottom: 0),
                     sliver: SliverList(

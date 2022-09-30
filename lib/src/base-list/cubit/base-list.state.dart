@@ -179,6 +179,7 @@ class NiceBaseListState<D> extends NiceBaseState {
   List<Object?> get props => [
         loading,
         error,
+        initialLoadCompleted,
         nextPage,
         pageSize,
         total,

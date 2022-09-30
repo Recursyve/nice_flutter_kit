@@ -68,3 +68,7 @@
 ### 1.4.11
 
 * Added absorb pointer and opacity overlay to NiceLoadingOverlay.
+
+### 1.4.12
+
+* Onboarding layout fixes

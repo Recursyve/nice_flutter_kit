@@ -80,6 +80,9 @@ class NicePageViewFormButtons extends StatelessWidget {
               ? null
               : () {
                   if (!isAtFirstPage) onPrevious();
+                  else{
+                    Navigator.of(context).maybePop();
+                  }
                 },
         );
       },

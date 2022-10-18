@@ -56,7 +56,7 @@ class PaginatedBaseListPage extends StatelessWidget {
                 emptyStateBuilder: (context) => const Text("Empty state"),
               ),
             ),
-            BaseListPaginator<Accounts>(
+            NiceBaseListPaginator<Accounts>(
               pageSizes: const [10, 25, 50, 100],
               innerPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             ),

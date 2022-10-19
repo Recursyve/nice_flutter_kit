@@ -79,8 +79,9 @@ class NicePageViewFormButtons extends StatelessWidget {
           onPressed: isAtFirstPage && config.boundReachedState.isDisabled
               ? null
               : () {
-                  if (!isAtFirstPage) onPrevious();
-                  else{
+                  if (!isAtFirstPage) {
+                    onPrevious();
+                  } else {
                     Navigator.of(context).maybePop();
                   }
                 },

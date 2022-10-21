@@ -21,6 +21,7 @@ class NiceBaseListPaginator<D> extends StatefulWidget {
   final EdgeInsets innerPadding;
 
   NiceBaseListPaginator({
+    super.key,
     this.pageSizes: const [10, 25, 50],
     this.boxDecoration: const BoxDecoration(),
     this.innerPadding: EdgeInsets.zero,

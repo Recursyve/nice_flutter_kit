@@ -13,6 +13,7 @@ class NiceBaseListCubitBuilder<D> extends StatelessWidget {
   final BlocWidgetBuilder<NiceBaseListState<D>> builder;
 
   const NiceBaseListCubitBuilder({
+    super.key,
     this.buildWhen,
     required this.builder,
   });

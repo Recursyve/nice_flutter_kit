@@ -73,7 +73,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
   final WidgetBuilder? emptyStateBuilder;
 
   NiceBaseListBody({
-    Key? key,
+    super.key,
     this.scrollDirection = Axis.vertical,
     this.controller,
     this.primary,
@@ -93,11 +93,10 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize: true,
     this.emptyStateBuilder,
-  })  : delegate = NiceBaseListBodyBuilderDelegate(builder),
-        super(key: key);
+  }) : delegate = NiceBaseListBodyBuilderDelegate(builder);
 
   NiceBaseListBody.indexed({
-    Key? key,
+    super.key,
     this.scrollDirection = Axis.vertical,
     this.controller,
     this.primary,
@@ -117,11 +116,10 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize: true,
     this.emptyStateBuilder,
-  })  : delegate = NiceBaseListBodyChildIndexedBuilderDelegate(builder),
-        super(key: key);
+  }) : delegate = NiceBaseListBodyChildIndexedBuilderDelegate(builder);
 
   NiceBaseListBody.separated({
-    Key? key,
+    super.key,
     this.scrollDirection = Axis.vertical,
     this.controller,
     this.primary,
@@ -142,14 +140,13 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize: true,
     this.emptyStateBuilder,
-  })  : delegate = NiceBaseListBodyChildSeparatedBuilderDelegate(
+  }) : delegate = NiceBaseListBodyChildSeparatedBuilderDelegate(
           builder: builder,
           separatorBuilder: separatorBuilder,
-        ),
-        super(key: key);
+        );
 
   NiceBaseListBody.separatedIndexed({
-    Key? key,
+    super.key,
     this.scrollDirection = Axis.vertical,
     this.controller,
     this.primary,
@@ -170,14 +167,13 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize: true,
     this.emptyStateBuilder,
-  })  : delegate = NiceBaseListBodyChildSeparatedIndexedBuilderDelegate(
+  }) : delegate = NiceBaseListBodyChildSeparatedIndexedBuilderDelegate(
           builder: builder,
           separatorBuilder: separatorBuilder,
-        ),
-        super(key: key);
+        );
 
   const NiceBaseListBody.custom({
-    Key? key,
+    super.key,
     this.scrollDirection = Axis.vertical,
     this.controller,
     this.primary,
@@ -197,7 +193,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize: true,
     this.emptyStateBuilder,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

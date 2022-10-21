@@ -23,6 +23,7 @@ class NiceBaseListLoadingIndicator<D> extends StatelessWidget {
   final Widget child;
 
   const NiceBaseListLoadingIndicator({
+    super.key,
     this.color,
     this.size: 72,
     this.lineWidth: 7,

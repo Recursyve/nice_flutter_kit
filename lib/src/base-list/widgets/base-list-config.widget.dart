@@ -25,6 +25,7 @@ class NiceBaseListConfig<D> extends StatelessWidget {
   final Widget child;
 
   const NiceBaseListConfig({
+    super.key,
     required this.config,
     required this.child,
   });

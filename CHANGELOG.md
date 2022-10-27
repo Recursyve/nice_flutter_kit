@@ -75,5 +75,8 @@
 
 ### 1.4.13
 
-* Page viwe form: pressing back when on first page will now pop
+* Page view form: pressing back when on first page will now pop
 
+### 1.4.14
+
+* Upgrade firebase version

@@ -72,3 +72,11 @@
 ### 1.4.12
 
 * Onboarding layout fixes
+
+### 1.4.13
+
+* Page view form: pressing back when on first page will now pop
+
+### 1.4.14
+
+* Upgrade firebase version

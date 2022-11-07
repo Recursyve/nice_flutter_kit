@@ -4,7 +4,8 @@ class NiceSignInConfig {
   /// Whether or not to activate native autofill for the email and password, and save it afterwards.
   final bool autofillEmailAndPassword;
 
-  /// List of validators that the email field will be using.
+  /// Validators that will be applied to the email field.
+  /// Defaults to `[Validators.required, Validators.email]`. Providing a value will override it.
   final List<ValidatorFunction>? signInEmailFieldValidators;
 
   const NiceSignInConfig({

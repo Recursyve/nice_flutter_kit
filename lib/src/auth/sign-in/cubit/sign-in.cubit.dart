@@ -25,7 +25,7 @@ class NiceSignInCubit<SocialProviders> extends NiceBaseCubit<NiceSignInState> {
   }) : super(const NiceSignInState.initialState()) {
     signInWithPasswordFormGroup.valueChanges.takeUntil(unsubscribeAll$).listen((_) => resetInvalidCredentials());
 
-    if (config.signInEmailFieldValidators != null && config.signInEmailFieldValidators!.isNotEmpty) {
+    if (config.signInEmailFieldValidators != null) {
       signInWithPasswordFormGroup.controls["email"]?.setValidators(config.signInEmailFieldValidators!);
     }
   }

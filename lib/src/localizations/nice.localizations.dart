@@ -23,7 +23,7 @@ class NiceLocalizations {
     DefaultCupertinoLocalizations.delegate,
   ];
 
-  static List<Locale> get supportedLocales => const [Locale("fr", "CA"), Locale("en", "CA")];
+  static List<Locale> get supportedLocales => const [Locale("en", "CA"), Locale("fr", "CA")];
 
   NiceLocalizations(this.locale) {
     Intl.defaultLocale = locale.toString();

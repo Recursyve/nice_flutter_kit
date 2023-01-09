@@ -80,3 +80,7 @@
 ### 1.4.14
 
 * Upgrade firebase version
+
+### 1.4.15
+
+* Added `NiceLocalizationsConfig`

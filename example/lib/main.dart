@@ -18,6 +18,9 @@ void main() async {
         print(s);
       },
     ),
+    localizationsConfig: const NiceLocalizationsConfig(
+      supportedLocales: [Locale("fr", "CA"), Locale("en", "CA")],
+    ),
   );
 
   runApp(MyApp());
@@ -73,6 +76,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      localeResolutionCallback: NiceLocalizations.localResolutionCallback,
+      localizationsDelegates: NiceLocalizations.delegates,
+      supportedLocales: NiceLocalizations.supportedLocales,
     );
   }
 }

@@ -8,7 +8,7 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePage(
-      title: "Onboarding",
+      title: NiceLocalizations.of(context).translate("general"),
       child: NiceOnboarding(
         configuration: NiceOnboardingConfiguration(
           welcome: NiceOnboardingWelcomeConfiguration(

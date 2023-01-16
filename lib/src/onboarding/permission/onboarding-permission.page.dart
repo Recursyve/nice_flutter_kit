@@ -49,7 +49,7 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
                 ],
               ),
             ),
-            _buildButtons(),
+            _buildButton(),
             const SizedBox(height: 16),
           ],
         ),
@@ -67,33 +67,24 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
     }
   }
 
-  Widget _buildButtons() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        ElevatedButton(
-          onPressed: loading ? null : _activate,
-          child: loading
-              ? const SizedBox(
-                  height: 24,
-                  width: 24,
-                  child: CircularProgressIndicator(),
-                )
-              : Text(
-                  widget.configuration.activate,
-                  style: const TextStyle(
-                    color: Colors.white,
-                  ),
+  Widget _buildButton() {
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: loading ? null : _activate,
+        child: loading
+            ? const SizedBox(
+                height: 24,
+                width: 24,
+                child: CircularProgressIndicator(),
+              )
+            : Text(
+                widget.configuration.activate,
+                style: const TextStyle(
+                  color: Colors.white,
                 ),
-        ),
-        const SizedBox(height: 20),
-        TextButton(
-          onPressed: widget.onNext,
-          child: Text(
-            widget.configuration.activateLater,
-          ),
-        ),
-      ],
+              ),
+      ),
     );
   }
 

@@ -21,6 +21,9 @@ void main() async {
         print(s);
       },
     ),
+    localizationsConfig: const NiceLocalizationsConfig(
+      supportedLocales: [Locale("fr", "CA"), Locale("en", "CA")],
+    ),
   );
 
   runApp(

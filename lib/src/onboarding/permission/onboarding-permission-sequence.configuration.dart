@@ -7,7 +7,6 @@ class NiceOnboardingPermissionConfiguration {
   final Widget title;
   final Widget paragraph;
   final String activate;
-  final String activateLater;
   final Future<void> Function()? onActivated;
 
   const NiceOnboardingPermissionConfiguration({
@@ -16,7 +15,6 @@ class NiceOnboardingPermissionConfiguration {
     required this.title,
     required this.paragraph,
     required this.activate,
-    required this.activateLater,
     this.onActivated,
   });
 }

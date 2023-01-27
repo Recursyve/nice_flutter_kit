@@ -80,3 +80,11 @@
 ### 1.4.14
 
 * Upgrade firebase version
+
+### 1.4.15
+
+* Added `NiceLocalizationsConfig`
+
+### 1.4.16
+
+* Changed onboarding to comply with Apple's guideline

@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import "package:flutter/services.dart";
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class NiceLocalizations {
@@ -23,7 +24,7 @@ class NiceLocalizations {
     DefaultCupertinoLocalizations.delegate,
   ];
 
-  static List<Locale> get supportedLocales => const [Locale("fr", "CA"), Locale("en", "CA")];
+  static List<Locale> get supportedLocales => NiceConfig.localizationsConfig.supportedLocales;
 
   NiceLocalizations(this.locale) {
     Intl.defaultLocale = locale.toString();

@@ -9,10 +9,10 @@ class NiceBaseListConfig<D> {
 
   const NiceBaseListConfig({
     required this.filterApi,
-    this.defaultOrder: const NiceFilterOrderModel(
+    this.defaultOrder = const NiceFilterOrderModel(
       column: "createdAt",
       direction: NiceFilterOrderDirectionType.Asc,
     ),
-    this.itemsPerPage: 20,
+    this.itemsPerPage = 20,
   });
 }

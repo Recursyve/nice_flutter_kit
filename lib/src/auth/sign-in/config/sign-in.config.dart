@@ -9,7 +9,7 @@ class NiceSignInConfig {
   final List<ValidatorFunction>? signInEmailFieldValidators;
 
   const NiceSignInConfig({
-    this.autofillEmailAndPassword: false,
+    this.autofillEmailAndPassword = false,
     this.signInEmailFieldValidators,
   });
 }

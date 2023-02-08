@@ -25,8 +25,8 @@ class NiceSignInErrors<SocialProviders> extends StatelessWidget {
     required this.errorText,
     required this.invalidCredentialsText,
     this.style,
-    this.textAlign: TextAlign.center,
-    this.maintainSize: true,
+    this.textAlign = TextAlign.center,
+    this.maintainSize = true,
   });
 
   @override

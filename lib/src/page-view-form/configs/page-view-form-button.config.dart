@@ -49,9 +49,9 @@ class NicePageViewFormNextButtonConfig extends NicePageViewFormBaseButtonConfig 
     required String text,
     required this.submitText,
     this.submitButtonContentWidget,
-    bool elevated: false,
+    bool elevated = false,
     ButtonStyle? style,
-    EdgeInsets padding: EdgeInsets.zero,
+    EdgeInsets padding = EdgeInsets.zero,
   }) : super(
     text: text,
     elevated: elevated,
@@ -67,10 +67,10 @@ class NicePageViewFormPreviousButtonConfig extends NicePageViewFormBaseButtonCon
 
   const NicePageViewFormPreviousButtonConfig({
     required String text,
-    bool elevated: false,
+    bool elevated = false,
     ButtonStyle? style,
-    EdgeInsets padding: EdgeInsets.zero,
-    this.boundReachedState: NicePageViewFormButtonBoundReachedState.Hidden,
+    EdgeInsets padding = EdgeInsets.zero,
+    this.boundReachedState = NicePageViewFormButtonBoundReachedState.Hidden,
   }) : super(
     text: text,
     elevated: elevated,

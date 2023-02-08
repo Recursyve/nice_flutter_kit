@@ -5,10 +5,10 @@ class NicePageViewFormContentPage extends NicePageViewFormLayoutPage {
   final Widget content;
 
   const NicePageViewFormContentPage({
-    NicePageViewFormBaseEnabledStrategy enabledStrategy:
+    NicePageViewFormBaseEnabledStrategy enabledStrategy =
         const NicePageViewFormAlwaysEnabledStrategy(),
     required NicePageViewFormBaseValidationStrategy validationStrategy,
-    NicePageViewFormLayoutHeaderData headerData: const NicePageViewFormLayoutHeaderData(),
+    NicePageViewFormLayoutHeaderData headerData = const NicePageViewFormLayoutHeaderData(),
     NicePageViewFormPageConfig? pageConfig,
     required this.content,
   }) : super(

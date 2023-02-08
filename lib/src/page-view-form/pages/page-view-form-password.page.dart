@@ -28,16 +28,16 @@ class NicePageViewFormPasswordPage extends NicePageViewFormLayoutPage {
   final Widget? suffix;
 
   NicePageViewFormPasswordPage({
-    NicePageViewFormBaseEnabledStrategy enabledStrategy: const NicePageViewFormAlwaysEnabledStrategy(),
-    NicePageViewFormLayoutHeaderData headerData: const NicePageViewFormLayoutHeaderData(),
+    NicePageViewFormBaseEnabledStrategy enabledStrategy = const NicePageViewFormAlwaysEnabledStrategy(),
+    NicePageViewFormLayoutHeaderData headerData = const NicePageViewFormLayoutHeaderData(),
     NicePageViewFormPageConfig? pageConfig,
-    this.formGroupName: "password",
-    this.passwordFormControlName: "password",
-    this.passwordConfirmationControlName: "passwordConfirmation",
+    this.formGroupName = "password",
+    this.passwordFormControlName = "password",
+    this.passwordConfirmationControlName = "passwordConfirmation",
     this.passwordDecoration,
     this.passwordConfirmationDecoration,
     this.validationMessages,
-    this.inputSpacing: 12,
+    this.inputSpacing = 12,
     this.suffix,
   }) : super(
           enabledStrategy: enabledStrategy,

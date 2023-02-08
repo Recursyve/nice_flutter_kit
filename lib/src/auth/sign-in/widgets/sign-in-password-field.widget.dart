@@ -21,9 +21,9 @@ class NiceSignInPasswordField<SocialProviders> extends StatelessWidget {
 
   const NiceSignInPasswordField({
     this.validationMessages,
-    this.decoration: const InputDecoration(),
+    this.decoration = const InputDecoration(),
     this.style,
-    this.textAlign: TextAlign.left,
+    this.textAlign = TextAlign.left,
   });
 
   @override

@@ -29,7 +29,7 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
   Widget build(BuildContext context) {
     return Theme(
       child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).colorScheme.background,
         body: PageView(
           controller: _controller,
           physics: const NeverScrollableScrollPhysics(),

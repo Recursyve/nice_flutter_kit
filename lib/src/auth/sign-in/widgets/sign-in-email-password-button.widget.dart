@@ -33,8 +33,8 @@ class NiceSignInEmailPasswordButton<SocialProviders> extends StatelessWidget {
     this.style,
     required this.text,
     this.textStyle,
-    this.showLoading: true,
-    this.loadingLineWidth: 3,
+    this.showLoading = true,
+    this.loadingLineWidth = 3,
     this.loadingLineColor,
   });
 

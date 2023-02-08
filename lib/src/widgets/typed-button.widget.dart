@@ -28,8 +28,8 @@ class NiceTypedButton extends StatelessWidget {
     this.onFocusChange,
     this.style,
     this.focusNode,
-    this.autofocus: false,
-    this.clipBehavior: Clip.none,
+    this.autofocus = false,
+    this.clipBehavior = Clip.none,
     required this.child,
   });
 
@@ -115,8 +115,8 @@ class _NiceTypedButtonIcon extends NiceTypedButton {
     ValueChanged<bool>? onFocusChange,
     ButtonStyle? style,
     FocusNode? focusNode,
-    bool autofocus: false,
-    Clip clipBehavior: Clip.none,
+    bool autofocus = false,
+    Clip clipBehavior = Clip.none,
     required this.icon,
     required Widget label,
   }) : super(

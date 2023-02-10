@@ -94,3 +94,8 @@
 
 * Changed deprecated background theme color usage in onboarding.
 * Dart 3.0 deprecation warning fixes
+
+### 1.4.18
+
+* Added safearea in `NiceOnboarding`.
+

@@ -49,7 +49,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
                       onPressed: onNext,
                     ),
                   ),
-                  const SizedBox(height: 48),
+                  const Spacer(),
                 ],
               ),
             ),

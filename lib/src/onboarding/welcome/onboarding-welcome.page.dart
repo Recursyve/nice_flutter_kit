@@ -34,14 +34,22 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
               flex: 2,
               child: Column(
                 children: [
-                  const SizedBox(height: 40),
-                  configuration.title,
-                  const SizedBox(height: 20),
-                  Text(
-                    configuration.paragraph,
-                    textAlign: TextAlign.center,
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 40),
+                          configuration.title,
+                          const SizedBox(height: 20),
+                          Text(
+                            configuration.paragraph,
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  const Spacer(),
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -49,7 +57,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
                       onPressed: onNext,
                     ),
                   ),
-                  const Spacer(),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),

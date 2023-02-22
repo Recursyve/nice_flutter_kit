@@ -20,13 +20,13 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -52,20 +52,17 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: SizedBox(
+            const SizedBox(height: 20),
+            SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 child: Text(configuration.bottomButtonText),
                 onPressed: onNext,
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-        ],
+            const SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }

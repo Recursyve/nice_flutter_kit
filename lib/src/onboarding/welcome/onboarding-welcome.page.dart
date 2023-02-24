@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 class NiceOnboardingWelcomePage extends StatelessWidget {
+  static const double buttonHeight = 100;
+
   final NiceOnboardingWelcomeConfiguration configuration;
   final VoidCallback onNext;
 
@@ -24,35 +26,41 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              flex: 3,
-              child: Align(
-                alignment: Alignment.center,
-                child: _buildImage(configuration.imageUrl),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Column(
-                children: [
-                  const SizedBox(height: 40),
-                  configuration.title,
-                  const SizedBox(height: 20),
-                  Text(
-                    configuration.paragraph,
-                    textAlign: TextAlign.center,
-                  ),
-                  const Spacer(),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      child: Text(configuration.bottomButtonText),
-                      onPressed: onNext,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: (MediaQuery.of(context).size.height - buttonHeight) * 0.6,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: _buildImage(configuration.imageUrl),
+                      ),
                     ),
-                  ),
-                  const Spacer(),
-                ],
+                    Column(
+                      children: [
+                        const SizedBox(height: 40),
+                        configuration.title,
+                        const SizedBox(height: 20),
+                        Text(
+                          configuration.paragraph,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                child: Text(configuration.bottomButtonText),
+                onPressed: onNext,
+              ),
+            ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

@@ -25,31 +25,29 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    SizedBox(
-                      height: (MediaQuery.of(context).size.height - buttonHeight) * 0.6,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: _buildImage(configuration.imageUrl),
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SizedBox(
+                    height: (MediaQuery.of(context).size.height - buttonHeight) * 0.6,
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: _buildImage(configuration.imageUrl),
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      const SizedBox(height: 40),
+                      configuration.title,
+                      const SizedBox(height: 20),
+                      Text(
+                        configuration.paragraph,
+                        textAlign: TextAlign.center,
                       ),
-                    ),
-                    Column(
-                      children: [
-                        const SizedBox(height: 40),
-                        configuration.title,
-                        const SizedBox(height: 20),
-                        Text(
-                          configuration.paragraph,
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

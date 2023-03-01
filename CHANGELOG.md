@@ -99,3 +99,7 @@
 
 * Added safearea in `NiceOnboarding`.
 
+### 1.4.19
+
+* Added padidng to `NiceOnboarding`.
+

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
@@ -14,36 +16,44 @@ class NiceAutomaticUnfocus extends StatefulWidget {
 
 class _NiceAutomaticUnfocusState extends State<NiceAutomaticUnfocus> {
   final _controller = KeyboardVisibilityController();
+  late StreamSubscription<bool> _subscription;
 
   bool isKeyboardVisible = false;
 
   @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<bool>(
-      stream: _controller.onChange,
-      builder: (context, snapshot) {
-        if (snapshot.data != null) {
-          if (!snapshot.data! && isKeyboardVisible) {
-            isKeyboardVisible = false;
-            final focusScope = FocusScope.of(context);
-            if (!focusScope.hasPrimaryFocus) {
-              focusScope.unfocus();
-            }
-          } else if (snapshot.data!) {
-            isKeyboardVisible = true;
-          }
-        }
+  void initState() {
+    super.initState();
+    _subscription = _controller.onChange.listen(onKeyboardStateChanged);
+  }
 
-        return GestureDetector(
-          onTap: () {
-            final focusScope = FocusScope.of(context);
-            if (!focusScope.hasPrimaryFocus) {
-              focusScope.unfocus();
-            }
-          },
-          child: widget.child,
-        );
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        final focusScope = FocusScope.of(context);
+        if (!focusScope.hasPrimaryFocus) {
+          focusScope.unfocus();
+        }
       },
+      child: widget.child,
     );
+  }
+
+  void onKeyboardStateChanged(bool hasOpenedKeyboard) {
+    if (!hasOpenedKeyboard && isKeyboardVisible) {
+      isKeyboardVisible = false;
+      final focusScope = FocusScope.of(context);
+      if (!focusScope.hasPrimaryFocus) {
+        focusScope.unfocus();
+      }
+    } else if (hasOpenedKeyboard) {
+      isKeyboardVisible = true;
+    }
   }
 }

@@ -18,8 +18,6 @@ class _NiceAutomaticUnfocusState extends State<NiceAutomaticUnfocus> {
   final _controller = KeyboardVisibilityController();
   late StreamSubscription<bool> _subscription;
 
-  bool isKeyboardVisible = false;
-
   @override
   void initState() {
     super.initState();

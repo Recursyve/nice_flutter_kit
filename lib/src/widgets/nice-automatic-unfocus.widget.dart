@@ -23,7 +23,7 @@ class _NiceAutomaticUnfocusState extends State<NiceAutomaticUnfocus> {
   @override
   void initState() {
     super.initState();
-    _subscription = _controller.onChange.listen(onKeyboardStateChanged);
+    _subscription = _controller.onChange.where((isVisible) => !isVisible).listen((_) => unfocus());
   }
 
   @override
@@ -35,25 +35,15 @@ class _NiceAutomaticUnfocusState extends State<NiceAutomaticUnfocus> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        final focusScope = FocusScope.of(context);
-        if (!focusScope.hasPrimaryFocus) {
-          focusScope.unfocus();
-        }
-      },
+      onTap: unfocus,
       child: widget.child,
     );
   }
 
-  void onKeyboardStateChanged(bool hasOpenedKeyboard) {
-    if (!hasOpenedKeyboard && isKeyboardVisible) {
-      isKeyboardVisible = false;
-      final focusScope = FocusScope.of(context);
-      if (!focusScope.hasPrimaryFocus) {
-        focusScope.unfocus();
-      }
-    } else if (hasOpenedKeyboard) {
-      isKeyboardVisible = true;
+  void unfocus() {
+    final focusScope = FocusScope.of(context);
+    if (!focusScope.hasPrimaryFocus) {
+      focusScope.unfocus();
     }
   }
 }

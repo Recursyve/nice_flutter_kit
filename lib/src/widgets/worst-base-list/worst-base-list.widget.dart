@@ -3,15 +3,15 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/widgets/base-list/widgets/nice-base-list-body.widget.dart';
-import 'package:nice_flutter_kit/src/widgets/base-list/widgets/nice-base-list-header.widget.dart';
+import 'package:nice_flutter_kit/src/widgets/worst-base-list/widgets/worst-base-list-body.widget.dart';
+import 'package:nice_flutter_kit/src/widgets/worst-base-list/widgets/worst-base-list-header.widget.dart';
 import 'package:rxdart/rxdart.dart';
 
-typedef NiceBaseListItemBuilder<D> = Widget Function(BuildContext context, D data, int? index);
+typedef WorstBaseListItemBuilder<D> = Widget Function(BuildContext context, D data, int? index);
 
-class NiceBaseList<D> extends StatefulWidget {
-  final NiceBaseListConfig<D> config;
-  final NiceBaseListItemBuilder<D> itemBuilder;
+class WorstBaseList<D> extends StatefulWidget {
+  final WorstBaseListConfig<D> config;
+  final WorstBaseListItemBuilder<D> itemBuilder;
   final Widget? title;
   final VoidCallback? onBack;
   final Widget? separator;
@@ -25,13 +25,13 @@ class NiceBaseList<D> extends StatefulWidget {
   final ScrollPhysics scrollPhysics;
   final ScrollController? scrollController;
   final bool shrinkWrap;
-  final Function(NiceBaseListCubit)? onCubitCreated;
+  final Function(WorstBaseListCubit)? onCubitCreated;
   final bool loadOnInit;
 
   // These BlocProviders will be placed underneath the NiceBaseListCubit
   final List<BlocProvider> blocProviders;
 
-  const NiceBaseList({
+  const WorstBaseList({
     required this.config,
     required this.itemBuilder,
     this.title,
@@ -53,12 +53,12 @@ class NiceBaseList<D> extends StatefulWidget {
   });
 
   @override
-  State<NiceBaseList<D>> createState() => _NiceBaseListState<D>();
+  State<WorstBaseList<D>> createState() => _WorstBaseListState<D>();
 }
 
-class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
+class _WorstBaseListState<D> extends State<WorstBaseList<D>> {
   final _searchSubject = BehaviorSubject<String>();
-  late final NiceBaseListCubit<D> _cubit;
+  late final WorstBaseListCubit<D> _cubit;
   late final ScrollController _scrollController;
 
   bool get shouldLoadMore =>
@@ -69,7 +69,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   void initState() {
     super.initState();
     _scrollController = widget.scrollController ?? ScrollController();
-    _cubit = NiceBaseListCubit<D>(config: widget.config);
+    _cubit = WorstBaseListCubit<D>(config: widget.config);
     if (widget.loadOnInit) {
       _cubit.load();
     }
@@ -102,18 +102,18 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<NiceBaseListCubit<D>>.value(
+        BlocProvider<WorstBaseListCubit<D>>.value(
           value: _cubit,
         ),
         ...widget.blocProviders,
       ],
-      child: BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
+      child: BlocBuilder<WorstBaseListCubit<D>, WorstBaseListState<D>>(
         buildWhen: (prev, curr) => prev.loading != curr.loading || prev.error != curr.error,
         builder: (context, state) {
           if (state.error) {
             return NiceErrorWidget(
               error: NiceLocalizations.of(context).translate("general.an_error_occurred"),
-              onRefresh: () => NiceBaseListCubit<D>.of(context).resetAndLoad(),
+              onRefresh: () => WorstBaseListCubit<D>.of(context).resetAndLoad(),
             );
           }
 
@@ -134,7 +134,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
         physics: widget.scrollPhysics,
         padding: NiceLayoutUtils.isPhone(context) ? widget.mobilePadding : widget.largePadding,
         children: [
-          NiceBaseListHeader(
+          WorstBaseListHeader(
             title: widget.title,
             onBack: widget.onBack,
             onSearchChange: (searchQuery) => _searchSubject.add(searchQuery),
@@ -142,7 +142,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
             action: widget.action,
           ),
           const SizedBox(height: 24),
-          BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
+          BlocBuilder<WorstBaseListCubit<D>, WorstBaseListState<D>>(
             buildWhen: (prev, curr) => prev.values.isEmpty != curr.values.isEmpty || prev.loading != curr.loading,
             builder: (context, state) {
               if (state.values.isEmpty && !state.loading) {
@@ -152,14 +152,14 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
                 );
               }
 
-              return NiceBaseListBody(
+              return WorstBaseListBody(
                 itemBuilder: widget.itemBuilder,
                 separator: widget.separator,
                 fadeInItems: widget.fadeInItems,
               );
             },
           ),
-          BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
+          BlocBuilder<WorstBaseListCubit<D>, WorstBaseListState<D>>(
             buildWhen: (prev, curr) => prev.loadingMore != curr.loadingMore,
             builder: (context, state) {
               if (!state.loadingMore) return const SizedBox();

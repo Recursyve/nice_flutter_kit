@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
-class NiceBaseListBody<D> extends StatelessWidget {
-  final NiceBaseListItemBuilder<D> itemBuilder;
+class WorstBaseListBody<D> extends StatelessWidget {
+  final WorstBaseListItemBuilder<D> itemBuilder;
   final Widget? separator;
   final bool fadeInItems;
 
-  const NiceBaseListBody({
+  const WorstBaseListBody({
     required this.itemBuilder,
     this.separator,
     required this.fadeInItems,
@@ -16,7 +16,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
+    return BlocBuilder<WorstBaseListCubit<D>, WorstBaseListState<D>>(
       buildWhen: (prev, curr) => prev.result != curr.result,
       builder: (context, state) => ListView.separated(
         padding: EdgeInsets.zero,

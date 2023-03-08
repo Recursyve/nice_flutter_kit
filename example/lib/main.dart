@@ -1,4 +1,7 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:example/pages/auth/auth.page.dart';
+import 'package:example/pages/base-list/infinite-scroll-base-list.page.dart';
+import 'package:example/pages/base-list/paginated-base-list.page.dart';
 import 'package:example/pages/home.page.dart';
 import 'package:example/pages/onboarding.page.dart';
 import 'package:example/pages/page-view-form.page.dart';
@@ -23,10 +26,14 @@ void main() async {
     ),
   );
 
-  runApp(MyApp());
+  runApp(
+    DevicePreview(
+      builder: (_) => MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   static const pageRoutes = <RouteData>[
     RouteData(
       path: "/onboarding",
@@ -48,23 +55,38 @@ class MyApp extends StatelessWidget {
       title: "Radio expandable cards",
       child: RadioExpandableCardsPage(),
     ),
+    RouteData(
+      path: "/base-list/infinite-scroll",
+      title: "Infinite scroll base list",
+      child: InfiniteScrollLoadedBaseListPage(),
+    ),
+    RouteData(
+      path: "/base-list/paginated",
+      title: "Paginated base list",
+      child: PaginatedBaseListPage(),
+    ),
   ];
 
+  MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   final _router = GoRouter(
     routes: [
       GoRoute(
         path: "/",
         builder: (_, __) => const HomePage(),
       ),
-      for (final route in pageRoutes)
+      for (final route in MyApp.pageRoutes)
         GoRoute(
           path: route.path,
           builder: (_, __) => route.child,
         ),
     ],
   );
-
-  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -76,9 +98,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      localeResolutionCallback: NiceLocalizations.localResolutionCallback,
-      localizationsDelegates: NiceLocalizations.delegates,
+      useInheritedMediaQuery: true,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
       supportedLocales: NiceLocalizations.supportedLocales,
+      localizationsDelegates: NiceLocalizations.delegates,
+      localeResolutionCallback: NiceLocalizations.localResolutionCallback,
     );
   }
 }

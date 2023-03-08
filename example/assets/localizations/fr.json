@@ -1,1 +1,9 @@
-{}
+{
+    "widgets": {
+        "nice_base_list": {
+            "paginator": {
+                "per_page": "Par page"
+            }
+        }
+    }
+}

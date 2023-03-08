@@ -1,23 +1,20 @@
-import 'dart:collection';
-
 import 'package:equatable/equatable.dart';
+import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 // ignore: must_be_immutable
 class NiceFilterResultPageModel extends Equatable {
-  int? number;
-  int? size;
+  final int number;
+  final int size;
 
-  NiceFilterResultPageModel({this.number, this.size});
+  NiceFilterResultPageModel({
+    required this.number,
+    required this.size,
+  });
 
-  NiceFilterResultPageModel.fromJson(LinkedHashMap<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
-
-    number = json["number"];
-    size = json["size"];
-  }
+  NiceFilterResultPageModel.fromJson(Json json)
+      : number = json["number"],
+        size = json["size"];
 
   @override
-  List<Object?> get props => [number, size];
+  List<Object> get props => [number, size];
 }

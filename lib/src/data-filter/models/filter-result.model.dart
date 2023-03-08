@@ -1,36 +1,28 @@
-import 'dart:collection';
-
 import 'package:equatable/equatable.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 // ignore: must_be_immutable
 class NiceFilterResultModel<T> extends Equatable {
-  NiceFilterResultPageModel? page;
-  int? total;
-  List<T>? values;
+  final NiceFilterResultPageModel page;
+  final int total;
+  final List<T> values;
 
-  NiceFilterResultModel({this.page, this.total, this.values});
+  int? get nextPage => page.number * page.size + values.length < total ? page.number + 1 : null;
 
-  NiceFilterResultModel.fromJson(LinkedHashMap<String, dynamic>? json) {
-    if (json == null) {
-      return;
-    }
+  const NiceFilterResultModel({
+    required this.page,
+    required this.total,
+    required this.values,
+  });
 
-    page = NiceFilterResultPageModel.fromJson(json["page"]);
-    total = json["total"];
-
-    assert(
-      NiceConfig.dataFilterConfig != null,
-      "NiceDataFilter wasn't initialized, please provide NiceDataFilterConfig in main",
-    );
-
-    values = [
-      for (final data in json["values"] ?? const [])
-        NiceConfig.dataFilterConfig!.deserialize(
-          data,
+  NiceFilterResultModel.fromJson(Json json)
+      : assert(
+          NiceConfig.dataFilterConfig != null,
+          "NiceDataFilter wasn't initialized, please provide a NiceDataFilterConfig.",
         ),
-    ];
-  }
+        page = NiceFilterResultPageModel.fromJson(json["page"]),
+        total = json["total"],
+        values = [for (final value in json["values"]) NiceConfig.dataFilterConfig!.deserialize(value)];
 
   NiceFilterResultModel<T> copyWith({
     NiceFilterResultPageModel? page,
@@ -45,5 +37,5 @@ class NiceFilterResultModel<T> extends Equatable {
   }
 
   @override
-  List<Object?> get props => [page, total, values];
+  List<Object> get props => [page, total, values];
 }

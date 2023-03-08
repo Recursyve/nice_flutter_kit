@@ -2,16 +2,16 @@ import 'package:flutter/widgets.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
 @immutable
-class NiceBaseListConfig<D> {
+class WorstBaseListConfig<D> {
   final NiceDataFilterApi<D> filterApi;
   final NiceFilterOrderModel defaultOrder;
   final int itemsPerPage;
 
-  const NiceBaseListConfig({
+  const WorstBaseListConfig({
     required this.filterApi,
     this.defaultOrder = const NiceFilterOrderModel(
       column: "createdAt",
-      direction: NiceFilterOrderDirectionType.Asc,
+      direction: NiceFilterOrderDirections.Asc,
     ),
     this.itemsPerPage = 20,
   });

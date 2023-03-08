@@ -1,15 +1,10 @@
-import 'package:equatable/equatable.dart';
+enum NiceFilterOrderDirections {
+  Asc("asc"),
+  Desc("desc");
 
-class NiceFilterOrderDirectionType extends Equatable {
-  final String _value;
+  final String value;
 
-  const NiceFilterOrderDirectionType._internal(this._value);
+  const NiceFilterOrderDirections(this.value);
 
-  String toString() => _value;
-
-  static const Asc = const NiceFilterOrderDirectionType._internal("asc");
-  static const Desc = const NiceFilterOrderDirectionType._internal("desc");
-
-  @override
-  List<Object> get props => [_value];
+  String toString() => value;
 }

@@ -36,17 +36,17 @@ class NicePageViewFormConfig {
   final BoxConstraints buttonConstraints;
 
   const NicePageViewFormConfig({
-    this.pageChangeDuration: const Duration(milliseconds: 200),
-    this.pageChangeCurve: Curves.easeOut,
-    this.defaultPageConfig: const NicePageViewFormPageConfig(),
+    this.pageChangeDuration = const Duration(milliseconds: 200),
+    this.pageChangeCurve = Curves.easeOut,
+    this.defaultPageConfig = const NicePageViewFormPageConfig(),
     required this.nextButtonText,
     required this.previousButtonText,
-    this.pageViewPhysics: const NeverScrollableScrollPhysics(),
+    this.pageViewPhysics = const NeverScrollableScrollPhysics(),
     required this.nextButtonConfig,
     required this.previousButtonConfig,
-    this.hideButtonsIfKeyboardVisible: true,
-    this.unfocusOnInteraction: true,
-    this.buttonConstraints: const BoxConstraints(),
+    this.hideButtonsIfKeyboardVisible = true,
+    this.unfocusOnInteraction = true,
+    this.buttonConstraints = const BoxConstraints(),
   });
 
   factory NicePageViewFormConfig.of(BuildContext context) => Provider.of<NicePageViewFormConfig>(context);

@@ -13,7 +13,7 @@ class WorstBaseListHeader extends StatelessWidget {
     this.title,
     this.backIcon,
     this.onBack,
-    this.hideSearch: false,
+    this.hideSearch = false,
     required this.onSearchChange,
     required this.action,
   });

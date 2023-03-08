@@ -28,17 +28,23 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: PageView(
-          controller: _controller,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            _buildWelcome(),
-            _buildIntroductionSequence(),
-            ..._buildPermissionSequence(),
-          ].whereType<Widget>().toList(),
-        ),
+      child: Builder(
+        builder: (context) {
+          return Scaffold(
+            backgroundColor: Theme.of(context).colorScheme.background,
+            body: SafeArea(
+              child: PageView(
+                controller: _controller,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  _buildWelcome(),
+                  _buildIntroductionSequence(),
+                  ..._buildPermissionSequence(),
+                ].whereType<Widget>().toList(),
+              ),
+            ),
+          );
+        }
       ),
       data: widget.theme ?? Theme.of(context),
     );

@@ -19,9 +19,9 @@ class NiceSignInEmailField<SocialProviders> extends StatelessWidget {
 
   const NiceSignInEmailField({
     this.validationMessages,
-    this.decoration: const InputDecoration(),
+    this.decoration = const InputDecoration(),
     this.style,
-    this.textAlign: TextAlign.left,
+    this.textAlign = TextAlign.left,
   });
 
   @override

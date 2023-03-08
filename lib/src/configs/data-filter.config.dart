@@ -2,7 +2,7 @@ class NiceDataFilterConfig {
   final Map<Type, dynamic Function(Map<String, dynamic>)> deserializers;
 
   const NiceDataFilterConfig({
-    this.deserializers: const {},
+    this.deserializers = const {},
   });
 
   bool canDeserialize<T>() => deserializers.containsKey(T);

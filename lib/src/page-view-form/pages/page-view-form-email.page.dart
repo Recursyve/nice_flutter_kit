@@ -28,16 +28,16 @@ class NicePageViewFormEmailPage extends NicePageViewFormLayoutPage {
   final Widget? suffix;
 
   NicePageViewFormEmailPage({
-    NicePageViewFormBaseEnabledStrategy enabledStrategy: const NicePageViewFormAlwaysEnabledStrategy(),
-    NicePageViewFormLayoutHeaderData headerData: const NicePageViewFormLayoutHeaderData(),
+    NicePageViewFormBaseEnabledStrategy enabledStrategy = const NicePageViewFormAlwaysEnabledStrategy(),
+    NicePageViewFormLayoutHeaderData headerData = const NicePageViewFormLayoutHeaderData(),
     NicePageViewFormPageConfig? pageConfig,
-    this.formGroupName: "email",
-    this.emailFormControlName: "email",
-    this.emailConfirmationControlName: "emailConfirmation",
+    this.formGroupName = "email",
+    this.emailFormControlName = "email",
+    this.emailConfirmationControlName = "emailConfirmation",
     this.emailDecoration,
     this.emailConfirmationDecoration,
     this.validationMessages,
-    this.inputSpacing: 12,
+    this.inputSpacing = 12,
     this.suffix,
   }) : super(
           enabledStrategy: enabledStrategy,

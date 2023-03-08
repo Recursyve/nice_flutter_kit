@@ -19,7 +19,7 @@ class NiceSignIn<SocialProviders, User extends Object, Account extends Object> e
 
   const NiceSignIn({
     required this.signInProvider,
-    this.config: const NiceSignInConfig(),
+    this.config = const NiceSignInConfig(),
     required this.child,
   });
 

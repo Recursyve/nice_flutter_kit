@@ -12,9 +12,9 @@ class NiceOnboardingGlobalConfig {
   final bool debug;
 
   NiceOnboardingGlobalConfig({
-    this.sharedPrefKey: "ONBOARDING_COMPLETED",
+    this.sharedPrefKey = "ONBOARDING_COMPLETED",
     this.permissions,
-    this.debug: false,
+    this.debug = false,
   });
 
   Future<void> init() async {

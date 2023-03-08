@@ -18,9 +18,9 @@ class NiceTextAccentPunctuation extends StatelessWidget {
     this.textSpanStyle,
     this.textStyle,
     this.punctuationStyle,
-    this.textAlign: TextAlign.center,
+    this.textAlign = TextAlign.center,
     this.maxLines,
-    this.overflow: TextOverflow.clip,
+    this.overflow = TextOverflow.clip,
     this.alignment,
   });
 

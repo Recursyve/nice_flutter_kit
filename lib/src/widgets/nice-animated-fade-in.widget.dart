@@ -9,7 +9,7 @@ class NiceAnimatedFadeIn extends StatefulWidget {
     super.key,
     required this.child,
     required this.duration,
-    this.delay: Duration.zero,
+    this.delay = Duration.zero,
   });
 
   @override

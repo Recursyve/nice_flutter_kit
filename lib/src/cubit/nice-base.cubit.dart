@@ -9,7 +9,7 @@ abstract class NiceBaseCubit<S extends NiceBaseState> extends Cubit<S> {
 
   @protected
   FutureOr<R?> wrap<R>({
-    bool loading: true,
+    bool loading = true,
     required FutureOr<R> Function() callback,
     FutureOr<R?> Function(Object e)? onError,
   }) async {

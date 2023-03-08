@@ -35,7 +35,7 @@ class NiceAuth<User extends Object, Account extends Object> extends StatelessWid
     this.onStateChange,
     this.onUserChange,
     this.onAccountChange,
-    this.waitForInitialization: true,
+    this.waitForInitialization = true,
     this.placeholder,
   });
 

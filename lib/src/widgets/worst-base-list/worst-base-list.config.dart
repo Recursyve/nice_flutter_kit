@@ -9,10 +9,10 @@ class WorstBaseListConfig<D> {
 
   const WorstBaseListConfig({
     required this.filterApi,
-    this.defaultOrder: const NiceFilterOrderModel(
+    this.defaultOrder = const NiceFilterOrderModel(
       column: "createdAt",
       direction: NiceFilterOrderDirections.Asc,
     ),
-    this.itemsPerPage: 20,
+    this.itemsPerPage = 20,
   });
 }

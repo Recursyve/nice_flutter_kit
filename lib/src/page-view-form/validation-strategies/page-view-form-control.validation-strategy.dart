@@ -12,7 +12,7 @@ class NicePageViewFormFormGroupValidationStrategy implements NicePageViewFormBas
   const NicePageViewFormFormGroupValidationStrategy({
     this.abstractControlName,
     this.abstractControl,
-    this.markAllAsTouchedIfInvalid: true,
+    this.markAllAsTouchedIfInvalid = true,
   }) : assert(
           (abstractControlName == null) != (abstractControl == null),
           "abstractControlName or abstractControl must be passed",

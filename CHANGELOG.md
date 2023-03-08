@@ -47,7 +47,8 @@
 
 ### 1.4.6
 
-* Added "raw" argument to NiceLocalizations' translate method to return translation as a json object if a node is reached instead of a leaf.
+* Added "raw" argument to NiceLocalizations' translate method to return translation as a json object
+  if a node is reached instead of a leaf.
 
 ### 1.4.7
 
@@ -88,3 +89,17 @@
 ### 1.4.16
 
 * Changed onboarding to comply with Apple's guideline
+
+### 1.4.17
+
+* Changed deprecated background theme color usage in onboarding.
+* Dart 3.0 deprecation warning fixes
+
+### 1.4.18
+
+* Added safearea in `NiceOnboarding`.
+
+### 1.4.19
+
+* Added padidng to `NiceOnboarding`.
+

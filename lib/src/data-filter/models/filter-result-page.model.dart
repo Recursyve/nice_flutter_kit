@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
 
+// ignore: must_be_immutable
 class NiceFilterResultPageModel extends Equatable {
   final int number;
   final int size;

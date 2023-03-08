@@ -8,7 +8,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 /// The [SocialProviders] type must be provided and be the same type as the one passed to [NiceSignInCubit]
 class NiceSignInPasswordField<SocialProviders> extends StatelessWidget {
   /// Validation messages that will be passed to the [ReactiveTextField]
-  final ValidationMessagesFunction? validationMessages;
+  final Map<String, ValidationMessageFunction>? validationMessages;
 
   /// Decoration for the [ReactiveTextField]
   final InputDecoration decoration;
@@ -30,14 +30,13 @@ class NiceSignInPasswordField<SocialProviders> extends StatelessWidget {
   Widget build(BuildContext context) {
     return ReactiveTextField(
       formControlName: "password",
-      validationMessages: validationMessages,
       decoration: decoration,
       keyboardType: TextInputType.visiblePassword,
       textInputAction: TextInputAction.go,
       obscureText: true,
       style: style,
       textAlign: textAlign,
-      onSubmitted: NiceSignInCubit.of<SocialProviders>(context).signInWithPassword,
+      onSubmitted: (_) => NiceSignInCubit.of<SocialProviders>(context).signInWithPassword(),
       autofillHints: [
         if (NiceSignInCubit.of<SocialProviders>(context).config.autofillEmailAndPassword) AutofillHints.password,
       ],

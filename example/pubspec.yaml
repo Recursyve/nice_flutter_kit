@@ -17,7 +17,7 @@ dependencies:
   go_router: 3.1.0
   nice_flutter_kit:
     path: ../
-  reactive_forms: 13.0.0
+  reactive_forms: 14.1.0
 
 flutter:
   uses-material-design: true

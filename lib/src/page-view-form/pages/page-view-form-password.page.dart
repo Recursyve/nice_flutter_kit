@@ -19,7 +19,7 @@ class NicePageViewFormPasswordPage extends NicePageViewFormLayoutPage {
   final InputDecoration? passwordConfirmationDecoration;
 
   /// Validation messages for both password and password confirmations
-  final ValidationMessagesFunction? validationMessages;
+  final Map<String, ValidationMessageFunction>? validationMessages;
 
   /// Spacing between the password and password confirmation [ReactiveTextField]
   final double inputSpacing;
@@ -59,7 +59,7 @@ class NicePageViewFormPasswordPage extends NicePageViewFormLayoutPage {
             validationMessages: validationMessages,
             obscureText: true,
             textInputAction: TextInputAction.next,
-            onSubmitted: FocusScope.of(context).nextFocus,
+            onSubmitted: (_) => FocusScope.of(context).nextFocus(),
           ),
           SizedBox(
             height: inputSpacing,
@@ -70,7 +70,7 @@ class NicePageViewFormPasswordPage extends NicePageViewFormLayoutPage {
             validationMessages: validationMessages,
             obscureText: true,
             textInputAction: TextInputAction.go,
-            onSubmitted: FocusScope.of(context).nextFocus,
+            onSubmitted: (_) => FocusScope.of(context).nextFocus(),
           ),
           if (suffix != null) suffix!,
         ],

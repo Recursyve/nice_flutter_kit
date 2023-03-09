@@ -5,8 +5,7 @@ class NicePageViewFormContentPage extends NicePageViewFormLayoutPage {
   final Widget content;
 
   const NicePageViewFormContentPage({
-    NicePageViewFormBaseEnabledStrategy enabledStrategy =
-        const NicePageViewFormAlwaysEnabledStrategy(),
+    NicePageViewFormBaseEnabledStrategy enabledStrategy = const NicePageViewFormAlwaysEnabledStrategy(),
     required NicePageViewFormBaseValidationStrategy validationStrategy,
     NicePageViewFormLayoutHeaderData headerData = const NicePageViewFormLayoutHeaderData(),
     NicePageViewFormPageConfig? pageConfig,

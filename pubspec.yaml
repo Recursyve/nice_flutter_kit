@@ -5,7 +5,7 @@ homepage: https://github.com/Recursyve/nice_flutter_kit
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
-  flutter: ">=2.5.0"
+  flutter: ">=3.0.0"
 
 dependencies:
   flutter:
@@ -15,21 +15,21 @@ dependencies:
     sdk: flutter
 
   collection: ^1.15.0
-  dio: ^4.0.0
+  dio: ^5.0.1
   equatable: ^2.0.0
   expandable: ^5.0.0
   firebase_messaging: ^14.0.3
   flutter_bloc: ^8.0.0
   flutter_keyboard_visibility: ^5.2.0
   flutter_spinkit: ^5.0.0
-  flutter_svg: ^1.0.0
+  flutter_svg: ^2.0.2
   geolocator: ^9.0.0
   intl: ^0.17.0
   introduction_screen: ^3.0.0
   notification_permissions: ^0.6.1
   path: ^1.8.0
   provider: ^6.0.0
-  reactive_forms: ^13.0.0
+  reactive_forms: ^14.1.0
   rxdart: ^0.27.0
   shared_preferences: ^2.0.0
   timeago: ^3.1.0

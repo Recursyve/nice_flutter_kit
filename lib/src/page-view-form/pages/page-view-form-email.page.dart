@@ -19,7 +19,7 @@ class NicePageViewFormEmailPage extends NicePageViewFormLayoutPage {
   final InputDecoration? emailConfirmationDecoration;
 
   /// Validation messages for both email and email confirmations
-  final ValidationMessagesFunction? validationMessages;
+  final Map<String, ValidationMessageFunction>? validationMessages;
 
   /// Spacing between the email and email confirmation [ReactiveTextField]
   final double inputSpacing;
@@ -59,7 +59,7 @@ class NicePageViewFormEmailPage extends NicePageViewFormLayoutPage {
             validationMessages: validationMessages,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
-            onSubmitted: FocusScope.of(context).nextFocus,
+            onSubmitted: (_) => FocusScope.of(context).nextFocus,
           ),
           SizedBox(
             height: inputSpacing,
@@ -70,7 +70,7 @@ class NicePageViewFormEmailPage extends NicePageViewFormLayoutPage {
             validationMessages: validationMessages,
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.go,
-            onSubmitted: FocusScope.of(context).nextFocus,
+            onSubmitted: (_) => FocusScope.of(context).nextFocus(),
           ),
           if (suffix != null) suffix!,
         ],

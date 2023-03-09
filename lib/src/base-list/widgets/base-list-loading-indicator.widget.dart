@@ -1,6 +1,5 @@
 import 'package:flutter/widgets.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/base-list/cubit/base-list-cubit-builder.widget.dart';
 
 /// This widget is part of the base list, and MUST be a child of [NiceBaseListConfig]
 ///
@@ -25,8 +24,8 @@ class NiceBaseListLoadingIndicator<D> extends StatelessWidget {
   const NiceBaseListLoadingIndicator({
     super.key,
     this.color,
-    this.size: 72,
-    this.lineWidth: 7,
+    this.size = 72,
+    this.lineWidth = 7,
     required this.child,
   });
 

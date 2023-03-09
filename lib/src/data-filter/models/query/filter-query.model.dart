@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/data-filter/models/query/base-filter-query.model.dart';
 
 class NiceFilterQueryModel extends NiceBaseFilterQueryModel with EquatableMixin {
   final NiceFilterQueryConditionType condition;

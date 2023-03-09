@@ -22,9 +22,9 @@ class NiceBaseListPaginator<D> extends StatefulWidget {
 
   NiceBaseListPaginator({
     super.key,
-    this.pageSizes: const [10, 25, 50],
-    this.boxDecoration: const BoxDecoration(),
-    this.innerPadding: EdgeInsets.zero,
+    this.pageSizes = const [10, 25, 50],
+    this.boxDecoration = const BoxDecoration(),
+    this.innerPadding = EdgeInsets.zero,
   })  : assert(pageSizes.length == pageSizes.toSet().length),
         assert(pageSizes.every((pageSize) => pageSize > 0));
 

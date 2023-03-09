@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/base-list/cubit/base-list-cubit-builder.widget.dart';
 
 typedef NiceBaseListBodyBuilder<D> = Widget Function(D data);
 typedef NiceBaseListBodyBuilderIndexed<D> = Widget Function(D data, int index);
@@ -79,7 +78,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.primary,
     this.physics,
     this.shrinkWrap = false,
-    this.padding: EdgeInsets.zero,
+    this.padding = EdgeInsets.zero,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -91,7 +90,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
-    this.pageLoadingIndicatorMaintainSize: true,
+    this.pageLoadingIndicatorMaintainSize = true,
     this.emptyStateBuilder,
   }) : delegate = NiceBaseListBodyBuilderDelegate(builder);
 
@@ -102,7 +101,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.primary,
     this.physics,
     this.shrinkWrap = false,
-    this.padding: EdgeInsets.zero,
+    this.padding = EdgeInsets.zero,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -114,7 +113,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
-    this.pageLoadingIndicatorMaintainSize: true,
+    this.pageLoadingIndicatorMaintainSize = true,
     this.emptyStateBuilder,
   }) : delegate = NiceBaseListBodyChildIndexedBuilderDelegate(builder);
 
@@ -125,7 +124,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.primary,
     this.physics,
     this.shrinkWrap = false,
-    this.padding: EdgeInsets.zero,
+    this.padding = EdgeInsets.zero,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -138,7 +137,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
-    this.pageLoadingIndicatorMaintainSize: true,
+    this.pageLoadingIndicatorMaintainSize = true,
     this.emptyStateBuilder,
   }) : delegate = NiceBaseListBodyChildSeparatedBuilderDelegate(
           builder: builder,
@@ -152,7 +151,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.primary,
     this.physics,
     this.shrinkWrap = false,
-    this.padding: EdgeInsets.zero,
+    this.padding = EdgeInsets.zero,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -165,7 +164,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
-    this.pageLoadingIndicatorMaintainSize: true,
+    this.pageLoadingIndicatorMaintainSize = true,
     this.emptyStateBuilder,
   }) : delegate = NiceBaseListBodyChildSeparatedIndexedBuilderDelegate(
           builder: builder,
@@ -179,7 +178,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.primary,
     this.physics,
     this.shrinkWrap = false,
-    this.padding: EdgeInsets.zero,
+    this.padding = EdgeInsets.zero,
     this.addAutomaticKeepAlives = true,
     this.addRepaintBoundaries = true,
     this.addSemanticIndexes = true,
@@ -191,7 +190,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.clipBehavior = Clip.hardEdge,
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
-    this.pageLoadingIndicatorMaintainSize: true,
+    this.pageLoadingIndicatorMaintainSize = true,
     this.emptyStateBuilder,
   });
 

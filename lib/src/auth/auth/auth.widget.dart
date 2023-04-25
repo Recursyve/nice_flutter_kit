@@ -14,7 +14,7 @@ class NiceAuth<User extends Object, Account extends Object> extends StatelessWid
   final Widget child;
 
   /// Called whenever the [NiceAuthState] changes
-  final void Function(BuildContext context, NiceAuthState state)? onStateChange;
+  final void Function(BuildContext context, NiceAuthState<User, Account> state)? onStateChange;
 
   /// Called whenever the [NiceAuthState.user] changes
   final void Function(BuildContext context, User? user)? onUserChange;

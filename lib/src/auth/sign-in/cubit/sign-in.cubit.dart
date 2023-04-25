@@ -1,9 +1,9 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-import 'package:rxdart/rxdart.dart';
+import "package:flutter/services.dart";
+import "package:flutter/widgets.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:reactive_forms/reactive_forms.dart";
+import "package:rxdart/rxdart.dart";
 
 class NiceSignInCubit<SocialProviders> extends NiceBaseCubit<NiceSignInState> {
   /// Provider that will be used for email/password & social provider sign ins
@@ -11,7 +11,7 @@ class NiceSignInCubit<SocialProviders> extends NiceBaseCubit<NiceSignInState> {
   final NiceAuthCubit authCubit;
   final NiceSignInConfig config;
 
-  final unsubscribeAll$ = new BehaviorSubject<void>();
+  final unsubscribeAll$ = BehaviorSubject<void>();
 
   final signInWithPasswordFormGroup = FormGroup({
     "email": FormControl<String>(validators: [Validators.required, Validators.email]),
@@ -64,7 +64,9 @@ class NiceSignInCubit<SocialProviders> extends NiceBaseCubit<NiceSignInState> {
           return;
         }
 
-        if (config.autofillEmailAndPassword) TextInput.finishAutofillContext(shouldSave: true);
+        if (config.autofillEmailAndPassword) {
+          TextInput.finishAutofillContext();
+        }
 
         await authCubit.loadCurrentUser();
       },

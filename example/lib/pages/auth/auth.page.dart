@@ -1,12 +1,12 @@
-import 'package:example/pages/auth/auth.provider.dart';
-import 'package:example/pages/auth/sign-in.provider.dart';
-import 'package:example/pages/common/base.page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:example/pages/auth/auth.provider.dart";
+import "package:example/pages/auth/sign-in.provider.dart";
+import "package:example/pages/common/base.page.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class AuthPage extends StatelessWidget {
-  const AuthPage();
+  const AuthPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,6 @@ class AuthPage extends StatelessWidget {
                   key: UniqueKey(),
                   duration: const Duration(milliseconds: 200),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       if (state.isRegistered)
                         const Text("Signed in and registered")
@@ -76,7 +75,6 @@ class AuthPage extends StatelessWidget {
                 errorText: "Invalid credentials",
                 invalidCredentialsText: "Invalid credentials",
                 style: TextStyle(color: Colors.red),
-                maintainSize: true,
               ),
               SizedBox(height: 16),
               NiceSignInEmailPasswordButton<SocialProviders>(

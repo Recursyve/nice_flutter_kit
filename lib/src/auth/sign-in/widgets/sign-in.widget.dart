@@ -1,7 +1,7 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import "package:flutter/widgets.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:reactive_forms/reactive_forms.dart";
 
 /// Widget used to provide the [NiceSignInCubit]
 /// Required for [NiceSignInEmailField], [NiceSignInPasswordField], [NiceSignInErrors], [NiceSignInEmailPasswordButton], [NiceSignInSocialButton]
@@ -18,6 +18,7 @@ class NiceSignIn<SocialProviders, User extends Object, Account extends Object> e
   final Widget child;
 
   const NiceSignIn({
+    super.key,
     required this.signInProvider,
     this.config = const NiceSignInConfig(),
     required this.child,

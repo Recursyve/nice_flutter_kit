@@ -1,9 +1,11 @@
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceFilterQueryUtils {
   // Replace or add the new rule only in the first rules list
   static NiceFilterQueryModel upsertQueryRules(
-      NiceFilterQueryModel? query, List<NiceFilterQueryRuleModel> upsertedRules) {
+    NiceFilterQueryModel? query,
+    List<NiceFilterQueryRuleModel> upsertedRules,
+  ) {
     if (query == null) {
       return NiceFilterQueryModel(condition: NiceFilterQueryConditionType.And, rules: upsertedRules);
     }

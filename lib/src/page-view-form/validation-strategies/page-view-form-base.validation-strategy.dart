@@ -1,7 +1,7 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/cupertino.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import "package:flutter/cupertino.dart";
+import "package:reactive_forms/reactive_forms.dart";
 
 abstract class NicePageViewFormBaseValidationStrategy {
   /// Called when the user presses the next button

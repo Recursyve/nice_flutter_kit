@@ -1,13 +1,4 @@
 analyzer:
   exclude: [ build/** ]
 
-linter:
-  rules:
-    - prefer_const_declarations
-    - prefer_const_literals_to_create_immutables
-    - prefer_const_constructors
-    - cancel_subscriptions
-    - close_sinks
-    - always_use_package_imports
-    - avoid_relative_lib_imports
-    - prefer_collection_literals
+include: lib/lints.yaml

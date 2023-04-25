@@ -1,10 +1,10 @@
-import 'package:example/pages/common/base.page.dart';
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import "package:example/pages/common/base.page.dart";
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:reactive_forms/reactive_forms.dart";
 
 class PageViewFormPage extends StatelessWidget {
-  const PageViewFormPage();
+  const PageViewFormPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class PageViewFormPage extends StatelessWidget {
               ),
               subTitleTextAlign: TextAlign.center,
               subTitlePadding: EdgeInsets.only(bottom: 32),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               pageConstraints: BoxConstraints(
                 maxWidth: 350,
               ),
@@ -155,6 +155,7 @@ class PageViewFormPage extends StatelessWidget {
             ),
           ],
           onSubmit: () {
+            // ignore: avoid_print
             print("Submitted");
           },
         ),

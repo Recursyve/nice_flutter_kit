@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/cupertino.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NicePageViewFormCustomEnabledStrategy implements NicePageViewFormBaseEnabledStrategy {
   final bool Function(BuildContext context) callback;

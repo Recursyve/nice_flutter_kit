@@ -1,8 +1,8 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/foundation.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 abstract class NiceBaseCubit<S extends NiceBaseState> extends Cubit<S> {
   NiceBaseCubit(S initialState) : super(initialState);
@@ -14,9 +14,13 @@ abstract class NiceBaseCubit<S extends NiceBaseState> extends Cubit<S> {
     FutureOr<R?> Function(Object e)? onError,
   }) async {
     try {
-      if (loading) emit(state.copyWithLoadingAndError(loading: true) as S);
+      if (loading) {
+        emit(state.copyWithLoadingAndError(loading: true) as S);
+      }
       final result = await callback();
-      if (loading) emit(state.copyWithLoadingAndError(loading: false) as S);
+      if (loading) {
+        emit(state.copyWithLoadingAndError(loading: false) as S);
+      }
       return result;
     } catch (e, s) {
       await NiceConfig.baseCubitConfig?.wrapErrorHandler(e, s);

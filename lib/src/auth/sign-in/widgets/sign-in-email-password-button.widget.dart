@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 /// Button that will call [NiceSignInCubit.signInWithPassword]
 /// Must be used in combination with [NiceSignIn], [NiceSignInEmailField] and [NiceSignInPasswordField]
@@ -29,6 +29,7 @@ class NiceSignInEmailPasswordButton<SocialProviders> extends StatelessWidget {
   final Color? loadingLineColor;
 
   const NiceSignInEmailPasswordButton({
+    super.key,
     required this.type,
     this.style,
     required this.text,

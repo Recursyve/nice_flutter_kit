@@ -1,4 +1,4 @@
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 /// Provider that will be used by [NiceSignInCubit]
 /// The [SocialProviders] can be anything, but an enum works best

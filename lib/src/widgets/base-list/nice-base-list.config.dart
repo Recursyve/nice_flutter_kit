@@ -1,5 +1,5 @@
-import 'package:flutter/widgets.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/widgets.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 @immutable
 class NiceBaseListConfig<D> {

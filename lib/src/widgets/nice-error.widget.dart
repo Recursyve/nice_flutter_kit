@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class NiceErrorWidget extends StatelessWidget {
   final String error;
   final VoidCallback? onRefresh;
 
   const NiceErrorWidget({
+    super.key,
     required this.error,
     this.onRefresh,
   });

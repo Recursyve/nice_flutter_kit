@@ -1,4 +1,4 @@
-import 'package:tuple/tuple.dart';
+import "package:tuple/tuple.dart";
 
 class NiceFutureUtils {
   const NiceFutureUtils._();

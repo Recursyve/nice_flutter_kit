@@ -1,16 +1,16 @@
 import "dart:async";
 import "dart:convert";
 
-import 'package:flutter/cupertino.dart';
+import "package:flutter/cupertino.dart";
 import "package:flutter/services.dart";
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:intl/intl.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:timeago/timeago.dart' as timeago;
+import "package:flutter_localizations/flutter_localizations.dart";
+import "package:intl/intl.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:timeago/timeago.dart" as timeago;
 
 class NiceLocalizations {
   Locale locale;
-  Map<String, Map<String, dynamic>> _translations = {};
+  final Map<String, Map<String, dynamic>> _translations = {};
 
   factory NiceLocalizations.of(BuildContext context) {
     return Localizations.of<NiceLocalizations>(context, NiceLocalizations)!;
@@ -29,13 +29,13 @@ class NiceLocalizations {
   NiceLocalizations(this.locale) {
     Intl.defaultLocale = locale.toString();
 
-    timeago.setLocaleMessages('fr', timeago.FrShortMessages());
-    timeago.setLocaleMessages('en', timeago.EnMessages());
+    timeago.setLocaleMessages("fr", timeago.FrShortMessages());
+    timeago.setLocaleMessages("en", timeago.EnMessages());
   }
 
   static void initializeTimeago() {
-    timeago.setLocaleMessages('fr', timeago.FrShortMessages());
-    timeago.setLocaleMessages('en', timeago.EnMessages());
+    timeago.setLocaleMessages("fr", timeago.FrShortMessages());
+    timeago.setLocaleMessages("en", timeago.EnMessages());
   }
 
   static Locale localResolutionCallback(Locale? locale, Iterable<Locale> supportedLocales) {
@@ -43,7 +43,7 @@ class NiceLocalizations {
       return supportedLocales.first;
     }
 
-    for (var supportedLocale in supportedLocales) {
+    for (final supportedLocale in supportedLocales) {
       if (supportedLocale.languageCode == locale.languageCode) {
         return supportedLocale;
       }
@@ -54,8 +54,9 @@ class NiceLocalizations {
 
   Future load() async {
     for (final supportedLocale in supportedLocales) {
-      String jsonString = await rootBundle.loadString("assets/localizations/${supportedLocale.languageCode}.json");
-      Map<String, dynamic> jsonMap = json.decode(jsonString);
+      final String jsonString =
+          await rootBundle.loadString("assets/localizations/${supportedLocale.languageCode}.json");
+      final Map<String, dynamic> jsonMap = json.decode(jsonString);
       _translations.putIfAbsent(supportedLocale.languageCode, () {
         return jsonMap.map((key, value) {
           return MapEntry(key, value);
@@ -68,7 +69,7 @@ class NiceLocalizations {
     var nestedMap = _getNestedValue(key, overrideLocale: overrideLocale);
 
     if (nestedMap is String) {
-      nestedMap = this.replaceValues(nestedMap, variables);
+      nestedMap = replaceValues(nestedMap, variables);
     }
 
     return nestedMap.toString();
@@ -98,6 +99,7 @@ class NiceLocalizations {
         return keyPath;
       }
       final currentKey = subKeys.removeAt(0);
+      // ignore: avoid_dynamic_calls
       currentValue = currentValue[currentKey];
     }
     return currentValue ?? keyPath;
@@ -114,7 +116,7 @@ class _NiceLocalizationsDelegate extends LocalizationsDelegate<NiceLocalizations
 
   @override
   Future<NiceLocalizations> load(Locale locale) async {
-    NiceLocalizations localizations = new NiceLocalizations(locale);
+    final localizations = NiceLocalizations(locale);
     await localizations.load();
     return localizations;
   }

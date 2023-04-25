@@ -1,4 +1,4 @@
-import 'package:flutter/rendering.dart';
+import "package:flutter/rendering.dart";
 
 class NiceLocalizationsConfig {
   final List<Locale> supportedLocales;

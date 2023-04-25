@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 enum NicePageViewFormButtonBoundReachedState {
   /// Leave the button as it is
@@ -53,11 +53,11 @@ class NicePageViewFormNextButtonConfig extends NicePageViewFormBaseButtonConfig 
     ButtonStyle? style,
     EdgeInsets padding = EdgeInsets.zero,
   }) : super(
-    text: text,
-    elevated: elevated,
-    style: style,
-    padding: padding,
-  );
+          text: text,
+          elevated: elevated,
+          style: style,
+          padding: padding,
+        );
 }
 
 class NicePageViewFormPreviousButtonConfig extends NicePageViewFormBaseButtonConfig {
@@ -72,10 +72,9 @@ class NicePageViewFormPreviousButtonConfig extends NicePageViewFormBaseButtonCon
     EdgeInsets padding = EdgeInsets.zero,
     this.boundReachedState = NicePageViewFormButtonBoundReachedState.Hidden,
   }) : super(
-    text: text,
-    elevated: elevated,
-    style: style,
-    padding: padding,
-  );
+          text: text,
+          elevated: elevated,
+          style: style,
+          padding: padding,
+        );
 }
-

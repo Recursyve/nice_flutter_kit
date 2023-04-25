@@ -1,1 +1,1 @@
-export 'nice.localizations.dart';
+export "nice.localizations.dart";

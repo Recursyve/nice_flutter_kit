@@ -103,3 +103,7 @@
 
 * Added padidng to `NiceOnboarding`.
 
+### 1.4.20
+
+* Fixed typings for NiceAuth
+

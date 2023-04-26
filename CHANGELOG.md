@@ -1,3 +1,7 @@
+### 2.0.0-rc.2
+
+* Fixed typings for NiceAuth (form 1.4.20)
+
 ### 2.0.0-rc.1
 
 RC for version 2.

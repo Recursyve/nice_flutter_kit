@@ -8,6 +8,10 @@ RC for version 2.
 
 ---
 
+### 1.4.20
+
+* Fixed typings for NiceAuth
+
 ### 1.4.19
 
 * Added padding to `NiceOnboarding`.
@@ -113,4 +117,3 @@ RC for version 2.
 ## 1.0.0
 
 * Initial release
-

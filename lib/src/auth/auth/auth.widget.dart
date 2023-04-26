@@ -90,8 +90,9 @@ class NiceAuth<User extends Object, Account extends Object> extends StatelessWid
     if (onStateChange != null) {
       return null;
     }
-    if (onUserChange != null && onUserChange != null)
+    if (onUserChange != null && onUserChange != null) {
       return (prev, curr) => prev.user != curr.user || prev.account != curr.account;
+    }
     if (onUserChange != null) {
       return (prev, curr) => prev.user != curr.user;
     }

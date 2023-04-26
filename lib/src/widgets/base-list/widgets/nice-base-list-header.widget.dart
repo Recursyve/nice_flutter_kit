@@ -42,7 +42,7 @@ class NiceBaseListHeader extends StatelessWidget {
   }
 
   Widget _buildLarge() {
-    if (action != null)
+    if (action != null) {
       return Row(
         children: [
           Expanded(
@@ -65,6 +65,7 @@ class NiceBaseListHeader extends StatelessWidget {
           ),
         ],
       );
+    }
 
     return Row(
       children: [

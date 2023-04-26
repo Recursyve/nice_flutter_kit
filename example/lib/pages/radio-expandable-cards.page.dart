@@ -14,11 +14,12 @@ class RadioExpandableCardsPage extends StatelessWidget {
         child: ListView.separated(
           itemCount: 50,
           itemBuilder: (_, index) {
-            if (index % 5 == 0)
+            if (index % 5 == 0) {
               return Padding(
                 padding: const EdgeInsets.fromLTRB(32, 20, 32, 0),
                 child: Text("This is title #$index"),
               );
+            }
 
             return _buildCard(index);
           },

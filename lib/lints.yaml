@@ -26,6 +26,7 @@ linter:
     - cancel_subscriptions
     - close_sinks
     - control_flow_in_finally
+    - curly_braces_in_flow_control_structures
     - empty_catches
     - empty_constructor_bodies
     - empty_statements
@@ -78,3 +79,4 @@ linter:
     - use_full_hex_values_for_flutter_colors
     - use_if_null_to_convert_nulls_to_bools
     - use_key_in_widget_constructors
+

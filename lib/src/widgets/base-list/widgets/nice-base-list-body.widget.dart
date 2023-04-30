@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceBaseListBody<D> extends StatelessWidget {
   final NiceBaseListItemBuilder<D> itemBuilder;
@@ -9,6 +9,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
   final bool fadeInItems;
 
   const NiceBaseListBody({
+    super.key,
     required this.itemBuilder,
     this.separator,
     required this.fadeInItems,
@@ -32,7 +33,9 @@ class NiceBaseListBody<D> extends StatelessWidget {
   Widget _buildItem(BuildContext context, D data, int index) {
     final child = itemBuilder(context, data, index);
 
-    if (!fadeInItems) return child;
+    if (!fadeInItems) {
+      return child;
+    }
 
     return NiceAnimatedFadeIn(
       key: ValueKey(data),

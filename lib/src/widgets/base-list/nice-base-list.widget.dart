@@ -1,11 +1,11 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/widgets/base-list/widgets/nice-base-list-body.widget.dart';
-import 'package:nice_flutter_kit/src/widgets/base-list/widgets/nice-base-list-header.widget.dart';
-import 'package:rxdart/rxdart.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:nice_flutter_kit/src/widgets/base-list/widgets/nice-base-list-body.widget.dart";
+import "package:nice_flutter_kit/src/widgets/base-list/widgets/nice-base-list-header.widget.dart";
+import "package:rxdart/rxdart.dart";
 
 typedef NiceBaseListItemBuilder<D> = Widget Function(BuildContext context, D data, int? index);
 
@@ -32,6 +32,7 @@ class NiceBaseList<D> extends StatefulWidget {
   final List<BlocProvider> blocProviders;
 
   const NiceBaseList({
+    super.key,
     required this.config,
     required this.itemBuilder,
     this.title,
@@ -78,7 +79,7 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
 
     _searchSubject.distinct().debounceTime(const Duration(milliseconds: 250)).listen((text) async {
       await widget.onBeforeSearch?.call();
-      _cubit.updateSearch(NiceFilterSearchModel(value: text));
+      await _cubit.updateSearch(NiceFilterSearchModel(value: text));
     });
 
     _scrollController.addListener(() {
@@ -162,7 +163,9 @@ class _NiceBaseListState<D> extends State<NiceBaseList<D>> {
           BlocBuilder<NiceBaseListCubit<D>, NiceBaseListState<D>>(
             buildWhen: (prev, curr) => prev.loadingMore != curr.loadingMore,
             builder: (context, state) {
-              if (!state.loadingMore) return const SizedBox();
+              if (!state.loadingMore) {
+                return const SizedBox();
+              }
 
               return Padding(
                 padding: const EdgeInsets.only(top: 8),

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 /// Button that will call [NiceSignInCubit.signInWithSocialProvider]
 /// Must be used in combination with [NiceSignIn]
@@ -23,6 +23,7 @@ class NiceSignInSocialButton<SocialProviders> extends StatelessWidget {
   final Widget child;
 
   const NiceSignInSocialButton({
+    super.key,
     required this.type,
     required this.socialProvider,
     this.style,

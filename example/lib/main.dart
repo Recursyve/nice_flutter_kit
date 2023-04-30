@@ -1,11 +1,11 @@
-import 'package:example/pages/auth/auth.page.dart';
-import 'package:example/pages/home.page.dart';
-import 'package:example/pages/onboarding.page.dart';
-import 'package:example/pages/page-view-form.page.dart';
-import 'package:example/pages/radio-expandable-cards.page.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:example/pages/auth/auth.page.dart";
+import "package:example/pages/home.page.dart";
+import "package:example/pages/onboarding.page.dart";
+import "package:example/pages/page-view-form.page.dart";
+import "package:example/pages/radio-expandable-cards.page.dart";
+import "package:flutter/material.dart";
+import "package:go_router/go_router.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,13 +14,13 @@ void main() async {
     onboardingConfig: NiceOnboardingGlobalConfig(),
     baseCubitConfig: NiceBaseCubitConfig(
       wrapErrorHandler: (e, s) {
+        // ignore: avoid_print
         print(e);
+        // ignore: avoid_print
         print(s);
       },
     ),
-    localizationsConfig: const NiceLocalizationsConfig(
-      supportedLocales: [Locale("fr", "CA"), Locale("en", "CA")],
-    ),
+    localizationsConfig: const NiceLocalizationsConfig(),
   );
 
   runApp(MyApp());
@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
-      title: 'Flutter Demo',
+      title: "Flutter Demo",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -1,6 +1,6 @@
-import 'package:collection/collection.dart' show IterableExtension;
-import 'package:example/pages/auth/auth.provider.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:collection/collection.dart" show IterableExtension;
+import "package:example/pages/auth/auth.provider.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 enum SocialProviders {
   GitHub,

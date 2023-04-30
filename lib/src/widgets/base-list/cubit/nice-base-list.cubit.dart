@@ -1,15 +1,15 @@
-import 'package:collection/collection.dart' show IterableExtension;
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/widgets/base-list/utils/nice-filter-query.utils.dart';
+import "package:collection/collection.dart" show IterableExtension;
+import "package:flutter/cupertino.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:nice_flutter_kit/src/widgets/base-list/utils/nice-filter-query.utils.dart";
 
 class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   final NiceBaseListConfig<D> config;
 
   NiceBaseListCubit({
     required this.config,
-  }) : super(NiceBaseListState.initialState());
+  }) : super(const NiceBaseListState.initialState());
 
   factory NiceBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
 
@@ -39,7 +39,9 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   }
 
   Future<void> loadMore() async {
-    if (state.loading || state.loadingMore || state.endReached) return;
+    if (state.loading || state.loadingMore || state.endReached) {
+      return;
+    }
 
     await wrap(
       loading: false,
@@ -61,7 +63,10 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
         emit(
           state.copyWith(
             result: NiceFilterResultModel(
-                page: result.page, total: result.total, values: [...state.values, ...(result.values ?? const [])]),
+              page: result.page,
+              total: result.total,
+              values: [...state.values, ...?result.values],
+            ),
             loadingMore: false,
             endReached: (result.values ?? const []).length < config.itemsPerPage,
           ),
@@ -108,7 +113,9 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
         ),
       ),
     );
-    if (reloadData) await load();
+    if (reloadData) {
+      await load();
+    }
   }
 
   Future<void> removeQueryRule(String id, {bool reloadData = true}) async {
@@ -117,7 +124,9 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
         NiceFilterQueryUtils.removeRuleById(state.query, id),
       ),
     );
-    if (reloadData) await load();
+    if (reloadData) {
+      await load();
+    }
   }
 
   Future<void> updateOrder(NiceFilterOrderModel? order) async {
@@ -126,7 +135,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   }
 
   Future<void> resetAndLoad() async {
-    emit(NiceBaseListState.initialState());
+    emit(const NiceBaseListState.initialState());
     await load();
   }
 

@@ -1,4 +1,4 @@
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 abstract class NiceBaseApi {
   final NiceApiConfig? overrideConfig;
@@ -10,8 +10,10 @@ abstract class NiceBaseApi {
   });
 
   String get _apiUrl {
-    assert(NiceConfig.defaultApiConfig != null || overrideConfig != null,
-        "NiceApi wasn't initialized, please provide NiceApiConfig in main");
+    assert(
+      NiceConfig.defaultApiConfig != null || overrideConfig != null,
+      "NiceApi wasn't initialized, please provide NiceApiConfig in main",
+    );
     return overrideConfig?.url ?? NiceConfig.defaultApiConfig!.url;
   }
 

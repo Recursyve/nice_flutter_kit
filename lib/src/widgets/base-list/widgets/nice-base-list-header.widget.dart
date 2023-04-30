@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceBaseListHeader extends StatelessWidget {
   final Widget? title;
@@ -10,6 +10,7 @@ class NiceBaseListHeader extends StatelessWidget {
   final bool hideSearch;
 
   const NiceBaseListHeader({
+    super.key,
     this.title,
     this.backIcon,
     this.onBack,
@@ -41,7 +42,7 @@ class NiceBaseListHeader extends StatelessWidget {
   }
 
   Widget _buildLarge() {
-    if (action != null)
+    if (action != null) {
       return Row(
         children: [
           Expanded(
@@ -53,7 +54,6 @@ class NiceBaseListHeader extends StatelessWidget {
           if (!hideSearch)
             Expanded(
               child: Align(
-                alignment: Alignment.center,
                 child: _buildSearch(),
               ),
             ),
@@ -65,6 +65,7 @@ class NiceBaseListHeader extends StatelessWidget {
           ),
         ],
       );
+    }
 
     return Row(
       children: [

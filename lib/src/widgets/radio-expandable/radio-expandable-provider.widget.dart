@@ -1,5 +1,5 @@
-import 'package:flutter/widgets.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/widgets.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class RadioExpandableProvider extends StatefulWidget {
   /// Key that will be initially expanded
@@ -32,7 +32,9 @@ class _RadioExpandableProviderState extends State<RadioExpandableProvider> {
   Key? _expandedKey;
 
   void _setExpandedKey(Key? expandedKey) {
-    if (this._expandedKey == expandedKey) return;
+    if (_expandedKey == expandedKey) {
+      return;
+    }
 
     setState(() {
       _expandedKey = expandedKey;
@@ -50,8 +52,8 @@ class _RadioExpandableProviderState extends State<RadioExpandableProvider> {
   Widget build(BuildContext context) {
     return RadioExpandableProviderData(
       expandedKey: _expandedKey,
-      child: widget.child,
       state: this,
+      child: widget.child,
     );
   }
 }
@@ -60,7 +62,8 @@ class RadioExpandableProviderData extends InheritedWidget {
   final Key? expandedKey;
   final _RadioExpandableProviderState _state;
 
-  RadioExpandableProviderData({
+  const RadioExpandableProviderData({
+    super.key,
     required this.expandedKey,
     required Widget child,
     required _RadioExpandableProviderState state,
@@ -71,6 +74,6 @@ class RadioExpandableProviderData extends InheritedWidget {
 
   @override
   bool updateShouldNotify(covariant RadioExpandableProviderData oldWidget) {
-    return this.expandedKey != oldWidget.expandedKey;
+    return expandedKey != oldWidget.expandedKey;
   }
 }

@@ -1,4 +1,4 @@
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceConfig {
   static NiceApiConfig? defaultApiConfig;

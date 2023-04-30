@@ -1,4 +1,4 @@
-import 'package:reactive_forms/reactive_forms.dart';
+import "package:reactive_forms/reactive_forms.dart";
 
 class NiceSignInConfig {
   /// Whether or not to activate native autofill for the email and password, and save it afterwards.

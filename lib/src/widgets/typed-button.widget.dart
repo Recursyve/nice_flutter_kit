@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 enum NiceButtonTypes {
   Text,
@@ -33,7 +33,7 @@ class NiceTypedButton extends StatelessWidget {
     required this.child,
   });
 
-  factory NiceTypedButton.icon({
+  const factory NiceTypedButton.icon({
     Key? key,
     required NiceButtonTypes type,
     required VoidCallback? onPressed,
@@ -145,6 +145,7 @@ class _NiceTypedButtonIcon extends NiceTypedButton {
     }
   }
 
+  @override
   Widget _buildTextButton() {
     return TextButton.icon(
       onPressed: onPressed,
@@ -160,6 +161,7 @@ class _NiceTypedButtonIcon extends NiceTypedButton {
     );
   }
 
+  @override
   Widget _buildElevatedButton() {
     return ElevatedButton.icon(
       onPressed: onPressed,
@@ -175,6 +177,7 @@ class _NiceTypedButtonIcon extends NiceTypedButton {
     );
   }
 
+  @override
   Widget _buildOutlinedButton() {
     return OutlinedButton.icon(
       onPressed: onPressed,

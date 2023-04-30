@@ -1,6 +1,6 @@
-import 'package:expandable/expandable.dart';
-import 'package:flutter/widgets.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:expandable/expandable.dart";
+import "package:flutter/widgets.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class RadioExpandable extends StatefulWidget {
   /// Widget tha will be displayed when the expandable is collapsed

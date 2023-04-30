@@ -1,6 +1,6 @@
-import 'package:flutter/widgets.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:provider/provider.dart';
+import "package:flutter/widgets.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:provider/provider.dart";
 
 class NicePageViewFormConfig {
   /// Duration it takes for the animation of a page change

@@ -1,8 +1,8 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/widgets.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import "package:flutter/widgets.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:reactive_forms/reactive_forms.dart";
 
 class NicePageViewFormFormGroupValidationStrategy implements NicePageViewFormBaseValidationStrategy {
   final String? abstractControlName;
@@ -22,7 +22,9 @@ class NicePageViewFormFormGroupValidationStrategy implements NicePageViewFormBas
   FutureOr<bool> isValid(BuildContext context) {
     final control = _getControl(context);
     if (!control.valid) {
-      if (markAllAsTouchedIfInvalid) control.markAllAsTouched();
+      if (markAllAsTouchedIfInvalid) {
+        control.markAllAsTouched();
+      }
       return false;
     }
     return true;

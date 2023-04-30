@@ -1,7 +1,7 @@
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:path/path.dart';
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:path/path.dart";
 
 class NiceOnboardingWelcomePage extends StatelessWidget {
   static const double buttonHeight = 100;
@@ -10,6 +10,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
   final VoidCallback onNext;
 
   const NiceOnboardingWelcomePage({
+    super.key,
     required this.configuration,
     required this.onNext,
   });
@@ -21,7 +22,6 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
         color: Theme.of(context).colorScheme.background,
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
             child: SingleChildScrollView(
@@ -32,7 +32,6 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
                   SizedBox(
                     height: (MediaQuery.of(context).size.height - buttonHeight) * 0.6,
                     child: Align(
-                      alignment: Alignment.center,
                       child: _buildImage(configuration.imageUrl),
                     ),
                   ),
@@ -57,8 +56,8 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                child: Text(configuration.bottomButtonText),
                 onPressed: onNext,
+                child: Text(configuration.bottomButtonText),
               ),
             ),
           ),

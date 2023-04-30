@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:introduction_screen/introduction_screen.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:path/path.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:introduction_screen/introduction_screen.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:path/path.dart";
 
 class NiceOnboardingIntroductionSequence extends StatelessWidget {
   final NiceOnboardingIntroductionSequenceConfiguration sequenceConfiguration;
   final VoidCallback onNext;
 
-  NiceOnboardingIntroductionSequence({
+  const NiceOnboardingIntroductionSequence({
+    super.key,
     required this.sequenceConfiguration,
     required this.onNext,
   });
@@ -40,11 +41,10 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
               child: configuration.title,
             ),
             decoration: PageDecoration(
-              bodyAlignment: Alignment.topCenter,
               imageAlignment: Alignment.center,
               imageFlex: 2,
               bodyFlex: 3,
-              imagePadding: const EdgeInsets.only(bottom: 0),
+              imagePadding: const EdgeInsets.only(),
               pageColor: Theme.of(context).colorScheme.background,
               contentMargin: const EdgeInsets.all(5),
             ),
@@ -62,7 +62,6 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
           ),
       ],
       showSkipButton: true,
-      showDoneButton: true,
       skip: Text(
         sequenceConfiguration.skip,
         style: TextStyle(

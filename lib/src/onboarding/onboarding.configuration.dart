@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/foundation.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceOnboardingConfiguration {
   final NiceOnboardingWelcomeConfiguration? welcome;

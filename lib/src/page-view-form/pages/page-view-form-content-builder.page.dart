@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NicePageViewFormContentBuilderPage extends NicePageViewFormLayoutPage {
   final WidgetBuilder contentBuilder;

@@ -1,6 +1,6 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/foundation.dart';
+import "package:flutter/foundation.dart";
 
 typedef ErrorCallback = FutureOr<void> Function(Object e, StackTrace s);
 

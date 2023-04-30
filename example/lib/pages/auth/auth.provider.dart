@@ -1,5 +1,5 @@
-import 'package:collection/collection.dart' show IterableExtension;
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:collection/collection.dart" show IterableExtension;
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class User {
   final String userId;
@@ -46,7 +46,10 @@ class AuthProvider implements NiceAuthProvider<User, Account> {
   @override
   Future<Account?> getCurrentAccount() async {
     await Future.delayed(const Duration(seconds: 1));
-    if (currentUser == null) return null;
+    if (currentUser == null) {
+      return null;
+    }
+
     return accounts.firstWhereOrNull((account) => account.userId == currentUser!.userId);
   }
 

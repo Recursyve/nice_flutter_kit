@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import "package:flutter/cupertino.dart";
 
 class NicePageViewFormPageConfig {
   /// Alignment of the title, used in [NicePageViewFormLayoutPage]

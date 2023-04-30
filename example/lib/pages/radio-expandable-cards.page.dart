@@ -1,9 +1,9 @@
-import 'package:example/pages/common/base.page.dart';
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:example/pages/common/base.page.dart";
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class RadioExpandableCardsPage extends StatelessWidget {
-  const RadioExpandableCardsPage();
+  const RadioExpandableCardsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +14,12 @@ class RadioExpandableCardsPage extends StatelessWidget {
         child: ListView.separated(
           itemCount: 50,
           itemBuilder: (_, index) {
-            if (index % 5 == 0)
+            if (index % 5 == 0) {
               return Padding(
                 padding: const EdgeInsets.fromLTRB(32, 20, 32, 0),
                 child: Text("This is title #$index"),
               );
+            }
 
             return _buildCard(index);
           },
@@ -32,6 +33,7 @@ class RadioExpandableCardsPage extends StatelessWidget {
     return RadioExpandableCard(
       key: ValueKey(index),
       cardMargin: const EdgeInsets.symmetric(horizontal: 32),
+      // ignore: avoid_print
       onChanged: (expanded) => print("Card $index changed: $expanded"),
       cardDecoration: const BoxDecoration(
         color: Colors.white,

@@ -1,2 +1,2 @@
-export 'nice-base.cubit.dart';
-export 'nice-base.state.dart';
+export "nice-base.cubit.dart";
+export "nice-base.state.dart";

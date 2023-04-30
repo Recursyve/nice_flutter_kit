@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:reactive_forms/reactive_forms.dart";
 
 class NicePageViewFormPasswordPage extends NicePageViewFormLayoutPage {
   /// Name of the parent [FormGroup]

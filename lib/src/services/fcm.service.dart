@@ -1,5 +1,7 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:notification_permissions/notification_permissions.dart';
+import "dart:async";
+
+import "package:firebase_messaging/firebase_messaging.dart";
+import "package:notification_permissions/notification_permissions.dart";
 
 class NiceFcmService {
   static Future<String?> get token => FirebaseMessaging.instance.getToken();
@@ -7,10 +9,12 @@ class NiceFcmService {
   static Future<void> init() async {
     final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
     if (initialMessage != null) {
-      _onOpenWithInitialMessage(initialMessage);
+      unawaited(_onOpenWithInitialMessage(initialMessage));
     }
 
-    if (!await isPermissionGranted()) return;
+    if (!await isPermissionGranted()) {
+      return;
+    }
 
     FirebaseMessaging.onMessage.listen(_onMessage);
   }
@@ -38,11 +42,11 @@ class NiceFcmService {
     return permission == PermissionStatus.denied;
   }
 
-  static void _onOpenWithInitialMessage(RemoteMessage message) async {
+  static Future<void> _onOpenWithInitialMessage(RemoteMessage message) async {
     // TODO: handle notification that opened the app
   }
 
-  static void _onMessage(RemoteMessage message) async {
+  static Future<void> _onMessage(RemoteMessage message) async {
     // TODO: handle in-app notification
   }
 }

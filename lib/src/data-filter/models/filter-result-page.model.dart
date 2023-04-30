@@ -1,6 +1,6 @@
-import 'dart:collection';
+import "dart:collection";
 
-import 'package:equatable/equatable.dart';
+import "package:equatable/equatable.dart";
 
 // ignore: must_be_immutable
 class NiceFilterResultPageModel extends Equatable {

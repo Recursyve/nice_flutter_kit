@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/material.dart";
+import "package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NicePageViewFormButtons extends StatelessWidget {
   /// Index of the current page in the [PageView]
@@ -19,6 +19,7 @@ class NicePageViewFormButtons extends StatelessWidget {
   final VoidCallback? onChange;
 
   const NicePageViewFormButtons({
+    super.key,
     required this.currentPageIndex,
     required this.pageCount,
     required this.onNext,

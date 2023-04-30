@@ -1,3 +1,7 @@
+### 2.0.0
+
+* Apply lints
+
 ### 2.0.0-rc.2
 
 * Fixed typings for NiceAuth (form 1.4.20)

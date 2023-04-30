@@ -101,9 +101,12 @@
 
 ### 1.4.19
 
-* Added padidng to `NiceOnboarding`.
+* Added padding to `NiceOnboarding`.
 
 ### 1.4.20
 
 * Fixed typings for NiceAuth
 
+### 1.4.21
+
+* Lints

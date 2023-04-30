@@ -110,3 +110,7 @@
 ### 1.4.21
 
 * Lints
+
+### 1.4.22
+
+* Fix for base list

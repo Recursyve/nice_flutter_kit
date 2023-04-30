@@ -9,7 +9,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
 
   NiceBaseListCubit({
     required this.config,
-  }) : super(const NiceBaseListState.initialState());
+  }) : super(NiceBaseListState<D>.initialState());
 
   factory NiceBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
 

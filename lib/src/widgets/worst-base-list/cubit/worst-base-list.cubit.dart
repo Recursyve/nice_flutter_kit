@@ -1,15 +1,15 @@
-import 'package:collection/collection.dart' show IterableExtension;
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/widgets/worst-base-list/utils/worst-filter-query.utils.dart';
+import "package:collection/collection.dart";
+import "package:flutter/cupertino.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:nice_flutter_kit/src/widgets/worst-base-list/utils/worst-filter-query.utils.dart";
 
 class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
   final WorstBaseListConfig<D> config;
 
   WorstBaseListCubit({
     required this.config,
-  }) : super(WorstBaseListState.initialState());
+  }) : super(const WorstBaseListState.initialState());
 
   factory WorstBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
 
@@ -39,7 +39,9 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
   }
 
   Future<void> loadMore() async {
-    if (state.loading || state.loadingMore || state.endReached) return;
+    if (state.loading || state.loadingMore || state.endReached) {
+      return;
+    }
 
     await wrap(
       loading: false,
@@ -111,7 +113,9 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
         ),
       ),
     );
-    if (reloadData) await load();
+    if (reloadData) {
+      await load();
+    }
   }
 
   Future<void> removeQueryRule(String id, {bool reloadData = true}) async {
@@ -120,7 +124,9 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
         WorstFilterQueryUtils.removeRuleById(state.query, id),
       ),
     );
-    if (reloadData) await load();
+    if (reloadData) {
+      await load();
+    }
   }
 
   Future<void> updateOrder(NiceFilterOrderModel? order) async {
@@ -129,7 +135,7 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
   }
 
   Future<void> resetAndLoad() async {
-    emit(WorstBaseListState.initialState());
+    emit(const WorstBaseListState.initialState());
     await load();
   }
 

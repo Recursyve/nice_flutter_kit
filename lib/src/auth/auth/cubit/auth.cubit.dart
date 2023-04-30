@@ -1,6 +1,6 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/widgets.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceAuthCubit<User extends Object, Account extends Object> extends NiceBaseCubit<NiceAuthState<User, Account>> {
   /// [NiceAuthProvider] that will be used to handle the current user

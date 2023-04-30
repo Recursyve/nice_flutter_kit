@@ -1,6 +1,6 @@
-import 'package:expandable/expandable.dart';
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:expandable/expandable.dart";
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 /// Similar to [RadioExpandable], but displays the [header] and [body] in a cord.
 /// It also handles the tap to expand / collapse the expandable

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:reactive_forms/reactive_forms.dart";
 
 /// [ReactiveTextField] that will automatically bind to the [FormGroup] of [NiceSignInCubit] provided in [NiceSignIn]
 /// Must be used in combination with [NiceSignIn], [NiceSignInPasswordField] and [NiceSignInEmailPasswordButton]
@@ -18,6 +18,7 @@ class NiceSignInEmailField<SocialProviders> extends StatelessWidget {
   final TextAlign textAlign;
 
   const NiceSignInEmailField({
+    super.key,
     this.validationMessages,
     this.decoration = const InputDecoration(),
     this.style,

@@ -1,5 +1,5 @@
-import 'package:example/pages/base-list/accounts.model.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:example/pages/base-list/accounts.model.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class AccountsFilterProvider implements NiceBaseListDataFilterProvider<Accounts> {
   @override

@@ -1,4 +1,4 @@
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 /// Config that will be used to determine the behavior of the base list.
 class NiceBaseListConfigData<D> {

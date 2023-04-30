@@ -12,6 +12,10 @@ RC for version 2.
 
 ---
 
+### 1.4.21
+
+* Lints
+
 ### 1.4.20
 
 * Fixed typings for NiceAuth

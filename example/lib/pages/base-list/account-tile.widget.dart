@@ -1,10 +1,11 @@
-import 'package:example/pages/base-list/accounts.model.dart';
-import 'package:flutter/material.dart';
+import "package:example/pages/base-list/accounts.model.dart";
+import "package:flutter/material.dart";
 
 class AccountTile extends StatelessWidget {
   final Accounts account;
 
   const AccountTile({
+    super.key,
     required this.account,
   });
 
@@ -25,7 +26,6 @@ class AccountTile extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               width: 32,

@@ -1,4 +1,4 @@
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class WorstBaseListState<D> extends NiceBaseState {
   final NiceFilterResultModel<D>? result;
@@ -22,7 +22,7 @@ class WorstBaseListState<D> extends NiceBaseState {
     required this.search,
   });
 
-  WorstBaseListState.initialState()
+  const WorstBaseListState.initialState()
       : result = null,
         loadingMore = false,
         endReached = false,

@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import "package:flutter/widgets.dart";
 
 class NiceLazyLoader extends StatefulWidget {
   final VoidCallback onLoad;
@@ -8,6 +8,7 @@ class NiceLazyLoader extends StatefulWidget {
   final bool dangerouslySkipControllerDisposal;
 
   const NiceLazyLoader({
+    super.key,
     required this.onLoad,
     this.loadingThreshold = 350,
     this.scrollController,

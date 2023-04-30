@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:rxdart/rxdart.dart';
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:rxdart/rxdart.dart";
 
 /// This widget is part of the base list, and MUST be a child of [NiceBaseListConfig]
 ///

@@ -1,6 +1,6 @@
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:collection/collection.dart";
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 /// This widget is part of the base list, and MUST be a child of [NiceBaseListConfig]
 ///
@@ -124,7 +124,9 @@ class _NiceBaseListPaginatorState<D> extends State<NiceBaseListPaginator<D>> {
             return DropdownButton<int>(
               value: state.pageSize,
               onChanged: (pageSize) {
-                if (pageSize != null) NiceBaseListCubit.of<D>(context).setPageSize(pageSize);
+                if (pageSize != null) {
+                  NiceBaseListCubit.of<D>(context).setPageSize(pageSize);
+                }
               },
               items: [
                 for (final pageSize in pageSizes.sorted((a, b) => a - b))

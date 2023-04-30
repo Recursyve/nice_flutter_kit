@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:equatable/equatable.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceFilterQueryModel extends NiceBaseFilterQueryModel with EquatableMixin {
   final NiceFilterQueryConditionType condition;
@@ -15,9 +15,13 @@ class NiceFilterQueryModel extends NiceBaseFilterQueryModel with EquatableMixin 
     for (final rule in rules) {
       if (rule is NiceFilterQueryModel) {
         final value = rule.findValueForId(id);
-        if (value != null) return value;
+        if (value != null) {
+          return value;
+        }
       } else if (rule is NiceFilterQueryRuleModel) {
-        if (rule.id == id) return rule.value;
+        if (rule.id == id) {
+          return rule.value;
+        }
       }
     }
 

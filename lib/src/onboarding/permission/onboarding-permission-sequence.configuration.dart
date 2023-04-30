@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceOnboardingPermissionConfiguration {
   final NicePermissionTypes type;
@@ -24,5 +24,5 @@ class OnboardingPermissionSequenceConfiguration {
 
   OnboardingPermissionSequenceConfiguration({
     required this.configurations,
-  }) : assert(configurations.length >= 0);
+  });
 }

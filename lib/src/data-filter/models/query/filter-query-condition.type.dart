@@ -6,5 +6,6 @@ enum NiceFilterQueryConditionType {
 
   const NiceFilterQueryConditionType(this.value);
 
+  @override
   String toString() => value;
 }

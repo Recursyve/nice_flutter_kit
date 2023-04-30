@@ -1,5 +1,5 @@
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import "package:flutter/services.dart";
+import "package:flutter/widgets.dart";
 
 // Listen for keyboard key press
 class NiceKeyboardListener extends StatelessWidget {
@@ -23,8 +23,6 @@ class NiceKeyboardListener extends StatelessWidget {
       autofocus: true,
       onKeyEvent: (_, keyEvent) {
         switch (keyEvent.runtimeType) {
-          case KeyUpEvent:
-            return onKeyDown?.call(keyEvent.logicalKey) ?? KeyEventResult.ignored;
           case KeyRepeatEvent:
             return onKeyRepeat?.call(keyEvent.logicalKey) ?? KeyEventResult.ignored;
           case KeyUpEvent:

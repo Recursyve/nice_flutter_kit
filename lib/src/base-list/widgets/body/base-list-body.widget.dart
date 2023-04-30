@@ -1,6 +1,6 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/widgets.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/gestures.dart";
+import "package:flutter/widgets.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 typedef NiceBaseListBodyBuilder<D> = Widget Function(D data);
 typedef NiceBaseListBodyBuilderIndexed<D> = Widget Function(D data, int index);
@@ -198,7 +198,9 @@ class NiceBaseListBody<D> extends StatelessWidget {
   Widget build(BuildContext context) {
     final config = NiceBaseListCubit.of<D>(context).config;
 
-    if (!config.mode.lazyLoaded) return _buildList(controller);
+    if (!config.mode.lazyLoaded) {
+      return _buildList(controller);
+    }
 
     return NiceLazyLoader(
       onLoad: NiceBaseListCubit.of<D>(context).loadNextPage,

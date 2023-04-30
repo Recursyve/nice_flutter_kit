@@ -1,4 +1,4 @@
-import 'package:faker/faker.dart';
+import "package:faker/faker.dart";
 
 class Accounts {
   static List<Accounts> generatedAccounts = [

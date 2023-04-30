@@ -1,7 +1,7 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:provider/provider.dart';
+import "package:flutter/widgets.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:provider/provider.dart";
 
 /// This widget provides the building blocks for the base list.
 ///
@@ -16,7 +16,8 @@ import 'package:provider/provider.dart';
 /// - A [NiceBaseCubit] will be created and provided to it's child, based on the [config].
 ///
 class NiceBaseListConfig<D> extends StatelessWidget {
-  static NiceBaseListConfigData<D> of<D>(BuildContext context, {bool listen = false}) => Provider.of(context, listen: listen);
+  static NiceBaseListConfigData<D> of<D>(BuildContext context, {bool listen = false}) =>
+      Provider.of(context, listen: listen);
 
   /// [NiceBaseListConfigData] that will be used for the base list and provided to this widget's child.
   final NiceBaseListConfigData<D> config;

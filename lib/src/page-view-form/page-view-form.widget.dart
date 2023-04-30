@@ -1,7 +1,9 @@
-import 'package:flutter/cupertino.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/page-view-form/widgets/page-view-form-buttons.widget.dart';
-import 'package:provider/provider.dart';
+import "dart:async";
+
+import "package:flutter/cupertino.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:nice_flutter_kit/src/page-view-form/widgets/page-view-form-buttons.widget.dart";
+import "package:provider/provider.dart";
 
 class NicePageViewForm extends StatefulWidget {
   /// Config used for the page view form
@@ -26,6 +28,7 @@ class NicePageViewForm extends StatefulWidget {
   final VoidCallback onSubmit;
 
   NicePageViewForm({
+    super.key,
     required this.config,
     this.pageController,
     required this.pages,
@@ -57,7 +60,9 @@ class _NicePageViewFormState extends State<NicePageViewForm> {
   }
 
   int get _pageViewPageIndex {
-    if (!_pageController.hasClients) return _pageController.initialPage;
+    if (!_pageController.hasClients) {
+      return _pageController.initialPage;
+    }
     return _pageController.page?.round() ?? _pageController.initialPage;
   }
 
@@ -71,6 +76,7 @@ class _NicePageViewFormState extends State<NicePageViewForm> {
   Future<void> _onNext() async {
     _unfocusIfEnabled();
     final currentPage = _enabledPages.elementAt(_pageViewPageIndex);
+    // ignore: use_build_context_synchronously
     if (!await currentPage.validationStrategy.isValid(context)) {
       return;
     }
@@ -95,7 +101,9 @@ class _NicePageViewFormState extends State<NicePageViewForm> {
   }
 
   void _unfocusIfEnabled() {
-    if (!widget.config.unfocusOnInteraction) return;
+    if (!widget.config.unfocusOnInteraction) {
+      return;
+    }
     final focusScope = FocusScope.of(context);
     if (!focusScope.hasPrimaryFocus) {
       focusScope.unfocus();
@@ -108,8 +116,10 @@ class _NicePageViewFormState extends State<NicePageViewForm> {
       value: widget.config,
       child: WillPopScope(
         onWillPop: () async {
-          if (_pageViewPageIndex == 0) return true;
-          _onPrevious();
+          if (_pageViewPageIndex == 0) {
+            return true;
+          }
+          unawaited(_onPrevious());
           return false;
         },
         child: Column(

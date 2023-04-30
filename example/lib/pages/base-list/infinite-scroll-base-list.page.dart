@@ -1,12 +1,12 @@
-import 'package:example/pages/base-list/account-tile.widget.dart';
-import 'package:example/pages/base-list/accounts.filter-provider.dart';
-import 'package:example/pages/base-list/accounts.model.dart';
-import 'package:example/pages/common/base.page.dart';
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:example/pages/base-list/account-tile.widget.dart";
+import "package:example/pages/base-list/accounts.filter-provider.dart";
+import "package:example/pages/base-list/accounts.model.dart";
+import "package:example/pages/common/base.page.dart";
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class InfiniteScrollLoadedBaseListPage extends StatelessWidget {
-  const InfiniteScrollLoadedBaseListPage();
+  const InfiniteScrollLoadedBaseListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,6 @@ class InfiniteScrollLoadedBaseListPage extends StatelessWidget {
     return NiceBaseListConfig<Accounts>(
       config: NiceBaseListConfigData<Accounts>(
         dataFilterProvider: AccountsFilterProvider(),
-        pageSize: 20,
-        mode: NiceBaseListMode.InfiniteScroll,
       ),
       child: NiceBaseListLoadingIndicator<Accounts>(
         child: Column(

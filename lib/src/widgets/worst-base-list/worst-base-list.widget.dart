@@ -1,11 +1,11 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:nice_flutter_kit/src/widgets/worst-base-list/widgets/worst-base-list-body.widget.dart';
-import 'package:nice_flutter_kit/src/widgets/worst-base-list/widgets/worst-base-list-header.widget.dart';
-import 'package:rxdart/rxdart.dart';
+import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:nice_flutter_kit/src/widgets/worst-base-list/widgets/worst-base-list-body.widget.dart";
+import "package:nice_flutter_kit/src/widgets/worst-base-list/widgets/worst-base-list-header.widget.dart";
+import "package:rxdart/rxdart.dart";
 
 typedef WorstBaseListItemBuilder<D> = Widget Function(BuildContext context, D data, int? index);
 
@@ -32,6 +32,7 @@ class WorstBaseList<D> extends StatefulWidget {
   final List<BlocProvider> blocProviders;
 
   const WorstBaseList({
+    super.key,
     required this.config,
     required this.itemBuilder,
     this.title,
@@ -78,7 +79,7 @@ class _WorstBaseListState<D> extends State<WorstBaseList<D>> {
 
     _searchSubject.distinct().debounceTime(const Duration(milliseconds: 250)).listen((text) async {
       await widget.onBeforeSearch?.call();
-      _cubit.updateSearch(NiceFilterSearchModel(value: text));
+      await _cubit.updateSearch(NiceFilterSearchModel(value: text));
     });
 
     _scrollController.addListener(() {
@@ -162,7 +163,9 @@ class _WorstBaseListState<D> extends State<WorstBaseList<D>> {
           BlocBuilder<WorstBaseListCubit<D>, WorstBaseListState<D>>(
             buildWhen: (prev, curr) => prev.loadingMore != curr.loadingMore,
             builder: (context, state) {
-              if (!state.loadingMore) return const SizedBox();
+              if (!state.loadingMore) {
+                return const SizedBox();
+              }
 
               return Padding(
                 padding: const EdgeInsets.only(top: 8),

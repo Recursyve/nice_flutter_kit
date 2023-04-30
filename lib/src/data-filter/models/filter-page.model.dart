@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:equatable/equatable.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceFilterPageModel extends Equatable {
   final int number;

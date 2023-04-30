@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 /// This widget is part of the base list, and MUST be a child of [NiceBaseListConfig]
 ///

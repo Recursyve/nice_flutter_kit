@@ -1,12 +1,13 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/widgets.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import "package:flutter/widgets.dart";
+import "package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart";
 
 class NiceAutomaticUnfocus extends StatefulWidget {
   final Widget child;
 
-  NiceAutomaticUnfocus({
+  const NiceAutomaticUnfocus({
+    super.key,
     required this.child,
   });
 

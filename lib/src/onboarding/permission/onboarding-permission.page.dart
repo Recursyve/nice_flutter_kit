@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
-import 'package:path/path.dart';
+import "package:flutter/material.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:path/path.dart";
 
 class NiceOnboardingPermissionPage extends StatefulWidget {
   final NiceOnboardingPermissionConfiguration configuration;
   final VoidCallback onNext;
 
   const NiceOnboardingPermissionPage({
+    super.key,
     required this.configuration,
     required this.onNext,
   });
@@ -28,12 +29,10 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
       child: Padding(
         padding: const EdgeInsets.only(top: 64.0, left: 24.0, right: 24.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
               flex: 2,
               child: Align(
-                alignment: Alignment.center,
                 child: _buildImage(widget.configuration.imageUrl),
               ),
             ),
@@ -91,7 +90,9 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
   Future<void> _activate() async {
     setState(() => loading = true);
     await NicePermissionUtils.requestPermission(widget.configuration.type);
-    if (widget.configuration.onActivated != null) await widget.configuration.onActivated!();
+    if (widget.configuration.onActivated != null) {
+      await widget.configuration.onActivated!();
+    }
     setState(() => loading = false);
     widget.onNext();
   }

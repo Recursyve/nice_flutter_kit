@@ -7,6 +7,7 @@ enum NiceBaseListMode {
     supportsPaginator: false,
     lazyLoaded: true,
   ),
+
   /// This mode is for a classic fixed-length page list.
   /// A base list using this mode may (and should) use a paginator.
   Paginated(

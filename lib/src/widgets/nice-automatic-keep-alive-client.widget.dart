@@ -1,9 +1,10 @@
-import 'package:flutter/widgets.dart';
+import "package:flutter/widgets.dart";
 
 class NiceAutomaticKeepAliveClient extends StatefulWidget {
   final Widget child;
 
   const NiceAutomaticKeepAliveClient({
+    super.key,
     required this.child,
   });
 

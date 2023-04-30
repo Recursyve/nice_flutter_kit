@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NicePageViewFormLayoutHeaderData {
   /// Title of the page, displayed according to [defaultPageConfig]

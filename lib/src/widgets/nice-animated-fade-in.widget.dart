@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import "package:flutter/cupertino.dart";
 
 class NiceAnimatedFadeIn extends StatefulWidget {
   final Widget child;
@@ -30,7 +30,9 @@ class _NiceAnimatedFadeInState extends State<NiceAnimatedFadeIn>
     );
 
     Future.delayed(widget.delay).then((_) {
-      if (!mounted) return;
+      if (!mounted) {
+        return;
+      }
 
       _animationController.animateTo(1);
     });
@@ -45,7 +47,6 @@ class _NiceAnimatedFadeInState extends State<NiceAnimatedFadeIn>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      child: widget.child,
       animation: _animationController,
       builder: (context, child) {
         return Opacity(
@@ -53,6 +54,7 @@ class _NiceAnimatedFadeInState extends State<NiceAnimatedFadeIn>
           child: child,
         );
       },
+      child: widget.child,
     );
   }
 }

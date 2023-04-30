@@ -1,14 +1,14 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:example/pages/auth/auth.page.dart';
-import 'package:example/pages/base-list/infinite-scroll-base-list.page.dart';
-import 'package:example/pages/base-list/paginated-base-list.page.dart';
-import 'package:example/pages/home.page.dart';
-import 'package:example/pages/onboarding.page.dart';
-import 'package:example/pages/page-view-form.page.dart';
-import 'package:example/pages/radio-expandable-cards.page.dart';
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:device_preview/device_preview.dart";
+import "package:example/pages/auth/auth.page.dart";
+import "package:example/pages/base-list/infinite-scroll-base-list.page.dart";
+import "package:example/pages/base-list/paginated-base-list.page.dart";
+import "package:example/pages/home.page.dart";
+import "package:example/pages/onboarding.page.dart";
+import "package:example/pages/page-view-form.page.dart";
+import "package:example/pages/radio-expandable-cards.page.dart";
+import "package:flutter/material.dart";
+import "package:go_router/go_router.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,18 +17,18 @@ void main() async {
     onboardingConfig: NiceOnboardingGlobalConfig(),
     baseCubitConfig: NiceBaseCubitConfig(
       wrapErrorHandler: (e, s) {
+        // ignore: avoid_print
         print(e);
+        // ignore: avoid_print
         print(s);
       },
     ),
-    localizationsConfig: const NiceLocalizationsConfig(
-      supportedLocales: [Locale("fr", "CA"), Locale("en", "CA")],
-    ),
+    localizationsConfig: const NiceLocalizationsConfig(),
   );
 
   runApp(
     DevicePreview(
-      builder: (_) => MyApp(),
+      builder: (_) => const MyApp(),
     ),
   );
 }
@@ -67,7 +67,7 @@ class MyApp extends StatefulWidget {
     ),
   ];
 
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -93,7 +93,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp.router(
       routeInformationParser: _router.routeInformationParser,
       routerDelegate: _router.routerDelegate,
-      title: 'Flutter Demo',
+      title: "Flutter Demo",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,

@@ -1,11 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import "package:flutter/material.dart";
+import "package:go_router/go_router.dart";
 
 class BasePage extends StatelessWidget {
   final String title;
   final Widget child;
 
   const BasePage({
+    super.key,
     required this.title,
     required this.child,
   });

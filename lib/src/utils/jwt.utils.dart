@@ -1,4 +1,4 @@
-import 'dart:convert';
+import "dart:convert";
 
 class NiceJwtUtils {
   const NiceJwtUtils._();

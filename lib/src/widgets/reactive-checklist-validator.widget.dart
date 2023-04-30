@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import "package:flutter/material.dart";
+import "package:reactive_forms/reactive_forms.dart";
 
 class ReactiveChecklistValidator extends StatelessWidget {
   final String? value;
@@ -15,6 +15,7 @@ class ReactiveChecklistValidator extends StatelessWidget {
   final bool hideWhenEmpty;
 
   ReactiveChecklistValidator({
+    super.key,
     required this.invalidColor,
     required this.validColor,
     required this.defaultColor,
@@ -27,20 +28,24 @@ class ReactiveChecklistValidator extends StatelessWidget {
     this.textStyle = const TextStyle(),
     this.hideWhenEmpty = false,
   })  : assert(
-            validationsAndTranslations.entries.isNotEmpty, "validationsAndTranslations must contains at least 1 entry"),
+          validationsAndTranslations.entries.isNotEmpty,
+          "validationsAndTranslations must contains at least 1 entry",
+        ),
         assert(value != null || formControlName != null, "value and formControlName can't both be null");
 
   @override
   Widget build(BuildContext context) {
     final needsEarlyReturn = _checkIfEarlyReturnNeeded(context);
-    if (needsEarlyReturn) return const SizedBox.shrink();
+    if (needsEarlyReturn) {
+      return const SizedBox.shrink();
+    }
 
     if (formControlName != null) {
       return ReactiveValueListenableBuilder(
         formControlName: formControlName,
         builder: (context, control, _) {
           return _buildCheckList((control as AbstractControl<String>).value ?? "");
-        }
+        },
       );
     }
     return _buildCheckList(value!);

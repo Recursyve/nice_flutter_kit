@@ -6,5 +6,6 @@ enum NiceFilterOrderDirections {
 
   const NiceFilterOrderDirections(this.value);
 
+  @override
   String toString() => value;
 }

@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/cupertino.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 /// List child delegate that is used by the [NiceBaseListBody].
 abstract class NiceBaseListBodyChildDelegate<D> {
@@ -56,7 +56,10 @@ class NiceBaseListBodyChildSeparatedBuilderDelegate<D> implements NiceBaseListBo
     final child = builder(context, data);
 
     final index = config.mode.keepPreviousValuesOnPageChange ? absoluteIndex : relativeIndex;
-    if (index == 0) return child;
+    if (index == 0) {
+      return child;
+    }
+
     return Column(
       children: [
         separatorBuilder(context),
@@ -81,7 +84,10 @@ class NiceBaseListBodyChildSeparatedIndexedBuilderDelegate<D> implements NiceBas
     final child = builder(context, data, absoluteIndex, relativeIndex);
 
     final index = config.mode.keepPreviousValuesOnPageChange ? absoluteIndex : relativeIndex;
-    if (index == 0) return child;
+    if (index == 0) {
+      return child;
+    }
+
     return Column(
       children: [
         separatorBuilder(context),

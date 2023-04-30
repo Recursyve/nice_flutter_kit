@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import "package:flutter/material.dart";
 
 class NiceTextAccentPunctuation extends StatelessWidget {
   final String text;
@@ -12,7 +12,8 @@ class NiceTextAccentPunctuation extends StatelessWidget {
   final TextOverflow overflow;
   final Alignment? alignment;
 
-  NiceTextAccentPunctuation({
+  const NiceTextAccentPunctuation({
+    super.key,
     required this.text,
     required this.punctuation,
     this.textSpanStyle,

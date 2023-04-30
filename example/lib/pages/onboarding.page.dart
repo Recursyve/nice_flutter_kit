@@ -1,16 +1,16 @@
-import 'package:example/pages/common/base.page.dart';
-import 'package:flutter/material.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:example/pages/common/base.page.dart";
+import "package:flutter/material.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class OnboardingPage extends StatelessWidget {
-  const OnboardingPage();
+  const OnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BasePage(
       title: "Onboarding",
       child: NiceOnboarding(
-        configuration: NiceOnboardingConfiguration(
+        configuration: const NiceOnboardingConfiguration(
           welcome: NiceOnboardingWelcomeConfiguration(
             imageUrl: "assets/bacon.png",
             title: NiceTextAccentPunctuation(

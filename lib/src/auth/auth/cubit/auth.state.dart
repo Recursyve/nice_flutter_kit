@@ -1,4 +1,4 @@
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceAuthState<User extends Object, Account extends Object> extends NiceBaseState {
   final bool initialized;
@@ -38,8 +38,8 @@ class NiceAuthState<User extends Object, Account extends Object> extends NiceBas
   NiceBaseState copyWithLoadingAndError({bool? loading, bool? error}) => copyWith(loading: loading, error: error);
 
   NiceAuthState<User, Account> copyWithUserAndAccount(User? user, Account? account) => NiceAuthState(
-        loading: this.loading,
-        error: this.error,
+        loading: loading,
+        error: error,
         initialized: this.initialized,
         user: user,
         account: account,

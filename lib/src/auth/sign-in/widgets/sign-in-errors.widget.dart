@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nice_flutter_kit/nice_flutter_kit.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
+import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 /// Listens for [NiceSignInState] errors and displays a text
 ///
@@ -22,6 +22,7 @@ class NiceSignInErrors<SocialProviders> extends StatelessWidget {
   final bool maintainSize;
 
   const NiceSignInErrors({
+    super.key,
     required this.errorText,
     required this.invalidCredentialsText,
     this.style,

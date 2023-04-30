@@ -24,5 +24,6 @@ enum NiceFilterQueryRuleOperators {
 
   const NiceFilterQueryRuleOperators(this.value);
 
+  @override
   String toString() => value;
 }

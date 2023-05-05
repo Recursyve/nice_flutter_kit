@@ -21,6 +21,9 @@ class NiceBaseListLoadingIndicator<D> extends StatelessWidget {
   /// Opacity of the child when [NiceBaseListCubit] loads.
   final double loadingOpacity;
 
+  /// [NiceLoadingOverlay.childLoadingVisibility]
+  final bool childLoadingVisibility;
+
   /// child [Widget] over which the circular loading spinner will be displayed whenever the [NiceBaseListCubit] loads.
   final Widget child;
 
@@ -30,6 +33,7 @@ class NiceBaseListLoadingIndicator<D> extends StatelessWidget {
     this.size = 72,
     this.lineWidth = 7,
     this.loadingOpacity = 1,
+    this.childLoadingVisibility = true,
     required this.child,
   });
 
@@ -42,6 +46,7 @@ class NiceBaseListLoadingIndicator<D> extends StatelessWidget {
         size: size,
         lineWidth: lineWidth,
         opacity: loadingOpacity,
+        childLoadingVisibility: childLoadingVisibility,
         loading: state.loading,
         child: child,
       ),

@@ -12,6 +12,9 @@ class NiceLoadingOverlay extends StatelessWidget {
   final bool absorb;
   final double opacity;
 
+  /// control the [Visibility.visible] of the [child] when [loading]
+  final bool childLoadingVisibility;
+
   const NiceLoadingOverlay({
     super.key,
     this.size = 72,
@@ -22,6 +25,7 @@ class NiceLoadingOverlay extends StatelessWidget {
     this.stackFit = StackFit.loose,
     this.absorb = false,
     this.opacity = 1.0,
+    this.childLoadingVisibility = true,
   });
 
   @override
@@ -32,9 +36,12 @@ class NiceLoadingOverlay extends StatelessWidget {
         if (child != null)
           AbsorbPointer(
             absorbing: absorb,
-            child: Opacity(
-              opacity: loading ? opacity : 1.0,
-              child: child!,
+            child: Visibility(
+              visible: childLoadingVisibility ? true : !loading,
+              child: Opacity(
+                opacity: loading ? opacity : 1.0,
+                child: child!,
+              ),
             ),
           ),
         if (loading)

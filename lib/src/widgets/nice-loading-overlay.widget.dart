@@ -49,7 +49,7 @@ class NiceLoadingOverlay extends StatelessWidget {
           AbsorbPointer(
             absorbing: childAbsorb ?? absorb,
             child: Visibility(
-              visible: childLoadingVisibility ? true : !loading,
+              visible: childLoadingVisibility || !loading,
               child: Opacity(
                 opacity: loading ? childLoadingOpacity ?? opacity : 1.0,
                 child: child!,

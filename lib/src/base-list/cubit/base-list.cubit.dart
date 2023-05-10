@@ -184,7 +184,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
 
   /// Removes the [NiceBaseListState.values] where the [filter] callback return true.
   void removeValuesWhere(bool Function(D value) filter) {
-    final filteredValues = state.values.where(filter).toList(growable: false);
+    final filteredValues = state.values.where((value) => !filter(value)).toList(growable: false);
     setValues(filteredValues);
   }
 

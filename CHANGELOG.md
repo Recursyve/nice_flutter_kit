@@ -1,3 +1,8 @@
+### 2.0.1
+
+* Fix inverted condition in `NiceBaseListCubit.removeValuesWhere`
+* Add loading opacity to `NiceBaseListLoading`
+
 ### 2.0.0
 
 * Apply lints

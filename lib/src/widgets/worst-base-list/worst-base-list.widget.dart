@@ -133,6 +133,7 @@ class _WorstBaseListState<D> extends State<WorstBaseList<D>> {
         shrinkWrap: widget.shrinkWrap,
         controller: widget.scrollController == null ? _scrollController : null,
         physics: widget.scrollPhysics,
+        // ignore: deprecated_member_use_from_same_package
         padding: NiceLayoutUtils.isPhone(context) ? widget.mobilePadding : widget.largePadding,
         children: [
           WorstBaseListHeader(

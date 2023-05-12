@@ -21,6 +21,7 @@ class WorstBaseListHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use_from_same_package
     if (NiceLayoutUtils.isPhone(context) || NiceLayoutUtils.isTabletPortrait(context)) {
       return _buildSmall();
     }

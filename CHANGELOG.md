@@ -1,3 +1,7 @@
+### 2.1.0-rc.1
+
+* Upgrade dart sdk min version to 3.0.0
+
 ### 2.0.1
 
 * Fix inverted condition in `NiceBaseListCubit.removeValuesWhere`

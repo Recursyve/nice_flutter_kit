@@ -1,5 +1,6 @@
 import "package:flutter/widgets.dart";
 
+@Deprecated("")
 class NiceLayoutUtils {
   static const int TABLET_SIZE = 600;
   static const int DESKTOP_SIZE = 960;

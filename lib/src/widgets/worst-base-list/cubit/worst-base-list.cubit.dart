@@ -9,7 +9,7 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
 
   WorstBaseListCubit({
     required this.config,
-  }) : super(const WorstBaseListState.initialState());
+  }) : super(WorstBaseListState<D>.initialState());
 
   factory WorstBaseListCubit.of(BuildContext context) => BlocProvider.of(context);
 

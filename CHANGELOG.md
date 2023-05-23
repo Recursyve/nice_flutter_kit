@@ -29,6 +29,10 @@ RC for version 2.
 
 ---
 
+### 1.4.22
+
+* Fix for base list
+
 ### 1.4.21
 
 * Lints

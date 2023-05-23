@@ -135,7 +135,7 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
   }
 
   Future<void> resetAndLoad() async {
-    emit(const WorstBaseListState.initialState());
+    emit(WorstBaseListState<D>.initialState());
     await load();
   }
 

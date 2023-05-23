@@ -29,7 +29,5 @@ class NiceConfig {
       // Hardcoded permissionsTypes for now
       await NiceConfig.onboardingConfig!.init();
     }
-
-    NiceLocalizations.initializeTimeago();
   }
 }

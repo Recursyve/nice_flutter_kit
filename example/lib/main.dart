@@ -1,4 +1,6 @@
 import "package:device_preview/device_preview.dart";
+import "package:example/cubit/app.cubit.dart";
+import "package:example/cubit/app.state.dart";
 import "package:example/pages/auth/auth.page.dart";
 import "package:example/pages/base-list/infinite-scroll-base-list.page.dart";
 import "package:example/pages/base-list/paginated-base-list.page.dart";
@@ -7,6 +9,7 @@ import "package:example/pages/onboarding.page.dart";
 import "package:example/pages/page-view-form.page.dart";
 import "package:example/pages/radio-expandable-cards.page.dart";
 import "package:flutter/material.dart";
+import "package:flutter_bloc/flutter_bloc.dart";
 import "package:go_router/go_router.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
@@ -37,32 +40,32 @@ class MyApp extends StatefulWidget {
   static const pageRoutes = <RouteData>[
     RouteData(
       path: "/onboarding",
-      title: "Onboarding",
+      titleKey: "home.pages.onboarding",
       child: OnboardingPage(),
     ),
     RouteData(
       path: "/page-view-form",
-      title: "Page view form",
+      titleKey: "home.pages.page_view_form",
       child: PageViewFormPage(),
     ),
     RouteData(
       path: "/auth",
-      title: "Auth",
+      titleKey: "home.pages.auth",
       child: AuthPage(),
     ),
     RouteData(
       path: "/radio-expandable-cards",
-      title: "Radio expandable cards",
+      titleKey: "home.pages.radio_expandable_cards",
       child: RadioExpandableCardsPage(),
     ),
     RouteData(
       path: "/base-list/infinite-scroll",
-      title: "Infinite scroll base list",
+      titleKey: "home.pages.infinite_scroll_base_list",
       child: InfiniteScrollLoadedBaseListPage(),
     ),
     RouteData(
       path: "/base-list/paginated",
-      title: "Paginated base list",
+      titleKey: "home.pages.paginated_base_list",
       child: PaginatedBaseListPage(),
     ),
   ];
@@ -90,31 +93,37 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routeInformationParser: _router.routeInformationParser,
-      routerDelegate: _router.routerDelegate,
-      title: "Flutter Demo",
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return BlocProvider<AppCubit>(
+      create: (context) => AppCubit(),
+      child: BlocSelector<AppCubit, AppState, Locale?>(
+        selector: (state) => state.overrideLocale,
+        builder: (context, overrideLocale) => MaterialApp.router(
+          routeInformationParser: _router.routeInformationParser,
+          routerDelegate: _router.routerDelegate,
+          title: "Flutter Demo",
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          locale: overrideLocale ?? DevicePreview.locale(context),
+          builder: DevicePreview.appBuilder,
+          supportedLocales: NiceLocalizations.supportedLocales,
+          localizationsDelegates: NiceLocalizations.delegates,
+          localeResolutionCallback: NiceLocalizations.localResolutionCallback,
+        ),
       ),
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
-      supportedLocales: NiceLocalizations.supportedLocales,
-      localizationsDelegates: NiceLocalizations.delegates,
-      localeResolutionCallback: NiceLocalizations.localResolutionCallback,
     );
   }
 }
 
 class RouteData {
   final String path;
-  final String title;
+  final String titleKey;
   final Widget child;
 
   const RouteData({
     required this.path,
-    required this.title,
+    required this.titleKey,
     required this.child,
   });
 }

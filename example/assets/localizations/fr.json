@@ -5,5 +5,15 @@
                 "per_page": "Par page"
             }
         }
+    },
+    "home": {
+        "pages": {
+            "onboarding": "Intégration",
+            "page_view_form": "Formulaire de visualisation de page",
+            "auth": "Authentification",
+            "radio_expandable_cards": "Cartes extensibles radio",
+            "infinite_scroll_base_list": "Liste de base à défilement infini",
+            "paginated_base_list": "Liste de base paginée"
+        }
     }
 }

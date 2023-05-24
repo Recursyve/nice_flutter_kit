@@ -9,7 +9,7 @@ import "package:nice_flutter_kit/nice_flutter_kit.dart";
 import "package:timeago/timeago.dart" as timeago;
 
 class NiceLocalizations {
-  Locale locale;
+  final Locale locale;
   final Map<String, Map<String, dynamic>> _translations = {};
 
   factory NiceLocalizations.of(BuildContext context) {
@@ -33,11 +33,6 @@ class NiceLocalizations {
     timeago.setLocaleMessages("en", timeago.EnMessages());
   }
 
-  static void initializeTimeago() {
-    timeago.setLocaleMessages("fr", timeago.FrShortMessages());
-    timeago.setLocaleMessages("en", timeago.EnMessages());
-  }
-
   static Locale localResolutionCallback(Locale? locale, Iterable<Locale> supportedLocales) {
     if (locale == null) {
       return supportedLocales.first;
@@ -52,10 +47,9 @@ class NiceLocalizations {
     return supportedLocales.first;
   }
 
-  Future load() async {
+  Future<void> load() async {
     for (final supportedLocale in supportedLocales) {
-      final String jsonString =
-          await rootBundle.loadString("assets/localizations/${supportedLocale.languageCode}.json");
+      final jsonString = await rootBundle.loadString("assets/localizations/${supportedLocale.languageCode}.json");
       final Map<String, dynamic> jsonMap = json.decode(jsonString);
       _translations.putIfAbsent(supportedLocale.languageCode, () {
         return jsonMap.map((key, value) {
@@ -111,7 +105,8 @@ class _NiceLocalizationsDelegate extends LocalizationsDelegate<NiceLocalizations
 
   @override
   bool isSupported(Locale locale) {
-    return NiceLocalizations.supportedLocales.map((locale) => locale.languageCode).contains(locale.languageCode);
+    return NiceLocalizations.supportedLocales
+        .any((supportedLocale) => supportedLocale.languageCode == locale.languageCode);
   }
 
   @override

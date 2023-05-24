@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
 
   device_preview: 1.1.0
+  equatable: 2.0.5
   expandable: 5.0.1
   faker: 2.1.0
   flutter_bloc: 8.1.2

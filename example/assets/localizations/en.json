@@ -5,5 +5,15 @@
                 "per_page": "Per page"
             }
         }
+    },
+    "home": {
+        "pages": {
+            "onboarding": "Onboarding",
+            "page_view_form": "Page view form",
+            "auth": "Auth",
+            "radio_expandable_cards": "Radio expandable cards",
+            "infinite_scroll_base_list": "Infinite scroll base list",
+            "paginated_base_list": "Paginated base list"
+        }
     }
 }

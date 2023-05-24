@@ -1,3 +1,7 @@
+### 2.1.0
+
+* Add NiceLocalizations extension (`context.translate("key")`)
+
 ### 2.1.0-rc.2
 
 * Fix worst base list typings

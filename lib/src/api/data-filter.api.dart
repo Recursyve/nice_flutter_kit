@@ -17,4 +17,9 @@ abstract class NiceDataFilterApi<T> extends NiceBaseApi {
     final res = await dio.post(url("filter"), data: filter.toJson());
     return NiceFilterResultModel.fromJson(res.data);
   }
+
+  Future<int> filterCount(NiceFilterModel filter) async {
+    final res = await dio.post(url("filter-count"), data: filter.toJson());
+    return int.parse(res.data);
+  }
 }

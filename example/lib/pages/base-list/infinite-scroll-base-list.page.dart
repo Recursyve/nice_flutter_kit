@@ -46,15 +46,19 @@ class InfiniteScrollLoadedBaseListPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: NiceBaseListBody<Accounts>.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                builder: (_, account) => AccountTile(account: account),
-                separatorBuilder: (_) => const SizedBox(height: 16),
-                pageLoadingIndicator: const Padding(
-                  padding: EdgeInsets.only(top: 20),
-                  child: LinearProgressIndicator(),
+              child: NiceBaseListEmptyState<Accounts>(
+                emptyStateBuilder: (context) => const Center(
+                  child: Text("Empty state"),
                 ),
-                emptyStateBuilder: (context) => const Text("Empty state"),
+                child: NiceBaseListBody<Accounts>.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  builder: (_, account) => AccountTile(account: account),
+                  separatorBuilder: (_) => const SizedBox(height: 16),
+                  pageLoadingIndicator: const Padding(
+                    padding: EdgeInsets.only(top: 20),
+                    child: LinearProgressIndicator(),
+                  ),
+                ),
               ),
             ),
           ],

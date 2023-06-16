@@ -48,11 +48,15 @@ class PaginatedBaseListPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: NiceBaseListBody<Accounts>.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                builder: (_, account) => AccountTile(account: account),
-                separatorBuilder: (_) => const SizedBox(height: 16),
-                emptyStateBuilder: (context) => const Text("Empty state"),
+              child: NiceBaseListEmptyState<Accounts>(
+                emptyStateBuilder: (context) => const Center(
+                  child: Text("Empty state"),
+                ),
+                child: NiceBaseListBody<Accounts>.separated(
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                  builder: (_, account) => AccountTile(account: account),
+                  separatorBuilder: (_) => const SizedBox(height: 16),
+                ),
               ),
             ),
             NiceBaseListPaginator<Accounts>(

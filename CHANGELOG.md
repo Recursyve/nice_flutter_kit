@@ -1,3 +1,7 @@
+## 2.2.0
+
+* Deprecate `NiceBaseListBody.emptyStateBuilder` in favor of `NiceBaseListEmptyState`
+
 ### 2.1.1
 
 * Fix for introduction screen

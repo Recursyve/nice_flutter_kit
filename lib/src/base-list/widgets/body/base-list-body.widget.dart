@@ -69,6 +69,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
   final double loadingThreshold;
 
   /// [WidgetBuilder] that will display the resulting [Widget] when there are no items in the list.
+  @Deprecated("replaced by NiceBaseListEmptyState")
   final WidgetBuilder? emptyStateBuilder;
 
   NiceBaseListBody({
@@ -91,7 +92,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize = true,
-    this.emptyStateBuilder,
+    @Deprecated("replaced by NiceBaseListEmptyState") this.emptyStateBuilder,
   }) : delegate = NiceBaseListBodyBuilderDelegate(builder);
 
   NiceBaseListBody.indexed({
@@ -114,7 +115,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize = true,
-    this.emptyStateBuilder,
+    @Deprecated("replaced by NiceBaseListEmptyState") this.emptyStateBuilder,
   }) : delegate = NiceBaseListBodyChildIndexedBuilderDelegate(builder);
 
   NiceBaseListBody.separated({
@@ -138,7 +139,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize = true,
-    this.emptyStateBuilder,
+    @Deprecated("replaced by NiceBaseListEmptyState") this.emptyStateBuilder,
   }) : delegate = NiceBaseListBodyChildSeparatedBuilderDelegate(
           builder: builder,
           separatorBuilder: separatorBuilder,
@@ -165,7 +166,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize = true,
-    this.emptyStateBuilder,
+    @Deprecated("replaced by NiceBaseListEmptyState") this.emptyStateBuilder,
   }) : delegate = NiceBaseListBodyChildSeparatedIndexedBuilderDelegate(
           builder: builder,
           separatorBuilder: separatorBuilder,
@@ -191,7 +192,7 @@ class NiceBaseListBody<D> extends StatelessWidget {
     this.loadingThreshold = 400,
     this.pageLoadingIndicator,
     this.pageLoadingIndicatorMaintainSize = true,
-    this.emptyStateBuilder,
+    @Deprecated("replaced by NiceBaseListEmptyState") this.emptyStateBuilder,
   });
 
   @override

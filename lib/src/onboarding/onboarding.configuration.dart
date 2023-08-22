@@ -8,8 +8,10 @@ class NiceOnboardingConfiguration {
   final VoidCallback? onShown;
   final VoidCallback? onNotShown;
   final VoidCallback? onDone;
+  final List<bool> safeAreaList;
 
   const NiceOnboardingConfiguration({
+    this.safeAreaList = const [true, true, true, true],
     this.welcome,
     this.introductionSequence,
     this.permissionSequence,

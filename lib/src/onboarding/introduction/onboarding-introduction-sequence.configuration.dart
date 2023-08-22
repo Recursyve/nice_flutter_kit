@@ -2,14 +2,20 @@ import "package:flutter/material.dart";
 import "package:introduction_screen/introduction_screen.dart";
 
 class NiceOnboardingIntroductionConfiguration {
-  final Widget title;
+  final Widget? title;
   final String imageUrl;
+  final Widget? imageWidget;
   final String paragraph;
+  final Widget? bodyWidget;
+  final PageDecoration? pageDecoration;
 
   const NiceOnboardingIntroductionConfiguration({
-    required this.title,
+    this.title,
     required this.imageUrl,
+    this.imageWidget,
     required this.paragraph,
+    this.bodyWidget,
+    this.pageDecoration,
   });
 }
 
@@ -31,16 +37,20 @@ class NiceOnboardingIntroductionSequenceConfiguration {
 
 class NiceOnboardingIntroductionSequenceFooterConfig {
   final DotsDecorator? dotsDecorator;
+  final BoxDecoration? dotsContainerDecorator;
   final int dotsFlex;
   final int nextFlex;
   final int skipOrBackFlex;
   final ButtonStyle buttonStyle;
+  final EdgeInsets controlsPadding;
 
   const NiceOnboardingIntroductionSequenceFooterConfig({
     this.dotsDecorator,
+    this.dotsContainerDecorator,
     this.dotsFlex = 1,
     this.nextFlex = 1,
     this.skipOrBackFlex = 1,
+    this.controlsPadding = const EdgeInsets.all(16.0),
     this.buttonStyle = const ButtonStyle(),
   })  : assert(dotsFlex > 0),
         assert(nextFlex > 0),

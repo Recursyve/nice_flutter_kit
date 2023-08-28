@@ -35,10 +35,10 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
           return Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
             body: SafeArea(
-              left: widget.configuration.safeAreaList[0],
-              top: widget.configuration.safeAreaList[1],
-              right: widget.configuration.safeAreaList[2],
-              bottom: widget.configuration.safeAreaList[3],
+              left: widget.configuration.safeArea.left,
+              top: widget.configuration.safeArea.top,
+              right: widget.configuration.safeArea.right,
+              bottom: widget.configuration.safeArea.bottom,
               child: PageView(
                 controller: _controller,
                 physics: const NeverScrollableScrollPhysics(),

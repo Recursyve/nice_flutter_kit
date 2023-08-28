@@ -5,13 +5,13 @@ class NiceOnboardingWelcomeConfiguration {
   final Widget title;
   final String paragraph;
   final String bottomButtonText;
-  final EdgeInsets? pagePadding;
+  final EdgeInsets pagePadding;
 
   const NiceOnboardingWelcomeConfiguration({
     required this.imageUrl,
     required this.title,
     required this.paragraph,
     required this.bottomButtonText,
-    this.pagePadding,
+    this.pagePadding = const EdgeInsets.only(bottom: 20),
   });
 }

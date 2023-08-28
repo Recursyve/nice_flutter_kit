@@ -22,7 +22,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
         color: Theme.of(context).colorScheme.background,
       ),
       child: Padding(
-        padding: configuration.pagePadding ?? const EdgeInsets.only(bottom: 20),
+        padding: configuration.pagePadding,
         child: Column(
           children: [
             Expanded(

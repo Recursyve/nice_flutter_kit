@@ -1,5 +1,6 @@
 import "package:flutter/foundation.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
+import "package:nice_flutter_kit/src/onboarding/onboarding-configuration-safe-area.dart";
 
 class NiceOnboardingConfiguration {
   final NiceOnboardingWelcomeConfiguration? welcome;
@@ -8,10 +9,10 @@ class NiceOnboardingConfiguration {
   final VoidCallback? onShown;
   final VoidCallback? onNotShown;
   final VoidCallback? onDone;
-  final List<bool> safeAreaList;
+  final NiceOnboardingConfigurationSafeArea safeArea;
 
   const NiceOnboardingConfiguration({
-    this.safeAreaList = const [true, true, true, true],
+    this.safeArea = const NiceOnboardingConfigurationSafeArea(),
     this.welcome,
     this.introductionSequence,
     this.permissionSequence,

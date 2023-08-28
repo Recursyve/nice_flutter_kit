@@ -39,11 +39,12 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 64.0),
                   child: _buildImage(configuration.imageUrl),
                 ),
-            titleWidget: configuration.title ??
-                Padding(
-                  padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
-                  child: configuration.title,
-                ),
+            titleWidget: configuration.title != null
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
+                    child: configuration.title,
+                  )
+                : null,
             decoration: configuration.pageDecoration ??
                 PageDecoration(
                   imageAlignment: Alignment.center,

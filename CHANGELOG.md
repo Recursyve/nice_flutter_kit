@@ -1,3 +1,7 @@
+### 2.2.2
+
+* Added `onBeforeSearch` callback to `NiceBaseListSearchBar`.
+
 ### 2.2.1
 
 * Fix `NiceAuth` listeners triggering too often

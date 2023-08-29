@@ -20,6 +20,7 @@ class NiceBaseListSearchBar<D> extends StatefulWidget {
   /// [Duration] that will be used to debounce the [TextField]'s values.
   final Duration debounceDuration;
 
+  /// Callback that will be called before searching, after it has been debounced.
   final FutureOr<void> Function()? onBeforeSearch;
 
   const NiceBaseListSearchBar({

@@ -1,3 +1,7 @@
+### 2.2.3
+
+* `RadioExpandableProvider` now reacts to initial expanded key changes.
+
 ### 2.2.2
 
 * Added `onBeforeSearch` callback to `NiceBaseListSearchBar`.

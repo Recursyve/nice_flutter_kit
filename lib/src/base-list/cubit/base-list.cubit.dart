@@ -150,7 +150,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   }
 
   /// Sets the [NiceBaseListState.order].
-  Future<void> setOrder(NiceFilterOrderModel? order, {bool reload = true}) async {
+  Future<void> setOrder(List<NiceFilterOrderModel>? order, {bool reload = true}) async {
     emit(state.copyWithOrder(order));
     if (reload) {
       await load(resetPaging: true);

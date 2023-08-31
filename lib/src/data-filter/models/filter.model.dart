@@ -1,7 +1,7 @@
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 class NiceFilterModel {
-  final NiceFilterOrderModel? order;
+  final List<NiceFilterOrderModel>? order;
   final NiceFilterPageModel page;
   final NiceFilterQueryModel? query;
   final NiceFilterSearchModel? search;
@@ -14,7 +14,7 @@ class NiceFilterModel {
   });
 
   Json toJson() => {
-        if (order != null) "order": order!.toJson(),
+        if (order != null) "order": [...order!.map((order) => order.toJson())],
         "page": page.toJson(),
         if (query != null) "query": query!.toJson(),
         if (search != null) "search": search!.toJson(),

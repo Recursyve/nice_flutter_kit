@@ -14,7 +14,7 @@ class NiceFilterModel {
   });
 
   Json toJson() => {
-        if (order != null) "order": [...order!.map((order) => order.toJson())],
+        if (order != null) "order": order!.map((order) => order.toJson()).toList(growable: false),
         "page": page.toJson(),
         if (query != null) "query": query!.toJson(),
         if (search != null) "search": search!.toJson(),

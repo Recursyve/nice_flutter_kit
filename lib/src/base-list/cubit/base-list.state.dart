@@ -23,7 +23,7 @@ class NiceBaseListState<D> extends NiceBaseState {
   final NiceFilterQueryModel? query;
 
   /// Order that will be used to sort items, via the [NiceBaseListDataFilterProvider].
-  final NiceFilterOrderModel? order;
+  final List<NiceFilterOrderModel>? order;
 
   /// Items that have been filtered by the data filter, and are being displayed.
   final List<D> values;
@@ -80,7 +80,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         total = 0,
         searchQuery = null,
         query = null,
-        order = null,
+        order = const [],
         values = const [],
         loadingPage = false,
         super.initialState();
@@ -142,7 +142,7 @@ class NiceBaseListState<D> extends NiceBaseState {
         loadingPage: this.loadingPage,
       );
 
-  NiceBaseListState<D> copyWithOrder(NiceFilterOrderModel? order) => NiceBaseListState<D>(
+  NiceBaseListState<D> copyWithOrder(List<NiceFilterOrderModel>? order) => NiceBaseListState<D>(
         loading: loading,
         error: error,
         initialLoadCompleted: this.initialLoadCompleted,

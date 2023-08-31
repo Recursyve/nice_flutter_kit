@@ -1,3 +1,7 @@
+### 2.3.0
+
+* BREAKING: `BaseListConfigData` now takes an array of order.
+
 ### 2.2.3
 
 * `RadioExpandableProvider` now reacts to initial expanded key changes.

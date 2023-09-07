@@ -23,42 +23,49 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       nextFlex: sequenceConfiguration.footerConfig.nextFlex,
       skipOrBackFlex: sequenceConfiguration.footerConfig.skipOrBackFlex,
       baseBtnStyle: sequenceConfiguration.footerConfig.buttonStyle,
+      controlsPadding: sequenceConfiguration.footerConfig.controlsPadding,
       dotsDecorator: sequenceConfiguration.footerConfig.dotsDecorator != null
           ? sequenceConfiguration.footerConfig.dotsDecorator!
           : DotsDecorator(
               activeColor: Theme.of(context).colorScheme.secondary,
               color: Theme.of(context).primaryColor,
             ),
+      dotsContainerDecorator: sequenceConfiguration.footerConfig.dotsContainerDecorator,
       pages: [
         for (final configuration in sequenceConfiguration.configurations)
           PageViewModel(
-            image: Padding(
-              padding: const EdgeInsets.only(top: 64.0),
-              child: _buildImage(configuration.imageUrl),
-            ),
-            titleWidget: Padding(
-              padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
-              child: configuration.title,
-            ),
-            decoration: PageDecoration(
-              imageAlignment: Alignment.center,
-              imageFlex: 2,
-              bodyFlex: 3,
-              imagePadding: const EdgeInsets.only(),
-              pageColor: Theme.of(context).colorScheme.background,
-              contentMargin: const EdgeInsets.all(5),
-            ),
-            bodyWidget: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
-                configuration.paragraph,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
-                  height: 1.5,
+            image: configuration.imageWidget ??
+                Padding(
+                  padding: const EdgeInsets.only(top: 64.0),
+                  child: _buildImage(configuration.imageUrl),
                 ),
-              ),
-            ),
+            titleWidget: configuration.title != null
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
+                    child: configuration.title,
+                  )
+                : null,
+            decoration: configuration.pageDecoration ??
+                PageDecoration(
+                  imageAlignment: Alignment.center,
+                  imageFlex: 2,
+                  bodyFlex: 3,
+                  imagePadding: const EdgeInsets.only(),
+                  pageColor: Theme.of(context).colorScheme.background,
+                  contentMargin: const EdgeInsets.all(5),
+                ),
+            bodyWidget: configuration.bodyWidget ??
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: Text(
+                    configuration.paragraph,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      height: 1.5,
+                    ),
+                  ),
+                ),
           ),
       ],
       showSkipButton: true,
@@ -66,7 +73,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
         sequenceConfiguration.skip,
         style: TextStyle(
           fontSize: 16,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.primary,
         ),
       ),
       next: Text(

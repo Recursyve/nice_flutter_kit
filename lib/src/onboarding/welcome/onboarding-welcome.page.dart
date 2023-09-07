@@ -21,48 +21,50 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background,
       ),
-      child: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  SizedBox(
-                    height: (MediaQuery.of(context).size.height - buttonHeight) * 0.6,
-                    child: Align(
-                      child: _buildImage(configuration.imageUrl),
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      const SizedBox(height: 40),
-                      configuration.title,
-                      const SizedBox(height: 20),
-                      Text(
-                        configuration.paragraph,
-                        textAlign: TextAlign.center,
+      child: Padding(
+        padding: configuration.pagePadding,
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      height: (MediaQuery.of(context).size.height - buttonHeight) * 0.6,
+                      child: Align(
+                        child: _buildImage(configuration.imageUrl),
                       ),
-                    ],
-                  ),
-                ],
+                    ),
+                    Column(
+                      children: [
+                        const SizedBox(height: 40),
+                        configuration.title,
+                        const SizedBox(height: 20),
+                        Text(
+                          configuration.paragraph,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: onNext,
-                child: Text(configuration.bottomButtonText),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: onNext,
+                  child: Text(configuration.bottomButtonText),
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 20),
-        ],
+          ],
+        ),
       ),
     );
   }

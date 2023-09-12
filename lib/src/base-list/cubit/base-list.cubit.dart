@@ -42,29 +42,21 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   /// Loads values for the [NiceBaseListState.nextPage].
   /// If [resetPaging] is true, [NiceBaseListState.nextPage] will be reset to 0 and [NiceBaseListState.values] will be
   /// replaced by the values to be loaded.
-  Future<void> load({required bool resetPaging, bool showLoading = true}) async {
+  Future<void> load({required bool resetPaging, bool loading = true}) async {
     if (resetPaging) {
       emit(state.copyWithNextPage(0));
     }
 
-    try {
-      if (showLoading) {
-        emit(state.copyWith(loading: true));
-      }
-      await loadNextPage(
-        forceReplaceValues: resetPaging,
-        skipLoadingCheck: true,
-      );
-    } catch (e, s) {
-      await NiceConfig.baseCubitConfig?.wrapErrorHandler(e, s);
-      emit(
-        state.copyWith(error: true),
-      );
-    } finally {
-      emit(
-        state.copyWith(loading: false),
-      );
-    }
+    await wrap(
+      loading: loading,
+      callback: () async {
+        await loadNextPage(
+          loading: loading,
+          forceReplaceValues: resetPaging,
+          skipLoadingCheck: true,
+        );
+      },
+    );
   }
 
   /// Loads the previous page, relative to [NiceBaseListState.currentPage].
@@ -97,6 +89,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   Future<void> loadNextPage({
     bool forceReplaceValues = false,
     bool skipLoadingCheck = false,
+    bool? loading,
   }) {
     if (state.nextPage == null) {
       return SynchronousFuture(null);
@@ -106,6 +99,7 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     }
 
     return _loadPage(
+      loading: loading,
       state.nextPage ?? 0,
       forceReplaceValues: forceReplaceValues,
     );
@@ -117,14 +111,17 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   /// the config's [NiceBaseListDataFilterProvider].
   Future<void> _loadPage(
     int page, {
+    bool? loading,
     required bool forceReplaceValues,
   }) async {
-    final loading = forceReplaceValues || !config.mode.keepPreviousValuesOnPageChange;
-
+    bool isLoading = forceReplaceValues || !config.mode.keepPreviousValuesOnPageChange;
+    if (loading != null) {
+      isLoading = loading;
+    }
     emit(state.copyWith(loadingPage: true));
 
     await wrap(
-      loading: loading,
+      loading: isLoading,
       callback: () async {
         final result = await config.dataFilterProvider.filter(state.getFilterForPage(page));
 

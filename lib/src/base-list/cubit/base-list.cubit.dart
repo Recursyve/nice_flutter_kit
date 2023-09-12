@@ -42,19 +42,29 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
   /// Loads values for the [NiceBaseListState.nextPage].
   /// If [resetPaging] is true, [NiceBaseListState.nextPage] will be reset to 0 and [NiceBaseListState.values] will be
   /// replaced by the values to be loaded.
-  Future<void> load({required bool resetPaging}) async {
+  Future<void> load({required bool resetPaging, bool showLoading = true}) async {
     if (resetPaging) {
       emit(state.copyWithNextPage(0));
     }
 
-    await wrap(
-      callback: () async {
-        await loadNextPage(
-          forceReplaceValues: resetPaging,
-          skipLoadingCheck: true,
-        );
-      },
-    );
+    try {
+      if (showLoading) {
+        emit(state.copyWith(loading: true));
+      }
+      await loadNextPage(
+        forceReplaceValues: resetPaging,
+        skipLoadingCheck: true,
+      );
+    } catch (e, s) {
+      await NiceConfig.baseCubitConfig?.wrapErrorHandler(e, s);
+      emit(
+        state.copyWith(error: true),
+      );
+    } finally {
+      emit(
+        state.copyWith(loading: false),
+      );
+    }
   }
 
   /// Loads the previous page, relative to [NiceBaseListState.currentPage].

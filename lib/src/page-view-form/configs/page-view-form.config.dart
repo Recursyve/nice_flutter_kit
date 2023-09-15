@@ -35,6 +35,9 @@ class NicePageViewFormConfig {
   /// Constrained used for the next / previous buttons
   final BoxConstraints buttonConstraints;
 
+  /// Determines the axis on which the form buttons are laid-out
+  final Axis formButtonsLayoutAxis;
+
   const NicePageViewFormConfig({
     this.pageChangeDuration = const Duration(milliseconds: 200),
     this.pageChangeCurve = Curves.easeOut,
@@ -47,6 +50,7 @@ class NicePageViewFormConfig {
     this.hideButtonsIfKeyboardVisible = true,
     this.unfocusOnInteraction = true,
     this.buttonConstraints = const BoxConstraints(),
+    this.formButtonsLayoutAxis = Axis.vertical,
   });
 
   factory NicePageViewFormConfig.of(BuildContext context) => Provider.of<NicePageViewFormConfig>(context);

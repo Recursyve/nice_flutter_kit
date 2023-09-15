@@ -136,6 +136,7 @@ class _NicePageViewFormState extends State<NicePageViewForm> {
                   pageCount: _enabledPageCount,
                   onNext: _onNext,
                   onPrevious: _onPrevious,
+                  layoutAxis: widget.config.formButtonsLayoutAxis,
                 ),
               ),
             ),

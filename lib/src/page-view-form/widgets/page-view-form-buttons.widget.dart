@@ -18,6 +18,9 @@ class NicePageViewFormButtons extends StatelessWidget {
   /// Called whenever onNext or onPrevious is called
   final VoidCallback? onChange;
 
+  /// Determines if the buttons are laid-out horizontally or vertically
+  final Axis layoutAxis;
+
   const NicePageViewFormButtons({
     super.key,
     required this.currentPageIndex,
@@ -25,17 +28,28 @@ class NicePageViewFormButtons extends StatelessWidget {
     required this.onNext,
     required this.onPrevious,
     this.onChange,
+    this.layoutAxis = Axis.vertical,
   });
 
   @override
   Widget build(BuildContext context) {
-    final buttons = Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        _buildNextButton(),
-        _buildPreviousButton(),
-      ],
-    );
+    final buttons;
+    if (layoutAxis == Axis.vertical) {
+      buttons = Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _buildNextButton(),
+          _buildPreviousButton(),
+        ],
+      );
+    } else {
+      buttons = Row(
+        children: [
+          _buildNextButton(),
+          _buildPreviousButton(),
+        ],
+      );
+    }
 
     if (NicePageViewFormConfig.of(context).hideButtonsIfKeyboardVisible) {
       return KeyboardVisibilityBuilder(

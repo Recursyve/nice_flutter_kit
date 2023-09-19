@@ -46,10 +46,10 @@ class NicePageViewFormButtons extends StatelessWidget {
       buttons = Row(
         children: [
           Expanded(
-            child: _buildNextButton(),
+            child: _buildPreviousButton(),
           ),
           Expanded(
-            child: _buildPreviousButton(),
+            child: _buildNextButton(),
           ),
         ],
       );

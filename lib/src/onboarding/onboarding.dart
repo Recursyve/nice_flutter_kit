@@ -27,13 +27,9 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
     super.initState();
 
     if (NiceConfig.onboardingConfig!.onboardingCompleted) {
-      if (widget.configuration.onNotShown != null) {
-        widget.configuration.onNotShown!();
-      }
+      widget.configuration.onNotShown?.call();
     } else {
-      if (widget.configuration.onShown != null) {
-        widget.configuration.onShown!();
-      }
+      widget.configuration.onShown?.call();
     }
   }
 
@@ -70,8 +66,6 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
   void _complete() {
     _controller.add(true);
     NiceConfig.onboardingConfig!.onboardingCompleted = true;
-    if (widget.configuration.onDone != null) {
-      widget.configuration.onDone!();
-    }
+    widget.configuration.onDone?.call();
   }
 }

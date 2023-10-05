@@ -1,6 +1,6 @@
 name: nice_flutter_kit
 description: A collection of nice widgets
-version: 2.3.0
+version: 2.4.0
 homepage: https://github.com/Recursyve/nice_flutter_kit
 
 environment:
@@ -14,6 +14,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  collection: ^1.17.2
   dio: ^5.3.3
   equatable: ^2.0.5
   expandable: ^5.0.1

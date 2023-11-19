@@ -10,7 +10,7 @@ class NiceSignInPasswordField extends StatefulWidget {
 
   /// Validators that will be applied to the form control.
   /// Note that the `required` validator is already applied.
-  final List<ValidatorFunction>? validators;
+  final List<Validator>? validators;
 
   /// Decoration for the [ReactiveTextField]
   final InputDecoration decoration;

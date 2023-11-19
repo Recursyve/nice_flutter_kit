@@ -3,6 +3,7 @@ import "package:flutter/widgets.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
 import "package:provider/provider.dart";
 import "package:reactive_forms/reactive_forms.dart";
+import "package:rxdart/rxdart.dart";
 
 /// Called when the user on the "Sign in" button.
 /// Should return [true] is the credentials were valid, and [false] otherwise.
@@ -39,16 +40,21 @@ class NiceSignInUsernamePassword extends StatefulWidget {
 
 class _NiceSignInUsernamePasswordState extends State<NiceSignInUsernamePassword> {
   final _formGroup = NiceSignInUsernamePasswordFormGroup();
+  final _unsubscribeAll$ = BehaviorSubject<void>();
 
   @override
   void initState() {
     super.initState();
 
-    _formGroup.valueChanges.listen((_) => NiceSignInCubit.of(context).clearInvalidCredentials());
+    _formGroup.valueChanges
+        .takeUntil(_unsubscribeAll$)
+        .listen((_) => NiceSignInCubit.of(context).clearInvalidCredentials());
   }
 
   @override
   void dispose() {
+    _unsubscribeAll$.add(null);
+    _unsubscribeAll$.close();
     _formGroup.dispose();
     super.dispose();
   }

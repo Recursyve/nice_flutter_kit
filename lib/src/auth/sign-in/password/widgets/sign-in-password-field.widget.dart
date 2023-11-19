@@ -49,6 +49,19 @@ class _NiceSignInPasswordFieldState extends State<NiceSignInPasswordField> {
   }
 
   @override
+  void didUpdateWidget(covariant NiceSignInPasswordField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    final formControl = NiceSignInUsernamePasswordFormGroup.of(context).usernameControl;
+    final validators = [
+      for (final validator in formControl.validators)
+        if (oldWidget.validators?.contains(validator) == false) validator,
+      ...?widget.validators,
+    ];
+    formControl.setValidators(validators);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ReactiveTextField(
       formControlName: "password",

@@ -30,7 +30,7 @@ class NiceSignInCubit extends NiceBaseCubit<NiceSignInState> {
         FlutterErrorDetails(
           exception: e,
           stack: s,
-          library: "Nice sign in",
+          library: "nice_flutter_kit/nice_sign_in",
         ),
       );
       markInvalidCredentials();

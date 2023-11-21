@@ -25,6 +25,9 @@ class NiceLoadingOverlay extends StatelessWidget {
   /// control the [Visibility.visible] of the [child] when [loading]
   final bool childLoadingVisibility;
 
+  /// custom loading widget that is shown instead of the default one when [loading]
+  final Widget? customLoadingWidget;
+
   const NiceLoadingOverlay({
     super.key,
     this.size = 72,
@@ -38,6 +41,7 @@ class NiceLoadingOverlay extends StatelessWidget {
     this.opacity = 1.0,
     this.childLoadingOpacity,
     this.childLoadingVisibility = true,
+    this.customLoadingWidget,
   });
 
   @override
@@ -60,7 +64,7 @@ class NiceLoadingOverlay extends StatelessWidget {
           ),
         if (loading)
           Positioned.fill(
-            child: _buildSpinner(),
+            child: customLoadingWidget ?? _buildSpinner(),
           ),
       ],
     );

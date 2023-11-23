@@ -19,12 +19,16 @@ class NiceSignInPasswordField<SocialProviders> extends StatelessWidget {
   /// Alignment of the text inside the text field
   final TextAlign textAlign;
 
+  /// Whether we want to obscure text content or not
+  final bool obscureText;
+
   const NiceSignInPasswordField({
     super.key,
     this.validationMessages,
     this.decoration = const InputDecoration(),
     this.style,
     this.textAlign = TextAlign.left,
+    this.obscureText = true,
   });
 
   @override
@@ -35,7 +39,7 @@ class NiceSignInPasswordField<SocialProviders> extends StatelessWidget {
       decoration: decoration,
       keyboardType: TextInputType.visiblePassword,
       textInputAction: TextInputAction.go,
-      obscureText: true,
+      obscureText: obscureText,
       style: style,
       textAlign: textAlign,
       onSubmitted: NiceSignInCubit.of<SocialProviders>(context).signInWithPassword,

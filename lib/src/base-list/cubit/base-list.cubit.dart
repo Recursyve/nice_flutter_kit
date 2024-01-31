@@ -169,29 +169,6 @@ class NiceBaseListCubit<D> extends NiceBaseCubit<NiceBaseListState<D>> {
     }
   }
 
-  /// Remove a query rule with the given [id] in the [NiceBaseListState.query].
-  Future<void> removeQueryRuleById(String id) async {
-    final query = state.query;
-
-    if (query == null) {
-      return;
-    }
-
-    final newRules = query.rules.where((rule) => rule.id != id).toList(growable: false);
-
-    await setQuery(
-      NiceFilterQueryModel(
-        condition: query.condition,
-        rules: newRules,
-      ),
-    );
-  }
-
-  /// Removes all query rules in the [NiceBaseListState.query].
-  Future<void> removeAllQueryRules() async {
-    await setQuery(null);
-  }
-
   /// Sets the [NiceBaseListState.values].
   void setValues(List<D> values) => emit(state.copyWith(values: values));
 

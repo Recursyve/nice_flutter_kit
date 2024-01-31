@@ -42,6 +42,14 @@ class NiceFilterQueryModel extends NiceBaseFilterQueryModel with EquatableMixin 
     );
   }
 
+  /// Remove all rules, If [reload] is true, the base list will be reloaded after the rules have been set.
+  NiceFilterQueryModel removeAllRules() {
+    return NiceFilterQueryModel(
+      condition: condition,
+      rules: [],
+    );
+  }
+
   @override
   Json toJson() => {
         "condition": condition.value,

@@ -1,3 +1,8 @@
+### 2.4.1
+
+* Add copyWith functions to `NiceFilterQueryModel`.
+* Make `NiceBaseListCubit` not lazy when `config.autoLoad` is `true`.
+
 ### 2.4.0
 
 * Upgrade dependencies

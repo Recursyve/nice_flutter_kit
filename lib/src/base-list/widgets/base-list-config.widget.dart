@@ -36,6 +36,7 @@ class NiceBaseListConfig<D> extends StatelessWidget {
     return Provider<NiceBaseListConfigData>.value(
       value: config,
       child: BlocProvider<NiceBaseListCubit<D>>(
+        lazy: !config.autoLoad,
         create: (context) => NiceBaseListCubit<D>(
           config: config,
         )..applyDefaultConfigAndMaybeLoad(),

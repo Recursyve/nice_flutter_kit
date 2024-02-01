@@ -28,22 +28,22 @@ class NiceFilterQueryModel extends NiceBaseFilterQueryModel with EquatableMixin 
     return null;
   }
 
-  /// Recursively remove rules where the [id] matches the given [id]
-  NiceFilterQueryModel removeRuleById(String id) {
+  /// Returns a new [NiceFilterQueryModel] with the rule that matches the given [id] removed
+  NiceFilterQueryModel copyWithRuleRemoved(String id) {
     return NiceFilterQueryModel(
       condition: condition,
       rules: [
         for (final rule in rules)
           if (rule is NiceFilterQueryModel)
-            rule.removeRuleById(id)
+            rule.copyWithRuleRemoved(id)
           else if (rule is NiceFilterQueryRuleModel)
             if (rule.id != id) rule,
       ],
     );
   }
 
-  /// Remove all rules, If [reload] is true, the base list will be reloaded after the rules have been set.
-  NiceFilterQueryModel removeAllRules() {
+  /// Returns a new [NiceFilterQueryModel] with all the rules removed
+  NiceFilterQueryModel copyWithRulesCleared() {
     return NiceFilterQueryModel(
       condition: condition,
       rules: [],

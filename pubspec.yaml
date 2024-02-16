@@ -31,3 +31,6 @@ dependencies:
   rxdart: ^0.27.7
   shared_preferences: ^2.2.1
   timeago: ^3.5.0
+
+dev_dependencies:
+  test: ^1.25.2

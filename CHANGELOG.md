@@ -1,3 +1,7 @@
+### 2.5.0
+
+* Add `VersionUtils`
+
 ### 2.4.1
 
 * Add copyWith functions to `NiceFilterQueryModel`.

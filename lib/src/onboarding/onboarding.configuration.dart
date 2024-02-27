@@ -1,6 +1,5 @@
 import "package:flutter/foundation.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
-import "package:nice_flutter_kit/src/onboarding/enum/onboarding-bypass.enum.dart";
 
 class NiceOnboardingConfiguration {
   final NiceOnboardingWelcomeConfiguration? welcome;
@@ -19,7 +18,7 @@ class NiceOnboardingConfiguration {
 
   /// Override the default visibility of the onboarding.
   /// Defaults to [NiceOnboardingBypassEnum.Default]
-  final AsyncValueGetter<NiceOnboardingBypassEnum?>? bypass;
+  final AsyncValueGetter<NiceOnboardingBypassEnum>? bypass;
 
   int get pageCount =>
       (welcome != null ? 1 : 0) +

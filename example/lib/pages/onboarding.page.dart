@@ -10,8 +10,8 @@ class OnboardingPage extends StatelessWidget {
     return BasePage(
       title: "Onboarding",
       child: NiceOnboarding(
-        configuration: const NiceOnboardingConfiguration(
-          welcome: NiceOnboardingWelcomeConfiguration(
+        configuration: NiceOnboardingConfiguration(
+          welcome: const NiceOnboardingWelcomeConfiguration(
             imageUrl: "assets/bacon.png",
             title: NiceTextAccentPunctuation(
               text: "Bacon ipsum",
@@ -22,11 +22,8 @@ class OnboardingPage extends StatelessWidget {
             bottomButtonText: "Ipsum",
           ),
         ),
-        child: Center(
-          child: ElevatedButton(
-            onPressed: () => NiceConfig.onboardingConfig!.onboardingCompleted = false,
-            child: const Text("Reset onboarding completion"),
-          ),
+        child: const Center(
+          child: Text("Onboarding completed!"),
         ),
       ),
     );

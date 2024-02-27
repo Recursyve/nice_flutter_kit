@@ -26,7 +26,7 @@ class NiceOnboardingConfiguration {
       (introductionSequence != null ? 1 : 0) +
       (permissionSequence?.configurations.length ?? 0);
 
-  NiceOnboardingConfiguration({
+  const NiceOnboardingConfiguration({
     this.safeArea = const NiceOnboardingConfigurationSafeArea(),
     this.welcome,
     this.introductionSequence,

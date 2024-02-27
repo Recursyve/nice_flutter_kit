@@ -3,7 +3,6 @@ import "dart:collection";
 
 import "package:flutter/material.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
-import "package:nice_flutter_kit/src/onboarding/enum/onboarding-bypass.enum.dart";
 import "package:shared_preferences/shared_preferences.dart";
 
 class NiceOnboarding extends StatefulWidget {
@@ -95,8 +94,8 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
   void _complete() {
     setState(() {
       _completed = true;
-      _sharedPref.setBool(widget.configuration.sharedPrefKey, true);
     });
+    _sharedPref.setBool(widget.configuration.sharedPrefKey, true);
     widget.configuration.onDone?.call();
   }
 }

@@ -10,15 +10,21 @@ class NiceOnboardingConfiguration {
   final VoidCallback? onDone;
   final NiceOnboardingConfigurationSafeArea safeArea;
 
-  final String sharedPrefKey;
-  final Set<NicePermissionTypes>? permissions;
+  final String? _sharedPrefKey;
+  final Set<NicePermissionTypes>? _permissions;
 
   /// If set to true, the onboarding will always be shown.
-  final bool debug;
+  final bool? _debug;
 
   /// Override the default visibility of the onboarding.
   /// Defaults to [NiceOnboardingBypassEnum.Default]
   final AsyncValueGetter<NiceOnboardingBypassEnum>? bypass;
+
+  String get sharedPrefKey => _sharedPrefKey ?? NiceConfig.onboardingConfig?.sharedPrefKey ?? "ONBOARDING_COMPLETED";
+
+  bool get debug => _debug ?? NiceConfig.onboardingConfig?.debug ?? false;
+
+  Set<NicePermissionTypes>? get permissions => _permissions ?? NiceConfig.onboardingConfig?.permissions;
 
   int get pageCount =>
       (welcome != null ? 1 : 0) +
@@ -33,11 +39,14 @@ class NiceOnboardingConfiguration {
     this.onShown,
     this.onNotShown,
     this.onDone,
-    this.sharedPrefKey = "ONBOARDING_COMPLETED",
-    this.permissions,
-    this.debug = false,
+    String? sharedPrefKey,
+    Set<NicePermissionTypes>? permissions,
+    bool? debug,
     this.bypass,
-  }) : assert(
+  })  : _sharedPrefKey = sharedPrefKey,
+        _debug = debug,
+        _permissions = permissions,
+        assert(
           welcome != null || introductionSequence != null || permissionSequence != null,
           "At least one of welcome, introduction or permission is required",
         );

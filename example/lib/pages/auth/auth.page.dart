@@ -54,12 +54,12 @@ class AuthPage extends StatelessWidget {
         constraints: const BoxConstraints(
           maxWidth: 350,
         ),
-        child: NiceSignIn<SocialProviders, User, Account>(
-          signInProvider: const SignInProvider(),
+        child: const NiceSignIn<SocialProviders, User, Account>(
+          signInProvider: SignInProvider(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: const [
-              NiceSignInEmailField(
+            children: [
+              NiceSignInEmailField<SocialProviders>(
                 decoration: InputDecoration(
                   label: Text("Email"),
                 ),

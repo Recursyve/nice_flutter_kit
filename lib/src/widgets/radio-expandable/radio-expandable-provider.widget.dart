@@ -31,6 +31,22 @@ class RadioExpandableProvider extends StatefulWidget {
 class _RadioExpandableProviderState extends State<RadioExpandableProvider> {
   Key? _expandedKey;
 
+  @override
+  void initState() {
+    super.initState();
+
+    _expandedKey = widget.initialExpandedKey;
+  }
+
+  @override
+  void didUpdateWidget(covariant RadioExpandableProvider oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.initialExpandedKey != widget.initialExpandedKey) {
+      _expandedKey = widget.initialExpandedKey;
+    }
+  }
+
   void _setExpandedKey(Key? expandedKey) {
     if (_expandedKey == expandedKey) {
       return;
@@ -39,13 +55,6 @@ class _RadioExpandableProviderState extends State<RadioExpandableProvider> {
     setState(() {
       _expandedKey = expandedKey;
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _expandedKey = widget.initialExpandedKey;
   }
 
   @override

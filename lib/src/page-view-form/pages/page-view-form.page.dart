@@ -40,7 +40,7 @@ abstract class NicePageViewFormPage {
     String emailConfirmationControlName,
     InputDecoration emailDecoration,
     InputDecoration emailConfirmationDecoration,
-    ValidationMessagesFunction validationMessages,
+    Map<String, ValidationMessageFunction>? validationMessages,
     double inputSpacing,
     Widget suffix,
   }) = NicePageViewFormEmailPage;
@@ -54,7 +54,7 @@ abstract class NicePageViewFormPage {
     String passwordConfirmationControlName,
     InputDecoration passwordDecoration,
     InputDecoration passwordConfirmationDecoration,
-    ValidationMessagesFunction validationMessages,
+    Map<String, ValidationMessageFunction>? validationMessages,
     double inputSpacing,
     Widget suffix,
   }) = NicePageViewFormPasswordPage;

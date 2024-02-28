@@ -6,7 +6,7 @@ import "package:reactive_forms/reactive_forms.dart";
 /// Must be used in combination with [NiceSignIn], [NiceSignInPasswordField] and [NiceSignInEmailPasswordButton]
 class NiceSignInEmailField<SocialProviders> extends StatelessWidget {
   /// Validation messages that is passed to the [ReactiveTextField]
-  final ValidationMessagesFunction? validationMessages;
+  final Map<String, ValidationMessageFunction>? validationMessages;
 
   /// Decoration for the [ReactiveTextField]
   final InputDecoration decoration;

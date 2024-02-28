@@ -1,5 +1,4 @@
-import "package:geolocator/geolocator.dart";
-import "package:nice_flutter_kit/src/services/fcm.service.dart";
+import "package:permission_handler/permission_handler.dart";
 
 enum NicePermissionTypes { notification, gpsLocalization }
 
@@ -25,23 +24,18 @@ class NicePermissionUtils {
   }
 
   static Future<void> requestGpsLocalizationPermission() async {
-    final permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      await Geolocator.requestPermission();
-    }
+    await Permission.location.request();
   }
 
   static Future<bool> isGpsLocalizationPermissionEnabled() async {
-    final gpsPermission = await Geolocator.checkPermission();
-
-    return !(gpsPermission == LocationPermission.denied);
+    return Permission.location.isGranted;
   }
 
   static Future<void> requestNotificationPermission() async {
-    await NiceFcmService.requestPermission();
+    await Permission.notification.request();
   }
 
   static Future<bool> isNotificationPermissionEnabled() {
-    return NiceFcmService.isPermissionGranted();
+    return Permission.notification.isGranted;
   }
 }

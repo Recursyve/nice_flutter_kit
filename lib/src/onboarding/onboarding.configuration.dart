@@ -20,10 +20,13 @@ class NiceOnboardingConfiguration {
   /// Defaults to [NiceOnboardingBypassEnum.Default]
   final AsyncValueGetter<NiceOnboardingBypassEnum>? bypass;
 
+  // ignore: deprecated_member_use_from_same_package
   String get sharedPrefKey => _sharedPrefKey ?? NiceConfig.onboardingConfig?.sharedPrefKey ?? "ONBOARDING_COMPLETED";
 
+  // ignore: deprecated_member_use_from_same_package
   bool get debug => _debug ?? NiceConfig.onboardingConfig?.debug ?? false;
 
+  // ignore: deprecated_member_use_from_same_package
   Set<NicePermissionTypes>? get permissions => _permissions ?? NiceConfig.onboardingConfig?.permissions;
 
   int get pageCount =>

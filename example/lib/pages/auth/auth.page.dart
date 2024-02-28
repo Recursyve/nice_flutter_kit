@@ -1,33 +1,33 @@
-import "package:example/pages/auth/auth.provider.dart";
-import "package:example/pages/auth/sign-in.provider.dart";
 import "package:example/pages/common/base.page.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends StatefulWidget {
   const AuthPage({super.key});
+
+  @override
+  State<AuthPage> createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  bool _isSignedIn = false;
 
   @override
   Widget build(BuildContext context) {
     return BasePage(
       title: "Auth",
-      child: Center(
-        child: NiceAuth<User, Account>(
-          authProvider: const AuthProvider(),
-          child: BlocBuilder<NiceAuthCubit<User, Account>, NiceAuthState<User, Account>>(
-            buildWhen: (prev, curr) => prev.isSignedIn != curr.isSignedIn || prev.isRegistered != curr.isRegistered,
-            builder: (context, state) {
-              if (state.isSignedIn) {
+      child: NiceSignIn(
+        child: Center(
+          child: Builder(
+            builder: (context) {
+              if (_isSignedIn) {
                 return NiceAnimatedFadeIn(
                   key: UniqueKey(),
                   duration: const Duration(milliseconds: 200),
                   child: Column(
                     children: [
-                      if (state.isRegistered)
-                        const Text("Signed in and registered")
-                      else
-                        const Text("Signed in and not registered"),
+                      const Text("Signed in"),
                       const SizedBox(height: 64),
                       _buildSignOutButton(),
                     ],
@@ -54,41 +54,77 @@ class AuthPage extends StatelessWidget {
         constraints: const BoxConstraints(
           maxWidth: 350,
         ),
-        child: const NiceSignIn<SocialProviders, User, Account>(
-          signInProvider: SignInProvider(),
+        child: NiceSignInUsernamePassword(
+          autofill: true,
+          onSignIn: (username, password) async {
+            await Future.delayed(const Duration(seconds: 2));
+
+            final valid = username == "foo" && password == "bar";
+
+            if (valid) {
+              setState(() {
+                _isSignedIn = true;
+              });
+            }
+
+            return valid;
+          },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              NiceSignInEmailField<SocialProviders>(
-                decoration: InputDecoration(
-                  label: Text("Email"),
-                ),
+              const Column(
+                children: [
+                  NiceSignInUsernameField(
+                    decoration: InputDecoration(
+                      label: Text("Email"),
+                    ),
+                  ),
+                  SizedBox(height: 32),
+                  NiceSignInPasswordField(
+                    decoration: InputDecoration(
+                      label: Text("Password"),
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 32),
-              NiceSignInPasswordField<SocialProviders>(
-                decoration: InputDecoration(
-                  label: Text("Password"),
-                ),
-              ),
-              SizedBox(height: 16),
-              NiceSignInErrors<SocialProviders>(
+              const SizedBox(height: 16),
+              const NiceSignInErrors(
                 errorText: "Invalid credentials",
                 invalidCredentialsText: "Invalid credentials",
                 style: TextStyle(color: Colors.red),
               ),
-              SizedBox(height: 16),
-              NiceSignInEmailPasswordButton<SocialProviders>(
+              const SizedBox(height: 16),
+              const NiceSignInUsernamePasswordButton(
                 type: NiceButtonTypes.Elevated,
                 text: "Sign in",
                 loadingLineColor: Colors.white,
                 loadingLineWidth: 2,
               ),
-              SizedBox(height: 64),
-              NiceSignInSocialButton<SocialProviders>(
-                socialProvider: SocialProviders.GitHub,
+              const SizedBox(height: 64),
+              NiceSignInSocialButton(
+                onSignIn: (context) async {
+                  await Future.delayed(const Duration(seconds: 2));
+
+                  setState(() {
+                    _isSignedIn = true;
+                  });
+
+                  return true;
+                },
                 type: NiceButtonTypes.Outlined,
-                icon: Icon(Icons.code),
-                child: Text("GitHub"),
+                icon: const Icon(Icons.code),
+                child: const Text("GitHub"),
+              ),
+              const SizedBox(height: 32),
+              NiceSignInSocialButton(
+                onSignIn: (context) async {
+                  await Future.delayed(const Duration(seconds: 2));
+
+                  return false;
+                },
+                type: NiceButtonTypes.Outlined,
+                icon: const Icon(Icons.code),
+                child: const Text("Google"),
               ),
             ],
           ),
@@ -98,9 +134,12 @@ class AuthPage extends StatelessWidget {
   }
 
   Widget _buildSignOutButton() {
-    return BlocBuilder<NiceAuthCubit<User, Account>, NiceAuthState<User, Account>>(
+    return BlocBuilder<NiceSignInCubit, NiceSignInState>(
       builder: (context, state) => ElevatedButton(
-        onPressed: state.loading ? null : NiceAuthCubit.of<User, Account>(context).signOut,
+        onPressed: switch (state.loading) {
+          false => () => setState(() => _isSignedIn = false),
+          _ => null,
+        },
         child: NiceLoadingOverlay(
           loading: state.loading,
           color: Colors.white,

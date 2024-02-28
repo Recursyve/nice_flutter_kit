@@ -1,16 +1,14 @@
 import "package:flutter/material.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
-/// Button that will call [NiceSignInCubit.signInWithSocialProvider]
 /// Must be used in combination with [NiceSignIn]
-///
-/// The [SocialProviders] type must be provided and be the same type as the one passed to [NiceSignInCubit]
-class NiceSignInSocialButton<SocialProviders> extends StatelessWidget {
+class NiceSignInSocialButton extends StatelessWidget {
   /// Type of button to be displayed
   final NiceButtonTypes type;
 
-  /// Social provider that this button will sign in with
-  final SocialProviders socialProvider;
+  /// Callback that will be executed whenever the user taps on the button.
+  /// Should return [true] is successfully signed in, and [false] otherwise.
+  final Future<bool> Function(BuildContext context) onSignIn;
 
   /// Style of the button
   final ButtonStyle? style;
@@ -25,7 +23,7 @@ class NiceSignInSocialButton<SocialProviders> extends StatelessWidget {
   const NiceSignInSocialButton({
     super.key,
     required this.type,
-    required this.socialProvider,
+    required this.onSignIn,
     this.style,
     this.icon,
     required this.child,
@@ -36,7 +34,7 @@ class NiceSignInSocialButton<SocialProviders> extends StatelessWidget {
     if (icon != null) {
       return NiceTypedButton.icon(
         type: type,
-        onPressed: () => NiceSignInCubit.of<SocialProviders>(context).signInWithSocialProvider(socialProvider),
+        onPressed: () => _onSignIn(context),
         style: style,
         icon: icon!,
         label: child,
@@ -45,9 +43,13 @@ class NiceSignInSocialButton<SocialProviders> extends StatelessWidget {
 
     return NiceTypedButton(
       type: type,
-      onPressed: () => NiceSignInCubit.of<SocialProviders>(context).signInWithSocialProvider(socialProvider),
+      onPressed: () => _onSignIn(context),
       style: style,
       child: child,
     );
+  }
+
+  Future<void> _onSignIn(BuildContext context) {
+    return NiceSignInCubit.of(context).executeSignInCallback(() => onSignIn(context));
   }
 }

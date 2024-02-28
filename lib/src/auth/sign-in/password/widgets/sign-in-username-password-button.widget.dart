@@ -3,10 +3,8 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
 /// Button that will call [NiceSignInCubit.signInWithPassword]
-/// Must be used in combination with [NiceSignIn], [NiceSignInEmailField] and [NiceSignInPasswordField]
-///
-/// The [SocialProviders] type must be provided and be the same type as the one passed to [NiceSignInCubit]
-class NiceSignInEmailPasswordButton<SocialProviders> extends StatelessWidget {
+/// Must be used in combination with [NiceSignIn], [NiceSignInUsernameField] and [NiceSignInPasswordField]
+class NiceSignInUsernamePasswordButton extends StatelessWidget {
   /// Type of button to be displayed
   final NiceButtonTypes type;
 
@@ -28,7 +26,7 @@ class NiceSignInEmailPasswordButton<SocialProviders> extends StatelessWidget {
   /// Line color of the loading spinner, if [showLoading] is true
   final Color? loadingLineColor;
 
-  const NiceSignInEmailPasswordButton({
+  const NiceSignInUsernamePasswordButton({
     super.key,
     required this.type,
     this.style,
@@ -41,11 +39,14 @@ class NiceSignInEmailPasswordButton<SocialProviders> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NiceSignInCubit<SocialProviders>, NiceSignInState>(
+    return BlocBuilder<NiceSignInCubit, NiceSignInState>(
       buildWhen: (prev, curr) => prev.loading != curr.loading,
       builder: (context, state) => NiceTypedButton(
         type: type,
-        onPressed: state.loading ? null : NiceSignInCubit.of<SocialProviders>(context).signInWithPassword,
+        onPressed: switch (state.loading) {
+          false => NiceSignInUsernamePasswordConfig.of(context).onSignIn,
+          _ => null,
+        },
         style: style,
         child: NiceLoadingOverlay(
           loading: state.loading && showLoading,

@@ -1,3 +1,8 @@
+### 2.5.1
+
+* Deprecate global onboarding config in favor of local widget config.
+* Add onboarding `bypass` callback.
+
 ### 2.5.0
 
 * Add `VersionUtils`

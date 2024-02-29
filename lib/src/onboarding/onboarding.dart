@@ -22,7 +22,7 @@ class NiceOnboarding extends StatefulWidget {
 }
 
 class _NiceOnboardingState extends State<NiceOnboarding> {
-  bool? _completed;
+  bool _completed = false;
   Future<void>? _initializationFuture;
   late SharedPreferences _sharedPref;
   final HashMap<NicePermissionTypes, bool> isPermissionEnabled = HashMap<NicePermissionTypes, bool>();

@@ -48,7 +48,7 @@ class WorstFilterQueryUtils {
       condition: query.condition,
       rules: [
         for (final rule in query.rules)
-          if (rule is! NiceFilterQueryRuleModel || rule.id != ruleId) rule
+          if (rule is! NiceFilterQueryRuleModel || rule.id != ruleId) rule,
       ],
     );
   }

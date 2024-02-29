@@ -40,7 +40,7 @@ class NiceErrorWidget extends StatelessWidget {
               ),
               onPressed: onRefresh,
             ),
-          ]
+          ],
         ],
       ),
     );

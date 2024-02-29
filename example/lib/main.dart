@@ -17,7 +17,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await NiceConfig.setup(
-    onboardingConfig: NiceOnboardingGlobalConfig(),
     baseCubitConfig: NiceBaseCubitConfig(
       wrapErrorHandler: (e, s) {
         // ignore: avoid_print

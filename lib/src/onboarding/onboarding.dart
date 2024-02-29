@@ -53,7 +53,7 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
       }
     }
 
-    if (_completed!) {
+    if (_completed) {
       widget.configuration.onNotShown?.call();
     } else {
       widget.configuration.onShown?.call();
@@ -78,7 +78,7 @@ class _NiceOnboardingState extends State<NiceOnboarding> {
         }
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 100),
-          child: _completed!
+          child: _completed
               ? widget.child
               : NiceOnboardingWrapper(
                   theme: widget.onboardingTheme,

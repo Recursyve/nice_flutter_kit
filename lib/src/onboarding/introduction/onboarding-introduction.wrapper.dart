@@ -7,20 +7,18 @@ import "package:path/path.dart";
 class NiceOnboardingIntroductionSequence extends StatelessWidget {
   final NiceOnboardingIntroductionSequenceConfiguration sequenceConfiguration;
   final VoidCallback onNext;
-  final List<bool>? safeAreaList;
 
   const NiceOnboardingIntroductionSequence({
     super.key,
     required this.sequenceConfiguration,
     required this.onNext,
-    this.safeAreaList,
   });
 
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
       globalBackgroundColor: Theme.of(context).colorScheme.background,
-      safeAreaList: safeAreaList ?? const [false, false, true, false],
+      safeAreaList: sequenceConfiguration.safeA ?? const [false, false, true, false],
       dotsFlex: sequenceConfiguration.footerConfig.dotsFlex,
       nextFlex: sequenceConfiguration.footerConfig.nextFlex,
       skipOrBackFlex: sequenceConfiguration.footerConfig.skipOrBackFlex,

@@ -51,7 +51,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
                   imageFlex: 2,
                   bodyFlex: 3,
                   imagePadding: const EdgeInsets.only(),
-                  pageColor: Theme.of(context).colorScheme.background,
+                  pageColor: configuration.boxDecoration == null ? Theme.of(context).colorScheme.background : null,
                   contentMargin: const EdgeInsets.all(5),
                   boxDecoration: configuration.boxDecoration,
                 ),

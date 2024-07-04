@@ -18,7 +18,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntroductionScreen(
       globalBackgroundColor: sequenceConfiguration.globalBackGroundColor ?? Theme.of(context).colorScheme.background,
-      safeAreaList: const [false, false, true, true],
+      safeAreaList: const [false, false, true, false],
       dotsFlex: sequenceConfiguration.footerConfig.dotsFlex,
       nextFlex: sequenceConfiguration.footerConfig.nextFlex,
       skipOrBackFlex: sequenceConfiguration.footerConfig.skipOrBackFlex,

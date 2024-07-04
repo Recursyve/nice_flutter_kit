@@ -8,6 +8,7 @@ class NiceOnboardingIntroductionConfiguration {
   final String paragraph;
   final Widget? bodyWidget;
   final PageDecoration? pageDecoration;
+  final BoxDecoration? boxDecoration;
 
   const NiceOnboardingIntroductionConfiguration({
     this.title,
@@ -16,6 +17,7 @@ class NiceOnboardingIntroductionConfiguration {
     required this.paragraph,
     this.bodyWidget,
     this.pageDecoration,
+    this.boxDecoration,
   });
 }
 

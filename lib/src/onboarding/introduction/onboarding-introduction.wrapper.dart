@@ -7,13 +7,11 @@ import "package:path/path.dart";
 class NiceOnboardingIntroductionSequence extends StatelessWidget {
   final NiceOnboardingIntroductionSequenceConfiguration sequenceConfiguration;
   final VoidCallback onNext;
-  final BoxDecoration? boxDecoration;
 
   const NiceOnboardingIntroductionSequence({
     super.key,
     required this.sequenceConfiguration,
     required this.onNext,
-    this.boxDecoration,
   });
 
   @override
@@ -55,7 +53,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
                   imagePadding: const EdgeInsets.only(),
                   pageColor: Theme.of(context).colorScheme.background,
                   contentMargin: const EdgeInsets.all(5),
-                  boxDecoration: boxDecoration,
+                  boxDecoration: configuration.boxDecoration,
                 ),
             bodyWidget: configuration.bodyWidget ??
                 Padding(

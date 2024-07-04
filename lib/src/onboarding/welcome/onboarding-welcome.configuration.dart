@@ -6,6 +6,7 @@ class NiceOnboardingWelcomeConfiguration {
   final String paragraph;
   final String bottomButtonText;
   final EdgeInsets pagePadding;
+  final Gradient? gradientBackground;
 
   const NiceOnboardingWelcomeConfiguration({
     required this.imageUrl,
@@ -13,5 +14,6 @@ class NiceOnboardingWelcomeConfiguration {
     required this.paragraph,
     required this.bottomButtonText,
     this.pagePadding = const EdgeInsets.only(bottom: 20),
+    this.gradientBackground,
   });
 }

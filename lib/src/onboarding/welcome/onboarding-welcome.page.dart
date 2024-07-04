@@ -20,6 +20,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.background,
+        gradient: configuration.gradientBackground,
       ),
       child: Padding(
         padding: configuration.pagePadding,

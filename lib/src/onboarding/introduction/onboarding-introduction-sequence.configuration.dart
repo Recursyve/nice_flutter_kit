@@ -27,7 +27,7 @@ class NiceOnboardingIntroductionSequenceConfiguration {
   final String next;
   final String done;
   final NiceOnboardingIntroductionSequenceFooterConfig footerConfig;
-  final List<bool>? safeAreaList;
+  final Color? globalBackGroundColor;
 
   const NiceOnboardingIntroductionSequenceConfiguration({
     required this.configurations,
@@ -35,7 +35,7 @@ class NiceOnboardingIntroductionSequenceConfiguration {
     required this.next,
     required this.done,
     this.footerConfig = const NiceOnboardingIntroductionSequenceFooterConfig(),
-    this.safeAreaList,
+    this.globalBackGroundColor,
   }) : assert(configurations.length > 0);
 }
 

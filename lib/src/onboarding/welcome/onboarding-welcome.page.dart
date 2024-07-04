@@ -19,8 +19,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
-        gradient: configuration.gradientBackground,
+        color: configuration.backgroundColor ?? Theme.of(context).colorScheme.background,
       ),
       child: Padding(
         padding: configuration.pagePadding,

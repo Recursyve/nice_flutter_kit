@@ -51,6 +51,7 @@ class NiceOnboardingIntroductionSequenceFooterConfig {
   final EdgeInsets controlsPadding;
   final ButtonStyle? nextButtonStyle;
   final ButtonStyle? skipButtonStyle;
+  final ButtonStyle? doneButtonStyle;
   final TextStyle? skipButtonTextStyle;
   final TextStyle? nextButtonTextStyle;
   final TextStyle? doneButtonTextStyle;
@@ -65,6 +66,7 @@ class NiceOnboardingIntroductionSequenceFooterConfig {
     this.buttonStyle = const ButtonStyle(),
     this.nextButtonStyle,
     this.skipButtonStyle,
+    this.doneButtonStyle,
     this.nextButtonTextStyle,
     this.skipButtonTextStyle,
     this.doneButtonTextStyle,

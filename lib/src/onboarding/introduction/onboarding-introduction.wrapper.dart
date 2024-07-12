@@ -24,6 +24,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       skipOrBackFlex: sequenceConfiguration.footerConfig.skipOrBackFlex,
       nextStyle: sequenceConfiguration.footerConfig.nextButtonStyle,
       skipStyle: sequenceConfiguration.footerConfig.skipButtonStyle,
+      doneStyle: sequenceConfiguration.footerConfig.doneButtonStyle,
       baseBtnStyle: sequenceConfiguration.footerConfig.buttonStyle,
       controlsPadding: sequenceConfiguration.footerConfig.controlsPadding,
       dotsDecorator: sequenceConfiguration.footerConfig.dotsDecorator != null

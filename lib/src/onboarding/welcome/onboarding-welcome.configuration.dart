@@ -7,6 +7,7 @@ class NiceOnboardingWelcomeConfiguration {
   final String bottomButtonText;
   final EdgeInsets pagePadding;
   final Color? backgroundColor;
+  final TextStyle? paragraphTextStyle;
 
   const NiceOnboardingWelcomeConfiguration({
     required this.imageUrl,
@@ -15,5 +16,6 @@ class NiceOnboardingWelcomeConfiguration {
     required this.bottomButtonText,
     this.pagePadding = const EdgeInsets.only(bottom: 20),
     this.backgroundColor,
+    this.paragraphTextStyle,
   });
 }

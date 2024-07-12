@@ -44,6 +44,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
                         const SizedBox(height: 20),
                         Text(
                           configuration.paragraph,
+                          style: configuration.paragraphTextStyle,
                           textAlign: TextAlign.center,
                         ),
                       ],

@@ -22,6 +22,8 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       dotsFlex: sequenceConfiguration.footerConfig.dotsFlex,
       nextFlex: sequenceConfiguration.footerConfig.nextFlex,
       skipOrBackFlex: sequenceConfiguration.footerConfig.skipOrBackFlex,
+      nextStyle: sequenceConfiguration.footerConfig.nextButtonStyle,
+      skipStyle: sequenceConfiguration.footerConfig.skipButtonStyle,
       baseBtnStyle: sequenceConfiguration.footerConfig.buttonStyle,
       controlsPadding: sequenceConfiguration.footerConfig.controlsPadding,
       dotsDecorator: sequenceConfiguration.footerConfig.dotsDecorator != null
@@ -34,11 +36,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       pages: [
         for (final configuration in sequenceConfiguration.configurations)
           PageViewModel(
-            image: configuration.imageWidget ??
-                Padding(
-                  padding: const EdgeInsets.only(top: 64.0),
-                  child: _buildImage(configuration.imageUrl),
-                ),
+            image: _buildImage(imageUrl: configuration.imageUrl, imageWidget: configuration.imageWidget),
             titleWidget: configuration.title != null
                 ? Padding(
                     padding: const EdgeInsets.only(top: 40.0, left: 24.0, right: 24.0),
@@ -61,7 +59,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
                   child: Text(
                     configuration.paragraph,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
+                    style: configuration.paragraphTextStyle ?? const TextStyle(
                       fontSize: 16,
                       height: 1.5,
                     ),
@@ -72,24 +70,27 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
       showSkipButton: true,
       skip: Text(
         sequenceConfiguration.skip,
-        style: TextStyle(
-          fontSize: 16,
-          color: Theme.of(context).colorScheme.primary,
-        ),
+        style: sequenceConfiguration.footerConfig.skipButtonTextStyle ??
+            TextStyle(
+              fontSize: 16,
+              color: Theme.of(context).colorScheme.primary,
+            ),
       ),
       next: Text(
         sequenceConfiguration.next,
-        style: TextStyle(
-          fontSize: 16,
-          color: Theme.of(context).colorScheme.secondary,
-        ),
+        style: sequenceConfiguration.footerConfig.nextButtonTextStyle ??
+            TextStyle(
+              fontSize: 16,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
       ),
       done: Text(
         sequenceConfiguration.done,
-        style: TextStyle(
-          fontSize: 16,
-          color: Theme.of(context).colorScheme.secondary,
-        ),
+        style: sequenceConfiguration.footerConfig.doneButtonTextStyle ??
+            TextStyle(
+              fontSize: 16,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
       ),
       animationDuration: 250,
       onDone: onNext,
@@ -98,13 +99,28 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
     );
   }
 
-  Widget _buildImage(String imageUrl) {
-    final ext = extension(imageUrl);
-    switch (ext) {
-      case ".svg":
-        return SvgPicture.asset(imageUrl);
-      default:
-        return Image.asset(imageUrl);
+  Widget _buildImage({String? imageUrl, Widget? imageWidget}) {
+    if (imageWidget != null) {
+      return imageWidget;
     }
+
+    if (imageUrl == null) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 64.0),
+      child: Builder(
+        builder: (context) {
+          final ext = extension(imageUrl);
+          switch (ext) {
+            case ".svg":
+              return SvgPicture.asset(imageUrl);
+            default:
+              return Image.asset(imageUrl);
+          }
+        },
+      ),
+    );
   }
 }

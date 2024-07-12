@@ -2,22 +2,24 @@ import "package:flutter/material.dart";
 import "package:introduction_screen/introduction_screen.dart";
 
 class NiceOnboardingIntroductionConfiguration {
-  final Widget? title;
   final String imageUrl;
-  final Widget? imageWidget;
   final String paragraph;
   final Widget? bodyWidget;
-  final PageDecoration? pageDecoration;
   final BoxDecoration? boxDecoration;
+  final Widget? imageWidget;
+  final PageDecoration? pageDecoration;
+  final TextStyle? paragraphTextStyle;
+  final Widget? title;
 
   const NiceOnboardingIntroductionConfiguration({
     this.title,
     required this.imageUrl,
-    this.imageWidget,
     required this.paragraph,
     this.bodyWidget,
-    this.pageDecoration,
     this.boxDecoration,
+    this.imageWidget,
+    this.pageDecoration,
+    this.paragraphTextStyle,
   });
 }
 
@@ -47,6 +49,11 @@ class NiceOnboardingIntroductionSequenceFooterConfig {
   final int skipOrBackFlex;
   final ButtonStyle buttonStyle;
   final EdgeInsets controlsPadding;
+  final ButtonStyle? nextButtonStyle;
+  final ButtonStyle? skipButtonStyle;
+  final TextStyle? skipButtonTextStyle;
+  final TextStyle? nextButtonTextStyle;
+  final TextStyle? doneButtonTextStyle;
 
   const NiceOnboardingIntroductionSequenceFooterConfig({
     this.dotsDecorator,
@@ -56,6 +63,11 @@ class NiceOnboardingIntroductionSequenceFooterConfig {
     this.skipOrBackFlex = 1,
     this.controlsPadding = const EdgeInsets.all(16.0),
     this.buttonStyle = const ButtonStyle(),
+    this.nextButtonStyle,
+    this.skipButtonStyle,
+    this.nextButtonTextStyle,
+    this.skipButtonTextStyle,
+    this.doneButtonTextStyle,
   })  : assert(dotsFlex > 0),
         assert(nextFlex > 0),
         assert(skipOrBackFlex > 0);

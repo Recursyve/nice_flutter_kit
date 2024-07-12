@@ -7,6 +7,7 @@ class NiceOnboardingPermissionConfiguration {
   final Widget title;
   final Widget paragraph;
   final String activate;
+  final Color? backGroundColor;
   final Future<void> Function()? onActivated;
 
   const NiceOnboardingPermissionConfiguration({
@@ -15,6 +16,7 @@ class NiceOnboardingPermissionConfiguration {
     required this.title,
     required this.paragraph,
     required this.activate,
+    this.backGroundColor,
     this.onActivated,
   });
 }

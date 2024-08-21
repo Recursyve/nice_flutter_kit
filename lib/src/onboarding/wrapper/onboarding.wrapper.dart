@@ -13,8 +13,8 @@ class NiceOnboardingWrapper extends StatefulWidget {
     super.key,
     required this.configuration,
     required this.onCompleted,
-    this.theme,
     required this.isPermissionEnabled,
+    this.theme,
   });
 
   @override
@@ -37,7 +37,7 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
       child: Builder(
         builder: (context) {
           return Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: widget.configuration.backgroundColor ?? Theme.of(context).colorScheme.background,
             body: SafeArea(
               left: widget.configuration.safeArea.left,
               top: widget.configuration.safeArea.top,

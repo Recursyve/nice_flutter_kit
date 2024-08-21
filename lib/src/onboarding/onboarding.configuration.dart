@@ -1,3 +1,5 @@
+import "dart:ui";
+
 import "package:flutter/foundation.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
@@ -9,6 +11,7 @@ class NiceOnboardingConfiguration {
   final VoidCallback? onNotShown;
   final VoidCallback? onDone;
   final NiceOnboardingConfigurationSafeArea safeArea;
+  final Color? backgroundColor;
 
   final String? _sharedPrefKey;
   final Set<NicePermissionTypes>? _permissions;
@@ -46,6 +49,7 @@ class NiceOnboardingConfiguration {
     Set<NicePermissionTypes>? permissions,
     bool? debug,
     this.bypass,
+    this.backgroundColor,
   })  : _sharedPrefKey = sharedPrefKey,
         _debug = debug,
         _permissions = permissions,

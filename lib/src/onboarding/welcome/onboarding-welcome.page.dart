@@ -19,7 +19,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
+        color: configuration.backgroundColor ?? Theme.of(context).colorScheme.background,
       ),
       child: Padding(
         padding: configuration.pagePadding,
@@ -44,6 +44,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
                         const SizedBox(height: 20),
                         Text(
                           configuration.paragraph,
+                          style: configuration.paragraphTextStyle,
                           textAlign: TextAlign.center,
                         ),
                       ],

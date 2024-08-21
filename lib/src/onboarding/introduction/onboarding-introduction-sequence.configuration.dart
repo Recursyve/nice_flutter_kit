@@ -2,20 +2,24 @@ import "package:flutter/material.dart";
 import "package:introduction_screen/introduction_screen.dart";
 
 class NiceOnboardingIntroductionConfiguration {
-  final Widget? title;
   final String imageUrl;
-  final Widget? imageWidget;
   final String paragraph;
   final Widget? bodyWidget;
+  final BoxDecoration? boxDecoration;
+  final Widget? imageWidget;
   final PageDecoration? pageDecoration;
+  final TextStyle? paragraphTextStyle;
+  final Widget? title;
 
   const NiceOnboardingIntroductionConfiguration({
     this.title,
     required this.imageUrl,
-    this.imageWidget,
     required this.paragraph,
     this.bodyWidget,
+    this.boxDecoration,
+    this.imageWidget,
     this.pageDecoration,
+    this.paragraphTextStyle,
   });
 }
 
@@ -25,6 +29,7 @@ class NiceOnboardingIntroductionSequenceConfiguration {
   final String next;
   final String done;
   final NiceOnboardingIntroductionSequenceFooterConfig footerConfig;
+  final Color? globalBackGroundColor;
 
   const NiceOnboardingIntroductionSequenceConfiguration({
     required this.configurations,
@@ -32,6 +37,7 @@ class NiceOnboardingIntroductionSequenceConfiguration {
     required this.next,
     required this.done,
     this.footerConfig = const NiceOnboardingIntroductionSequenceFooterConfig(),
+    this.globalBackGroundColor,
   }) : assert(configurations.length > 0);
 }
 
@@ -43,6 +49,12 @@ class NiceOnboardingIntroductionSequenceFooterConfig {
   final int skipOrBackFlex;
   final ButtonStyle buttonStyle;
   final EdgeInsets controlsPadding;
+  final ButtonStyle? nextButtonStyle;
+  final ButtonStyle? skipButtonStyle;
+  final ButtonStyle? doneButtonStyle;
+  final TextStyle? skipButtonTextStyle;
+  final TextStyle? nextButtonTextStyle;
+  final TextStyle? doneButtonTextStyle;
 
   const NiceOnboardingIntroductionSequenceFooterConfig({
     this.dotsDecorator,
@@ -52,6 +64,12 @@ class NiceOnboardingIntroductionSequenceFooterConfig {
     this.skipOrBackFlex = 1,
     this.controlsPadding = const EdgeInsets.all(16.0),
     this.buttonStyle = const ButtonStyle(),
+    this.nextButtonStyle,
+    this.skipButtonStyle,
+    this.doneButtonStyle,
+    this.nextButtonTextStyle,
+    this.skipButtonTextStyle,
+    this.doneButtonTextStyle,
   })  : assert(dotsFlex > 0),
         assert(nextFlex > 0),
         assert(skipOrBackFlex > 0);

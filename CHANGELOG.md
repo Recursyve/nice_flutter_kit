@@ -1,3 +1,7 @@
+### 2.5.2
+
+* More configurations for the NiceOnboarding.
+
 ### 2.5.1
 
 * Deprecate global onboarding config in favor of local widget config.

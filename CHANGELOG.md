@@ -1,3 +1,7 @@
+### 2.6.0
+
+* Upgrade dependencies
+
 ### 2.5.2
 
 * More configurations for the NiceOnboarding.

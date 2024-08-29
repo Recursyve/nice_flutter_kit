@@ -10,15 +10,15 @@ dependencies:
   flutter:
     sdk: flutter
 
-  device_preview: 1.1.0
+  device_preview: 1.2.0
   equatable: 2.0.5
   expandable: 5.0.1
   faker: 2.1.0
-  flutter_bloc: 8.1.3
+  flutter_bloc: 8.1.6
   go_router: 11.1.2
   nice_flutter_kit:
     path: ../
-  reactive_forms: 16.1.0
+  reactive_forms: 17.0.1
 
 flutter:
   uses-material-design: true

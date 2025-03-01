@@ -1,7 +1,6 @@
 import "dart:async";
 
 import "package:firebase_messaging/firebase_messaging.dart";
-import "package:notification_permissions/notification_permissions.dart";
 
 class NiceFcmService {
   static Future<String?> get token => FirebaseMessaging.instance.getToken();
@@ -20,26 +19,23 @@ class NiceFcmService {
   }
 
   static Future<void> requestPermission() async {
-    final permission = await NotificationPermissions.requestNotificationPermissions();
-    if (const [
-      PermissionStatus.granted,
-      PermissionStatus.provisional,
-    ].contains(permission)) {
+    final notificationSettings = await FirebaseMessaging.instance.requestPermission();
+    final status = notificationSettings.authorizationStatus;
+    if (status == AuthorizationStatus.authorized || status == AuthorizationStatus.provisional) {
       FirebaseMessaging.onMessage.listen(_onMessage);
     }
   }
 
   static Future<bool> isPermissionGranted() async {
-    final permission = await NotificationPermissions.getNotificationPermissionStatus();
-    return const [
-      PermissionStatus.granted,
-      PermissionStatus.provisional,
-    ].contains(permission);
+    final notificationSettings = await FirebaseMessaging.instance.getNotificationSettings();
+    final status = notificationSettings.authorizationStatus;
+    return status == AuthorizationStatus.authorized || status == AuthorizationStatus.provisional;
   }
 
   static Future<bool> isPermissionPermanentlyDenied() async {
-    final permission = await NotificationPermissions.getNotificationPermissionStatus();
-    return permission == PermissionStatus.denied;
+    final notificationSettings = await FirebaseMessaging.instance.getNotificationSettings();
+    final status = notificationSettings.authorizationStatus;
+    return status == AuthorizationStatus.denied;
   }
 
   static Future<void> _onOpenWithInitialMessage(RemoteMessage message) async {

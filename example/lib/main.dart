@@ -78,6 +78,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _router = GoRouter(
+    initialLocation: "/",
     routes: [
       GoRoute(
         path: "/",
@@ -98,8 +99,7 @@ class _MyAppState extends State<MyApp> {
       child: BlocSelector<AppCubit, AppState, Locale?>(
         selector: (state) => state.overrideLocale,
         builder: (context, overrideLocale) => MaterialApp.router(
-          routeInformationParser: _router.routeInformationParser,
-          routerDelegate: _router.routerDelegate,
+          routerConfig: _router,
           title: "Flutter Demo",
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

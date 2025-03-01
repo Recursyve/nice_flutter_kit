@@ -59,7 +59,7 @@ class AuthPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              NiceSignInEmailField(
+              NiceSignInEmailField<SocialProviders>(
                 decoration: InputDecoration(
                   label: Text("Email"),
                 ),

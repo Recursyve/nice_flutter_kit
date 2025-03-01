@@ -6,7 +6,7 @@ class NiceSignInConfig {
 
   /// Validators that will be applied to the email field.
   /// Defaults to `[Validators.required, Validators.email]`. Providing a value will override it.
-  final List<ValidatorFunction>? signInEmailFieldValidators;
+  final List<Validator<dynamic>>? signInEmailFieldValidators;
 
   const NiceSignInConfig({
     this.autofillEmailAndPassword = false,

@@ -71,34 +71,29 @@ class NiceAuth<User extends Object, Account extends Object> extends StatelessWid
   }
 
   Widget _buildBlocListener({required Widget child}) {
-    if (onStateChange == null && onUserChange == null && onAccountChange == null) {
-      return child;
-    }
-
-    return BlocListener<NiceAuthCubit<User, Account>, NiceAuthState<User, Account>>(
-      listenWhen: _listenWhen(),
-      listener: (context, state) {
-        onStateChange?.call(context, state);
-        onUserChange?.call(context, state.user);
-        onAccountChange?.call(context, state.account);
-      },
-      child: child,
-    );
-  }
-
-  BlocListenerCondition<NiceAuthState<User, Account>>? _listenWhen() {
     if (onStateChange != null) {
-      return null;
+      child = BlocListener<NiceAuthCubit<User, Account>, NiceAuthState<User, Account>>(
+        listener: onStateChange!,
+        child: child,
+      );
     }
-    if (onUserChange != null && onUserChange != null) {
-      return (prev, curr) => prev.user != curr.user || prev.account != curr.account;
-    }
+
     if (onUserChange != null) {
-      return (prev, curr) => prev.user != curr.user;
+      child = BlocListener<NiceAuthCubit<User, Account>, NiceAuthState<User, Account>>(
+        listenWhen: (prev, curr) => prev.user != curr.user,
+        listener: (context, state) => onUserChange!(context, state.user),
+        child: child,
+      );
     }
+
     if (onAccountChange != null) {
-      return (prev, curr) => prev.account != curr.account;
+      child = BlocListener<NiceAuthCubit<User, Account>, NiceAuthState<User, Account>>(
+        listenWhen: (prev, curr) => prev.account != curr.account,
+        listener: (context, state) => onAccountChange!(context, state.account),
+        child: child,
+      );
     }
-    return (_, __) => false;
+
+    return child;
   }
 }

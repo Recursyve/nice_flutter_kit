@@ -6,3 +6,4 @@ export "nice-layout.utils.dart";
 export "number.utils.dart";
 export "permissions.utils.dart";
 export "validation-message.utils.dart";
+export "version.utils.dart";

@@ -1,3 +1,5 @@
+import "dart:async";
+
 import "package:flutter/material.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
 import "package:rxdart/rxdart.dart";
@@ -18,11 +20,15 @@ class NiceBaseListSearchBar<D> extends StatefulWidget {
   /// [Duration] that will be used to debounce the [TextField]'s values.
   final Duration debounceDuration;
 
+  /// Callback that will be called before searching, after the debounce has been completed.
+  final FutureOr<void> Function()? onBeforeSearch;
+
   const NiceBaseListSearchBar({
     super.key,
     this.decoration = const BoxDecoration(),
     this.inputDecoration = const InputDecoration(),
     this.debounceDuration = const Duration(milliseconds: 300),
+    this.onBeforeSearch,
   });
 
   @override
@@ -37,7 +43,20 @@ class _NiceBaseListSearchBarState<D> extends State<NiceBaseListSearchBar<D>> {
   void initState() {
     super.initState();
 
-    _searchSubject.debounceTime(widget.debounceDuration).listen(NiceBaseListCubit.of<D>(context).setSearchQuery);
+    _searchSubject
+        .debounceTime(widget.debounceDuration)
+        .switchMap(
+          (searchQuery) => Future(() async {
+            if (widget.onBeforeSearch case final onBeforeSearch?) {
+              await onBeforeSearch();
+            }
+
+            if (context.mounted) {
+              await NiceBaseListCubit.of<D>(context).setSearchQuery(searchQuery);
+            }
+          }).asStream(),
+        )
+        .listen((_) {});
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final initialSearchQuery = NiceBaseListCubit.of<D>(context).state.searchQuery;

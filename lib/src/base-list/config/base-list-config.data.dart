@@ -13,8 +13,8 @@ class NiceBaseListConfigData<D> {
   /// In most cases, this should be left to the default value of 0.
   final int initialPage;
 
-  /// Initial [NiceFilterOrderModel].
-  final NiceFilterOrderModel? initialOrder;
+  /// Initial list of [NiceFilterOrderModel]. Order will be applied in the same order as the array
+  final List<NiceFilterOrderModel>? initialOrder;
 
   /// Initial [NiceFilterQueryModel].
   final NiceFilterQueryModel? initialQuery;

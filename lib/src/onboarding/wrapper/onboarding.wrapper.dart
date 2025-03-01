@@ -1,3 +1,5 @@
+import "dart:collection";
+
 import "package:flutter/material.dart";
 import "package:nice_flutter_kit/nice_flutter_kit.dart";
 
@@ -5,11 +7,13 @@ class NiceOnboardingWrapper extends StatefulWidget {
   final NiceOnboardingConfiguration configuration;
   final VoidCallback onCompleted;
   final ThemeData? theme;
+  final HashMap<NicePermissionTypes, bool> isPermissionEnabled;
 
   const NiceOnboardingWrapper({
     super.key,
     required this.configuration,
     required this.onCompleted,
+    required this.isPermissionEnabled,
     this.theme,
   });
 
@@ -33,8 +37,12 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
       child: Builder(
         builder: (context) {
           return Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: widget.configuration.backgroundColor ?? Theme.of(context).colorScheme.background,
             body: SafeArea(
+              left: widget.configuration.safeArea.left,
+              top: widget.configuration.safeArea.top,
+              right: widget.configuration.safeArea.right,
+              bottom: widget.configuration.safeArea.bottom,
               child: PageView(
                 controller: _controller,
                 physics: const NeverScrollableScrollPhysics(),
@@ -79,7 +87,7 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
     }
 
     widget.configuration.permissionSequence!.configurations.removeWhere(
-      (permission) => NiceConfig.onboardingConfig!.isPermissionEnabled[permission.type]!,
+      (permission) => widget.isPermissionEnabled[permission.type]!,
     );
 
     return [

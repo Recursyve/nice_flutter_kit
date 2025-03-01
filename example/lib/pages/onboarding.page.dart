@@ -7,10 +7,10 @@ class OnboardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BasePage(
+    return const BasePage(
       title: "Onboarding",
       child: NiceOnboarding(
-        configuration: const NiceOnboardingConfiguration(
+        configuration: NiceOnboardingConfiguration(
           welcome: NiceOnboardingWelcomeConfiguration(
             imageUrl: "assets/bacon.png",
             title: NiceTextAccentPunctuation(
@@ -23,10 +23,7 @@ class OnboardingPage extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: ElevatedButton(
-            onPressed: () => NiceConfig.onboardingConfig!.onboardingCompleted = false,
-            child: const Text("Reset onboarding completion"),
-          ),
+          child: Text("Onboarding completed!"),
         ),
       ),
     );

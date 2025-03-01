@@ -1,3 +1,49 @@
+### 2.5.2
+
+* More configurations for the NiceOnboarding.
+
+### 2.5.1
+
+* Deprecate global onboarding config in favor of local widget config.
+* Add onboarding `bypass` callback.
+
+### 2.5.0
+
+* Add `VersionUtils`
+
+### 2.4.1
+
+* Add copyWith functions to `NiceFilterQueryModel`.
+* Make `NiceBaseListCubit` not lazy when `config.autoLoad` is `true`.
+
+### 2.4.0
+
+* Upgrade dependencies
+
+### 2.3.0
+
+* BREAKING: `BaseListConfigData` now takes an array of order.
+
+### 2.2.3
+
+* `RadioExpandableProvider` now reacts to initial expanded key changes.
+
+### 2.2.2
+
+* Added `onBeforeSearch` callback to `NiceBaseListSearchBar`.
+
+### 2.2.1
+
+* Fix `NiceAuth` listeners triggering too often
+
+## 2.2.0
+
+* Deprecate `NiceBaseListBody.emptyStateBuilder` in favor of `NiceBaseListEmptyState`
+
+### 2.1.1
+
+* Fix for introduction screen
+
 ### 2.1.0
 
 * Add NiceLocalizations extension (`context.translate("key")`)

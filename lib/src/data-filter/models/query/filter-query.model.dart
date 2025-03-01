@@ -10,7 +10,7 @@ class NiceFilterQueryModel extends NiceBaseFilterQueryModel with EquatableMixin 
     required this.rules,
   });
 
-  // Recursively loop through the rules to maybe find a rule with id
+  /// Recursively loop through the rules to maybe find a rule with [id]
   D? findValueForId<D>(String id) {
     for (final rule in rules) {
       if (rule is NiceFilterQueryModel) {
@@ -26,6 +26,28 @@ class NiceFilterQueryModel extends NiceBaseFilterQueryModel with EquatableMixin 
     }
 
     return null;
+  }
+
+  /// Returns a new [NiceFilterQueryModel] with the rule that matches the given [id] removed
+  NiceFilterQueryModel copyWithRuleRemoved(String id) {
+    return NiceFilterQueryModel(
+      condition: condition,
+      rules: [
+        for (final rule in rules)
+          if (rule is NiceFilterQueryModel)
+            rule.copyWithRuleRemoved(id)
+          else if (rule is NiceFilterQueryRuleModel)
+            if (rule.id != id) rule,
+      ],
+    );
+  }
+
+  /// Returns a new [NiceFilterQueryModel] with all the rules removed
+  NiceFilterQueryModel copyWithRulesCleared() {
+    return NiceFilterQueryModel(
+      condition: condition,
+      rules: [],
+    );
   }
 
   @override

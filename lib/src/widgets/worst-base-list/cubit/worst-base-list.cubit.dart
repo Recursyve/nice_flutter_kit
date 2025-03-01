@@ -22,7 +22,7 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
         final result = await config.filterApi.filter(
           NiceFilterModel(
             page: NiceFilterPageModel(number: 0, size: config.itemsPerPage),
-            order: state.order ?? config.defaultOrder,
+            order: [state.order ?? config.defaultOrder],
             query: state.query,
             search: state.search,
           ),
@@ -54,7 +54,7 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
               number: (state.values).length ~/ config.itemsPerPage,
               size: config.itemsPerPage,
             ),
-            order: state.order ?? config.defaultOrder,
+            order: [state.order ?? config.defaultOrder],
             query: state.query,
             search: state.search,
           ),

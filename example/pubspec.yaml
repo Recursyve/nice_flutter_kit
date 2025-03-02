@@ -3,7 +3,7 @@ description: A new Flutter project.
 publish_to: 'none'
 
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: ">=3.5.0 <4.0.0"
   flutter: ">=3.24.0"
 
 dependencies:
@@ -14,7 +14,7 @@ dependencies:
   equatable: 2.0.7
   expandable: 5.0.1
   faker: 2.2.0
-  flutter_bloc: 9.0.0
+  flutter_bloc: 9.1.0
   go_router: 14.8.1
   nice_flutter_kit:
     path: ../

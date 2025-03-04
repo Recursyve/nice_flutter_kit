@@ -1,3 +1,7 @@
+### 3.0.0
+
+* Update Flutter SDK to 3.29.0 and dependencies.
+
 ### 2.5.2
 
 * More configurations for the NiceOnboarding.

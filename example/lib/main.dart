@@ -77,6 +77,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _router = GoRouter(
+    initialLocation: "/",
     routes: [
       GoRoute(
         path: "/",

@@ -1,3 +1,12 @@
+### 3.0.0
+
+* Update Flutter SDK to 3.29.0 and dependencies.
+* Migrated to Gradle V8
+* You might need to run the following steps
+  * https://docs.flutter.dev/release/breaking-changes/flutter-gradle-plugin-apply
+  * https://developer.android.com/build/configure-app-module#set-namespace
+  * 
+
 ### 2.5.2
 
 * More configurations for the NiceOnboarding.

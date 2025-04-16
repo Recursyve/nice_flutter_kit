@@ -35,6 +35,7 @@ class NiceSignInPasswordField<SocialProviders> extends StatelessWidget {
   Widget build(BuildContext context) {
     return ReactiveTextField(
       formControlName: "password",
+      validationMessages: validationMessages,
       decoration: decoration,
       keyboardType: TextInputType.visiblePassword,
       textInputAction: TextInputAction.go,

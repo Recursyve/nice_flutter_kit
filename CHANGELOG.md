@@ -1,3 +1,7 @@
+### 3.0.1
+
+* Bugfix for sign-in password field where validationMessages were not passed down.
+
 ### 3.0.0
 
 * Update Flutter SDK to 3.29.0 and dependencies.

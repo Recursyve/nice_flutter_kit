@@ -1,3 +1,7 @@
+### 3.0.2
+
+* Bugfix for checklist validator which didn't wrap text inside a column.
+
 ### 3.0.1
 
 * Bugfix for sign-in password field where validationMessages were not passed down.
@@ -9,7 +13,6 @@
 * You might need to run the following steps
   * https://docs.flutter.dev/release/breaking-changes/flutter-gradle-plugin-apply
   * https://developer.android.com/build/configure-app-module#set-namespace
-  * 
 
 ### 2.5.2
 

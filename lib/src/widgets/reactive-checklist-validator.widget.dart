@@ -72,11 +72,13 @@ class ReactiveChecklistValidator extends StatelessWidget {
               padding: const EdgeInsets.only(right: 16.0),
               child: defaultIcon!,
             ),
-          Text(
-            entry.value,
-            maxLines: 2,
-            style: textStyle.copyWith(
-              color: defaultColor,
+          Expanded(
+            child: Text(
+              entry.value,
+              maxLines: 2,
+              style: textStyle.copyWith(
+                color: defaultColor,
+              ),
             ),
           ),
         ],
@@ -92,11 +94,13 @@ class ReactiveChecklistValidator extends StatelessWidget {
               padding: const EdgeInsets.only(right: 16.0),
               child: validIcon!,
             ),
-          Text(
-            entry.value,
-            maxLines: 2,
-            style: textStyle.copyWith(
-              color: validColor,
+          Expanded(
+            child: Text(
+              entry.value,
+              maxLines: 2,
+              style: textStyle.copyWith(
+                color: validColor,
+              ),
             ),
           ),
         ],
@@ -110,11 +114,13 @@ class ReactiveChecklistValidator extends StatelessWidget {
             padding: const EdgeInsets.only(right: 16.0),
             child: invalidIcon!,
           ),
-        Text(
-          entry.value,
-          maxLines: 2,
-          style: textStyle.copyWith(
-            color: invalidColor,
+        Expanded(
+          child: Text(
+            entry.value,
+            maxLines: 2,
+            style: textStyle.copyWith(
+              color: invalidColor,
+            ),
           ),
         ),
       ],

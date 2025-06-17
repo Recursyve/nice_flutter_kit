@@ -1,3 +1,7 @@
+### 3.1.0
+
+* Update Flutter SDK to 3.32.0 and dependencies.
+
 ### 3.0.2
 
 * Bugfix for checklist validator which didn't wrap text inside a column.

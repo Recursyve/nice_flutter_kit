@@ -20,7 +20,7 @@ dependencies:
   expandable: ^5.0.0
   firebase_messaging: ^14.0.3
   flutter_bloc: ^8.0.0
-  flutter_keyboard_visibility: ^5.2.0
+  flutter_keyboard_visibility: ^6.0.0
   flutter_spinkit: ^5.0.0
   flutter_svg: ^1.0.0
   geolocator: ^9.0.0

@@ -90,9 +90,6 @@ class _NicePageViewFormState extends State<NicePageViewForm> {
       duration: widget.config.pageChangeDuration,
       curve: widget.config.pageChangeCurve,
     );
-
-    // Force a rebuild to update the canPop value
-    // setState(() {});
   }
 
   Future<void> _onPrevious() async {
@@ -101,9 +98,6 @@ class _NicePageViewFormState extends State<NicePageViewForm> {
       duration: widget.config.pageChangeDuration,
       curve: widget.config.pageChangeCurve,
     );
-
-    // Force a rebuild to update the canPop value
-    // setState(() {});
   }
 
   void _unfocusIfEnabled() {

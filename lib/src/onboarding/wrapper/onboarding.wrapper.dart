@@ -37,7 +37,7 @@ class _NiceOnboardingWrapperState extends State<NiceOnboardingWrapper> {
       child: Builder(
         builder: (context) {
           return Scaffold(
-            backgroundColor: widget.configuration.backgroundColor ?? Theme.of(context).colorScheme.background,
+            backgroundColor: widget.configuration.backgroundColor ?? Theme.of(context).colorScheme.surface,
             body: SafeArea(
               left: widget.configuration.safeArea.left,
               top: widget.configuration.safeArea.top,

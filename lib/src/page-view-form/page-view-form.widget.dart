@@ -112,34 +112,38 @@ class _NicePageViewFormState extends State<NicePageViewForm> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("new new");
     return Provider<NicePageViewFormConfig>.value(
       value: widget.config,
-      child: WillPopScope(
-        onWillPop: () async {
-          if (_pageViewPageIndex == 0) {
-            return true;
-          }
-          unawaited(_onPrevious());
-          return false;
-        },
-        child: Column(
-          children: [
-            Expanded(
-              child: _buildPageView(),
-            ),
-            ConstrainedBox(
-              constraints: widget.config.buttonConstraints,
-              child: AnimatedBuilder(
-                animation: _pageController,
-                builder: (context, _) => NicePageViewFormButtons(
-                  currentPageIndex: _pageViewPageIndex,
-                  pageCount: _enabledPageCount,
-                  onNext: _onNext,
-                  onPrevious: _onPrevious,
+      // AnimatedBuilder is necessary so the canPop: _pageViewPageIndex is updated on page change.
+      child: AnimatedBuilder(
+        animation: _pageController,
+        builder: (context, _) => PopScope(
+          canPop: _pageViewPageIndex == 0,
+          onPopInvokedWithResult: (didPop, result) {
+            if (!didPop && _pageViewPageIndex != 0) {
+              unawaited(_onPrevious());
+            }
+          },
+          child: Column(
+            children: [
+              Expanded(
+                child: _buildPageView(),
+              ),
+              ConstrainedBox(
+                constraints: widget.config.buttonConstraints,
+                child: AnimatedBuilder(
+                  animation: _pageController,
+                  builder: (context, _) => NicePageViewFormButtons(
+                    currentPageIndex: _pageViewPageIndex,
+                    pageCount: _enabledPageCount,
+                    onNext: _onNext,
+                    onPrevious: _onPrevious,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

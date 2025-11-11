@@ -51,7 +51,7 @@ class _NiceBaseListSearchBarState<D> extends State<NiceBaseListSearchBar<D>> {
               await onBeforeSearch();
             }
 
-            if (context.mounted) {
+            if (mounted) {
               await NiceBaseListCubit.of<D>(context).setSearchQuery(searchQuery);
             }
           }).asStream(),

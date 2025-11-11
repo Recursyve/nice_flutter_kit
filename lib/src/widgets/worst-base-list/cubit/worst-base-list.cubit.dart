@@ -51,7 +51,7 @@ class WorstBaseListCubit<D> extends NiceBaseCubit<WorstBaseListState<D>> {
         final result = await config.filterApi.filter(
           NiceFilterModel(
             page: NiceFilterPageModel(
-              number: (state.values).length ~/ config.itemsPerPage,
+              number: state.values.length ~/ config.itemsPerPage,
               size: config.itemsPerPage,
             ),
             order: [state.order ?? config.defaultOrder],

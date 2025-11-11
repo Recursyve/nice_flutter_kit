@@ -17,7 +17,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntroductionScreen(
-      globalBackgroundColor: sequenceConfiguration.globalBackGroundColor ?? Theme.of(context).colorScheme.background,
+      globalBackgroundColor: sequenceConfiguration.globalBackGroundColor ?? Theme.of(context).colorScheme.surface,
       safeAreaList: const [false, false, true, false],
       dotsFlex: sequenceConfiguration.footerConfig.dotsFlex,
       nextFlex: sequenceConfiguration.footerConfig.nextFlex,
@@ -50,7 +50,7 @@ class NiceOnboardingIntroductionSequence extends StatelessWidget {
                   imageFlex: 2,
                   bodyFlex: 3,
                   imagePadding: const EdgeInsets.only(),
-                  pageColor: configuration.boxDecoration == null ? Theme.of(context).colorScheme.background : null,
+                  pageColor: configuration.boxDecoration == null ? Theme.of(context).colorScheme.surface : null,
                   contentMargin: const EdgeInsets.all(5),
                   boxDecoration: configuration.boxDecoration,
                 ),

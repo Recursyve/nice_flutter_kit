@@ -24,7 +24,7 @@ class _NiceOnboardingPermissionPageState extends State<NiceOnboardingPermissionP
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: widget.configuration.backGroundColor ?? Theme.of(context).colorScheme.background,
+        color: widget.configuration.backGroundColor ?? Theme.of(context).colorScheme.surface,
       ),
       child: Padding(
         padding: const EdgeInsets.only(top: 64.0, left: 24.0, right: 24.0),

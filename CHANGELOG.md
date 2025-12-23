@@ -1,3 +1,7 @@
+### 3.2.0
+
+* Update Flutter SDK to 3.35.0 and dependencies.
+
 ### 3.1.0
 
 * Update Flutter SDK to 3.32.0 and dependencies.

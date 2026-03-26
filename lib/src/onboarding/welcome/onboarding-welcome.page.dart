@@ -34,7 +34,7 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
                     SizedBox(
                       height: (MediaQuery.of(context).size.height - buttonHeight) * 0.6,
                       child: Align(
-                        child: _buildImage(configuration.imageUrl),
+                        child: _buildImage(configuration),
                       ),
                     ),
                     Column(
@@ -70,13 +70,22 @@ class NiceOnboardingWelcomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildImage(String imageUrl) {
-    final ext = extension(imageUrl);
-    switch (ext) {
-      case ".svg":
-        return SvgPicture.asset(imageUrl, width: 260);
-      default:
-        return Image.asset(configuration.imageUrl, width: 260);
+  Widget _buildImage(NiceOnboardingWelcomeConfiguration configuration) {
+    if (configuration.imageBuilder != null) {
+      return configuration.imageBuilder!();
     }
+    
+    if (configuration.imageUrl != null) {
+      final ext = extension(configuration.imageUrl!);
+
+      switch (ext) {
+        case ".svg":
+          return SvgPicture.asset(configuration.imageUrl!, width: 260);
+        default:
+          return Image.asset(configuration.imageUrl!, width: 260);
+      }
+    }
+
+    return const SizedBox.shrink();
   }
 }

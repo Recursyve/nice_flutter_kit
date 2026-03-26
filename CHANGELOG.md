@@ -1,3 +1,7 @@
+### 3.2.1
+
+* Added imageBuilder parameter for the onboarding's welcome configuration.
+
 ### 3.2.0
 
 * Update Flutter SDK to 3.35.0 and dependencies.
